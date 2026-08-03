@@ -4,6 +4,7 @@
 	import ExternalLinkIcon from '@lucide/svelte/icons/external-link';
 	import PackageSearchIcon from '@lucide/svelte/icons/package-search';
 	import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
+	import SparklesIcon from '@lucide/svelte/icons/sparkles';
 	import TrophyIcon from '@lucide/svelte/icons/trophy';
 	import { Badge, type BadgeVariant } from '$lib/components/ui/badge';
 	import { Button } from '$lib/components/ui/button';
@@ -60,9 +61,16 @@
 		return offer.name ?? 'Item identification pending';
 	}
 
+	function offerValue(offer: OfferView, value: number | null): string {
+		if (offer.valuation === 'unique') return 'No Ely equivalent';
+		if (offer.valuation === 'pending') return 'Pending';
+		return formatEly(value);
+	}
+
 	function offerStatus(offer: OfferView): string {
 		if (!offer.identified) return 'Identification pending';
-		if (offer.elyPerPoint === null) return 'Pricing pending';
+		if (offer.valuation === 'unique') return 'Unique reward';
+		if (offer.valuation === 'pending') return 'Pricing pending';
 		return offer.rank === null ? 'Priced' : `#${offer.rank} in stage`;
 	}
 
@@ -74,7 +82,7 @@
 
 	function offerStatusVariant(offer: OfferView): BadgeVariant {
 		if (offer.rank !== null && offer.rank <= 5) return 'default';
-		return offer.elyPerPoint === null ? 'outline' : 'secondary';
+		return offer.valuation === 'pending' ? 'outline' : 'secondary';
 	}
 
 	function offerNote(offer: OfferView): string {
@@ -83,12 +91,15 @@
 			return 'The offer details were captured, but the item still needs a verified identity.';
 		}
 		if (offer.pointCost === null) return 'The point cost is incomplete, so this offer is not ranked.';
-		if (offer.elyPerPoint === null) {
+		if (offer.valuation === 'unique') {
+			return 'No defensible Ely equivalent exists, so this reward is highlighted separately and excluded from numeric ranks.';
+		}
+		if (offer.valuation === 'pending') {
 			return 'No verified Ely value yet. The offer remains visible but is excluded from the ranking.';
 		}
 		return offer.rank === null
 			? 'Verified pricing is available for this offer.'
-			: `Ranked #${offer.rank} by verified Ely returned per event point.`;
+			: `Ranked #${offer.rank} in its stage by verified Ely returned per event point.`;
 	}
 </script>
 
@@ -122,8 +133,8 @@
 					{data.event.title}
 				</h1>
 				<p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-					Event exchange ranking across all five stages by verified value per point. Unidentified and
-					unpriced offers stay visible instead of receiving a guessed rank.
+					Event exchange ranking across all five stages by verified value per point. Unique rewards
+					are separated, and pending offers stay visible instead of receiving a guessed rank.
 				</p>
 			</div>
 		</div>
@@ -154,7 +165,7 @@
 					<TrophyIcon class="size-5" aria-hidden="true" />
 					<p class="text-sm font-medium">Quick answer</p>
 				</div>
-				<Card.Title><h2 id="top-five-heading">Top five by verified value</h2></Card.Title>
+				<Card.Title><h2 id="top-five-heading">Top five by Ely efficiency</h2></Card.Title>
 				<Card.Description>
 					Only offers with a known item, bundle value, and point cost qualify for this list.
 				</Card.Description>
@@ -212,12 +223,69 @@
 			</Card.Content>
 			<Card.Footer>
 				<p class="text-xs leading-relaxed text-muted-foreground">
-					Value is one lens, not a universal answer. Cosmetics, account-bound rewards, and personal
-					progression needs may deserve a different priority.
+					Unique rewards are listed separately below. They are not treated as zero-value or placed at
+					the bottom of this ranking.
 				</p>
 			</Card.Footer>
 		</Card.Root>
 	</section>
+
+	{#if data.uniqueOffers.length > 0}
+		<section class="mt-8" aria-labelledby="unique-rewards-heading">
+			<Card.Root>
+				<Card.Header>
+					<div class="flex items-center gap-2 text-secondary-foreground">
+						<SparklesIcon class="size-5" aria-hidden="true" />
+						<p class="text-sm font-medium">Non-numeric picks</p>
+					</div>
+					<Card.Title><h2 id="unique-rewards-heading">Unique rewards</h2></Card.Title>
+					<Card.Description>
+						These items cannot be bought from players, the Cash Shop, or NPCs, so they do not have an
+						honest Ely equivalent. Review them separately from the numeric ranking.
+					</Card.Description>
+				</Card.Header>
+				<Card.Content>
+					<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+						{#each data.uniqueOffers as offer (offer.id)}
+							<Card.Root size="sm" class="h-full">
+								<Card.Header>
+									<Card.Action><Badge variant="secondary">Unique</Badge></Card.Action>
+									<div class="grid size-11 place-items-center rounded-lg bg-muted">
+										<img src={offer.iconSrc} alt="" class="size-9 object-contain" />
+									</div>
+									<Card.Title><h3>{offerTitle(offer)}</h3></Card.Title>
+									<Card.Description>
+										Stage {offer.stageNumber} · Slot {offer.slotNumber} · Bundle ×{offer.quantity}
+									</Card.Description>
+								</Card.Header>
+								<Card.Content>
+									<dl class="grid grid-cols-2 gap-3 text-sm">
+										<div>
+											<dt class="text-xs text-muted-foreground">Point cost</dt>
+											<dd class="mt-1 font-medium">{formatInteger(offer.pointCost)} EP</dd>
+										</div>
+										<div>
+											<dt class="text-xs text-muted-foreground">Purchase limit</dt>
+											<dd class="mt-1 font-medium">{formatInteger(offer.purchaseLimit)}</dd>
+										</div>
+									</dl>
+								</Card.Content>
+								<Card.Footer>
+									<p class="text-xs text-muted-foreground">No Ely equivalent · not numerically ranked</p>
+								</Card.Footer>
+							</Card.Root>
+						{/each}
+					</div>
+				</Card.Content>
+				<Card.Footer>
+					<p class="text-xs leading-relaxed text-muted-foreground">
+						“Unique” means incomparable, not low priority. Whether to buy one depends on whether you want
+						the reward itself.
+					</p>
+				</Card.Footer>
+			</Card.Root>
+		</section>
+	{/if}
 
 	<Separator class="my-10" />
 
@@ -234,6 +302,12 @@
 					<div class="flex flex-wrap gap-2">
 						<Badge variant="secondary">{stage.capturedCount}/{stage.expectedSlots} captured</Badge>
 						<Badge variant="outline">{stage.pricedCount} priced</Badge>
+						{#if stage.uniqueCount > 0}
+							<Badge variant="outline">{stage.uniqueCount} unique</Badge>
+						{/if}
+						{#if stage.pendingCount > 0}
+							<Badge variant="outline">{stage.pendingCount} pending</Badge>
+						{/if}
 					</div>
 				</div>
 
@@ -272,12 +346,16 @@
 											<dd class="mt-1 font-medium">{formatInteger(offer.purchaseLimit)}</dd>
 										</div>
 										<div>
+											<dt class="text-xs text-muted-foreground">Unit value</dt>
+											<dd class="mt-1 font-medium">{offerValue(offer, offer.unitEly)}</dd>
+										</div>
+										<div>
 											<dt class="text-xs text-muted-foreground">Bundle value</dt>
-											<dd class="mt-1 font-medium">{formatEly(offer.bundleEly)}</dd>
+											<dd class="mt-1 font-medium">{offerValue(offer, offer.bundleEly)}</dd>
 										</div>
 										<div>
 											<dt class="text-xs text-muted-foreground">Value per EP</dt>
-											<dd class="mt-1 font-medium">{formatEly(offer.elyPerPoint)}</dd>
+											<dd class="mt-1 font-medium">{offerValue(offer, offer.elyPerPoint)}</dd>
 										</div>
 									</dl>
 								</Card.Content>
@@ -307,11 +385,11 @@
 			<Card.Header>
 				<Card.Title><h2>Data completeness</h2></Card.Title>
 				<Card.Description>
-					See what is captured, identified, and priced before relying on the ranking.
+					See what participates in the numeric ranking and what still needs a decision.
 				</Card.Description>
 			</Card.Header>
 			<Card.Content>
-				<dl class="grid gap-4 sm:grid-cols-3">
+				<dl class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
 					<div>
 						<dt class="text-xs text-muted-foreground">Captured slots</dt>
 						<dd class="mt-1 text-xl font-semibold">
@@ -319,12 +397,16 @@
 						</dd>
 					</div>
 					<div>
-						<dt class="text-xs text-muted-foreground">Identified items</dt>
-						<dd class="mt-1 text-xl font-semibold">{data.completeness.identifiedOffers}</dd>
-					</div>
-					<div>
 						<dt class="text-xs text-muted-foreground">Priced items</dt>
 						<dd class="mt-1 text-xl font-semibold">{data.completeness.pricedOffers}</dd>
+					</div>
+					<div>
+						<dt class="text-xs text-muted-foreground">Unique items</dt>
+						<dd class="mt-1 text-xl font-semibold">{data.completeness.uniqueOffers}</dd>
+					</div>
+					<div>
+						<dt class="text-xs text-muted-foreground">Pending values</dt>
+						<dd class="mt-1 text-xl font-semibold">{data.completeness.pendingOffers}</dd>
 					</div>
 				</dl>
 

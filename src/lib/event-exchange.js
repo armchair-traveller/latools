@@ -5,7 +5,7 @@
 /** @typedef {import('$lib/types').ExchangeEvent} ExchangeEvent */
 /** @typedef {import('$lib/types').ExchangeCompleteness} ExchangeCompleteness */
 /** @typedef {import('$lib/types').RankedExchangeOffer} RankedExchangeOffer */
-/** @typedef {import('$lib/types').UnpricedExchangeOffer} UnpricedExchangeOffer */
+/** @typedef {import('$lib/types').UnrankedExchangeOffer} UnrankedExchangeOffer */
 
 /**
  * @param {ExchangeCatalog} catalog
@@ -18,7 +18,7 @@ function catalogById(catalog) {
 /**
  * @param {ExchangeEvent} event
  * @param {ExchangeCatalog} catalog
- * @returns {Array<UnpricedExchangeOffer | RankedExchangeOffer>}
+ * @returns {Array<UnrankedExchangeOffer | RankedExchangeOffer>}
  */
 export function expandOffers(event, catalog) {
 	const items = catalogById(catalog);
@@ -28,7 +28,9 @@ export function expandOffers(event, catalog) {
 			const item = items.get(offer.itemId);
 			if (!item) throw new Error(`Unknown catalog item: ${offer.itemId}`);
 
-			if (item.unitEly === null) return { ...offer, stage: stage.number, item };
+			if (item.valuation !== 'priced') {
+				return { ...offer, stage: stage.number, item };
+			}
 
 			const bundleEly = offer.quantity * item.unitEly;
 			return {
@@ -75,16 +77,19 @@ export function rankOffers(event, catalog, stageNumber) {
  * @param {ExchangeEvent} event
  * @param {ExchangeCatalog} catalog
  * @param {number} [stageNumber]
- * @returns {UnpricedExchangeOffer[]}
+ * @returns {UnrankedExchangeOffer[]}
  */
-export function unpricedOffers(event, catalog, stageNumber) {
+export function unrankedOffers(event, catalog, stageNumber) {
 	return expandOffers(event, catalog)
 		.filter(
-			/** @returns {offer is UnpricedExchangeOffer} */
+			/** @returns {offer is UnrankedExchangeOffer} */
 			(offer) => !('elyPerPoint' in offer) && (stageNumber === undefined || offer.stage === stageNumber)
 		)
 		.sort((left, right) => left.stage - right.stage || left.slot - right.slot);
 }
+
+/** @deprecated Use unrankedOffers to include both unique and pending valuations. */
+export const unpricedOffers = unrankedOffers;
 
 /**
  * @param {ExchangeEvent} event

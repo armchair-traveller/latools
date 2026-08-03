@@ -7,6 +7,7 @@ const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dataRoot = resolve(projectRoot, 'static/data/event-exchange');
 const errors = [];
 const warnings = [];
+const valuations = new Set(['priced', 'unique', 'pending']);
 
 function check(condition, message) {
 	if (!condition) errors.push(message);
@@ -68,9 +69,18 @@ for (const [index, item] of (catalog.items ?? []).entries()) {
 	check(!itemsById.has(item.id), `${context}.id is duplicated: ${item.id}`);
 	itemsById.set(item.id, item);
 	check(item.name === null || (typeof item.name === 'string' && item.name.trim().length > 0), `${context}.name must be null or non-empty.`);
-	check(item.unitEly === null || (Number.isFinite(item.unitEly) && item.unitEly > 0), `${context}.unitEly must be null or positive.`);
-	check(item.priceUpdatedAt === null || isDate(item.priceUpdatedAt), `${context}.priceUpdatedAt must be null or YYYY-MM-DD.`);
-	check(item.unitEly === null || item.priceUpdatedAt !== null, `${context}.priceUpdatedAt is required when unitEly is set.`);
+	check(valuations.has(item.valuation), `${context}.valuation must be priced, unique, or pending.`);
+
+	if (item.valuation === 'priced') {
+		check(Number.isFinite(item.unitEly) && item.unitEly > 0, `${context}.unitEly must be positive when priced.`);
+		check(isDate(item.priceUpdatedAt), `${context}.priceUpdatedAt must use YYYY-MM-DD when priced.`);
+		check(item.name !== null, `${context}.name is required when priced.`);
+	} else if (item.valuation === 'unique' || item.valuation === 'pending') {
+		check(item.unitEly === null, `${context}.unitEly must be null when ${item.valuation}.`);
+		check(item.priceUpdatedAt === null, `${context}.priceUpdatedAt must be null when ${item.valuation}.`);
+		if (item.valuation === 'unique') check(item.name !== null, `${context}.name is required when unique.`);
+	}
+
 	await checkPublicAsset(item.referenceIcon, `${context}.referenceIcon`);
 }
 
@@ -116,12 +126,13 @@ check(
 	`Captured plus missing offers (${completeness.total}) must equal expectedOfferCount (${event.expectedOfferCount}).`
 );
 
-const unpricedCount = [...referencedItemIds].filter((id) => itemsById.get(id)?.unitEly === null).length;
-const unnamedCount = [...referencedItemIds].filter((id) => itemsById.get(id)?.name === null).length;
+const referencedOffers = (event.stages ?? []).flatMap((stage) => stage.offers ?? []);
+const pendingCount = referencedOffers.filter((offer) => itemsById.get(offer.itemId)?.valuation === 'pending').length;
+const unnamedCount = referencedOffers.filter((offer) => itemsById.get(offer.itemId)?.name === null).length;
 const unusedCount = [...itemsById.keys()].filter((id) => !referencedItemIds.has(id)).length;
 
-if (unpricedCount) warnings.push(`${unpricedCount} captured items still need an Ely value.`);
-if (unnamedCount) warnings.push(`${unnamedCount} captured items still need an English label.`);
+if (pendingCount) warnings.push(`${pendingCount} captured offers still need an Ely value.`);
+if (unnamedCount) warnings.push(`${unnamedCount} captured offers still need an English label.`);
 if (unusedCount) warnings.push(`${unusedCount} catalog items are not used by the current event.`);
 
 if (errors.length) {

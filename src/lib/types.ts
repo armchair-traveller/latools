@@ -61,13 +61,25 @@ export type RenderEntry =
 	| { kind: 'choice'; text: string; id: string }
 	| { kind: 'repeated'; id: string };
 
-export interface ExchangeCatalogItem {
+export type ExchangeValuation = 'priced' | 'unique' | 'pending';
+
+interface ExchangeCatalogItemBase {
 	id: string;
 	name: string | null;
 	referenceIcon: string;
-	unitEly: number | null;
-	priceUpdatedAt: string | null;
 }
+
+export type ExchangeCatalogItem =
+	| (ExchangeCatalogItemBase & {
+			valuation: 'priced';
+			unitEly: number;
+			priceUpdatedAt: string;
+	  })
+	| (ExchangeCatalogItemBase & {
+			valuation: 'unique' | 'pending';
+			unitEly: null;
+			priceUpdatedAt: null;
+	  });
 
 export interface ExchangeCatalog {
 	items: ExchangeCatalogItem[];
@@ -102,15 +114,18 @@ export interface ExchangeEvent {
 
 export interface RankedExchangeOffer extends ExchangeOffer {
 	stage: number;
-	item: ExchangeCatalogItem;
+	item: Extract<ExchangeCatalogItem, { valuation: 'priced' }>;
 	bundleEly: number;
 	elyPerPoint: number;
 }
 
-export interface UnpricedExchangeOffer extends ExchangeOffer {
+export interface UnrankedExchangeOffer extends ExchangeOffer {
 	stage: number;
-	item: ExchangeCatalogItem;
+	item: Exclude<ExchangeCatalogItem, { valuation: 'priced' }>;
 }
+
+/** @deprecated Use UnrankedExchangeOffer. */
+export type UnpricedExchangeOffer = UnrankedExchangeOffer;
 
 export interface ExchangeCompleteness {
 	captured: number;

@@ -8,11 +8,11 @@ import type {
 	ExchangeCatalog,
 	ExchangeEvent,
 	RankedExchangeOffer,
-	UnpricedExchangeOffer
+	UnrankedExchangeOffer
 } from '$lib/types';
 import type { PageLoad } from './$types';
 
-type ExpandedOffer = RankedExchangeOffer | UnpricedExchangeOffer;
+type ExpandedOffer = RankedExchangeOffer | UnrankedExchangeOffer;
 
 function offerId(offer: ExpandedOffer): string {
 	return `stage-${offer.stage}-slot-${offer.slot}`;
@@ -27,6 +27,7 @@ function offerView(offer: ExpandedOffer, rank: number | null) {
 		slotNumber: offer.slot,
 		name: offer.item.name,
 		identified: offer.item.name !== null,
+		valuation: offer.item.valuation,
 		captured: true,
 		iconSrc: offer.icon,
 		quantity: offer.quantity,
@@ -55,6 +56,8 @@ export const load: PageLoad = async ({ fetch }) => {
 	const overallRanking = rankOffers(event, catalog);
 	const completeness = getExchangeCompleteness(event);
 	const identifiedOffers = allOffers.filter((offer) => offer.item.name !== null).length;
+	const uniqueOffers = allOffers.filter((offer) => offer.item.valuation === 'unique');
+	const pendingOffers = allOffers.filter((offer) => offer.item.valuation === 'pending');
 	const validationNotes = event.stages
 		.filter((stage) => stage.missingSlots.length > 0)
 		.map((stage) => {
@@ -68,9 +71,9 @@ export const load: PageLoad = async ({ fetch }) => {
 		);
 	}
 
-	if (overallRanking.length < completeness.captured) {
+	if (pendingOffers.length > 0) {
 		validationNotes.push(
-			`${completeness.captured - overallRanking.length} captured items still need a confirmed Ely value.`
+			`${pendingOffers.length} captured offers still need a confirmed Ely value.`
 		);
 	}
 
@@ -87,11 +90,12 @@ export const load: PageLoad = async ({ fetch }) => {
 			status: getEventStatus(event)
 		},
 		topOffers: overallRanking.slice(0, 5).map((offer, index) => offerView(offer, index + 1)),
+		uniqueOffers: uniqueOffers.map((offer) => offerView(offer, null)),
 		stages: event.stages.map((stage) => {
 			const stageRanking = rankOffers(event, catalog, stage.number);
+			const stageOffers = allOffers.filter((offer) => offer.stage === stage.number);
 			const rankById = new Map(stageRanking.map((offer, index) => [offerId(offer), index + 1]));
-			const offers = allOffers
-				.filter((offer) => offer.stage === stage.number)
+			const offers = stageOffers
 				.map((offer) => offerView(offer, rankById.get(offerId(offer)) ?? null))
 				.sort(
 					(left, right) =>
@@ -104,6 +108,8 @@ export const load: PageLoad = async ({ fetch }) => {
 				capturedCount: stage.offers.length,
 				expectedSlots: stage.offers.length + stage.missingSlots.length,
 				pricedCount: stageRanking.length,
+				uniqueCount: stageOffers.filter((offer) => offer.item.valuation === 'unique').length,
+				pendingCount: stageOffers.filter((offer) => offer.item.valuation === 'pending').length,
 				offers
 			};
 		}),
@@ -112,6 +118,8 @@ export const load: PageLoad = async ({ fetch }) => {
 			expectedSlots: event.expectedOfferCount,
 			identifiedOffers,
 			pricedOffers: overallRanking.length,
+			uniqueOffers: uniqueOffers.length,
+			pendingOffers: pendingOffers.length,
 			capturePercent: Math.round((completeness.captured / event.expectedOfferCount) * 100),
 			validationNotes
 		},
@@ -120,7 +128,7 @@ export const load: PageLoad = async ({ fetch }) => {
 			'Use the maintainer-confirmed Ely value for one item and multiply it by the bundle quantity.',
 			'Divide that bundle value by the event point cost. Higher Ely per point ranks first.',
 			'Break ties by bundle value, lower point cost, stage, and in-game slot so results stay deterministic.',
-			'Exclude unpriced and obscured offers from ranks while keeping every known gap visible.'
+			'Show unique rewards separately because they have no defensible Ely equivalent; exclude pending and obscured offers from ranks.'
 		]
 	};
 };
