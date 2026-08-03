@@ -1,11 +1,12 @@
 # LaTale Tools
 
-A growing collection of English-language LaTale fan utilities. The first tool recreates the scenario reader from [RamuWiki](https://latale.wiki/scenario-script) as a responsive SvelteKit application at `/scenario-script`.
+A growing collection of English-language LaTale fan utilities, including a scenario reader and a static current-event exchange ranking.
 
 ## Features
 
 - General-purpose tool landing page at `/`
 - Complete scenario reader at `/scenario-script`
+- Current event exchange guide at `/event-exchange`, ranked by maintainer-confirmed Ely value per point
 - All 143 main and side stories, split into lazy-loaded JSON files
 - 50,651 dialogue lines organized by chapter and quest step
 - English story titles, objectives, character names, narration, and dialogue
@@ -26,10 +27,14 @@ Useful checks:
 
 ```sh
 npm run check
+npm run check:event-exchange
+npm test
 npm run build
 ```
 
 The app uses the current SvelteKit CLI defaults with TypeScript, Tailwind CSS, `@sveltejs/adapter-vercel`, and shadcn-svelte.
+
+See [`docs/event-exchange-maintenance.md`](docs/event-exchange-maintenance.md) for the screenshot-to-ranking update workflow. Raw screenshots and generated review sheets stay under the ignored `.cache/` directory.
 
 ## Project-scoped agent skills
 

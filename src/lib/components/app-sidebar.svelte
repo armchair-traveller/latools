@@ -4,13 +4,15 @@
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
 	import ExternalLinkIcon from '@lucide/svelte/icons/external-link';
 	import HouseIcon from '@lucide/svelte/icons/house';
+	import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
 	import * as Sidebar from '$lib/components/ui/sidebar';
 
 	const sidebar = Sidebar.useSidebar();
 
 	const navigation = [
 		{ label: 'Home', href: '/', icon: HouseIcon },
-		{ label: 'Scenario scripts', href: '/scenario-script', icon: BookOpenTextIcon }
+		{ label: 'Scenario scripts', href: '/scenario-script', icon: BookOpenTextIcon },
+		{ label: 'Event exchange', href: '/event-exchange', icon: ShoppingBasketIcon }
 	] as const;
 
 	function isActive(href: string): boolean {

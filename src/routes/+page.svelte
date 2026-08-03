@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import ArrowRightIcon from '@lucide/svelte/icons/arrow-right';
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
+	import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
 	import SparklesIcon from '@lucide/svelte/icons/sparkles';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import { Badge } from '$lib/components/ui/badge';
@@ -14,7 +15,7 @@
 	<title>LaTale Tools</title>
 	<meta
 		name="description"
-		content="Community-made LaTale utilities, including a complete English scenario script archive."
+		content="Community-made LaTale utilities for scenario reading and current event exchange rankings."
 	/>
 </svelte:head>
 
@@ -29,8 +30,8 @@
 				Useful corners of LaTale, gathered in one place.
 			</h1>
 			<p class="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-				Browse community tools built to make the game easier to explore. The first release is a
-				complete English reader for LaTale's main and side-story dialogue.
+				Browse community tools built to make the game easier to explore, from a complete English
+				scenario reader to current event exchange rankings.
 			</p>
 			<div class="mt-7 flex flex-wrap gap-3">
 				<Button href={resolve('/scenario-script')} size="lg">
@@ -81,7 +82,7 @@
 			<h2 id="tools-heading" class="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
 				Start exploring
 			</h2>
-			<p class="mt-2 text-muted-foreground">More focused community tools can live here over time.</p>
+			<p class="mt-2 text-muted-foreground">Pick a focused guide and get straight to what you need.</p>
 		</div>
 
 		<div class="mt-7 grid gap-5 md:grid-cols-2">
@@ -105,6 +106,31 @@
 				<Card.Footer class="border-t">
 					<Button href={resolve('/scenario-script')}>
 						Open tool
+						<ArrowRightIcon data-icon="inline-end" aria-hidden="true" />
+					</Button>
+				</Card.Footer>
+			</Card.Root>
+
+			<Card.Root>
+				<Card.Header>
+					<div class="mb-3 grid size-10 place-items-center rounded-lg bg-secondary text-secondary-foreground">
+						<ShoppingBasketIcon class="size-5" aria-hidden="true" />
+					</div>
+					<Card.Title><h3>Event exchange ranking</h3></Card.Title>
+					<Card.Description>
+						Compare the current event rewards across all five exchange stages before spending points.
+					</Card.Description>
+				</Card.Header>
+				<Card.Content>
+					<div class="flex flex-wrap gap-2">
+						<Badge variant="secondary">Current event</Badge>
+						<Badge variant="outline">5 stages</Badge>
+						<Badge variant="outline">Value per point</Badge>
+					</div>
+				</Card.Content>
+				<Card.Footer class="border-t">
+					<Button href={resolve('/event-exchange')}>
+						View ranking
 						<ArrowRightIcon data-icon="inline-end" aria-hidden="true" />
 					</Button>
 				</Card.Footer>
