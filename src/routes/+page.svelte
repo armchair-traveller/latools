@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import ArrowRightIcon from '@lucide/svelte/icons/arrow-right';
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
+	import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
 	import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
 	import SparklesIcon from '@lucide/svelte/icons/sparkles';
 	import * as Avatar from '$lib/components/ui/avatar';
@@ -15,7 +16,7 @@
 	<title>LaTale Tools</title>
 	<meta
 		name="description"
-		content="Community-made LaTale utilities for scenario reading and current event exchange rankings."
+		content="Community-made LaTale utilities for specification analysis, scenario reading, and current event exchange rankings."
 	/>
 </svelte:head>
 
@@ -30,8 +31,8 @@
 				Useful corners of LaTale, gathered in one place.
 			</h1>
 			<p class="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-				Browse community tools built to make the game easier to explore, from a complete English
-				scenario reader to current event exchange rankings.
+				Browse community tools built to make the game easier to explore, from character damage
+				analysis to a complete English scenario reader and current event exchange rankings.
 			</p>
 			<div class="mt-7 flex flex-wrap gap-3">
 				<Button href={resolve('/scenario-script')} size="lg">
@@ -85,7 +86,32 @@
 			<p class="mt-2 text-muted-foreground">Pick a focused guide and get straight to what you need.</p>
 		</div>
 
-		<div class="mt-7 grid gap-5 md:grid-cols-2">
+		<div class="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+			<Card.Root>
+				<Card.Header>
+					<div class="mb-3 grid size-10 place-items-center rounded-lg bg-secondary text-secondary-foreground">
+						<ScanSearchIcon class="size-5" aria-hidden="true" />
+					</div>
+					<Card.Title><h3>Specification analyzer</h3></Card.Title>
+					<Card.Description>
+						Model your character stats, compare enchants, and see damage efficiency by dungeon.
+					</Card.Description>
+				</Card.Header>
+				<Card.Content>
+					<div class="flex flex-wrap gap-2">
+						<Badge variant="secondary">Damage model</Badge>
+						<Badge variant="outline">7 dungeons</Badge>
+						<Badge variant="outline">Enchant compare</Badge>
+					</div>
+				</Card.Content>
+				<Card.Footer class="border-t">
+					<Button href={resolve('/spec-analyzer')}>
+						Analyze stats
+						<ArrowRightIcon data-icon="inline-end" aria-hidden="true" />
+					</Button>
+				</Card.Footer>
+			</Card.Root>
+
 			<Card.Root>
 				<Card.Header>
 					<div class="mb-3 grid size-10 place-items-center rounded-lg bg-secondary text-secondary-foreground">
