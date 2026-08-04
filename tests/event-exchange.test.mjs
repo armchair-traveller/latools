@@ -94,6 +94,15 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 	assert.equal(unranked.filter((offer) => offer.item.valuation === 'unique').length, 4);
 	assert.equal(unranked.filter((offer) => offer.item.valuation === 'pending').length, 10);
 	assert.deepEqual(
+		ranked
+			.filter((offer) => offer.itemId === 'premium-abio-coke')
+			.map(({ stage, bundleEly, elyPerPoint }) => ({ stage, bundleEly, elyPerPoint })),
+		[
+			{ stage: 2, bundleEly: 18_000_000, elyPerPoint: 1_800_000 },
+			{ stage: 3, bundleEly: 18_000_000, elyPerPoint: 1_800_000 }
+		]
+	);
+	assert.deepEqual(
 		ranked.slice(0, 5).map(({ itemId, stage, slot, bundleEly, elyPerPoint }) => ({
 			itemId,
 			stage,
@@ -102,11 +111,11 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 			elyPerPoint
 		})),
 		[
-			{ itemId: 'premium-abio-coke', stage: 2, slot: 5, bundleEly: 600_000_000, elyPerPoint: 60_000_000 },
-			{ itemId: 'premium-abio-coke', stage: 3, slot: 2, bundleEly: 600_000_000, elyPerPoint: 60_000_000 },
 			{ itemId: 'gatia-sues-stone-7d', stage: 3, slot: 3, bundleEly: 520_000_000, elyPerPoint: 20_800_000 },
 			{ itemId: 'la-tale-adventure-dice', stage: 2, slot: 2, bundleEly: 172_500_000, elyPerPoint: 17_250_000 },
-			{ itemId: 'potion-of-resurrection', stage: 2, slot: 6, bundleEly: 120_000_000, elyPerPoint: 12_000_000 }
+			{ itemId: 'potion-of-resurrection', stage: 2, slot: 6, bundleEly: 120_000_000, elyPerPoint: 12_000_000 },
+			{ itemId: 'iceflower-charm', stage: 2, slot: 3, bundleEly: 400_000_000, elyPerPoint: 400_000_000 / 35 },
+			{ itemId: 'dungeon-titlebook-1-10-coupon', stage: 5, slot: 7, bundleEly: 900_000_000, elyPerPoint: 11_250_000 }
 		]
 	);
 });

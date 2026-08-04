@@ -7,7 +7,7 @@
 		{ "id": "la-tale-adventure-dice", "name": "La Tale Adventure Dice", "referenceIcon": "/items/event-exchange/current/stage-2-slot-2.png", "valuation": "priced", "unitEly": 34500000, "priceUpdatedAt": "2026-08-03" },
 		{ "id": "iceflower-charm", "name": "Iceflower Charm", "referenceIcon": "/items/event-exchange/current/stage-2-slot-3.png", "valuation": "priced", "unitEly": 400000000, "priceUpdatedAt": "2026-08-03" },
 		{ "id": "cheerful-tengu-totem-fragment", "name": "Cheerful Tengu Totem Fragment", "referenceIcon": "/items/event-exchange/current/stage-2-slot-4.png", "valuation": "pending", "unitEly": null, "priceUpdatedAt": null },
-		{ "id": "premium-abio-coke", "name": "Premium Abio Coke", "referenceIcon": "/items/event-exchange/current/stage-2-slot-5.png", "valuation": "priced", "unitEly": 30000000, "priceUpdatedAt": "2026-08-03" },
+		{ "id": "premium-abio-coke", "name": "Premium Abio Coke", "referenceIcon": "/items/event-exchange/current/stage-2-slot-5.png", "valuation": "priced", "unitEly": 900000, "priceUpdatedAt": "2026-08-04" },
 		{ "id": "potion-of-resurrection", "name": "Potion of Resurrection", "referenceIcon": "/items/event-exchange/current/stage-2-slot-6.png", "valuation": "priced", "unitEly": 60000000, "priceUpdatedAt": "2026-08-03" },
 		{ "id": "heros-exp-potion", "name": "Hero’s EXP Potion", "referenceIcon": "/items/event-exchange/current/stage-2-slot-8.png", "valuation": "priced", "unitEly": 35000000, "priceUpdatedAt": "2026-08-03" },
 		{ "id": "gatia-sues-stone-7d", "name": "Gatia Sue’s Stone [7D]", "referenceIcon": "/items/event-exchange/current/stage-3-slot-3.png", "valuation": "priced", "unitEly": 520000000, "priceUpdatedAt": "2026-08-03" },
