@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import ArrowRightIcon from '@lucide/svelte/icons/arrow-right';
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
+	import PercentIcon from '@lucide/svelte/icons/percent';
 	import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
 	import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
 	import SparklesIcon from '@lucide/svelte/icons/sparkles';
@@ -16,7 +17,7 @@
 	<title>LaTale Tools</title>
 	<meta
 		name="description"
-		content="Community-made LaTale utilities for specification analysis, scenario reading, and current event exchange rankings."
+		content="Community-made LaTale utilities for specification analysis, scenario reading, event exchange rankings, and flash sale comparisons."
 	/>
 </svelte:head>
 
@@ -32,7 +33,7 @@
 			</h1>
 			<p class="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
 				Browse community tools built to make the game easier to explore, from character damage
-				analysis to a complete English scenario reader and current event exchange rankings.
+				analysis to a complete English scenario reader and current event and flash sale rankings.
 			</p>
 			<div class="mt-7 flex flex-wrap gap-3">
 				<Button href={resolve('/scenario-script')} size="lg">
@@ -86,7 +87,7 @@
 			<p class="mt-2 text-muted-foreground">Pick a focused guide and get straight to what you need.</p>
 		</div>
 
-		<div class="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+		<div class="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
 			<Card.Root>
 				<Card.Header>
 					<div class="mb-3 grid size-10 place-items-center rounded-lg bg-secondary text-secondary-foreground">
@@ -157,6 +158,31 @@
 				<Card.Footer class="border-t">
 					<Button href={resolve('/event-exchange')}>
 						View ranking
+						<ArrowRightIcon data-icon="inline-end" aria-hidden="true" />
+					</Button>
+				</Card.Footer>
+			</Card.Root>
+
+			<Card.Root>
+				<Card.Header>
+					<div class="mb-3 grid size-10 place-items-center rounded-lg bg-secondary text-secondary-foreground">
+						<PercentIcon class="size-5" aria-hidden="true" />
+					</div>
+					<Card.Title><h3>Flash sale ranking</h3></Card.Title>
+					<Card.Description>
+						Compare each sale cycle by verified Ely returned for every LTC spent.
+					</Card.Description>
+				</Card.Header>
+				<Card.Content>
+					<div class="flex flex-wrap gap-2">
+						<Badge variant="secondary">Current sale</Badge>
+						<Badge variant="outline">Per-cycle ranks</Badge>
+						<Badge variant="outline">Personal view</Badge>
+					</div>
+				</Card.Content>
+				<Card.Footer class="border-t">
+					<Button href={resolve('/flash-sale')}>
+						Compare offers
 						<ArrowRightIcon data-icon="inline-end" aria-hidden="true" />
 					</Button>
 				</Card.Footer>

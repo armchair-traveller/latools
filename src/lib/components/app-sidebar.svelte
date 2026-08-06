@@ -4,6 +4,7 @@
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
 	import ExternalLinkIcon from '@lucide/svelte/icons/external-link';
 	import HouseIcon from '@lucide/svelte/icons/house';
+	import PercentIcon from '@lucide/svelte/icons/percent';
 	import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
 	import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
 	import * as Sidebar from '$lib/components/ui/sidebar';
@@ -14,7 +15,8 @@
 		{ label: 'Home', href: '/', icon: HouseIcon },
 		{ label: 'Specification analyzer', href: '/spec-analyzer', icon: ScanSearchIcon },
 		{ label: 'Scenario scripts', href: '/scenario-script', icon: BookOpenTextIcon },
-		{ label: 'Event exchange', href: '/event-exchange', icon: ShoppingBasketIcon }
+		{ label: 'Event exchange', href: '/event-exchange', icon: ShoppingBasketIcon },
+		{ label: 'Flash sale ranking', href: '/flash-sale', icon: PercentIcon }
 	] as const;
 
 	function isActive(href: string): boolean {

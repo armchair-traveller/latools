@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flash Sale Maintainer"
+  short_description: "Draft and review PapayaPlay flash sales"
+  default_prompt: "Use $flash-sale-maintainer to analyze the latest PapayaPlay La Tale flash sale and prepare a reviewable draft."

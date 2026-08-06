@@ -10,6 +10,7 @@
 		"sync:data": "node scripts/sync-scenarios.mjs",
 		"test": "node --test",
 		"check:event-exchange": "node scripts/check-event-exchange.mjs",
+		"check:flash-sale": "node scripts/check-flash-sale.mjs",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"

@@ -132,3 +132,145 @@ export interface ExchangeCompleteness {
 	missing: number;
 	total: number;
 }
+
+export type FlashSaleConfidence = 'high' | 'medium' | 'low';
+export type FlashSaleValuationStatus = 'priced' | 'estimated' | 'unique' | 'pending';
+export type FlashSaleValuationMethod =
+	| 'market-observation'
+	| 'maintainer-estimate'
+	| 'historical-comparison'
+	| 'not-applicable'
+	| 'pending';
+
+export interface FlashSaleSource {
+	id: string;
+	kind: 'official-sale' | 'official-guide' | 'historical-sale' | 'market-observation';
+	title: string;
+	url: string;
+	accessedAt: string;
+	note: string;
+}
+
+export interface FlashSaleValuation {
+	status: FlashSaleValuationStatus;
+	unitEly: number | null;
+	method: FlashSaleValuationMethod;
+	confidence: FlashSaleConfidence | null;
+	asOf: string | null;
+	sourceIds: string[];
+	note: string;
+}
+
+export interface FlashSaleCatalogItem {
+	id: string;
+	name: string;
+	aliases: string[];
+	valuation: FlashSaleValuation;
+}
+
+export interface FlashSaleCatalog {
+	schemaVersion: 1;
+	sources: FlashSaleSource[];
+	items: FlashSaleCatalogItem[];
+}
+
+export interface FlashSaleIndexEntry {
+	id: string;
+	title: string;
+	startsAt: string;
+	endsAt: string;
+	reviewedAt: string;
+}
+
+export interface FlashSaleIndex {
+	schemaVersion: 1;
+	currentSaleId: string;
+	sales: FlashSaleIndexEntry[];
+}
+
+export interface FlashSaleValuationSnapshot extends FlashSaleValuation {
+	itemId: string;
+}
+
+export interface FlashSaleOfferContent {
+	itemId: string;
+	quantity: number;
+}
+
+export interface FlashSaleOffer {
+	id: string;
+	slot: number;
+	name: string;
+	salePriceLtc: number;
+	purchaseLimit: {
+		quantity: number;
+		scope: 'account' | 'character' | 'unknown';
+	} | null;
+	contents: FlashSaleOfferContent[];
+	capture: {
+		status: 'verified' | 'uncertain';
+		sourceIds: string[];
+		note: string;
+	};
+	bestFor: string;
+	skipIf: string;
+	caveats: string[];
+}
+
+export interface FlashSaleCycle {
+	id: string;
+	label: string;
+	startsAt: string;
+	endsAt: string;
+	expectedOfferCount: number;
+	unresolvedSlots: number[];
+	offers: FlashSaleOffer[];
+}
+
+export interface FlashSaleAnalysis {
+	schemaVersion: 1;
+	id: string;
+	postId: number;
+	title: string;
+	region: 'NA';
+	currency: 'LTC';
+	timezone: 'America/New_York';
+	sourceUrl: string;
+	publishedAt: string;
+	analyzedAt: string;
+	reviewedAt: string;
+	status: 'published';
+	sourceFingerprint: string;
+	posterUrls: string[];
+	expectedOfferCount: number;
+	sources: FlashSaleSource[];
+	valuationSnapshot: FlashSaleValuationSnapshot[];
+	cycles: FlashSaleCycle[];
+}
+
+export interface EvaluatedFlashSaleComponent extends FlashSaleOfferContent {
+	item: FlashSaleCatalogItem;
+	valuation: FlashSaleValuationSnapshot;
+	componentEly: number | null;
+}
+
+export interface EvaluatedFlashSaleOffer extends FlashSaleOffer {
+	cycleId: string;
+	components: EvaluatedFlashSaleComponent[];
+	knownBundleEly: number;
+	bundleEly: number | null;
+	elyPerLtc: number | null;
+	lowerBoundElyPerLtc: number | null;
+	valuationState: 'exact' | 'partial' | 'unranked';
+	confidence: FlashSaleConfidence | null;
+	rank: number | null;
+}
+
+export interface FlashSaleCompleteness {
+	captured: number;
+	unresolved: number;
+	total: number;
+	fullyValued: number;
+	partiallyValued: number;
+	unranked: number;
+}
