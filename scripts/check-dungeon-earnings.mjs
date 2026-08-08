@@ -30,7 +30,6 @@ const expectedMainYields = new Map([
 const expectedBuffIds = new Set([
 	'flasks',
 	'critical-oil',
-	'sweet-mutant-special-potion',
 	'alvis-support-potion',
 	'hunter-hp-recovery-kit-30',
 	'mysterious-critical-damage-amplifier',
@@ -43,7 +42,6 @@ const expectedBuffIds = new Set([
 const expectedEssentialBuffIds = new Set([
 	'flasks',
 	'critical-oil',
-	'sweet-mutant-special-potion',
 	'alvis-support-potion',
 	'hunter-hp-recovery-kit-30',
 	'mysterious-critical-damage-amplifier'
@@ -258,7 +256,8 @@ for (const [i, buff] of (catalog.buffs ?? []).entries()) {
 	const context = `catalog.buffs[${i}]`;
 	unique(buffIds, buff.id, context);
 	check(expectedBuffIds.has(buff.id), `${context}.id is outside the maintained buff set.`);
-	check(nonEmpty(buff.name) && nonEmpty(buff.description), `${context} requires a name and description.`);
+	check(nonEmpty(buff.name), `${context}.name must be a non-empty string.`);
+	check(typeof buff.description === 'string', `${context}.description must be a string.`);
 	check(positive(buff.durationSeconds) && positive(buff.consumablesPerActivation), `${context} duration and activation quantity must be positive.`);
 	check(['snapshot', 'fixed-zero'].includes(buff.priceMode), `${context}.priceMode is invalid.`);
 	check(typeof buff.priceEditable === 'boolean', `${context}.priceEditable must be boolean.`);
@@ -338,7 +337,7 @@ for (const [i, price] of (snapshot?.prices ?? []).entries()) {
 	}
 }
 for (const [kind, ids] of Object.entries(validPrices)) for (const id of ids) check(prices.has(`${kind}:${id}`), `Snapshot is missing ${kind} price ${id}.`);
-check(!prices.has('buff:sweet-mutant-special-potion'), 'Sweet Mutant must not have a customizable snapshot price.');
+check(!buffIds.has('sweet-mutant-special-potion'), 'Sweet Mutant must stay outside the modeled buff-cost set.');
 for (const buff of catalog.buffs.filter(
 	(buff) => buff.essential && buff.priceMode === 'snapshot' && !buff.priceEditable
 )) {

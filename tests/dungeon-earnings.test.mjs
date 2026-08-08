@@ -8,6 +8,44 @@ import {
 	calculateDungeonEarnings,
 	validateDungeonBuffSelection
 } from '../src/lib/dungeon-earnings.js';
+import {
+	formatCompactEly,
+	formatCompactElyAmount,
+	normalizeElyInput,
+	parseElyInput
+} from '../src/lib/ely.js';
+
+test('parses and formats compact Ely values', () => {
+	assert.equal(parseElyInput('2.5m'), 2_500_000);
+	assert.equal(parseElyInput('200M'), 200_000_000);
+	assert.equal(parseElyInput('9 b'), 9_000_000_000);
+	assert.equal(parseElyInput('2500k'), 2_500_000);
+	assert.equal(parseElyInput('2,500,000'), 2_500_000);
+	assert.equal(parseElyInput('1.000000001b'), 1_000_000_001);
+	assert.equal(parseElyInput('9,007,199,254,740,991'), Number.MAX_SAFE_INTEGER);
+	assert.equal(parseElyInput('2,50'), null);
+	assert.equal(parseElyInput('1,,000'), null);
+	assert.equal(parseElyInput('1.25'), null);
+	assert.equal(parseElyInput('-1m'), null);
+	assert.equal(parseElyInput('1e6'), null);
+	assert.equal(parseElyInput('1mm'), null);
+	assert.equal(parseElyInput('10t'), null);
+	assert.equal(parseElyInput('9007199.254741b'), null);
+	assert.equal(parseElyInput('not Ely'), null);
+	assert.equal(formatCompactElyAmount(2_500_000), '2.5m');
+	assert.equal(formatCompactEly(613_500_000), '613.5m Ely');
+	assert.equal(formatCompactEly(4_440_166_667), '≈4.44b Ely');
+	assert.equal(formatCompactEly(null), 'Pending');
+	assert.equal(formatCompactEly(Number.NaN), '—');
+	assert.equal(normalizeElyInput('1234567'), '1,234,567');
+	assert.equal(normalizeElyInput('1.234567m'), '1.234567m');
+	assert.equal(parseElyInput(normalizeElyInput('1234567')), 1_234_567);
+	assert.equal(parseElyInput(normalizeElyInput('1.234567m')), 1_234_567);
+	assert.equal(
+		parseElyInput(normalizeElyInput(String(Number.MAX_SAFE_INTEGER))),
+		Number.MAX_SAFE_INTEGER
+	);
+});
 
 const catalog = {
 	schemaVersion: 1,
@@ -601,7 +639,6 @@ test('checked-in data contains the confirmed yields, routes, prices, and all fou
 	const essentialBuffIds = [
 		'flasks',
 		'critical-oil',
-		'sweet-mutant-special-potion',
 		'alvis-support-potion',
 		'hunter-hp-recovery-kit-30',
 		'mysterious-critical-damage-amplifier'
@@ -624,6 +661,16 @@ test('checked-in data contains the confirmed yields, routes, prices, and all fou
 	);
 	assert.equal(currentBuffs.has('mysterious-critical-chance-amplifier'), false);
 	assert.equal(currentBuffs.has('mysterious-damage-amplifier'), false);
+	assert.equal(currentBuffs.has('sweet-mutant-special-potion'), false);
+	assert.equal(currentBuffs.get('critical-oil')?.priceEditable, true);
+	assert.ok(
+		[
+			'flasks',
+			'alvis-support-potion',
+			'hunter-hp-recovery-kit-30',
+			'mysterious-critical-damage-amplifier'
+		].every((buffId) => currentBuffs.get(buffId)?.priceEditable === false)
+	);
 	assert.match(currentBuffs.get('shining-storm-potion')?.description ?? '', /Critical rate \+100/);
 	assert.equal(currentBuffs.get('heroes-set')?.name, "Hero's Set");
 	assert.equal(currentBuffs.get('heroes-set')?.exclusivityGroup, 'heroes-attack');

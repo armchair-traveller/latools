@@ -12,7 +12,7 @@
 			"title": "Ramu Wiki — fixed NPC buff exchanges",
 			"url": "https://latale.wiki/buff-items?tab=combat",
 			"accessedAt": "2026-08-07",
-			"note": "Combat and Utility Elixirs are 500,000 Ely each per use; Alvis Support Potion and Hunter HP Recovery Kit 30% are 1,000,000 Ely each per use."
+			"note": "Combat and Utility Elixirs are 500k Ely each per use; Alvis Support Potion and Hunter HP Recovery Kit 30% are 1m Ely each per use."
 		},
 		{
 			"id": "maintainer-current-economy",
@@ -24,8 +24,8 @@
 		}
 	],
 	"prices": [
-		{ "itemId": "wings-of-icarus-main-material", "kind": "market", "status": "priced", "unitEly": 2500000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Shared gross value for either main material: 5b universal 2,000-material coupon divided by 2,000. The engine separately deducts the 1% fee and 50,000 Ely per-unit conversion cost." },
-		{ "itemId": "rikimo-pelke-main-material", "kind": "market", "status": "priced", "unitEly": 6000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Shared gross value for either main material: 12b universal 2,000-material coupon divided by 2,000. The engine separately deducts the 1% fee and 50,000 Ely per-unit conversion cost." },
+		{ "itemId": "wings-of-icarus-main-material", "kind": "market", "status": "priced", "unitEly": 2500000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Shared gross value for either main material: 5b Ely universal 2,000-material coupon divided by 2,000. The engine separately deducts the 1% fee and 50k Ely per-unit conversion cost." },
+		{ "itemId": "rikimo-pelke-main-material", "kind": "market", "status": "priced", "unitEly": 6000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Shared gross value for either main material: 12b Ely universal 2,000-material coupon divided by 2,000. The engine separately deducts the 1% fee and 50k Ely per-unit conversion cost." },
 		{ "itemId": "pleroma-advanced-equipment-coupon", "kind": "market", "status": "priced", "unitEly": 200000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Gross auction price per immediately tradable coupon." },
 		{ "itemId": "emeraldia-advanced-equipment-coupon", "kind": "market", "status": "priced", "unitEly": 255000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Gross auction price per immediately tradable coupon." },
 		{ "itemId": "wings-of-icarus-advanced-equipment-coupon", "kind": "market", "status": "priced", "unitEly": 180000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Gross auction price per immediately tradable coupon." },

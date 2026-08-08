@@ -62,13 +62,15 @@ Pleroma/Emeraldia main materials are not directly auctionable and are service in
 
 Do not pre-deduct either fee when refreshing a snapshot.
 
+The page abbreviates displayed Ely amounts with lowercase `k`, `m`, and `b` suffixes. A leading `≈` marks a rounded display value; calculation precision is unchanged. Every editable Ely field accepts the same case-insensitive shorthand or an exactly grouped whole number. Valid shorthand is preserved on blur, while plain digits are grouped with commas without changing their value.
+
 ## Buff whitelist and pricing
 
 Guild food is excluded. Combat and Utility Elixirs are represented by one `Flasks` activation at their combined fixed cost. Hero's Attack Nostrums I and II are represented by the combined `Hero's Set`, with Attack Nostrum II also available by itself; the defense Nostrum is excluded. Only the Mysterious Critical Damage Amplifier is maintained because the alternatives have the same modeled cost and are not meaningful to the earnings comparison.
 
-Six buffs are the non-optional baseline and use `essential: true`: Flasks, Critical Oil, Sweet Mutant Special Potion, Alvis Support Potion, Hunter HP Recovery Kit 30%, and Mysterious Critical Damage Amplifier. The calculation engine appends these even when callers provide no buff IDs. UI persistence therefore stores optional selections only. Optional high-cost choices are displayed before the condensed essential baseline.
+Five buffs are the non-optional baseline and use `essential: true`: Flasks, Critical Oil, Alvis Support Potion, Hunter HP Recovery Kit 30%, and Mysterious Critical Damage Amplifier. The calculation engine appends these even when callers provide no buff IDs. UI persistence therefore stores optional selections only. Optional high-cost choices are displayed before the condensed essential baseline. Sweet Mutant Special Potion is intentionally omitted from the cost model because it has no Ely cost and players use it regardless.
 
-`priceMode: "fixed-zero"` is reserved for Sweet Mutant Special Potion, which is not purchasable and has `priceItemId: null`. Snapshot-priced buffs use `priceMode: "snapshot"`. `priceEditable: false` is used for fixed-source prices (Flasks, Alvis, Hunter Kit, and the Mysterious Critical Damage Amplifier); market-priced buffs remain editable.
+Snapshot-priced buffs use `priceMode: "snapshot"`. `priceEditable: false` is used for fixed-source prices (Flasks, Alvis, Hunter Kit, and the Mysterious Critical Damage Amplifier); these are labeled `Fixed` in the UI even though their maintained value lives in the dated snapshot. Critical Oil and the optional market-priced buffs remain editable and use `Snapshot` or `Custom` labels. `priceMode: "fixed-zero"` remains supported by the calculation schema for future costless entries, but none are currently displayed.
 
 Premium Syrup lasts two hours and Advanced Premium Syrup lasts one. Advanced Premium uses the lower of its direct snapshot price or `2 × premium-syrup` through `alternativePrice`. Premium Syrup has no current in-game source and survives only as legacy hoarded stock, so Advanced Premium remains the standard preset even when Premium is cheaper per hour.
 

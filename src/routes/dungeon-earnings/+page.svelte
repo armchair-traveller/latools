@@ -22,6 +22,12 @@
 	import * as Table from '$lib/components/ui/table';
 	import * as ToggleGroup from '$lib/components/ui/toggle-group';
 	import { calculateDungeonEarnings } from '$lib/dungeon-earnings.js';
+	import {
+		formatCompactEly,
+		formatCompactElyAmount,
+		normalizeElyInput,
+		parseElyInput
+	} from '$lib/ely.js';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -62,6 +68,7 @@
 		'guild-salad',
 		'guild-tomato-sandwich',
 		'guild-ham-sandwich',
+		'sweet-mutant-special-potion',
 		'mysterious-critical-chance-amplifier',
 		'mysterious-damage-amplifier'
 	]);
@@ -83,7 +90,6 @@
 		}
 	};
 	const emptyTime = (): TimeInput => ({ minutes: '', seconds: '' });
-	const integerFormatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
 	const decimalFormatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
 	const dateFormatter = new Intl.DateTimeFormat('en-US', {
 		year: 'numeric',
@@ -155,13 +161,8 @@
 		const values: Record<string, number> = {};
 		for (const [itemId, value] of Object.entries(overrides)) {
 			if (!editablePriceIds.has(itemId)) continue;
-			const parsed = Number(value);
-			if (
-				value.trim() !== '' &&
-				Number.isFinite(parsed) &&
-				parsed >= 0 &&
-				parsed <= Number.MAX_SAFE_INTEGER
-			) {
+			const parsed = parseElyInput(value);
+			if (value.trim() !== '' && parsed !== null) {
 				values[itemId] = parsed;
 			}
 		}
@@ -171,11 +172,7 @@
 		Object.entries(overrides)
 			.filter(([itemId, value]) => {
 				if (!editablePriceIds.has(itemId)) return false;
-				const parsed = Number(value);
-				return (
-					value.trim() !== '' &&
-					!(Number.isFinite(parsed) && parsed >= 0 && parsed <= Number.MAX_SAFE_INTEGER)
-				);
+				return value.trim() !== '' && parseElyInput(value) === null;
 			})
 			.map(([itemId]) => itemId)
 	);
@@ -418,14 +415,22 @@
 	}
 
 	function updateOverride(itemId: string, event: Event) {
-		const value = (event.currentTarget as HTMLInputElement).value;
-		if (value === '') {
+		const input = event.currentTarget as HTMLInputElement;
+		const value = input.value;
+		if (value.trim() === '') {
+			input.value = '';
 			const next = { ...overrides };
 			delete next[itemId];
 			overrides = next;
 			return;
 		}
 		overrides[itemId] = value;
+	}
+
+	function normalizeOverride(itemId: string) {
+		const value = overrides[itemId];
+		if (value === undefined) return;
+		if (parseElyInput(value) !== null) overrides[itemId] = normalizeElyInput(value);
 	}
 
 	function resetSetup() {
@@ -488,6 +493,14 @@
 		return 'Pending';
 	}
 
+	function buffPriceSourceLabel(row: {
+		priceEditable: boolean;
+		priceSource: 'snapshot' | 'override' | 'fixed' | 'derived' | null;
+	}): string {
+		if (!row.priceEditable && row.priceSource === 'snapshot') return 'Fixed';
+		return priceSourceLabel(row.priceSource);
+	}
+
 	function estimateStateLabel(state: 'complete' | 'lower-bound' | 'blocked'): string {
 		if (state === 'complete') return 'Complete estimate';
 		if (state === 'lower-bound') return 'Known lower bound';
@@ -495,11 +508,16 @@
 	}
 
 	function formatEly(value: number | null | undefined): string {
-		return value === null || value === undefined ? 'Pending' : `${integerFormatter.format(value)} Ely`;
+		return formatCompactEly(value);
 	}
 
 	function formatNumber(value: number | null | undefined): string {
 		return value === null || value === undefined ? '—' : decimalFormatter.format(value);
+	}
+
+	function buffDurationDescription(buff: Buff): string {
+		const duration = `${formatNumber(buff.durationSeconds / 60)} minute duration`;
+		return buff.description ? `${buff.description} · ${duration}` : duration;
 	}
 
 	function formatDate(value: string): string {
@@ -544,8 +562,12 @@
 		if (isRecord(value.overrides)) {
 			const restoredOverrides: Record<string, string> = {};
 			for (const [itemId, overrideValue] of Object.entries(value.overrides)) {
-				if (editablePriceIds.has(itemId) && typeof overrideValue === 'string') {
-					restoredOverrides[itemId] = overrideValue;
+				if (
+					editablePriceIds.has(itemId) &&
+					typeof overrideValue === 'string' &&
+					overrideValue.trim() !== ''
+				) {
+					restoredOverrides[itemId] = normalizeElyInput(overrideValue);
 				}
 			}
 			overrides = restoredOverrides;
@@ -780,11 +802,11 @@
 													{#if buff.icon}
 														<img src={buff.icon} alt="" class="size-9 shrink-0 object-contain" />
 													{/if}
-													<Field.Content>
-														<Field.Label for={`buff-${buff.id}`}>{buff.name}</Field.Label>
-														<Field.Description>
-															{buff.description} · {formatNumber(buff.durationSeconds / 60)} minute duration
-														</Field.Description>
+											<Field.Content>
+												<Field.Label for={`buff-${buff.id}`}>{buff.name}</Field.Label>
+												<Field.Description>
+													{buffDurationDescription(buff)}
+												</Field.Description>
 													</Field.Content>
 													<div class="flex shrink-0 flex-wrap items-center gap-2">
 														<Badge variant="outline">{buffPriceLabel(buff)}</Badge>
@@ -852,12 +874,13 @@
 							{/snippet}
 						</Sheet.Trigger>
 						<Sheet.Content class="data-[side=right]:w-full data-[side=right]:sm:max-w-xl">
-							<Sheet.Header>
-								<Sheet.Title>Price assumptions</Sheet.Title>
-								<Sheet.Description>
-									Override player-market values and provisional economy assumptions from the {formatDate(data.snapshot.asOf)}
-									Global snapshot. Fixed and zero-cost buffs are maintained in data and are not editable.
-								</Sheet.Description>
+						<Sheet.Header>
+							<Sheet.Title>Price assumptions</Sheet.Title>
+							<Sheet.Description>
+								Override player-market values and provisional economy assumptions from the {formatDate(data.snapshot.asOf)}
+								Global snapshot. Enter full values or shorthand such as 2.5m and 9b. Fixed and
+								zero-cost buffs are maintained in data and are not editable.
+							</Sheet.Description>
 							</Sheet.Header>
 							<div class="min-h-0 flex-1 overflow-y-auto px-4">
 								<Field.Group>
@@ -874,24 +897,35 @@
 													{/if}
 												</div>
 											</div>
-											<Input
-												id={`price-${price.itemId}`}
-												type="number"
-												min="0"
-												step="1"
-												inputmode="numeric"
-												placeholder={price.status === 'priced' ? String(price.unitEly) : 'Enter Ely value'}
-												value={overrides[price.itemId] ?? ''}
-												oninput={(event) => updateOverride(price.itemId, event)}
-												aria-invalid={invalidOverrideIds.includes(price.itemId)}
-												class="tabular-nums"
-											/>
+											<InputGroup.Root>
+												<InputGroup.Input
+													id={`price-${price.itemId}`}
+													type="text"
+													inputmode="text"
+													autocomplete="off"
+													spellcheck={false}
+													placeholder={price.status === 'priced'
+														? formatCompactElyAmount(price.unitEly)
+														: 'e.g. 250m'}
+													value={overrides[price.itemId] ?? ''}
+													oninput={(event) => updateOverride(price.itemId, event)}
+													onblur={() => normalizeOverride(price.itemId)}
+													aria-invalid={invalidOverrideIds.includes(price.itemId)}
+													class="tabular-nums"
+												/>
+												<InputGroup.Addon align="inline-end">
+													<InputGroup.Text>Ely</InputGroup.Text>
+												</InputGroup.Addon>
+											</InputGroup.Root>
 											{#if invalidOverrideIds.includes(price.itemId)}
 												<Field.Error>
-													Enter an Ely amount from zero to {integerFormatter.format(Number.MAX_SAFE_INTEGER)}.
+													Enter a whole Ely amount such as 2.5m, 200m, or 9b. Commas also work.
 												</Field.Error>
 											{:else}
 												<Field.Description>
+													{#if validOverrideValues[price.itemId] !== undefined}
+														Custom: {formatEly(validOverrideValues[price.itemId])}.
+													{/if}
 													Snapshot: {price.status === 'priced' ? formatEly(price.unitEly) : 'pending'}.
 													{price.note}
 												</Field.Description>
@@ -1329,7 +1363,7 @@
 														{/if}
 														<div>
 															<p class="font-medium">{row.name}</p>
-															<Badge variant="outline" class="mt-1">{priceSourceLabel(row.priceSource)}</Badge>
+													<Badge variant="outline" class="mt-1">{buffPriceSourceLabel(row)}</Badge>
 														</div>
 													</div>
 												</Table.Cell>
