@@ -274,3 +274,325 @@ export interface FlashSaleCompleteness {
 	partiallyValued: number;
 	unranked: number;
 }
+
+export type DungeonEarningsDifficulty = 'D4' | 'D5';
+export type DungeonEarningsRewardRoute = 'market' | 'service' | 'pending';
+export type DungeonEarningsPriceKind = 'market' | 'service' | 'cost' | 'buff';
+export type DungeonEarningsPriceSource = 'snapshot' | 'override' | 'fixed' | 'derived' | null;
+
+export interface DungeonEarningsSource {
+	id: string;
+	kind: 'dungeon-guide' | 'buff-guide' | 'maintainer-input' | 'market-observation';
+	title: string;
+	url: string | null;
+	accessedAt: string;
+	note: string;
+}
+
+export interface DungeonEarningsRewardItem {
+	id: string;
+	name: string;
+	route: DungeonEarningsRewardRoute;
+	marketPriceItemId?: string;
+	marketConversionCostPerUnitEly?: number;
+	icon: string | null;
+	sourceIds: string[];
+}
+
+export interface DungeonEarningsServiceRecipeInput {
+	itemId: string;
+	quantity: number;
+}
+
+export interface DungeonEarningsServiceRecipe {
+	id: string;
+	name: string;
+	inputs: DungeonEarningsServiceRecipeInput[];
+	providerElyCostEly: number;
+	customerPriceItemId: string;
+	customerSuppliedSealLocks: number;
+	customerSuppliedEquipment: boolean;
+	sourceIds: string[];
+	note: string;
+	status: 'confirmed' | 'provisional';
+}
+
+export type DungeonEarningsExpectedYield =
+	| { status: 'known'; expectedPerClear: number; note: string }
+	| { status: 'pending'; expectedPerClear: null; note: string };
+
+export interface DungeonEarningsRewardProfileEntry {
+	itemId: string;
+	yield: DungeonEarningsExpectedYield;
+	d5BonusEligible: boolean | null;
+}
+
+export interface DungeonEarningsDifficultyProfile {
+	rewards: DungeonEarningsRewardProfileEntry[];
+	serviceStrategyIds: string[];
+}
+
+export interface DungeonEarningsRequirement {
+	kind: 'ascension' | 'super-level';
+	value: number;
+	label: string;
+}
+
+export interface DungeonEarningsDungeon {
+	id: string;
+	name: string;
+	requirement: DungeonEarningsRequirement;
+	image: string;
+	sourceIds: string[];
+	difficulties: Record<DungeonEarningsDifficulty, DungeonEarningsDifficultyProfile>;
+}
+
+export interface DungeonEarningsBuff {
+	id: string;
+	name: string;
+	description: string;
+	durationSeconds: number;
+	consumablesPerActivation: number;
+	priceMode: 'fixed-zero' | 'snapshot';
+	priceEditable: boolean;
+	priceItemId: string | null;
+	alternativePrice?: {
+		priceItemId: string;
+		quantity: number;
+	};
+	standardPreset: boolean;
+	exclusivityGroup: string | null;
+	icon: string;
+	sourceIds: string[];
+}
+
+export interface DungeonEarningsCatalog {
+	schemaVersion: 1;
+	id: string;
+	updatedAt: string;
+	market: {
+		id: 'papayaplay-na';
+		label: string;
+		region: 'Global';
+		feeRate: number;
+		currency: 'Ely';
+	};
+	d5MaterialBonusRate: number;
+	sources: DungeonEarningsSource[];
+	rewardItems: DungeonEarningsRewardItem[];
+	serviceRecipes: DungeonEarningsServiceRecipe[];
+	dungeons: DungeonEarningsDungeon[];
+	buffs: DungeonEarningsBuff[];
+}
+
+interface DungeonEarningsSnapshotPriceBase {
+	itemId: string;
+	kind: DungeonEarningsPriceKind;
+	sourceIds: string[];
+	note: string;
+}
+
+export type DungeonEarningsSnapshotPrice =
+	| (DungeonEarningsSnapshotPriceBase & {
+			status: 'priced';
+			unitEly: number;
+			asOf: string;
+	  })
+	| (DungeonEarningsSnapshotPriceBase & {
+			status: 'pending';
+			unitEly: null;
+			asOf: null;
+	  });
+
+export interface DungeonEarningsSnapshot {
+	schemaVersion: 1;
+	id: string;
+	marketId: 'papayaplay-na';
+	currency: 'Ely';
+	asOf: string;
+	reviewedAt: string;
+	sources: DungeonEarningsSource[];
+	prices: DungeonEarningsSnapshotPrice[];
+}
+
+export interface DungeonEarningsSnapshotIndexEntry {
+	id: string;
+	asOf: string;
+	marketId: 'papayaplay-na';
+	path: string;
+}
+
+export interface DungeonEarningsIndex {
+	schemaVersion: 1;
+	currentSnapshotId: string;
+	snapshots: DungeonEarningsSnapshotIndexEntry[];
+}
+
+export type DungeonEarningsPriceOverrides = Record<string, number>;
+
+export interface DungeonEarningsEstimateInput {
+	catalog: DungeonEarningsCatalog;
+	snapshot: DungeonEarningsSnapshot;
+	dungeonId: string;
+	difficulty: DungeonEarningsDifficulty;
+	clearTimeSeconds: number;
+	selectedBuffIds?: string[];
+	priceOverrides?: DungeonEarningsPriceOverrides;
+}
+
+export interface DungeonEarningsServiceStrategyInputRow {
+	itemId: string;
+	name: string;
+	quantityPerService: number;
+	availableBeforePerClear: number | null;
+	consumedPerClear: number | null;
+	remainingAfterPerClear: number | null;
+}
+
+interface DungeonEarningsRewardRowBase {
+	itemId: string;
+	name: string;
+	icon: string | null;
+	baseExpectedPerClear: number | null;
+	bonusRate: number;
+	effectiveExpectedPerClear: number | null;
+	allocatedToServicesPerClear: number | null;
+	remainingAfterServicesPerClear: number | null;
+	missingMechanicIds: string[];
+	missingPriceIds: string[];
+}
+
+export interface DungeonEarningsMarketRewardRow extends DungeonEarningsRewardRowBase {
+	route: 'market';
+	priceItemId: string;
+	unitPriceEly: number | null;
+	priceSource: DungeonEarningsPriceSource;
+	conversionCostPerUnitEly: number;
+	grossPerClearEly: number | null;
+	marketFeePerClearEly: number | null;
+	conversionCostPerClearEly: number | null;
+	netPerClearEly: number | null;
+	netPerHourEly: number | null;
+	serviceFirstGrossPerClearEly: number | null;
+	serviceFirstMarketFeePerClearEly: number | null;
+	serviceFirstConversionCostPerClearEly: number | null;
+	serviceFirstNetPerClearEly: number | null;
+	serviceFirstNetPerHourEly: number | null;
+}
+
+export interface DungeonEarningsServiceRewardRow extends DungeonEarningsRewardRowBase {
+	route: 'service';
+}
+
+export interface DungeonEarningsPendingRewardRow extends DungeonEarningsRewardRowBase {
+	route: 'pending';
+}
+
+export type DungeonEarningsRewardRow =
+	| DungeonEarningsMarketRewardRow
+	| DungeonEarningsServiceRewardRow
+	| DungeonEarningsPendingRewardRow;
+
+export interface DungeonEarningsServiceStrategyRow {
+	strategyId: string;
+	name: string;
+	status: 'confirmed' | 'provisional';
+	note: string;
+	sourceIds: string[];
+	inputs: DungeonEarningsServiceStrategyInputRow[];
+	servicesPerClear: number | null;
+	customerPriceItemId: string;
+	customerPricePerServiceEly: number | null;
+	priceSource: DungeonEarningsPriceSource;
+	providerElyCostPerServiceEly: number;
+	customerSuppliedSealLocks: number;
+	customerSuppliedEquipment: boolean;
+	grossPerClearEly: number | null;
+	providerCostPerClearEly: number | null;
+	netPerClearEly: number | null;
+	netPerHourEly: number | null;
+	missingMechanicIds: string[];
+	missingPriceIds: string[];
+}
+
+export interface DungeonEarningsBuffRow {
+	buffId: string;
+	name: string;
+	description: string;
+	icon: string;
+	durationSeconds: number;
+	consumablesPerActivation: number;
+	priceMode: 'fixed-zero' | 'snapshot';
+	priceEditable: boolean;
+	priceItemId: string | null;
+	unitPriceEly: number | null;
+	priceSource: DungeonEarningsPriceSource;
+	directUnitPriceEly: number | null;
+	directPriceSource: DungeonEarningsPriceSource;
+	alternativePriceItemId: string | null;
+	alternativePriceQuantity: number | null;
+	alternativeUnitPriceEly: number | null;
+	alternativeCostEly: number | null;
+	alternativePriceSource: DungeonEarningsPriceSource;
+	chosenPricePath: 'direct' | 'alternative' | null;
+	costPerHourEly: number | null;
+}
+
+export interface DungeonEarningsPerClearTotals {
+	marketGrossEly: number;
+	marketFeeEly: number;
+	marketConversionCostEly: number;
+	marketNetEly: number;
+	serviceFirstMarketGrossEly: number;
+	serviceFirstMarketFeeEly: number;
+	serviceFirstMarketConversionCostEly: number;
+	serviceFirstMarketNetEly: number;
+	serviceGrossEly: number;
+	serviceProviderCostEly: number;
+	serviceTransferCostEly: number;
+	serviceRawNetEly: number;
+	serviceCountedNetEly: number;
+	totalGrossEly: number;
+	totalRewardProceedsEly: number;
+}
+
+export interface DungeonEarningsPerHourTotals {
+	marketGrossEly: number;
+	marketFeeEly: number;
+	marketConversionCostEly: number;
+	marketNetBeforeBuffsEly: number;
+	serviceFirstMarketGrossEly: number;
+	serviceFirstMarketFeeEly: number;
+	serviceFirstMarketConversionCostEly: number;
+	serviceFirstMarketNetBeforeBuffsEly: number;
+	serviceGrossEly: number;
+	serviceProviderCostEly: number;
+	serviceTransferCostEly: number;
+	serviceRawNetEly: number;
+	serviceCountedNetEly: number;
+	totalGrossEly: number;
+	rewardProceedsBeforeBuffsEly: number;
+	buffCostEly: number | null;
+	directNetEly: number | null;
+	potentialServiceContributionEly: number;
+	potentialNetEly: number | null;
+}
+
+export interface DungeonEarningsEstimate {
+	dungeonId: string;
+	difficulty: DungeonEarningsDifficulty;
+	clearTimeSeconds: number;
+	clearsPerHour: number;
+	estimateState: 'complete' | 'lower-bound' | 'blocked';
+	isLowerBound: boolean;
+	rewardRows: DungeonEarningsRewardRow[];
+	serviceStrategyRows: DungeonEarningsServiceStrategyRow[];
+	buffRows: DungeonEarningsBuffRow[];
+	perClear: DungeonEarningsPerClearTotals;
+	perHour: DungeonEarningsPerHourTotals;
+	missingMechanicIds: string[];
+	missingIncomePriceIds: string[];
+	missingBuffPriceIds: string[];
+	missingPriceIds: string[];
+	overriddenPriceIds: string[];
+}

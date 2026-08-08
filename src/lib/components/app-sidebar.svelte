@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
+	import CircleDollarSignIcon from '@lucide/svelte/icons/circle-dollar-sign';
 	import ExternalLinkIcon from '@lucide/svelte/icons/external-link';
 	import HouseIcon from '@lucide/svelte/icons/house';
 	import PercentIcon from '@lucide/svelte/icons/percent';
@@ -14,6 +15,7 @@
 	const navigation = [
 		{ label: 'Home', href: '/', icon: HouseIcon },
 		{ label: 'Specification analyzer', href: '/spec-analyzer', icon: ScanSearchIcon },
+		{ label: 'Dungeon earnings', href: '/dungeon-earnings', icon: CircleDollarSignIcon },
 		{ label: 'Scenario scripts', href: '/scenario-script', icon: BookOpenTextIcon },
 		{ label: 'Event exchange', href: '/event-exchange', icon: ShoppingBasketIcon },
 		{ label: 'Flash sale ranking', href: '/flash-sale', icon: PercentIcon }

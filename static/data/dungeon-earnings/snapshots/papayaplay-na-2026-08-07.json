@@ -1,0 +1,50 @@
+{
+	"schemaVersion": 1,
+	"id": "papayaplay-na-2026-08-07",
+	"marketId": "papayaplay-na",
+	"currency": "Ely",
+	"asOf": "2026-08-07",
+	"reviewedAt": "2026-08-07",
+	"sources": [
+		{
+			"id": "ramu-wiki-fixed-exchanges",
+			"kind": "market-observation",
+			"title": "Ramu Wiki — fixed NPC buff exchanges",
+			"url": "https://latale.wiki/buff-items?tab=combat",
+			"accessedAt": "2026-08-07",
+			"note": "Combat and Utility Elixirs are 500,000 Ely each per use; Alvis Support Potion and Hunter HP Recovery Kit 30% are 1,000,000 Ely each per use."
+		},
+		{
+			"id": "maintainer-current-economy",
+			"kind": "maintainer-input",
+			"title": "Maintainer-supplied Global economy observations",
+			"url": null,
+			"accessedAt": "2026-08-07",
+			"note": "Gross auction prices, service customer prices, and current buff prices supplied by the maintainer. Icarus/Rikimo service prices are provisional estimates."
+		}
+	],
+	"prices": [
+		{ "itemId": "wings-of-icarus-main-material", "kind": "market", "status": "priced", "unitEly": 2500000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Shared gross value for either main material: 5b universal 2,000-material coupon divided by 2,000. The engine separately deducts the 1% fee and 50,000 Ely per-unit conversion cost." },
+		{ "itemId": "rikimo-pelke-main-material", "kind": "market", "status": "priced", "unitEly": 6000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Shared gross value for either main material: 12b universal 2,000-material coupon divided by 2,000. The engine separately deducts the 1% fee and 50,000 Ely per-unit conversion cost." },
+		{ "itemId": "pleroma-advanced-equipment-coupon", "kind": "market", "status": "priced", "unitEly": 200000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Gross auction price per immediately tradable coupon." },
+		{ "itemId": "emeraldia-advanced-equipment-coupon", "kind": "market", "status": "priced", "unitEly": 255000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Gross auction price per immediately tradable coupon." },
+		{ "itemId": "wings-of-icarus-advanced-equipment-coupon", "kind": "market", "status": "priced", "unitEly": 180000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Gross auction price per immediately tradable coupon." },
+		{ "itemId": "likimo-pelke-advanced-equipment-coupon", "kind": "market", "status": "priced", "unitEly": 260000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Gross auction price per immediately tradable coupon." },
+		{ "itemId": "pleroma-0-to-6", "kind": "service", "status": "priced", "unitEly": 9000000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Customer payment; customer separately supplies equipment and Seal Locks." },
+		{ "itemId": "pleroma-6-to-7", "kind": "service", "status": "priced", "unitEly": 12000000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Customer payment; customer separately supplies equipment and Seal Locks." },
+		{ "itemId": "emeraldia-0-to-6", "kind": "service", "status": "priced", "unitEly": 20000000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Customer payment; customer separately supplies equipment and Seal Locks." },
+		{ "itemId": "emeraldia-6-to-7", "kind": "service", "status": "priced", "unitEly": 25000000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Customer payment; customer separately supplies equipment and Seal Locks." },
+		{ "itemId": "wings-of-icarus-6-to-7", "kind": "service", "status": "priced", "unitEly": 20000000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Provisional customer-payment estimate; customer separately supplies equipment and Seal Locks." },
+		{ "itemId": "likimo-pelke-6-to-7", "kind": "service", "status": "priced", "unitEly": 30000000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Provisional customer-payment estimate; customer separately supplies equipment and Seal Locks." },
+		{ "itemId": "flasks", "kind": "buff", "status": "priced", "unitEly": 1000000, "asOf": "2026-08-07", "sourceIds": ["ramu-wiki-fixed-exchanges", "maintainer-current-economy"], "note": "Fixed combined activation cost: one Combat Elixir plus one Utility Elixir." },
+		{ "itemId": "critical-oil", "kind": "buff", "status": "priced", "unitEly": 5500000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Current market cost per 60-minute activation." },
+		{ "itemId": "alvis-support-potion", "kind": "buff", "status": "priced", "unitEly": 1000000, "asOf": "2026-08-07", "sourceIds": ["ramu-wiki-fixed-exchanges"], "note": "Fixed per-use NPC exchange cost." },
+		{ "itemId": "hunter-hp-recovery-kit-30", "kind": "buff", "status": "priced", "unitEly": 1000000, "asOf": "2026-08-07", "sourceIds": ["ramu-wiki-fixed-exchanges"], "note": "Fixed per-use NPC exchange cost." },
+		{ "itemId": "mysterious-critical-damage-amplifier", "kind": "buff", "status": "priced", "unitEly": 10000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Fixed per-use cost." },
+		{ "itemId": "premium-syrup", "kind": "buff", "status": "priced", "unitEly": 150000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Current market cost per two-hour activation. Legacy hoarded stock with no current in-game source." },
+		{ "itemId": "advanced-premium-syrup", "kind": "buff", "status": "priced", "unitEly": 250000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Direct one-hour price; effective cost is min(250m, two Premium Syrups)." },
+		{ "itemId": "shining-storm-potion", "kind": "buff", "status": "priced", "unitEly": 100000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Current market cost for the 60-minute variant." },
+		{ "itemId": "heroes-set", "kind": "buff", "status": "priced", "unitEly": 245000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Combined Heroes Attack Nostrum I (150m) and II (95m); defense is excluded." },
+		{ "itemId": "heroes-attack-nostrum-ii", "kind": "buff", "status": "priced", "unitEly": 95000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Current market cost for Heroes Attack Nostrum II alone." }
+	]
+}

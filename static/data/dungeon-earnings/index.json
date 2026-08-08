@@ -1,0 +1,12 @@
+{
+	"schemaVersion": 1,
+	"currentSnapshotId": "papayaplay-na-2026-08-07",
+	"snapshots": [
+		{
+			"id": "papayaplay-na-2026-08-07",
+			"asOf": "2026-08-07",
+			"marketId": "papayaplay-na",
+			"path": "/data/dungeon-earnings/snapshots/papayaplay-na-2026-08-07.json"
+		}
+	]
+}

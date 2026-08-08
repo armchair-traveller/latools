@@ -1,0 +1,273 @@
+{
+	"schemaVersion": 1,
+	"id": "dungeon-earnings-v1",
+	"updatedAt": "2026-08-07",
+	"market": {
+		"id": "papayaplay-na",
+		"label": "Global",
+		"region": "Global",
+		"currency": "Ely",
+		"feeRate": 0.01
+	},
+	"d5MaterialBonusRate": 0.05,
+	"sources": [
+		{
+			"id": "latale-info-pleroma",
+			"kind": "dungeon-guide",
+			"title": "LaTale Info — Pleroma",
+			"url": "https://latale.info/70",
+			"accessedAt": "2026-08-07",
+			"note": "Requirement, reward categories, difficulty coverage, and local banner source."
+		},
+		{
+			"id": "latale-info-emeraldia",
+			"kind": "dungeon-guide",
+			"title": "LaTale Info — Emeraldia",
+			"url": "https://latale.info/73",
+			"accessedAt": "2026-08-07",
+			"note": "Requirement, reward categories, difficulty coverage, and local banner source."
+		},
+		{
+			"id": "latale-info-wings-of-icarus",
+			"kind": "dungeon-guide",
+			"title": "LaTale Info — Wings of Icarus",
+			"url": "https://latale.info/71",
+			"accessedAt": "2026-08-07",
+			"note": "Requirement, reward categories, difficulty coverage, and local banner source."
+		},
+		{
+			"id": "latale-info-rikimo-pelke",
+			"kind": "dungeon-guide",
+			"title": "LaTale Info — Rikimo Pelke",
+			"url": "https://latale.info/93",
+			"accessedAt": "2026-08-07",
+			"note": "Requirement, reward categories, difficulty coverage, and local banner source. The stable internal ID remains likimo-pelke."
+		},
+		{
+			"id": "latale-wiki-pleroma-upgrades",
+			"kind": "dungeon-guide",
+			"title": "Ramu Wiki — Pleroma item terminology",
+			"url": "https://latale.wiki/items/mugi-myeolmang",
+			"accessedAt": "2026-08-07",
+			"note": "Material and ascension-stone names only. Its Korean upgrade quantities are nerfed and are not used for the Global calculator."
+		},
+		{
+			"id": "ltgear-global-pleroma-upgrades",
+			"kind": "dungeon-guide",
+			"title": "LaTale Gear Toolkit — Global Pleroma upgrades",
+			"url": "https://ltgear.vercel.app/upgrade",
+			"accessedAt": "2026-08-07",
+			"note": "Global 0→6 steps total 3,839 primary material and 600m Ely. The Ascended step corresponding to 6→7 costs 999 primary material, 999 Demiurge Ascension Stones, and 2b Ely."
+		},
+		{
+			"id": "latale-wiki-emeraldia-upgrades",
+			"kind": "dungeon-guide",
+			"title": "Ramu Wiki — Emeraldia equipment upgrades",
+			"url": "https://latale.wiki/items/angyeong-emeraldia-gyeolhap",
+			"accessedAt": "2026-08-07",
+			"note": "Material names, quantities, ascension-stone input, and provider Ely costs."
+		},
+		{
+			"id": "latale-wiki-icarus-upgrades",
+			"kind": "dungeon-guide",
+			"title": "Ramu Wiki — Icarus and Grendel equipment upgrades",
+			"url": "https://latale.wiki/items/tugu-geurendel-chowol",
+			"accessedAt": "2026-08-07",
+			"note": "Transferable Grendel 6→7 material, stone, and provider Ely inputs."
+		},
+		{
+			"id": "latale-wiki-rikimo-upgrades",
+			"kind": "dungeon-guide",
+			"title": "Ramu Wiki — Rikimo and Belial equipment upgrades",
+			"url": "https://latale.wiki/items/gwigeoli-belrial-chowol",
+			"accessedAt": "2026-08-07",
+			"note": "Transferable Belial 6→7 material, stone, and provider Ely inputs."
+		},
+		{
+			"id": "latale-wiki-combat-buffs",
+			"kind": "buff-guide",
+			"title": "Ramu Wiki — Combat buff items",
+			"url": "https://latale.wiki/buff-items?tab=combat",
+			"accessedAt": "2026-08-07",
+			"note": "Buff effects, durations, acquisition routes, conflicts, and locally copied icons."
+		},
+		{
+			"id": "latale-wiki-shining-storm",
+			"kind": "buff-guide",
+			"title": "Ramu Wiki — Shining Storm Potion (60 min)",
+			"url": "https://latale.wiki/items/bitnaneun-pokpung-posyeon-60bun",
+			"accessedAt": "2026-08-07",
+			"note": "Exact 60-minute item variant and local icon source."
+		},
+		{
+			"id": "maintainer-confirmed-rewards",
+			"kind": "maintainer-input",
+			"title": "Maintainer-confirmed capped reward model",
+			"url": null,
+			"accessedAt": "2026-08-07",
+			"note": "Yields assume capped item-drop rate. The calculator does not model item-drop rate; players are assumed to reach cap with or without selected buffs. D4 is 115 average raw plus three decomposed bases (118 of each material). Pleroma/Emeraldia D5 adds six bases (121 each). Icarus/Rikimo D5 also includes one decomposed bonus base plus a random 7–15-material bag, yielding 127.5 expected of each type. Every D5 also gives three tradable advanced coupons and 21 dungeon stones."
+		},
+		{
+			"id": "maintainer-confirmed-services",
+			"kind": "maintainer-input",
+			"title": "Maintainer-confirmed service assumptions",
+			"url": null,
+			"accessedAt": "2026-08-07",
+			"note": "Customers supply the equipment and Seal Locks. Pleroma services require both main material types simultaneously at the listed quantity for each. Initial lock counts are 40 for +6 and 50 for +7; 60,000,000 Ely per lock is informational and never deducted from provider proceeds. Icarus/Rikimo customer prices remain provisional."
+		},
+		{
+			"id": "maintainer-confirmed-buffs",
+			"kind": "maintainer-input",
+			"title": "Maintainer-confirmed buff scope and durations",
+			"url": null,
+			"accessedAt": "2026-08-07",
+			"note": "Combat and Utility Elixirs are always used together as Flasks. Sweet Mutant is not purchased. Premium Syrup lasts two hours; Advanced Premium lasts one hour and can be made from two Premium Syrups. Guild foods and Heroes defense are excluded."
+		}
+	],
+	"rewardItems": [
+		{ "id": "pleroma-incomplete-demigod-torn-wing", "name": "Incomplete Demigod's Torn Wing", "route": "service", "icon": null, "sourceIds": ["latale-wiki-pleroma-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "pleroma-incomplete-demigod-horn", "name": "Incomplete Demigod's Horn", "route": "service", "icon": null, "sourceIds": ["latale-wiki-pleroma-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "pleroma-advanced-equipment-coupon", "name": "Advanced Pleroma Equipment Coupon", "route": "market", "icon": null, "sourceIds": ["latale-info-pleroma", "maintainer-confirmed-rewards"] },
+		{ "id": "demiurge-ascension-stone", "name": "Demiurge's Ascension Stone", "route": "service", "icon": null, "sourceIds": ["latale-wiki-pleroma-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "emeraldia-dorothea-emerald-bow", "name": "Dorothea's Emerald Bow", "route": "service", "icon": null, "sourceIds": ["latale-wiki-emeraldia-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "emeraldia-dorothea-red-shoes", "name": "Dorothea's Red Shoes", "route": "service", "icon": null, "sourceIds": ["latale-wiki-emeraldia-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "emeraldia-advanced-equipment-coupon", "name": "Advanced Emeraldia Equipment Coupon", "route": "market", "icon": null, "sourceIds": ["latale-info-emeraldia", "maintainer-confirmed-rewards"] },
+		{ "id": "dorothea-ascension-stone", "name": "Dorothea's Ascension Stone", "route": "service", "icon": null, "sourceIds": ["latale-wiki-emeraldia-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "icarus-demon-realm-lords-gluttony", "name": "Demon Realm Lord's Gluttony", "route": "market", "marketPriceItemId": "wings-of-icarus-main-material", "marketConversionCostPerUnitEly": 50000, "icon": null, "sourceIds": ["latale-wiki-icarus-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "icarus-demon-realm-lords-pride", "name": "Demon Realm Lord's Pride", "route": "market", "marketPriceItemId": "wings-of-icarus-main-material", "marketConversionCostPerUnitEly": 50000, "icon": null, "sourceIds": ["latale-wiki-icarus-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "wings-of-icarus-advanced-equipment-coupon", "name": "Advanced Wings of Icarus Equipment Coupon", "route": "market", "icon": null, "sourceIds": ["latale-info-wings-of-icarus", "maintainer-confirmed-rewards"] },
+		{ "id": "grendel-ascension-stone", "name": "Grendel's Ascension Stone", "route": "service", "icon": null, "sourceIds": ["latale-wiki-icarus-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "rikimo-belials-brooch", "name": "Belial's Brooch", "route": "market", "marketPriceItemId": "rikimo-pelke-main-material", "marketConversionCostPerUnitEly": 50000, "icon": null, "sourceIds": ["latale-wiki-rikimo-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "rikimo-belials-heart-sticker", "name": "Belial's Heart Sticker", "route": "market", "marketPriceItemId": "rikimo-pelke-main-material", "marketConversionCostPerUnitEly": 50000, "icon": null, "sourceIds": ["latale-wiki-rikimo-upgrades", "maintainer-confirmed-rewards"] },
+		{ "id": "likimo-pelke-advanced-equipment-coupon", "name": "Advanced Rikimo Pelke Equipment Coupon", "route": "market", "icon": null, "sourceIds": ["latale-info-rikimo-pelke", "maintainer-confirmed-rewards"] },
+		{ "id": "belial-ascension-stone", "name": "Belial's Ascension Stone", "route": "service", "icon": null, "sourceIds": ["latale-wiki-rikimo-upgrades", "maintainer-confirmed-rewards"] }
+	],
+	"serviceRecipes": [
+		{
+			"id": "pleroma-6-to-7", "name": "Pleroma 6→7", "inputs": [
+				{ "itemId": "pleroma-incomplete-demigod-torn-wing", "quantity": 999 },
+				{ "itemId": "pleroma-incomplete-demigod-horn", "quantity": 999 },
+				{ "itemId": "demiurge-ascension-stone", "quantity": 999 }
+			], "providerElyCostEly": 2000000000, "customerPriceItemId": "pleroma-6-to-7", "customerSuppliedSealLocks": 50, "customerSuppliedEquipment": true,
+			"sourceIds": ["ltgear-global-pleroma-upgrades", "maintainer-confirmed-services"], "note": "Global Ascended step. Both main materials are required at once. Customer supplies equipment and estimated 50 Seal Locks; locks are not provider costs.", "status": "confirmed"
+		},
+		{
+			"id": "pleroma-0-to-6", "name": "Pleroma 0→6", "inputs": [
+				{ "itemId": "pleroma-incomplete-demigod-torn-wing", "quantity": 3839 },
+				{ "itemId": "pleroma-incomplete-demigod-horn", "quantity": 3839 }
+			], "providerElyCostEly": 600000000, "customerPriceItemId": "pleroma-0-to-6", "customerSuppliedSealLocks": 40, "customerSuppliedEquipment": true,
+			"sourceIds": ["ltgear-global-pleroma-upgrades", "maintainer-confirmed-services"], "note": "Global cumulative six-step route. Both main materials are required at once. Customer supplies equipment and estimated 40 Seal Locks; locks are not provider costs.", "status": "confirmed"
+		},
+		{
+			"id": "emeraldia-0-to-6", "name": "Emeraldia 0→6", "inputs": [
+				{ "itemId": "emeraldia-dorothea-emerald-bow", "quantity": 3839 },
+				{ "itemId": "emeraldia-dorothea-red-shoes", "quantity": 3839 }
+			], "providerElyCostEly": 600000000, "customerPriceItemId": "emeraldia-0-to-6", "customerSuppliedSealLocks": 40, "customerSuppliedEquipment": true,
+			"sourceIds": ["latale-wiki-emeraldia-upgrades", "maintainer-confirmed-services"], "note": "Customer supplies equipment and estimated 40 Seal Locks; locks are not provider costs.", "status": "confirmed"
+		},
+		{
+			"id": "emeraldia-6-to-7", "name": "Emeraldia 6→7", "inputs": [
+				{ "itemId": "emeraldia-dorothea-emerald-bow", "quantity": 999 },
+				{ "itemId": "emeraldia-dorothea-red-shoes", "quantity": 999 },
+				{ "itemId": "dorothea-ascension-stone", "quantity": 500 }
+			], "providerElyCostEly": 2000000000, "customerPriceItemId": "emeraldia-6-to-7", "customerSuppliedSealLocks": 50, "customerSuppliedEquipment": true,
+			"sourceIds": ["latale-wiki-emeraldia-upgrades", "maintainer-confirmed-services"], "note": "Customer supplies equipment and estimated 50 Seal Locks; locks are not provider costs.", "status": "confirmed"
+		},
+		{
+			"id": "wings-of-icarus-6-to-7", "name": "Wings of Icarus 6→7", "inputs": [
+				{ "itemId": "icarus-demon-realm-lords-gluttony", "quantity": 1300 },
+				{ "itemId": "icarus-demon-realm-lords-pride", "quantity": 1300 },
+				{ "itemId": "grendel-ascension-stone", "quantity": 500 }
+			], "providerElyCostEly": 2000000000, "customerPriceItemId": "wings-of-icarus-6-to-7", "customerSuppliedSealLocks": 50, "customerSuppliedEquipment": true,
+			"sourceIds": ["latale-wiki-icarus-upgrades", "maintainer-confirmed-services"], "note": "20b customer price and 50-lock requirement are provisional. Customer supplies both equipment and locks.", "status": "provisional"
+		},
+		{
+			"id": "likimo-pelke-6-to-7", "name": "Rikimo Pelke 6→7", "inputs": [
+				{ "itemId": "rikimo-belials-brooch", "quantity": 1300 },
+				{ "itemId": "rikimo-belials-heart-sticker", "quantity": 1300 },
+				{ "itemId": "belial-ascension-stone", "quantity": 500 }
+			], "providerElyCostEly": 2000000000, "customerPriceItemId": "likimo-pelke-6-to-7", "customerSuppliedSealLocks": 50, "customerSuppliedEquipment": true,
+			"sourceIds": ["latale-wiki-rikimo-upgrades", "maintainer-confirmed-services"], "note": "30b customer price and 50-lock requirement are provisional. Customer supplies both equipment and locks.", "status": "provisional"
+		}
+	],
+	"costItems": [],
+	"dungeons": [
+		{
+			"id": "pleroma", "name": "Pleroma", "requirement": { "kind": "ascension", "value": 8000, "label": "Ascension 8000" },
+			"image": "/images/dungeon-earnings/dungeons/pleroma.jpg", "sourceIds": ["latale-info-pleroma", "maintainer-confirmed-rewards"],
+			"difficulties": {
+				"D4": { "serviceStrategyIds": ["pleroma-6-to-7", "pleroma-0-to-6"], "rewards": [
+					{ "itemId": "pleroma-incomplete-demigod-torn-wing", "yield": { "status": "known", "expectedPerClear": 118, "note": "Capped 115 midpoint plus three decomposed bases." }, "d5BonusEligible": false },
+					{ "itemId": "pleroma-incomplete-demigod-horn", "yield": { "status": "known", "expectedPerClear": 118, "note": "Capped 115 midpoint plus three decomposed bases." }, "d5BonusEligible": false }
+				] },
+				"D5": { "serviceStrategyIds": ["pleroma-6-to-7", "pleroma-0-to-6"], "rewards": [
+					{ "itemId": "pleroma-incomplete-demigod-torn-wing", "yield": { "status": "known", "expectedPerClear": 121, "note": "Capped 115 midpoint plus six decomposed bases." }, "d5BonusEligible": false },
+					{ "itemId": "pleroma-incomplete-demigod-horn", "yield": { "status": "known", "expectedPerClear": 121, "note": "Capped 115 midpoint plus six decomposed bases." }, "d5BonusEligible": false },
+					{ "itemId": "pleroma-advanced-equipment-coupon", "yield": { "status": "known", "expectedPerClear": 3, "note": "Fixed D5 reward." }, "d5BonusEligible": false },
+					{ "itemId": "demiurge-ascension-stone", "yield": { "status": "known", "expectedPerClear": 21, "note": "Fixed D5 reward." }, "d5BonusEligible": false }
+				] }
+			}
+		},
+		{
+			"id": "emeraldia", "name": "Emeraldia", "requirement": { "kind": "ascension", "value": 9000, "label": "Ascension 9000" },
+			"image": "/images/dungeon-earnings/dungeons/emeraldia.jpg", "sourceIds": ["latale-info-emeraldia", "maintainer-confirmed-rewards"],
+			"difficulties": {
+				"D4": { "serviceStrategyIds": ["emeraldia-6-to-7", "emeraldia-0-to-6"], "rewards": [
+					{ "itemId": "emeraldia-dorothea-emerald-bow", "yield": { "status": "known", "expectedPerClear": 118, "note": "Capped 115 midpoint plus three decomposed bases." }, "d5BonusEligible": false },
+					{ "itemId": "emeraldia-dorothea-red-shoes", "yield": { "status": "known", "expectedPerClear": 118, "note": "Capped 115 midpoint plus three decomposed bases." }, "d5BonusEligible": false }
+				] },
+				"D5": { "serviceStrategyIds": ["emeraldia-6-to-7", "emeraldia-0-to-6"], "rewards": [
+					{ "itemId": "emeraldia-dorothea-emerald-bow", "yield": { "status": "known", "expectedPerClear": 121, "note": "Capped 115 midpoint plus six decomposed bases." }, "d5BonusEligible": false },
+					{ "itemId": "emeraldia-dorothea-red-shoes", "yield": { "status": "known", "expectedPerClear": 121, "note": "Capped 115 midpoint plus six decomposed bases." }, "d5BonusEligible": false },
+					{ "itemId": "emeraldia-advanced-equipment-coupon", "yield": { "status": "known", "expectedPerClear": 3, "note": "Fixed D5 reward." }, "d5BonusEligible": false },
+					{ "itemId": "dorothea-ascension-stone", "yield": { "status": "known", "expectedPerClear": 21, "note": "Fixed D5 reward." }, "d5BonusEligible": false }
+				] }
+			}
+		},
+		{
+			"id": "wings-of-icarus", "name": "Wings of Icarus", "requirement": { "kind": "ascension", "value": 9999, "label": "Ascension 9999" },
+			"image": "/images/dungeon-earnings/dungeons/wings-of-icarus.jpg", "sourceIds": ["latale-info-wings-of-icarus", "maintainer-confirmed-rewards"],
+			"difficulties": {
+				"D4": { "serviceStrategyIds": ["wings-of-icarus-6-to-7"], "rewards": [
+					{ "itemId": "icarus-demon-realm-lords-gluttony", "yield": { "status": "known", "expectedPerClear": 118, "note": "Capped 115 midpoint plus three decomposed bases." }, "d5BonusEligible": false },
+					{ "itemId": "icarus-demon-realm-lords-pride", "yield": { "status": "known", "expectedPerClear": 118, "note": "Capped 115 midpoint plus three decomposed bases." }, "d5BonusEligible": false }
+				] },
+				"D5": { "serviceStrategyIds": ["wings-of-icarus-6-to-7"], "rewards": [
+					{ "itemId": "icarus-demon-realm-lords-gluttony", "yield": { "status": "known", "expectedPerClear": 127.5, "note": "Includes six normal bases, one bonus base, and half the random bag's 11-material expectation." }, "d5BonusEligible": false },
+					{ "itemId": "icarus-demon-realm-lords-pride", "yield": { "status": "known", "expectedPerClear": 127.5, "note": "Includes six normal bases, one bonus base, and half the random bag's 11-material expectation." }, "d5BonusEligible": false },
+					{ "itemId": "wings-of-icarus-advanced-equipment-coupon", "yield": { "status": "known", "expectedPerClear": 3, "note": "Fixed D5 reward." }, "d5BonusEligible": false },
+					{ "itemId": "grendel-ascension-stone", "yield": { "status": "known", "expectedPerClear": 21, "note": "Fixed D5 reward." }, "d5BonusEligible": false }
+				] }
+			}
+		},
+		{
+			"id": "likimo-pelke", "name": "Rikimo Pelke", "requirement": { "kind": "super-level", "value": 5, "label": "Super Level 5" },
+			"image": "/images/dungeon-earnings/dungeons/likimo-pelke.jpg", "sourceIds": ["latale-info-rikimo-pelke", "maintainer-confirmed-rewards"],
+			"difficulties": {
+				"D4": { "serviceStrategyIds": ["likimo-pelke-6-to-7"], "rewards": [
+					{ "itemId": "rikimo-belials-brooch", "yield": { "status": "known", "expectedPerClear": 118, "note": "Capped 115 midpoint plus three decomposed bases." }, "d5BonusEligible": false },
+					{ "itemId": "rikimo-belials-heart-sticker", "yield": { "status": "known", "expectedPerClear": 118, "note": "Capped 115 midpoint plus three decomposed bases." }, "d5BonusEligible": false }
+				] },
+				"D5": { "serviceStrategyIds": ["likimo-pelke-6-to-7"], "rewards": [
+					{ "itemId": "rikimo-belials-brooch", "yield": { "status": "known", "expectedPerClear": 127.5, "note": "Includes six normal bases, one bonus base, and half the random bag's 11-material expectation." }, "d5BonusEligible": false },
+					{ "itemId": "rikimo-belials-heart-sticker", "yield": { "status": "known", "expectedPerClear": 127.5, "note": "Includes six normal bases, one bonus base, and half the random bag's 11-material expectation." }, "d5BonusEligible": false },
+					{ "itemId": "likimo-pelke-advanced-equipment-coupon", "yield": { "status": "known", "expectedPerClear": 3, "note": "Fixed D5 reward." }, "d5BonusEligible": false },
+					{ "itemId": "belial-ascension-stone", "yield": { "status": "known", "expectedPerClear": 21, "note": "Fixed D5 reward." }, "d5BonusEligible": false }
+				] }
+			}
+		}
+	],
+	"buffs": [
+		{ "id": "flasks", "name": "Flasks", "description": "Combat and Utility Elixirs used together: combat stats plus Ely acquisition. Reward yields stay at the maintained capped-IDR averages.", "durationSeconds": 3600, "consumablesPerActivation": 1, "priceMode": "snapshot", "priceEditable": false, "priceItemId": "flasks", "standardPreset": true, "exclusivityGroup": null, "icon": "/images/dungeon-earnings/buffs/combat-elixir.png", "sourceIds": ["latale-wiki-combat-buffs", "maintainer-confirmed-buffs"] },
+		{ "id": "critical-oil", "name": "Critical Oil", "description": "Physical and magical critical damage +30%.", "durationSeconds": 3600, "consumablesPerActivation": 1, "priceMode": "snapshot", "priceEditable": true, "priceItemId": "critical-oil", "standardPreset": true, "exclusivityGroup": null, "icon": "/images/dungeon-earnings/buffs/critical-oil.png", "sourceIds": ["latale-wiki-combat-buffs"] },
+		{ "id": "sweet-mutant-special-potion", "name": "Sweet Mutant Special Potion", "description": "Maximum HP +3,000, minimum damage +40%, and critical damage +30%. Not purchasable; no Ely price is modeled.", "durationSeconds": 3600, "consumablesPerActivation": 1, "priceMode": "fixed-zero", "priceEditable": false, "priceItemId": null, "standardPreset": true, "exclusivityGroup": null, "icon": "/images/dungeon-earnings/buffs/sweet-mutant-special-potion.png", "sourceIds": ["latale-wiki-combat-buffs", "maintainer-confirmed-buffs"] },
+		{ "id": "alvis-support-potion", "name": "Alvis Support Potion", "description": "Weapon/elemental power +5%, maximum HP +5%, and critical damage +20%.", "durationSeconds": 3600, "consumablesPerActivation": 1, "priceMode": "snapshot", "priceEditable": false, "priceItemId": "alvis-support-potion", "standardPreset": true, "exclusivityGroup": null, "icon": "/images/dungeon-earnings/buffs/alvis-support-potion.png", "sourceIds": ["latale-wiki-combat-buffs"] },
+		{ "id": "hunter-hp-recovery-kit-30", "name": "Hunter HP Recovery Kit 30%", "description": "Restores 30% HP every 10 seconds.", "durationSeconds": 3600, "consumablesPerActivation": 1, "priceMode": "snapshot", "priceEditable": false, "priceItemId": "hunter-hp-recovery-kit-30", "standardPreset": true, "exclusivityGroup": null, "icon": "/images/dungeon-earnings/buffs/hunter-hp-recovery-kit-30.png", "sourceIds": ["latale-wiki-combat-buffs"] },
+		{ "id": "mysterious-critical-damage-amplifier", "name": "Mysterious Critical Damage Amplifier", "description": "Critical damage +120%.", "durationSeconds": 3600, "consumablesPerActivation": 1, "priceMode": "snapshot", "priceEditable": false, "priceItemId": "mysterious-critical-damage-amplifier", "standardPreset": true, "exclusivityGroup": null, "icon": "/images/dungeon-earnings/buffs/mysterious-critical-damage-amplifier.png", "sourceIds": ["latale-wiki-combat-buffs"] },
+		{ "id": "premium-syrup", "name": "Premium Syrup", "description": "Item drop rate +30% for two hours. Reward yields remain fixed at capped-IDR averages.", "durationSeconds": 7200, "consumablesPerActivation": 1, "priceMode": "snapshot", "priceEditable": true, "priceItemId": "premium-syrup", "standardPreset": false, "exclusivityGroup": "syrup", "icon": "/images/dungeon-earnings/buffs/premium-syrup.png", "sourceIds": ["latale-wiki-combat-buffs", "maintainer-confirmed-buffs"] },
+		{ "id": "advanced-premium-syrup", "name": "Advanced Premium Syrup", "description": "Item drop rate +30% for one hour. Uses the lower cost of one direct purchase or two Premium Syrups.", "durationSeconds": 3600, "consumablesPerActivation": 1, "priceMode": "snapshot", "priceEditable": true, "priceItemId": "advanced-premium-syrup", "alternativePrice": { "priceItemId": "premium-syrup", "quantity": 2 }, "standardPreset": true, "exclusivityGroup": "syrup", "icon": "/images/dungeon-earnings/buffs/advanced-premium-syrup.png", "sourceIds": ["latale-wiki-combat-buffs", "maintainer-confirmed-buffs"] },
+		{ "id": "shining-storm-potion", "name": "Shining Storm Potion", "description": "Critical rate +100 and item drop rate +5%. Reward yields remain fixed at capped-IDR averages.", "durationSeconds": 3600, "consumablesPerActivation": 1, "priceMode": "snapshot", "priceEditable": true, "priceItemId": "shining-storm-potion", "standardPreset": true, "exclusivityGroup": null, "icon": "/images/dungeon-earnings/buffs/shining-storm-potion.png", "sourceIds": ["latale-wiki-shining-storm", "maintainer-confirmed-buffs"] },
+		{ "id": "heroes-set", "name": "Heroes Set", "description": "Both Heroes Attack Nostrums: damage, critical, accuracy, all stats, weapon power, and elemental power. Defense Nostrum is excluded.", "durationSeconds": 3600, "consumablesPerActivation": 1, "priceMode": "snapshot", "priceEditable": true, "priceItemId": "heroes-set", "standardPreset": true, "exclusivityGroup": "heroes-attack", "icon": "/images/dungeon-earnings/buffs/heroes-set.png", "sourceIds": ["latale-wiki-combat-buffs", "maintainer-confirmed-buffs"] },
+		{ "id": "heroes-attack-nostrum-ii", "name": "Heroes Attack Nostrum II", "description": "Elemental power +10%, weapon power +10%, minimum damage +15%, and critical chance +5%.", "durationSeconds": 3600, "consumablesPerActivation": 1, "priceMode": "snapshot", "priceEditable": true, "priceItemId": "heroes-attack-nostrum-ii", "standardPreset": false, "exclusivityGroup": "heroes-attack", "icon": "/images/dungeon-earnings/buffs/heroes-attack-nostrum-ii.png", "sourceIds": ["latale-wiki-combat-buffs", "maintainer-confirmed-buffs"] }
+	]
+}

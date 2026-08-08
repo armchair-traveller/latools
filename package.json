@@ -11,6 +11,8 @@
 		"test": "node --test",
 		"check:event-exchange": "node scripts/check-event-exchange.mjs",
 		"check:flash-sale": "node scripts/check-flash-sale.mjs",
+		"check:dungeon-earnings": "node scripts/check-dungeon-earnings.mjs",
+		"check:dungeon-earnings:release": "node scripts/check-dungeon-earnings.mjs --release",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
