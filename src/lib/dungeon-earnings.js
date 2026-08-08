@@ -172,7 +172,8 @@ function calculateMarketValues(quantity, unitPriceEly, conversionCostPerUnitEly,
 }
 
 /**
- * Validate and deduplicate the selected universal buffs.
+ * Validate and deduplicate optional buff selections, then append every
+ * essential baseline buff that was not explicitly supplied.
  *
  * @param {DungeonEarningsCatalog} catalog
  * @param {string[]} [selectedBuffIds]
@@ -187,6 +188,13 @@ export function validateDungeonBuffSelection(catalog, selectedBuffIds = []) {
 		if (!buff) throw new Error(`Unknown dungeon-earnings buff: ${buffId}`);
 		return buff;
 	});
+	const selectedIds = new Set(selected.map((buff) => buff.id));
+	for (const buff of catalog.buffs) {
+		if (buff.essential && !selectedIds.has(buff.id)) {
+			selected.push(buff);
+			selectedIds.add(buff.id);
+		}
+	}
 	const groupSelections = new Map();
 
 	for (const buff of selected) {

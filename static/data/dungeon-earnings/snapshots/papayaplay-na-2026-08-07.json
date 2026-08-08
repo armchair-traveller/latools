@@ -44,7 +44,7 @@
 		{ "itemId": "premium-syrup", "kind": "buff", "status": "priced", "unitEly": 150000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Current market cost per two-hour activation. Legacy hoarded stock with no current in-game source." },
 		{ "itemId": "advanced-premium-syrup", "kind": "buff", "status": "priced", "unitEly": 250000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Direct one-hour price; effective cost is min(250m, two Premium Syrups)." },
 		{ "itemId": "shining-storm-potion", "kind": "buff", "status": "priced", "unitEly": 100000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Current market cost for the 60-minute variant." },
-		{ "itemId": "heroes-set", "kind": "buff", "status": "priced", "unitEly": 245000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Combined Heroes Attack Nostrum I (150m) and II (95m); defense is excluded." },
-		{ "itemId": "heroes-attack-nostrum-ii", "kind": "buff", "status": "priced", "unitEly": 95000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Current market cost for Heroes Attack Nostrum II alone." }
+		{ "itemId": "heroes-set", "kind": "buff", "status": "priced", "unitEly": 245000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Combined Hero's Attack Nostrum I (150m) and II (95m); defense is excluded." },
+		{ "itemId": "heroes-attack-nostrum-ii", "kind": "buff", "status": "priced", "unitEly": 95000000, "asOf": "2026-08-07", "sourceIds": ["maintainer-current-economy"], "note": "Current market cost for Hero's Attack Nostrum II alone." }
 	]
 }

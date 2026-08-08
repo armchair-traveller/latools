@@ -64,13 +64,15 @@ Do not pre-deduct either fee when refreshing a snapshot.
 
 ## Buff whitelist and pricing
 
-Guild food is excluded. Combat and Utility Elixirs are represented by one `Flasks` activation at their combined fixed cost. Heroes Attack Nostrums I and II are represented by the combined `Heroes Set`, with Attack Nostrum II also available by itself; the defense Nostrum is excluded. Only the Mysterious Critical Damage Amplifier is maintained because the alternatives have the same modeled cost and are not meaningful to the earnings comparison.
+Guild food is excluded. Combat and Utility Elixirs are represented by one `Flasks` activation at their combined fixed cost. Hero's Attack Nostrums I and II are represented by the combined `Hero's Set`, with Attack Nostrum II also available by itself; the defense Nostrum is excluded. Only the Mysterious Critical Damage Amplifier is maintained because the alternatives have the same modeled cost and are not meaningful to the earnings comparison.
+
+Six buffs are the non-optional baseline and use `essential: true`: Flasks, Critical Oil, Sweet Mutant Special Potion, Alvis Support Potion, Hunter HP Recovery Kit 30%, and Mysterious Critical Damage Amplifier. The calculation engine appends these even when callers provide no buff IDs. UI persistence therefore stores optional selections only. Optional high-cost choices are displayed before the condensed essential baseline.
 
 `priceMode: "fixed-zero"` is reserved for Sweet Mutant Special Potion, which is not purchasable and has `priceItemId: null`. Snapshot-priced buffs use `priceMode: "snapshot"`. `priceEditable: false` is used for fixed-source prices (Flasks, Alvis, Hunter Kit, and the Mysterious Critical Damage Amplifier); market-priced buffs remain editable.
 
 Premium Syrup lasts two hours and Advanced Premium Syrup lasts one. Advanced Premium uses the lower of its direct snapshot price or `2 × premium-syrup` through `alternativePrice`. Premium Syrup has no current in-game source and survives only as legacy hoarded stock, so Advanced Premium remains the standard preset even when Premium is cheaper per hour.
 
-Only real calculator choices receive an `exclusivityGroup`: `syrup` and `heroes-attack`. At most one standard-preset buff may belong to each group.
+Only real calculator choices receive an `exclusivityGroup`: `syrup` and `heroes-attack`. At most one standard-preset buff may belong to each group. Essential buffs must be standard, non-exclusive, and always included; fixed-cost essentials cannot publish with a pending snapshot price.
 
 ## Refreshing an economy snapshot
 
@@ -81,7 +83,7 @@ Only real calculator choices receive an `exclusivityGroup`: `syrup` and `heroes-
 5. Add the new snapshot to `index.json` and update `currentSnapshotId`.
 6. Run both validators and review the assumptions UI. Existing local overrides remain user-owned.
 
-Pending prices are allowed and produce warnings. Pending reward mechanics fail release validation. Provisional service assumptions warn but do not block release.
+Pending prices are allowed and produce warnings except for non-editable essential buffs, which must remain priced. Pending reward mechanics fail release validation. Provisional service assumptions warn but do not block release.
 
 ## Sources and local assets
 
@@ -92,8 +94,8 @@ New local buff icons copied on 2026-08-07:
 - Advanced Premium Syrup: `https://latale.wiki/icons/items/170196680.png`
 - Premium Syrup: `https://latale.wiki/icons/items/170195643.png`
 - Shining Storm Potion (60 min): `https://latale.wiki/icons/items/170196890.png`
-- Heroes Set representative (Heroes Attack Nostrum I): `https://latale.wiki/icons/royal-simulator/6479b041babe3e47.png`
-- Heroes Attack Nostrum II: `https://latale.wiki/icons/royal-simulator/dd449845fa4cc0ba.png`
+- Hero's Set representative (Hero's Attack Nostrum I): `https://latale.wiki/icons/royal-simulator/6479b041babe3e47.png`
+- Hero's Attack Nostrum II: `https://latale.wiki/icons/royal-simulator/dd449845fa4cc0ba.png`
 
 Flasks use the locally stored Combat Elixir icon. Existing local icons retain their source mappings from the original catalog research.
 

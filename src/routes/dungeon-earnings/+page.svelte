@@ -74,8 +74,8 @@
 	};
 	const exclusiveGroupCopy: Record<string, { title: string; description: string }> = {
 		'heroes-attack': {
-			title: 'Heroes attack nostrums',
-			description: 'Choose the full Heroes Set or Attack Nostrum II by itself.'
+			title: "Hero's attack nostrums",
+			description: "Choose the full Hero's Set or Attack Nostrum II by itself."
 		},
 		syrup: {
 			title: 'Syrups',
@@ -103,9 +103,22 @@
 			? 'pleroma'
 			: data.catalog.dungeons[0]?.id ?? ''
 	);
-	let standardBuffIds = $derived(
-		data.catalog.buffs.filter((buff) => buff.standardPreset).map((buff) => buff.id)
+	let essentialBuffs = $derived(data.catalog.buffs.filter((buff) => buff.essential));
+	let optionalBuffSections = $derived.by(buildOptionalBuffSections);
+	let optionalBuffsInDisplayOrder = $derived(
+		optionalBuffSections.flatMap((section) => section.buffs)
 	);
+	let standardBuffIds = $derived(
+		optionalBuffsInDisplayOrder
+			.filter((buff) => buff.standardPreset)
+			.map((buff) => buff.id)
+	);
+	let calculationBuffIds = $derived([
+		...optionalBuffsInDisplayOrder
+			.filter((buff) => selectedBuffIds.includes(buff.id))
+			.map((buff) => buff.id),
+		...essentialBuffs.map((buff) => buff.id)
+	]);
 
 	let selectedDungeon = $derived(
 		data.catalog.dungeons.find((dungeon) => dungeon.id === selectedDungeonId) ??
@@ -128,7 +141,6 @@
 	let buffsById = $derived(new Map(data.catalog.buffs.map((buff) => [buff.id, buff])));
 	let editablePriceEntries = $derived(data.snapshot.prices.filter((price) => isPriceEditable(price)));
 	let editablePriceIds = $derived(new Set(editablePriceEntries.map((price) => price.itemId)));
-	let buffSections = $derived.by(buildBuffSections);
 	let hasProvisionalServicePrice = $derived(
 		selectedProfile?.serviceStrategyIds.some(
 			(strategyId) => recipesById.get(strategyId)?.status === 'provisional'
@@ -200,7 +212,7 @@
 				if (recipe) ids.add(recipe.customerPriceItemId);
 			}
 		}
-		for (const buffId of selectedBuffIds) {
+		for (const buffId of calculationBuffIds) {
 			const buff = buffsById.get(buffId);
 			if (buff?.priceItemId) ids.add(buff.priceItemId);
 			if (buff?.alternativePrice) ids.add(buff.alternativePrice.priceItemId);
@@ -211,7 +223,7 @@
 		data.snapshot.prices.filter((price) => isSelectedMissingPrice(price))
 	);
 	let selectedUnpricedBuffs = $derived(
-		selectedBuffIds
+		calculationBuffIds
 			.map((buffId) => buffsById.get(buffId))
 			.filter((buff): buff is Buff => Boolean(buff))
 			.filter((buff) => isBuffUnpriced(buff))
@@ -228,7 +240,7 @@
 					dungeonId: selectedDungeon.id,
 					difficulty,
 					clearTimeSeconds: clearTime,
-					selectedBuffIds,
+					selectedBuffIds: calculationBuffIds,
 					priceOverrides: validOverrideValues
 				}),
 				error: null
@@ -277,7 +289,7 @@
 			return false;
 		}
 		if (price.kind !== 'buff') return true;
-		return selectedBuffIds
+		return calculationBuffIds
 			.map((buffId) => buffsById.get(buffId))
 			.filter((buff): buff is Buff => Boolean(buff))
 			.filter(
@@ -287,27 +299,22 @@
 			.some((buff) => isBuffUnpriced(buff));
 	}
 
-	function buildBuffSections(): BuffSection[] {
-		const stackable = data.catalog.buffs.filter((buff) => !buff.exclusivityGroup);
+	function buildOptionalBuffSections(): BuffSection[] {
+		const optionalBuffs = data.catalog.buffs.filter((buff) => !buff.essential);
 		const sections: BuffSection[] = [];
-		if (stackable.length > 0) {
-			sections.push({
-				id: 'stackable',
-				title: 'Stackable buffs',
-				description: 'These buffs can be used together.',
-				exclusive: false,
-				buffs: stackable
-			});
-		}
-
 		const grouped: Record<string, Buff[]> = {};
-		for (const buff of data.catalog.buffs) {
+		for (const buff of optionalBuffs) {
 			if (!buff.exclusivityGroup) continue;
 			const group = grouped[buff.exclusivityGroup] ?? [];
 			group.push(buff);
 			grouped[buff.exclusivityGroup] = group;
 		}
-		for (const [groupId, buffs] of Object.entries(grouped)) {
+		for (const groupId of ['syrup', 'heroes-attack']) {
+			const groupBuffs = grouped[groupId];
+			if (!groupBuffs) continue;
+			const buffs = [...groupBuffs].sort(
+				(a, b) => Number(b.standardPreset) - Number(a.standardPreset)
+			);
 			const copy = exclusiveGroupCopy[groupId];
 			sections.push({
 				id: groupId,
@@ -315,6 +322,17 @@
 				description: copy?.description ?? 'Choose one option from this exclusive group.',
 				exclusive: true,
 				buffs
+			});
+		}
+
+		const stackable = optionalBuffs.filter((buff) => !buff.exclusivityGroup);
+		if (stackable.length > 0) {
+			sections.push({
+				id: 'optional-stackable',
+				title: 'Additional optional buff',
+				description: 'Can be used alongside the other optional choices.',
+				exclusive: false,
+				buffs: stackable
 			});
 		}
 		return sections;
@@ -368,6 +386,7 @@
 	}
 
 	function setBuff(buff: Buff, checked: boolean) {
+		if (buff.essential) return;
 		let next = selectedBuffIds.filter((buffId) => buffId !== buff.id);
 		if (checked) {
 			if (buff.exclusivityGroup) {
@@ -390,7 +409,7 @@
 			const resolvedId = buffsById.has(migratedId) ? migratedId : value;
 			if (normalized.includes(resolvedId)) continue;
 			const buff = buffsById.get(resolvedId);
-			if (!buff) continue;
+			if (!buff || buff.essential) continue;
 			if (buff.exclusivityGroup && usedGroups.includes(buff.exclusivityGroup)) continue;
 			normalized.push(resolvedId);
 			if (buff.exclusivityGroup) usedGroups.push(buff.exclusivityGroup);
@@ -739,59 +758,86 @@
 				<Card.Header>
 					<Card.Title><h2>Universal buffs</h2></Card.Title>
 					<Card.Description>
-						Material yields assume capped item drop rate. Buff toggles affect cost only; keep any
-						clear-time effects in your entered time.
+						Material yields assume capped item drop rate. Essentials are always included, while
+						optional high-cost buffs are shown first. Keep any clear-time effects in your entered time.
 					</Card.Description>
 				</Card.Header>
 				<Card.Content>
-					<Field.Set>
-						<Field.Legend variant="label">Combat buffs</Field.Legend>
-						<Field.Description>
-							The standard preset is selected on first visit. Exclusive choices are grouped below.
-						</Field.Description>
-						<div class="mt-4 flex flex-col gap-4">
-							{#each buffSections as section (section.id)}
-								<Field.Set class="rounded-xl border p-4">
-									<Field.Legend variant="label">{section.title}</Field.Legend>
-									<Field.Description>{section.description}</Field.Description>
-									<Field.Group class="gap-3">
-										{#each section.buffs as buff (buff.id)}
-											<Field.Field orientation="responsive">
-												{#if buff.icon}
-													<img src={buff.icon} alt="" class="size-9 shrink-0 object-contain" />
-												{/if}
-												<Field.Content>
-													<Field.Label for={`buff-${buff.id}`}>{buff.name}</Field.Label>
-													<Field.Description>
-														{buff.description} · {formatNumber(buff.durationSeconds / 60)} minute duration
-													</Field.Description>
-												</Field.Content>
-												<div class="flex shrink-0 flex-wrap items-center gap-2">
-													<Badge variant="outline">{buffPriceLabel(buff)}</Badge>
-													{#if buff.id === 'advanced-premium-syrup'}
-														<Badge variant="secondary">Lowest effective price</Badge>
+					<div class="flex flex-col gap-5">
+						<Field.Set>
+							<Field.Legend variant="label">Optional high-cost buffs</Field.Legend>
+							<Field.Description>
+								These drive most buff spending. The standard optional preset is selected on first visit.
+							</Field.Description>
+							<div class="mt-3 flex flex-col gap-4">
+								{#each optionalBuffSections as section (section.id)}
+									<Field.Set class="rounded-xl border p-4">
+										<Field.Legend variant="label">{section.title}</Field.Legend>
+										<Field.Description>{section.description}</Field.Description>
+										<Field.Group class="gap-3">
+											{#each section.buffs as buff (buff.id)}
+												<Field.Field orientation="responsive">
+													{#if buff.icon}
+														<img src={buff.icon} alt="" class="size-9 shrink-0 object-contain" />
 													{/if}
-													{#if buff.standardPreset}
-														<Badge variant="outline">Preset</Badge>
-													{/if}
-													<Switch
-														id={`buff-${buff.id}`}
-														aria-label={`Use ${buff.name}`}
-														checked={selectedBuffIds.includes(buff.id)}
-														onCheckedChange={(checked) => setBuff(buff, checked)}
-													/>
-												</div>
-											</Field.Field>
-										{/each}
-									</Field.Group>
-								</Field.Set>
-							{/each}
-						</div>
-					</Field.Set>
+													<Field.Content>
+														<Field.Label for={`buff-${buff.id}`}>{buff.name}</Field.Label>
+														<Field.Description>
+															{buff.description} · {formatNumber(buff.durationSeconds / 60)} minute duration
+														</Field.Description>
+													</Field.Content>
+													<div class="flex shrink-0 flex-wrap items-center gap-2">
+														<Badge variant="outline">{buffPriceLabel(buff)}</Badge>
+														{#if buff.id === 'advanced-premium-syrup'}
+															<Badge variant="secondary">Lowest effective price</Badge>
+														{/if}
+														{#if buff.standardPreset}
+															<Badge variant="outline">Preset</Badge>
+														{/if}
+														<Switch
+															id={`buff-${buff.id}`}
+															aria-label={`Use ${buff.name}`}
+															checked={selectedBuffIds.includes(buff.id)}
+															onCheckedChange={(checked) => setBuff(buff, checked)}
+														/>
+													</div>
+												</Field.Field>
+											{/each}
+										</Field.Group>
+									</Field.Set>
+								{/each}
+							</div>
+						</Field.Set>
+
+						<Field.Set class="rounded-xl border p-4">
+							<Field.Legend variant="label">Essential baseline</Field.Legend>
+							<div class="flex flex-wrap items-center justify-between gap-2">
+								<Field.Description>
+									Always included in every estimate, so this routine setup is condensed.
+								</Field.Description>
+								<Badge variant="secondary">{essentialBuffs.length} always included</Badge>
+							</div>
+							<Field.Group class="mt-1 gap-2 sm:grid sm:grid-cols-2">
+								{#each essentialBuffs as buff (buff.id)}
+									<Field.Field orientation="horizontal" class="min-w-0 rounded-lg border p-2.5">
+										{#if buff.icon}
+											<img src={buff.icon} alt="" class="size-8 shrink-0 object-contain" />
+										{/if}
+										<Field.Content class="min-w-0">
+											<Field.Title class="w-full">{buff.name}</Field.Title>
+											<Field.Description class="text-xs">
+												{buffPriceLabel(buff)} · {formatNumber(buff.durationSeconds / 60)} min
+											</Field.Description>
+										</Field.Content>
+									</Field.Field>
+								{/each}
+							</Field.Group>
+						</Field.Set>
+					</div>
 				</Card.Content>
 				<Card.Footer class="flex-wrap justify-between gap-3">
 					<p class="text-xs text-foreground/75">
-						{selectedBuffIds.length} buff{selectedBuffIds.length === 1 ? '' : 's'} selected
+						{essentialBuffs.length} essentials included · {selectedBuffIds.length} optional selected
 					</p>
 					<Sheet.Root bind:open={assumptionsOpen}>
 						<Sheet.Trigger>
@@ -1247,23 +1293,23 @@
 					<div class="min-w-0">
 						<div class="flex flex-wrap items-end justify-between gap-2">
 							<div>
-								<h3 class="font-medium">Selected buff costs</h3>
+								<h3 class="font-medium">Buff cost breakdown</h3>
 								<p class="mt-1 text-xs text-muted-foreground">
-									Costs are normalized to one hour without rounding activations up.
+									Optional costs appear first, followed by the essential baseline. Costs are normalized to one hour.
 								</p>
 							</div>
-							<Badge variant="outline">{calculation.buffRows.length} selected</Badge>
+							<Badge variant="outline">{calculation.buffRows.length} buffs</Badge>
 						</div>
 						{#if calculation.buffRows.length > 0}
 							<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 							<div
 								class="mt-3 overflow-x-auto rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [&>[data-slot=table-container]]:overflow-visible"
 								role="region"
-								aria-label="Scrollable selected buff cost breakdown"
+								aria-label="Scrollable buff cost breakdown"
 								tabindex="0"
 							>
 								<Table.Root class="min-w-[42rem]">
-									<Table.Caption class="sr-only">Selected universal buff costs</Table.Caption>
+									<Table.Caption class="sr-only">Universal buff costs</Table.Caption>
 									<Table.Header>
 										<Table.Row>
 											<Table.Head>Buff</Table.Head>
@@ -1296,8 +1342,6 @@
 									</Table.Body>
 								</Table.Root>
 							</div>
-						{:else}
-							<p class="mt-3 text-sm text-muted-foreground">No buffs selected.</p>
 						{/if}
 					</div>
 				{:else}

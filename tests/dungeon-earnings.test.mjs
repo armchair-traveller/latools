@@ -135,6 +135,7 @@ const catalog = {
 			priceMode: 'snapshot',
 			priceEditable: true,
 			priceItemId: 'timed-buff-price',
+			essential: false,
 			standardPreset: true,
 			exclusivityGroup: null,
 			icon: '/timed-buff.png',
@@ -149,6 +150,7 @@ const catalog = {
 			priceMode: 'fixed-zero',
 			priceEditable: false,
 			priceItemId: null,
+			essential: false,
 			standardPreset: false,
 			exclusivityGroup: null,
 			icon: '/fixed-zero.png',
@@ -163,6 +165,7 @@ const catalog = {
 			priceMode: 'snapshot',
 			priceEditable: false,
 			priceItemId: 'fixed-snapshot-price',
+			essential: false,
 			standardPreset: false,
 			exclusivityGroup: null,
 			icon: '/fixed-snapshot.png',
@@ -177,6 +180,7 @@ const catalog = {
 			priceMode: 'snapshot',
 			priceEditable: true,
 			priceItemId: 'premium-syrup',
+			essential: false,
 			standardPreset: false,
 			exclusivityGroup: 'syrup',
 			icon: '/premium.png',
@@ -192,6 +196,7 @@ const catalog = {
 			priceEditable: true,
 			priceItemId: 'advanced-premium-syrup',
 			alternativePrice: { priceItemId: 'premium-syrup', quantity: 2 },
+			essential: false,
 			standardPreset: true,
 			exclusivityGroup: 'syrup',
 			icon: '/advanced.png',
@@ -206,6 +211,7 @@ const catalog = {
 			priceMode: 'fixed-zero',
 			priceEditable: false,
 			priceItemId: null,
+			essential: false,
 			standardPreset: false,
 			exclusivityGroup: 'exclusive',
 			icon: '/a.png',
@@ -220,6 +226,7 @@ const catalog = {
 			priceMode: 'fixed-zero',
 			priceEditable: false,
 			priceItemId: null,
+			essential: false,
 			standardPreset: false,
 			exclusivityGroup: 'exclusive',
 			icon: '/b.png',
@@ -234,6 +241,7 @@ const catalog = {
 			priceMode: 'snapshot',
 			priceEditable: true,
 			priceItemId: 'unpriced-buff-price',
+			essential: false,
 			standardPreset: false,
 			exclusivityGroup: null,
 			icon: '/unpriced.png',
@@ -462,6 +470,30 @@ test('uses fixed-zero and fixed snapshot prices without accepting overrides', ()
 	assert.deepEqual(result.overriddenPriceIds, []);
 });
 
+test('always includes and deduplicates the essential buff baseline', () => {
+	const changed = structuredClone(catalog);
+	const essential = changed.buffs.find((buff) => buff.id === 'fixed-snapshot');
+	essential.essential = true;
+	essential.standardPreset = true;
+
+	const essentialsOnly = calculate({ catalog: changed, selectedBuffIds: [] });
+	assert.deepEqual(
+		essentialsOnly.buffRows.map((row) => row.buffId),
+		['fixed-snapshot']
+	);
+	assert.equal(essentialsOnly.perHour.buffCostEly, 1000);
+
+	const withOptional = calculate({
+		catalog: changed,
+		selectedBuffIds: ['timed-buff', 'fixed-snapshot', 'fixed-snapshot']
+	});
+	assert.deepEqual(
+		withOptional.buffRows.map((row) => row.buffId),
+		['timed-buff', 'fixed-snapshot']
+	);
+	assert.equal(withOptional.perHour.buffCostEly, 2200);
+});
+
 test('deduplicates buffs and rejects unknown or mutually exclusive selections', () => {
 	const duplicate = calculate({ selectedBuffIds: ['timed-buff', 'timed-buff'] });
 	assert.equal(duplicate.buffRows.length, 1);
@@ -566,6 +598,25 @@ test('checked-in data contains the confirmed yields, routes, prices, and all fou
 		await readFile(new URL(`../static${currentEntry.path}`, import.meta.url), 'utf8')
 	);
 	const currentBuffs = new Map(currentCatalog.buffs.map((buff) => [buff.id, buff]));
+	const essentialBuffIds = [
+		'flasks',
+		'critical-oil',
+		'sweet-mutant-special-potion',
+		'alvis-support-potion',
+		'hunter-hp-recovery-kit-30',
+		'mysterious-critical-damage-amplifier'
+	];
+
+	assert.deepEqual(
+		currentCatalog.buffs.filter((buff) => buff.essential).map((buff) => buff.id),
+		essentialBuffIds
+	);
+	assert.ok(
+		essentialBuffIds.every((buffId) => {
+			const buff = currentBuffs.get(buffId);
+			return buff?.standardPreset === true && buff.exclusivityGroup === null;
+		})
+	);
 
 	assert.equal(
 		currentBuffs.get('mysterious-critical-damage-amplifier')?.exclusivityGroup,
@@ -574,8 +625,13 @@ test('checked-in data contains the confirmed yields, routes, prices, and all fou
 	assert.equal(currentBuffs.has('mysterious-critical-chance-amplifier'), false);
 	assert.equal(currentBuffs.has('mysterious-damage-amplifier'), false);
 	assert.match(currentBuffs.get('shining-storm-potion')?.description ?? '', /Critical rate \+100/);
+	assert.equal(currentBuffs.get('heroes-set')?.name, "Hero's Set");
 	assert.equal(currentBuffs.get('heroes-set')?.exclusivityGroup, 'heroes-attack');
 	assert.equal(currentBuffs.get('heroes-set')?.standardPreset, true);
+	assert.equal(
+		currentBuffs.get('heroes-attack-nostrum-ii')?.name,
+		"Hero's Attack Nostrum II"
+	);
 	assert.equal(currentBuffs.get('heroes-attack-nostrum-ii')?.exclusivityGroup, 'heroes-attack');
 	assert.equal(currentBuffs.get('heroes-attack-nostrum-ii')?.standardPreset, false);
 	assert.equal(
@@ -599,15 +655,51 @@ test('checked-in data contains the confirmed yields, routes, prices, and all fou
 			}),
 		/Conflicting buffs in exclusivity group heroes-attack/
 	);
+	const essentialsOnly = calculateDungeonEarnings({
+		catalog: currentCatalog,
+		snapshot: currentSnapshot,
+		dungeonId: 'pleroma',
+		difficulty: 'D4',
+		clearTimeSeconds: 3600,
+		selectedBuffIds: []
+	});
+	assert.deepEqual(
+		essentialsOnly.buffRows.map((row) => row.buffId),
+		essentialBuffIds
+	);
+	assert.equal(essentialsOnly.perHour.buffCostEly, 18_500_000);
+
+	const defaultOptionalBuffIds = [
+		'advanced-premium-syrup',
+		'heroes-set',
+		'shining-storm-potion'
+	];
+	const defaultBuffs = calculateDungeonEarnings({
+		catalog: currentCatalog,
+		snapshot: currentSnapshot,
+		dungeonId: 'pleroma',
+		difficulty: 'D4',
+		clearTimeSeconds: 3600,
+		selectedBuffIds: defaultOptionalBuffIds
+	});
+	assert.deepEqual(
+		defaultBuffs.buffRows.slice(0, defaultOptionalBuffIds.length).map((row) => row.buffId),
+		defaultOptionalBuffIds
+	);
+	assert.equal(defaultBuffs.perHour.buffCostEly, 613_500_000);
+
+	const heroesTwoOnly = calculateDungeonEarnings({
+		catalog: currentCatalog,
+		snapshot: currentSnapshot,
+		dungeonId: 'pleroma',
+		difficulty: 'D4',
+		clearTimeSeconds: 3600,
+		selectedBuffIds: ['heroes-attack-nostrum-ii']
+	});
+	assert.equal(heroesTwoOnly.perHour.buffCostEly, 113_500_000);
 	assert.equal(
-		calculateDungeonEarnings({
-			catalog: currentCatalog,
-			snapshot: currentSnapshot,
-			dungeonId: 'pleroma',
-			difficulty: 'D4',
-			clearTimeSeconds: 3600,
-			selectedBuffIds: ['heroes-attack-nostrum-ii']
-		}).perHour.buffCostEly,
+		heroesTwoOnly.buffRows.find((row) => row.buffId === 'heroes-attack-nostrum-ii')
+			?.costPerHourEly,
 		95_000_000
 	);
 

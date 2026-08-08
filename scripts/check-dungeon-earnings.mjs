@@ -40,6 +40,14 @@ const expectedBuffIds = new Set([
 	'heroes-set',
 	'heroes-attack-nostrum-ii'
 ]);
+const expectedEssentialBuffIds = new Set([
+	'flasks',
+	'critical-oil',
+	'sweet-mutant-special-potion',
+	'alvis-support-potion',
+	'hunter-hp-recovery-kit-30',
+	'mysterious-critical-damage-amplifier'
+]);
 const derivedFields = new Set(['clearsPerHour', 'effectiveYield', 'grossEly', 'netEly', 'elyPerHour', 'marketNet', 'serviceNet', 'buffCostPerHour', 'potentialTotal']);
 
 function check(condition, message) {
@@ -254,6 +262,12 @@ for (const [i, buff] of (catalog.buffs ?? []).entries()) {
 	check(positive(buff.durationSeconds) && positive(buff.consumablesPerActivation), `${context} duration and activation quantity must be positive.`);
 	check(['snapshot', 'fixed-zero'].includes(buff.priceMode), `${context}.priceMode is invalid.`);
 	check(typeof buff.priceEditable === 'boolean', `${context}.priceEditable must be boolean.`);
+	check(typeof buff.essential === 'boolean', `${context}.essential must be boolean.`);
+	check(buff.essential === expectedEssentialBuffIds.has(buff.id), `${context}.essential does not match the maintained baseline.`);
+	if (buff.essential) {
+		check(buff.standardPreset === true, `${context} essential buffs must be part of the standard preset.`);
+		check(buff.exclusivityGroup === null, `${context} essential buffs cannot be mutually exclusive.`);
+	}
 	if (buff.priceMode === 'fixed-zero') {
 		check(buff.priceItemId === null && buff.priceEditable === false, `${context} fixed-zero buffs require null priceItemId and cannot be editable.`);
 	} else {
@@ -325,6 +339,14 @@ for (const [i, price] of (snapshot?.prices ?? []).entries()) {
 }
 for (const [kind, ids] of Object.entries(validPrices)) for (const id of ids) check(prices.has(`${kind}:${id}`), `Snapshot is missing ${kind} price ${id}.`);
 check(!prices.has('buff:sweet-mutant-special-potion'), 'Sweet Mutant must not have a customizable snapshot price.');
+for (const buff of catalog.buffs.filter(
+	(buff) => buff.essential && buff.priceMode === 'snapshot' && !buff.priceEditable
+)) {
+	check(
+		prices.get(`buff:${buff.priceItemId}`)?.status === 'priced',
+		`Essential fixed-cost buff ${buff.id} must have a priced snapshot value.`
+	);
+}
 
 if (pendingYields.length) warnings.push(`${pendingYields.length} reward averages remain pending: ${pendingYields.join(', ')}.`);
 if (pendingBonuses.length) warnings.push(`${pendingBonuses.length} D5 bonus decisions remain pending: ${pendingBonuses.join(', ')}.`);

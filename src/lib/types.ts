@@ -360,6 +360,7 @@ export interface DungeonEarningsBuff {
 		priceItemId: string;
 		quantity: number;
 	};
+	essential: boolean;
 	standardPreset: boolean;
 	exclusivityGroup: string | null;
 	icon: string;
