@@ -52,6 +52,7 @@
 	const mainCount = $derived(archive.index.filter((item) => item.type === 'main').length);
 	const sideCount = $derived(archive.index.filter((item) => item.type === 'sub').length);
 	const lineCount = $derived(archive.index.reduce((total, item) => total + item.lineCount, 0));
+	const selectedMeta = $derived(archive.index.find((item) => item.id === selectedId));
 	const filteredStories = $derived(
 		archive.index.filter((item) => {
 			const matchesType = activeFilter === 'all' || item.type === activeFilter;
@@ -172,86 +173,108 @@
 	/>
 </svelte:head>
 
-<main class="mx-auto w-full max-w-[76rem] px-4 py-8 sm:px-6 md:px-8 md:py-12">
-	<header class="flex items-center gap-4">
-		<Avatar.Root class="size-14 rounded-2xl bg-secondary">
-			<Avatar.Image
-				src="/npc/741.png"
-				alt="Iris Livier"
-				class="rounded-2xl object-contain [image-rendering:pixelated]"
-			/>
-			<Avatar.Fallback class="rounded-2xl">IL</Avatar.Fallback>
-		</Avatar.Root>
-		<div>
-			<h1 class="text-2xl font-semibold tracking-tight sm:text-3xl">Scenario scripts</h1>
-			<p class="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-				Main and side-story dialogue, organized by chapter. Pick a story to read each step in
-				order.
+<main class="scenario-folio">
+	<header class="scenario-hero">
+		<div class="hero-copy">
+			<p class="concept-kicker"><span>01</span>The Archivist’s Folio</p>
+			<h1>Every journey, bound in one place.</h1>
+			<p class="hero-description">
+				Revisit LaTale’s main and side stories in a warm reading room made for slow discovery.
 			</p>
+		</div>
+
+		<div class="hero-art">
+			<div class="hero-frame" aria-hidden="true"></div>
+			<Avatar.Root class="hero-portrait">
+				<Avatar.Image
+					src="/npc/741.png"
+					alt="Iris Livier"
+					class="object-contain [image-rendering:pixelated]"
+				/>
+				<Avatar.Fallback>IL</Avatar.Fallback>
+			</Avatar.Root>
+			<div class="hero-mark">
+				<BookOpenTextIcon aria-hidden="true" />
+				<span>Community edition</span>
+			</div>
 		</div>
 	</header>
 
-	<div class="mt-6 flex flex-wrap gap-2" aria-label="Archive statistics">
-		<Badge variant="secondary">{formatNumber(archive.index.length)} stories</Badge>
-		<Badge variant="secondary">{mainCount} main · {sideCount} side</Badge>
-		<Badge variant="secondary">{formatNumber(lineCount)} dialogue lines</Badge>
-		<Badge variant="secondary">{formatNumber(Object.keys(archive.speakers).length)} characters</Badge>
-	</div>
+	<ul class="archive-stats" aria-label="Archive statistics">
+		<li><strong>{formatNumber(archive.index.length)}</strong><span>Stories</span></li>
+		<li><strong>{mainCount} / {sideCount}</strong><span>Main · side</span></li>
+		<li><strong>{formatNumber(lineCount)}</strong><span>Dialogue lines</span></li>
+		<li>
+			<strong>{formatNumber(Object.keys(archive.speakers).length)}</strong><span>Characters</span>
+		</li>
+	</ul>
 
-	<Field.Group class="mt-5 grid gap-3 md:grid-cols-[auto_minmax(12rem,1fr)_minmax(14rem,1fr)]">
-		<Field.Field>
-			<Field.Label class="sr-only">Story type</Field.Label>
-			<ToggleGroup.Root
-				type="single"
-				variant="outline"
-				value={activeFilter}
-				onValueChange={setFilter}
-				aria-label="Story type"
-			>
-				{#each filters as filter (filter.key)}
-					<ToggleGroup.Item value={filter.key} aria-label={`Show ${filter.label} stories`}>
-						{filter.label}
-					</ToggleGroup.Item>
-				{/each}
-			</ToggleGroup.Root>
-		</Field.Field>
+	<section class="archive-controls" aria-label="Archive controls">
+		<div class="controls-heading">
+			<p>Browse the archive</p>
+			<span>Filter the collection or make the script your own.</span>
+		</div>
+		<Field.Group class="control-grid">
+			<Field.Field>
+				<Field.Label>Story path</Field.Label>
+				<ToggleGroup.Root
+					type="single"
+					variant="outline"
+					value={activeFilter}
+					onValueChange={setFilter}
+					aria-label="Story type"
+				>
+					{#each filters as filter (filter.key)}
+						<ToggleGroup.Item value={filter.key} aria-label={`Show ${filter.label} stories`}>
+							{filter.label}
+						</ToggleGroup.Item>
+					{/each}
+				</ToggleGroup.Root>
+			</Field.Field>
 
-		<Field.Field>
-			<Field.Label for="story-search" class="sr-only">Search story titles</Field.Label>
-			<InputGroup.Root>
-				<InputGroup.Addon>
-					<SearchIcon aria-hidden="true" />
-				</InputGroup.Addon>
-				<InputGroup.Input
-					id="story-search"
-					bind:value={query}
-					placeholder="Search stories"
+			<Field.Field>
+				<Field.Label for="story-search">Find a story</Field.Label>
+				<InputGroup.Root>
+					<InputGroup.Addon>
+						<SearchIcon aria-hidden="true" />
+					</InputGroup.Addon>
+					<InputGroup.Input
+						id="story-search"
+						bind:value={query}
+						placeholder="Search titles"
+					/>
+				</InputGroup.Root>
+			</Field.Field>
+
+			<Field.Field>
+				<Field.Label for="player-name">Reader name</Field.Label>
+				<Input
+					id="player-name"
+					bind:value={playerName}
+					maxlength={20}
+					placeholder="Adventurer"
 				/>
-			</InputGroup.Root>
-		</Field.Field>
+			</Field.Field>
+		</Field.Group>
+	</section>
 
-		<Field.Field>
-			<Field.Label for="player-name" class="sr-only">Your character name</Field.Label>
-			<Input
-				id="player-name"
-				bind:value={playerName}
-				maxlength={20}
-				placeholder="Your character name (Adventurer)"
-			/>
-		</Field.Field>
-	</Field.Group>
-
-	<div class="mt-4 grid items-start gap-4 lg:grid-cols-[19rem_minmax(0,1fr)]">
-		<Card.Root class="h-[72vh] max-h-[44rem] gap-0 py-0">
-			<Card.Header class="border-b py-4">
-				<Card.Title><h2>Stories</h2></Card.Title>
+	<div class="story-workspace">
+		<Card.Root class="story-browser">
+			<Card.Header class="panel-heading story-browser-heading">
+				<div class="panel-label">Archive index</div>
+				<Card.Title><h2>Choose a story</h2></Card.Title>
 				<Card.Description>
 					{filteredStories.length === archive.index.length
 						? `${archive.index.length} in the archive`
 						: `${filteredStories.length} matching ${filteredStories.length === 1 ? 'story' : 'stories'}`}
 				</Card.Description>
 			</Card.Header>
-			<Card.Content class="fine-scrollbar min-h-0 flex-1 overflow-y-auto px-2 py-2">
+			<Card.Content
+				class="fine-scrollbar story-browser-content"
+				tabindex={0}
+				role="region"
+				aria-label="Story index"
+			>
 				{#if groupedStories.length === 0}
 					<Empty.Root class="min-h-64 border-0">
 						<Empty.Header>
@@ -264,46 +287,50 @@
 
 				{#each groupedStories as [chapterNumber, groups] (chapterNumber)}
 					{@const chapterCount = groups.main.length + groups.sub.length}
-					<div class="mb-1">
+					<div class="chapter-group">
 						<Button
 							variant="ghost"
 							size="lg"
-							class="h-auto w-full justify-start px-3 py-2.5"
+							class="chapter-toggle"
 							aria-expanded={openChapter === chapterNumber}
+							aria-controls={`chapter-${chapterNumber}-stories`}
 							onclick={() => (openChapter = openChapter === chapterNumber ? 0 : chapterNumber)}
 						>
-							<span class="shrink-0 font-semibold">Chapter {chapterNumber}</span>
-							<span class="min-w-0 flex-1 truncate text-muted-foreground">
+							<span class="chapter-number">{String(chapterNumber).padStart(2, '0')}</span>
+							<span class="chapter-name">
 								{archive.chapters[String(chapterNumber)]}
 							</span>
-							<span class="text-xs text-muted-foreground">{chapterCount}</span>
+							<span class="chapter-count">{chapterCount}</span>
 							<ChevronDownIcon
-								class={cn('size-4 transition-transform', openChapter === chapterNumber && 'rotate-180')}
+								data-icon="inline-end"
+								class={cn('transition-transform', openChapter === chapterNumber && 'rotate-180')}
 								aria-hidden="true"
 							/>
 						</Button>
 
 						{#if openChapter === chapterNumber}
-							<div class="mt-1 space-y-3 pl-1">
+							<div class="chapter-stories" id={`chapter-${chapterNumber}-stories`}>
 								{#each storyTypes as type (type)}
 									{#if groups[type].length}
-										<div>
-											<p class="px-2.5 py-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+										<div class="story-type-group">
+											<p class="story-type-label">
 												{storyTypeLabel(type)} scenarios
 											</p>
-											<div class="space-y-0.5">
+											<div class="story-list">
 												{#each groups[type] as item (item.id)}
 													<Button
 														variant={item.id === selectedId ? 'default' : 'ghost'}
 														size="lg"
-														class="h-auto w-full justify-start px-2.5 py-2"
+														class="story-row"
 														aria-current={item.id === selectedId ? 'true' : undefined}
 														title={item.name}
 														onclick={() => void selectStory(item.id)}
 													>
-														<Badge variant="secondary">{storyTypeLabel(item.type)}</Badge>
-														<span class="min-w-0 flex-1 truncate">{item.name}</span>
-														<span class="shrink-0 text-xs opacity-70">Lv{item.level}</span>
+														<Badge variant="secondary" class="story-type-badge">
+															{storyTypeLabel(item.type)}
+														</Badge>
+														<span class="story-name">{item.name}</span>
+														<span class="story-level">Lv{item.level}</span>
 													</Button>
 												{/each}
 											</div>
@@ -327,36 +354,38 @@
 						: 'No story selected.'}
 		</p>
 
-		<Card.Root
-			class="h-[72vh] max-h-[44rem] gap-0 py-0"
-			aria-busy={loading}
-		>
+		<Card.Root class="reader-card" aria-busy={loading}>
 			{#if story && !loading}
-				<Card.Header class="border-b py-4">
-					<div class="flex flex-wrap items-center gap-2">
-						<Badge variant="secondary">{storyTypeLabel(story.type)}</Badge>
-						<Card.Title><h2>{story.name}</h2></Card.Title>
+				<Card.Header class="panel-heading reader-heading">
+					<div class="reader-eyebrow">
+						<Badge variant="secondary">{storyTypeLabel(story.type)} route</Badge>
+						<span>Chapter {String(story.chapter).padStart(2, '0')}</span>
+						{#if selectedMeta}<span>Level {selectedMeta.level}</span>{/if}
 					</div>
+					<Card.Title><h2>{story.name}</h2></Card.Title>
 					<Card.Description>
-						Chapter {story.chapter} · {archive.chapters[String(story.chapter)]} · {story.steps.length}
-						{story.steps.length === 1 ? 'step' : 'steps'}
+						{archive.chapters[String(story.chapter)]} · {story.steps.length}
+						{story.steps.length === 1 ? 'story beat' : 'story beats'}
 					</Card.Description>
 				</Card.Header>
 			{/if}
 
 			<Card.Content
 				bind:ref={readerPanel}
-				class="fine-scrollbar min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6"
+				class="fine-scrollbar reader-content"
+				tabindex={0}
+				role="region"
+				aria-label="Story dialogue"
 			>
 				{#if loading}
-					<div aria-label="Loading story">
+					<div class="reader-loading" aria-label="Loading story">
 						<Skeleton class="h-6 w-52" />
 						<Skeleton class="mt-3 h-4 w-36" />
-						<div class="mt-9 space-y-5">
+						<div class="loading-lines">
 							{#each Array(5) as _, index (index)}
-								<div class="flex gap-3">
+								<div class="loading-line">
 									<Skeleton class="size-10 shrink-0 rounded-full" />
-									<div class="flex-1 space-y-2 pt-1">
+									<div class="loading-copy">
 										<Skeleton class="h-3 w-20" />
 										<Skeleton class="h-4 w-full max-w-xl" />
 									</div>
@@ -379,32 +408,33 @@
 						</Empty.Content>
 					</Empty.Root>
 				{:else if story}
-					<article>
+					<article class="story-article">
 						{#each story.steps as step, stepIndex (step.id)}
-							{#if stepIndex > 0}<Separator class="my-7" />{/if}
-							<section>
-								<p class="text-xs font-medium tracking-wider text-muted-foreground">
+							{#if stepIndex > 0}<Separator class="step-separator" />{/if}
+							<section class="story-step">
+								<p class="step-index">
 									{String(stepIndex + 1).padStart(2, '0')}
 								</p>
-								<h3 class="mt-1 font-semibold">{step.name}</h3>
+								<h3 class="step-title">{step.name}</h3>
 								{#if step.objective}
-									<p class="mt-3 whitespace-pre-line rounded-lg bg-muted px-3.5 py-2.5 text-sm leading-relaxed text-muted-foreground">
-										{substitute(step.objective)}
-									</p>
+									<div class="objective-note">
+										<span>Objective</span>
+										<p>{substitute(step.objective)}</p>
+									</div>
 								{/if}
 
 								{#if step.scenes.length === 0}
-									<p class="mt-4 text-sm italic text-muted-foreground">This step has no dialogue.</p>
+									<p class="empty-dialogue">This step has no dialogue.</p>
 								{:else}
 									{#each step.scenes as scene (scene.id)}
-										<div class="mt-4">
+										<div class="story-scene">
 											{#each flattenLines(scene.lines, `${story.id}-${scene.id}`) as entry (entry.id)}
 												{#if entry.kind === 'line'}
 													{@const speaker = entry.line.speaker ? substitute(entry.line.speakerName ?? entry.line.speaker) : ''}
 													{@const portraitId = entry.line.speaker ? portraitFor(entry.line.speaker) : undefined}
 													{#if entry.line.speaker}
-														<div class="flex gap-3 py-2">
-															<Avatar.Root size="lg">
+														<div class="dialogue-line">
+															<Avatar.Root size="lg" class="speaker-avatar">
 																{#if portraitId}
 																	<Avatar.Image
 																		src={`/npc/${portraitId}.png`}
@@ -414,28 +444,30 @@
 																{/if}
 																<Avatar.Fallback>{speaker.slice(0, 2).toUpperCase()}</Avatar.Fallback>
 															</Avatar.Root>
-															<div class="min-w-0 flex-1">
-																<p class="text-sm font-medium text-secondary-foreground">{speaker}</p>
-																<p class="mt-0.5 whitespace-pre-line text-[0.94rem] leading-relaxed">
+															<div class="dialogue-copy">
+																<p class="speaker-name">{speaker}</p>
+																<p class="dialogue-text">
 																	{substitute(entry.line.text)}
 																</p>
 															</div>
 														</div>
 													{:else}
-														<p class="py-2 pl-[3.25rem] text-sm italic leading-relaxed text-muted-foreground">
+														<p class="narration-line">
 															{substitute(entry.line.text)}
 														</p>
 													{/if}
 												{:else if entry.kind === 'choice'}
-													<div class="flex gap-3 py-2">
-														<Avatar.Root size="lg"><Avatar.Fallback>YOU</Avatar.Fallback></Avatar.Root>
-														<div class="min-w-0 flex-1">
-															<p class="text-sm font-medium text-secondary-foreground">{displayName}</p>
-															<p class="mt-0.5 text-[0.94rem] leading-relaxed">{cleanChoice(entry.text)}</p>
+													<div class="dialogue-line player-line">
+														<Avatar.Root size="lg" class="speaker-avatar player-avatar">
+															<Avatar.Fallback>YOU</Avatar.Fallback>
+														</Avatar.Root>
+														<div class="dialogue-copy">
+															<p class="speaker-name">{displayName}</p>
+															<p class="dialogue-text">{cleanChoice(entry.text)}</p>
 														</div>
 													</div>
 												{:else}
-													<p class="py-2 pl-[3.25rem] text-sm text-muted-foreground">
+													<p class="repeated-line">
 														The dialogue after this choice already appeared above.
 													</p>
 												{/if}
@@ -451,8 +483,8 @@
 		</Card.Root>
 	</div>
 
-	<Separator class="mt-8" />
-	<footer class="flex flex-wrap items-center justify-between gap-3 py-5 text-xs leading-relaxed text-muted-foreground">
+	<Separator class="page-separator" />
+	<footer class="scenario-footer">
 		<p>
 			English community archive · Source data updated
 			{archive.generatedAt
@@ -464,3 +496,724 @@
 		</Button>
 	</footer>
 </main>
+
+<style>
+	.scenario-folio {
+		--background: #f3eee3;
+		--foreground: #203027;
+		--card: #fffdf6;
+		--card-foreground: #203027;
+		--popover: #fffdf6;
+		--popover-foreground: #203027;
+		--primary: #214d3a;
+		--primary-foreground: #fffaf0;
+		--secondary: #eee0b8;
+		--secondary-foreground: #7b4d18;
+		--muted: #ede7da;
+		--muted-foreground: #685f50;
+		--accent: #dce8dc;
+		--accent-foreground: #214d3a;
+		--border: #d4c8b2;
+		--input: #c9bca5;
+		--ring: #9b6228;
+		--surface-radius: 0.35rem;
+		--surface-shadow: 0 18px 45px rgb(70 52 27 / 0.08);
+		position: relative;
+		min-height: calc(100vh - 3.5rem);
+		overflow: hidden;
+		padding: clamp(1.5rem, 3vw, 2.5rem);
+		background-color: var(--background);
+		background-image:
+			linear-gradient(rgb(255 255 255 / 0.34), rgb(255 255 255 / 0.34)),
+			repeating-linear-gradient(0deg, transparent 0 31px, rgb(69 78 56 / 0.035) 31px 32px);
+		color: var(--foreground);
+	}
+
+	.scenario-folio > * {
+		width: min(100%, 82rem);
+		margin-inline: auto;
+	}
+
+	.scenario-hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 12rem;
+		align-items: center;
+		gap: clamp(1.5rem, 4vw, 4rem);
+		min-height: 9.5rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.hero-copy {
+		max-width: 47rem;
+	}
+
+	.concept-kicker {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin: 0 0 0.75rem;
+		font-size: 0.72rem;
+		font-weight: 750;
+		letter-spacing: 0.16em;
+		line-height: 1;
+		text-transform: uppercase;
+		color: var(--secondary-foreground);
+	}
+
+	.concept-kicker span {
+		display: grid;
+		place-items: center;
+		min-width: 2.15rem;
+		height: 2.15rem;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.scenario-hero h1 {
+		max-width: 41rem;
+		margin: 0;
+		font-family: Iowan Old Style, Baskerville, 'Times New Roman', serif;
+		font-size: clamp(2.8rem, 4.5vw, 4.9rem);
+		font-weight: 600;
+		letter-spacing: -0.045em;
+		line-height: 0.98;
+		text-wrap: balance;
+	}
+
+	.hero-description {
+		max-width: 42rem;
+		margin: 1rem 0 0;
+		font-size: clamp(0.98rem, 1.35vw, 1.12rem);
+		line-height: 1.65;
+		color: var(--muted-foreground);
+		text-wrap: pretty;
+	}
+
+	.hero-art {
+		position: relative;
+		display: grid;
+		place-items: center;
+		justify-self: end;
+		min-height: 9rem;
+	}
+
+	.hero-frame {
+		position: absolute;
+		inset: 0.15rem 1.3rem;
+		border: 1px solid var(--border);
+		box-shadow: inset 0 0 0 4px var(--background);
+		transform: rotate(3deg);
+	}
+
+	.scenario-folio :global(.hero-portrait) {
+		position: relative;
+		z-index: 1;
+		width: 7.75rem;
+		height: 7.75rem;
+		border-radius: 0;
+		background: var(--secondary);
+		box-shadow: 0 0 0 6px var(--card), 0 0 0 7px var(--border), 0 16px 30px rgb(76 56 28 / 0.14);
+	}
+
+	.hero-mark {
+		position: absolute;
+		right: -0.5rem;
+		bottom: 0;
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		gap: 0.45rem;
+		padding: 0.45rem 0.65rem;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		background: var(--card);
+		box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+		font-size: 0.65rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		line-height: 1;
+		text-transform: uppercase;
+	}
+
+	.hero-mark :global(svg) {
+		width: 0.9rem;
+		height: 0.9rem;
+	}
+
+	.archive-stats {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0;
+		margin-block: 1.25rem 0;
+		padding: 0;
+		border-bottom: 1px solid var(--border);
+		list-style: none;
+	}
+
+	.archive-stats li {
+		display: flex;
+		min-width: 0;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding: 0.85rem 1rem;
+		border-right: 1px solid var(--border);
+	}
+
+	.archive-stats li:last-child {
+		border-right: 0;
+	}
+
+	.archive-stats strong {
+		font-size: 1rem;
+		font-weight: 760;
+		letter-spacing: -0.025em;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.archive-stats span {
+		min-width: 0;
+		font-size: 0.66rem;
+		font-weight: 700;
+		letter-spacing: 0.09em;
+		text-align: right;
+		text-transform: uppercase;
+		color: var(--muted-foreground);
+	}
+
+	.archive-controls {
+		display: grid;
+		grid-template-columns: minmax(9rem, 0.55fr) minmax(0, 2fr);
+		align-items: end;
+		gap: 1.5rem;
+		margin-top: 0.9rem;
+		padding: 1rem 1.1rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.controls-heading p {
+		margin: 0;
+		font-size: 0.88rem;
+		font-weight: 760;
+		letter-spacing: -0.02em;
+	}
+
+	.controls-heading span {
+		display: block;
+		max-width: 15rem;
+		margin-top: 0.2rem;
+		font-size: 0.7rem;
+		line-height: 1.45;
+		color: var(--muted-foreground);
+	}
+
+	.scenario-folio :global(.control-grid) {
+		display: grid;
+		grid-template-columns: auto minmax(10rem, 1fr) minmax(10rem, 0.8fr);
+		align-items: end;
+		gap: 0.85rem;
+	}
+
+	.archive-controls :global([data-slot='field-label']) {
+		font-size: 0.66rem;
+		font-weight: 720;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--muted-foreground);
+	}
+
+	.archive-controls :global([data-slot='toggle-group']) {
+		width: 100%;
+	}
+
+	.archive-controls :global([data-slot='toggle-group-item']) {
+		flex: 1;
+	}
+
+	.story-workspace {
+		display: grid;
+		grid-template-columns: minmax(18rem, 20rem) minmax(0, 1fr);
+		align-items: start;
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	.scenario-folio :global(.story-browser),
+	.scenario-folio :global(.reader-card) {
+		height: min(68vh, 43rem);
+		min-height: 35rem;
+		gap: 0;
+		overflow: hidden;
+		padding-block: 0;
+		border-radius: var(--surface-radius);
+		background: var(--card);
+		box-shadow: var(--surface-shadow);
+	}
+
+	.scenario-folio :global(.story-browser) {
+		background: #f8f3e8;
+	}
+
+	.scenario-folio :global(.reader-card) {
+		box-shadow: 0 22px 55px rgb(69 49 19 / 0.11), inset 0 0 0 7px #fffaf0;
+	}
+
+	.scenario-folio :global(.panel-heading) {
+		flex: none;
+		gap: 0.3rem;
+		padding: 1rem 1.15rem;
+		border-bottom: 1px solid var(--border);
+		background: color-mix(in oklab, var(--card) 92%, var(--muted));
+	}
+
+	.panel-label {
+		font-size: 0.62rem;
+		font-weight: 760;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--secondary-foreground);
+	}
+
+	.scenario-folio :global(.panel-heading [data-slot='card-title']) {
+		font-size: 1.05rem;
+		letter-spacing: -0.025em;
+	}
+
+	.scenario-folio :global(.panel-heading [data-slot='card-description']) {
+		font-size: 0.72rem;
+		line-height: 1.45;
+	}
+
+	.scenario-folio :global(.story-browser-content) {
+		min-height: 0;
+		flex: 1;
+		overflow-y: auto;
+		padding: 0.6rem;
+	}
+
+	.chapter-group + .chapter-group {
+		margin-top: 0.25rem;
+	}
+
+	.scenario-folio :global(.chapter-toggle) {
+		display: grid;
+		width: 100%;
+		height: auto;
+		grid-template-columns: 2rem minmax(0, 1fr) auto auto;
+		justify-content: stretch;
+		gap: 0.55rem;
+		padding: 0.7rem;
+	}
+
+	.chapter-number {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		font-size: 0.7rem;
+		font-weight: 760;
+		font-variant-numeric: tabular-nums;
+		color: var(--secondary-foreground);
+	}
+
+	.chapter-name {
+		min-width: 0;
+		overflow: hidden;
+		font-weight: 680;
+		letter-spacing: -0.015em;
+		text-align: left;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.chapter-count,
+	.story-level {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		font-size: 0.65rem;
+		font-variant-numeric: tabular-nums;
+		color: var(--muted-foreground);
+	}
+
+	.chapter-stories,
+	.story-type-group,
+	.story-list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.chapter-stories {
+		gap: 0.85rem;
+		padding: 0.35rem 0.15rem 0.7rem;
+	}
+
+	.story-type-group {
+		gap: 0.2rem;
+	}
+
+	.story-list {
+		gap: 0.15rem;
+	}
+
+	.story-type-label {
+		margin: 0;
+		padding: 0.35rem 0.65rem;
+		font-size: 0.59rem;
+		font-weight: 760;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--muted-foreground);
+	}
+
+	.scenario-folio :global(.story-row) {
+		display: grid;
+		width: 100%;
+		height: auto;
+		grid-template-columns: auto minmax(0, 1fr) auto;
+		justify-content: stretch;
+		gap: 0.55rem;
+		padding: 0.52rem 0.62rem;
+	}
+
+	.scenario-folio :global(.story-type-badge) {
+		min-width: 2.75rem;
+		justify-content: center;
+		font-size: 0.58rem;
+	}
+
+	.story-name {
+		min-width: 0;
+		overflow: hidden;
+		font-size: 0.76rem;
+		font-weight: 620;
+		letter-spacing: -0.01em;
+		text-align: left;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.scenario-folio :global(.story-row[aria-current='true'] .story-level) {
+		color: var(--primary-foreground);
+	}
+
+	.scenario-folio :global(.reader-heading) {
+		padding: 1.1rem 2rem;
+		background: #fffaf0;
+	}
+
+	.reader-eyebrow {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.65rem;
+		margin-bottom: 0.25rem;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		font-size: 0.62rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--muted-foreground);
+	}
+
+	.scenario-folio :global(.reader-heading [data-slot='card-title']) {
+		font-family: Iowan Old Style, Baskerville, 'Times New Roman', serif;
+		font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+		font-weight: 600;
+		line-height: 1.15;
+	}
+
+	.scenario-folio :global(.reader-content) {
+		min-height: 0;
+		flex: 1;
+		overflow-y: auto;
+		padding: 1.35rem clamp(1.75rem, 4vw, 3.5rem) 2rem;
+		outline: none;
+	}
+
+	.scenario-folio :global(.reader-content:focus-visible) {
+		box-shadow: inset 0 0 0 2px var(--ring);
+	}
+
+	.loading-lines,
+	.loading-line,
+	.loading-copy {
+		display: flex;
+	}
+
+	.loading-lines {
+		flex-direction: column;
+		gap: 1.25rem;
+		margin-top: 2.25rem;
+	}
+
+	.loading-line {
+		gap: 0.75rem;
+	}
+
+	.loading-copy {
+		flex: 1;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding-top: 0.25rem;
+	}
+
+	.story-article {
+		max-width: 48rem;
+		margin-inline: auto;
+	}
+
+	.story-step {
+		position: relative;
+	}
+
+	.step-index {
+		margin: 0;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		font-size: 0.66rem;
+		font-weight: 760;
+		letter-spacing: 0.14em;
+		color: var(--secondary-foreground);
+	}
+
+	.step-title {
+		margin: 0.25rem 0 0;
+		font-family: Iowan Old Style, Baskerville, 'Times New Roman', serif;
+		font-size: 1.05rem;
+		font-weight: 600;
+		letter-spacing: -0.025em;
+	}
+
+	.objective-note {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		align-items: start;
+		gap: 0.9rem;
+		margin-top: 0.9rem;
+		padding: 0.8rem 0.9rem;
+		border-left: 3px solid var(--border);
+	}
+
+	.objective-note span {
+		font-size: 0.59rem;
+		font-weight: 780;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--secondary-foreground);
+	}
+
+	.objective-note p {
+		margin: 0;
+		white-space: pre-line;
+		font-size: 0.78rem;
+		line-height: 1.55;
+		color: var(--muted-foreground);
+	}
+
+	.story-scene {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		margin-top: 0.9rem;
+	}
+
+	.dialogue-line {
+		display: grid;
+		grid-template-columns: 2.75rem minmax(0, 1fr);
+		align-items: start;
+		gap: 0.85rem;
+		padding: 0.6rem 0;
+		border-bottom: 1px solid color-mix(in oklab, var(--border) 48%, transparent);
+	}
+
+	.player-line {
+		margin-block: 0.2rem;
+		padding-inline: 0.8rem;
+		border-left: 3px solid var(--secondary-foreground);
+		background: color-mix(in oklab, var(--secondary) 28%, transparent);
+	}
+
+	.scenario-folio :global(.speaker-avatar) {
+		width: 2.75rem;
+		height: 2.75rem;
+		box-shadow: 0 0 0 1px var(--border);
+	}
+
+	.dialogue-copy {
+		min-width: 0;
+	}
+
+	.speaker-name {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 760;
+		letter-spacing: 0.025em;
+		color: var(--secondary-foreground);
+	}
+
+	.dialogue-text {
+		margin: 0.15rem 0 0;
+		white-space: pre-line;
+		font-size: 0.94rem;
+		line-height: 1.65;
+	}
+
+	.narration-line,
+	.repeated-line,
+	.empty-dialogue {
+		margin: 0;
+		padding: 0.6rem 0 0.6rem 3.6rem;
+		font-size: 0.8rem;
+		font-style: italic;
+		line-height: 1.55;
+		color: var(--muted-foreground);
+	}
+
+	.repeated-line {
+		font-style: normal;
+	}
+
+	.scenario-folio :global(.step-separator) {
+		margin-block: 2rem;
+	}
+
+	.scenario-folio :global(.page-separator) {
+		margin-top: 1.6rem;
+	}
+
+	.scenario-footer {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding: 0.9rem 0 0;
+		font-size: 0.68rem;
+		line-height: 1.5;
+		color: var(--muted-foreground);
+	}
+
+	.scenario-footer p {
+		margin: 0;
+	}
+
+	@media (max-width: 62rem) {
+		.scenario-folio {
+			padding: 1.5rem;
+		}
+
+		.scenario-hero {
+			grid-template-columns: minmax(0, 1fr) 9rem;
+		}
+
+		.scenario-folio :global(.hero-portrait) {
+			width: 6.5rem;
+			height: 6.5rem;
+		}
+
+		.hero-mark {
+			display: none;
+		}
+
+		.archive-controls {
+			grid-template-columns: 1fr;
+			gap: 0.75rem;
+		}
+
+		.controls-heading {
+			display: none;
+		}
+
+		.story-workspace {
+			grid-template-columns: 1fr;
+		}
+
+		.scenario-folio :global(.reader-card) {
+			order: -1;
+		}
+
+		.scenario-folio :global(.story-browser),
+		.scenario-folio :global(.reader-card) {
+			height: 38rem;
+			min-height: 0;
+		}
+	}
+
+	@media (max-width: 42rem) {
+		.scenario-folio {
+			padding: 1.1rem 0.9rem 1.5rem;
+		}
+
+		.scenario-hero {
+			grid-template-columns: minmax(0, 1fr) 5.25rem;
+			gap: 0.75rem;
+			min-height: 7.5rem;
+		}
+
+		.scenario-hero h1 {
+			font-size: clamp(2.05rem, 10vw, 3.2rem);
+		}
+
+		.hero-description {
+			font-size: 0.85rem;
+			line-height: 1.5;
+		}
+
+		.concept-kicker {
+			margin-bottom: 0.5rem;
+			font-size: 0.58rem;
+		}
+
+		.concept-kicker span {
+			min-width: 1.65rem;
+			height: 1.65rem;
+		}
+
+		.scenario-folio :global(.hero-portrait) {
+			width: 4.75rem;
+			height: 4.75rem;
+		}
+
+		.hero-frame {
+			display: none;
+		}
+
+		.archive-stats {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0.4rem;
+			border-bottom: 0;
+		}
+
+		.archive-stats li {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 0.15rem;
+			border: 1px solid var(--border);
+		}
+
+		.archive-stats span {
+			text-align: left;
+		}
+
+		.scenario-folio :global(.control-grid) {
+			grid-template-columns: 1fr;
+		}
+
+		.scenario-folio :global(.reader-heading),
+		.scenario-folio :global(.reader-content) {
+			padding-inline: 1rem;
+		}
+
+		.dialogue-line {
+			grid-template-columns: 2.4rem minmax(0, 1fr);
+			gap: 0.65rem;
+		}
+
+		.scenario-folio :global(.speaker-avatar) {
+			width: 2.4rem;
+			height: 2.4rem;
+		}
+
+		.narration-line,
+		.repeated-line,
+		.empty-dialogue {
+			padding-left: 3.05rem;
+		}
+	}
+</style>
