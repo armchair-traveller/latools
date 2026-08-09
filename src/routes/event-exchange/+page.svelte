@@ -506,6 +506,8 @@
 	.festival-page {
 		width: min(100%, 82rem);
 		margin-inline: auto;
+		font-kerning: normal;
+		font-variant-ligatures: common-ligatures;
 		padding: 1.5rem 1rem 5rem;
 	}
 
@@ -654,12 +656,13 @@
 
 	.hero-copy h1 {
 		max-width: 45rem;
-		margin: 1.15rem 0 1.5rem;
-		font-family: Georgia, 'Times New Roman', serif;
+		margin: 1.2rem 0 1.65rem;
+		font-family: var(--font-serif);
 		font-size: clamp(3.4rem, 7.1vw, 6.65rem);
 		font-weight: 500;
-		line-height: 0.86;
-		letter-spacing: -0.065em;
+		line-height: 0.9;
+		letter-spacing: -0.025em;
+		font-variant-numeric: lining-nums;
 		text-wrap: balance;
 	}
 
@@ -701,25 +704,28 @@
 	.capture-score {
 		display: flex;
 		align-items: baseline;
-		gap: 0.4rem;
-		margin-top: 0.35rem;
-		font-family: Georgia, 'Times New Roman', serif;
+		gap: 0.5rem;
+		margin-top: 0.45rem;
+		font-family: var(--font-serif);
+		font-variant-numeric: lining-nums;
+		line-height: 1;
 	}
 
 	.capture-score strong {
 		font-size: clamp(4rem, 8vw, 6.4rem);
 		font-weight: 500;
-		line-height: 0.9;
-		letter-spacing: -0.07em;
+		line-height: 0.88;
+		letter-spacing: -0.025em;
 	}
 
 	.capture-score span {
 		font-size: 1.5rem;
+		line-height: 1;
 		color: var(--festival-ink-soft);
 	}
 
 	.capture-caption {
-		margin-top: 0.3rem;
+		margin-top: 0.5rem;
 		color: var(--festival-coral-dark);
 	}
 
@@ -774,14 +780,17 @@
 
 	.stage-ribbon-label {
 		display: grid;
-		gap: 0.05rem;
+		gap: 0.15rem;
 		color: var(--festival-paper-light);
 		line-height: 1.2;
 	}
 
 	.stage-ribbon-label span {
-		font-family: Georgia, 'Times New Roman', serif;
-		font-size: 1rem;
+		font-family: var(--font-serif);
+		font-size: 1.05rem;
+		font-weight: 500;
+		letter-spacing: 0.005em;
+		line-height: 1;
 	}
 
 	.stage-ribbon-label small {
@@ -815,8 +824,12 @@
 	}
 
 	:global(.festival-page .stage-jump span) {
-		font-family: Georgia, 'Times New Roman', serif;
-		font-size: 0.86rem;
+		font-family: var(--font-serif);
+		font-size: 0.84rem;
+		font-weight: 600;
+		letter-spacing: 0.035em;
+		line-height: 1;
+		font-variant-numeric: lining-nums;
 		color: var(--festival-saffron-light);
 	}
 
@@ -839,12 +852,12 @@
 	.section-heading h2,
 	.unique-intro h2,
 	.notes-heading h2 {
-		margin-top: 0.5rem;
-		font-family: Georgia, 'Times New Roman', serif;
+		margin-top: 0.55rem;
+		font-family: var(--font-serif);
 		font-size: clamp(2.45rem, 4.6vw, 4.5rem);
 		font-weight: 500;
-		line-height: 0.98;
-		letter-spacing: -0.045em;
+		line-height: 0.94;
+		letter-spacing: -0.022em;
 		text-wrap: balance;
 	}
 
@@ -909,8 +922,12 @@
 		border-radius: 999px;
 		color: var(--festival-paper-light);
 		background: var(--festival-ink);
-		font-family: Georgia, 'Times New Roman', serif;
+		font-family: var(--font-serif);
 		font-size: 0.9rem;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		line-height: 1;
+		font-variant-numeric: lining-nums;
 	}
 
 	.podium-entry[data-rank='1'] :global(.podium-rank) {
@@ -982,16 +999,22 @@
 	}
 
 	:global(.festival-page .podium-title-group h3) {
-		font-family: Georgia, 'Times New Roman', serif;
-		font-size: 1.08rem;
+		font-family: var(--font-serif);
+		font-size: 1.125rem;
 		font-weight: 600;
-		line-height: 1.12;
+		letter-spacing: 0.003em;
+		line-height: 1.2;
+		font-variant-numeric: lining-nums;
+		overflow-wrap: break-word;
+		text-wrap: pretty;
 	}
 
 	.podium-entry[data-rank='1'] :global(.podium-title-group h3) {
-		font-size: clamp(1.7rem, 3vw, 2.6rem);
+		font-size: clamp(1.7rem, 3vw, 2.55rem);
 		font-weight: 500;
-		letter-spacing: -0.035em;
+		letter-spacing: -0.025em;
+		line-height: 1.04;
+		text-wrap: balance;
 	}
 
 	:global(.festival-page .podium-value) {
@@ -1004,11 +1027,13 @@
 	}
 
 	:global(.festival-page .podium-value p) {
-		font-family: Georgia, 'Times New Roman', serif;
+		font-family: var(--font-serif);
 		font-size: 1.35rem;
 		font-weight: 600;
-		line-height: 1;
-		letter-spacing: -0.03em;
+		letter-spacing: -0.012em;
+		line-height: 1.05;
+		font-variant-numeric: lining-nums;
+		white-space: nowrap;
 	}
 
 	.podium-entry[data-rank='1'] :global(.podium-value p) {
@@ -1024,7 +1049,7 @@
 
 	:global(.festival-page .podium-value small) {
 		display: block;
-		margin-top: 0.35rem;
+		margin-top: 0.45rem;
 		font-size: 0.67rem;
 		color: var(--festival-ink-soft);
 	}
@@ -1138,9 +1163,14 @@
 	}
 
 	:global(.festival-page .unique-card [data-slot='card-title'] h3) {
-		font-family: Georgia, 'Times New Roman', serif;
-		font-size: 1.15rem;
-		line-height: 1.14;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 500;
+		letter-spacing: 0.003em;
+		line-height: 1.2;
+		font-variant-numeric: lining-nums;
+		overflow-wrap: break-word;
+		text-wrap: pretty;
 	}
 
 	:global(.festival-page .unique-card [data-slot='card-description']) {
@@ -1242,7 +1272,7 @@
 	.chapter-heading {
 		display: grid;
 		grid-template-columns: auto minmax(0, 1fr) auto;
-		gap: 1.35rem;
+		gap: 1.15rem;
 		align-items: end;
 		margin-bottom: 1.75rem;
 		padding-bottom: 1.2rem;
@@ -1250,11 +1280,14 @@
 	}
 
 	.chapter-number {
-		font-family: Georgia, 'Times New Roman', serif;
+		inline-size: 0.95em;
+		font-family: var(--font-serif);
 		font-size: clamp(3.7rem, 6vw, 6.4rem);
 		font-weight: 500;
-		line-height: 0.72;
-		letter-spacing: -0.08em;
+		letter-spacing: -0.025em;
+		line-height: 0.8;
+		font-variant-numeric: lining-nums;
+		text-align: right;
 		color: var(--chapter-accent, var(--festival-coral));
 	}
 
@@ -1286,12 +1319,14 @@
 	}
 
 	.chapter-title h2 {
-		margin-top: 0.2rem;
-		font-family: Georgia, 'Times New Roman', serif;
+		margin-top: 0.25rem;
+		font-family: var(--font-serif);
 		font-size: clamp(2rem, 4vw, 3.25rem);
 		font-weight: 500;
-		line-height: 1;
-		letter-spacing: -0.045em;
+		letter-spacing: -0.022em;
+		line-height: 0.96;
+		font-variant-numeric: lining-nums;
+		text-wrap: balance;
 	}
 
 	.chapter-status {
@@ -1408,11 +1443,14 @@
 
 	:global(.festival-page .offer-title h3) {
 		margin-top: 0.28rem;
-		font-family: Georgia, 'Times New Roman', serif;
-		font-size: 1.18rem;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
 		font-weight: 600;
-		line-height: 1.15;
-		overflow-wrap: anywhere;
+		letter-spacing: 0.003em;
+		line-height: 1.2;
+		font-variant-numeric: lining-nums;
+		overflow-wrap: break-word;
+		text-wrap: pretty;
 	}
 
 	:global(.festival-page .offer-card [data-slot='card-content']) {
@@ -1443,8 +1481,13 @@
 	}
 
 	.offer-stats .offer-stat-featured dd {
-		font-family: Georgia, 'Times New Roman', serif;
-		font-size: 1.08rem;
+		font-family: var(--font-serif);
+		font-size: 1.12rem;
+		font-weight: 600;
+		letter-spacing: 0.003em;
+		line-height: 1.15;
+		font-variant-numeric: lining-nums;
+		overflow-wrap: break-word;
 	}
 
 	:global(.festival-page .offer-footer) {
@@ -1524,9 +1567,12 @@
 	}
 
 	:global(.festival-page .notes-card [data-slot='card-title'] h2) {
-		font-family: Georgia, 'Times New Roman', serif;
-		font-size: 1.7rem;
+		font-family: var(--font-serif);
+		font-size: 1.75rem;
 		font-weight: 500;
+		letter-spacing: -0.012em;
+		line-height: 1.05;
+		text-wrap: balance;
 	}
 
 	:global(.festival-page .notes-card [data-slot='card-description']) {
@@ -1555,9 +1601,13 @@
 	}
 
 	.completeness-grid dd {
-		margin-top: 0.25rem;
-		font-family: Georgia, 'Times New Roman', serif;
-		font-size: 1.55rem;
+		margin-top: 0.35rem;
+		font-family: var(--font-serif);
+		font-size: 1.5rem;
+		font-weight: 500;
+		letter-spacing: -0.005em;
+		line-height: 1;
+		font-variant-numeric: lining-nums;
 	}
 
 	.data-notes {
@@ -1592,8 +1642,16 @@
 		list-style: decimal-leading-zero;
 	}
 
+	.method-list li {
+		padding-left: 0.2rem;
+	}
+
 	.method-list li::marker {
-		font-family: Georgia, 'Times New Roman', serif;
+		font-family: var(--font-serif);
+		font-size: 0.8rem;
+		font-weight: 600;
+		line-height: 1.55;
+		font-variant-numeric: lining-nums;
 		color: var(--festival-saffron-light);
 	}
 
@@ -1738,6 +1796,15 @@
 
 		.hero-copy h1 {
 			font-size: clamp(2.85rem, 15vw, 4.25rem);
+			letter-spacing: -0.02em;
+			line-height: 0.92;
+		}
+
+		.section-heading h2,
+		.unique-intro h2,
+		.notes-heading h2 {
+			letter-spacing: -0.018em;
+			line-height: 0.96;
 		}
 
 		.podium-grid,
@@ -1761,7 +1828,7 @@
 		}
 
 		.chapter-heading {
-			gap: 0.85rem;
+			gap: 0.75rem;
 		}
 
 		.notes-heading {

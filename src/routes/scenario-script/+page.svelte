@@ -521,6 +521,8 @@
 		position: relative;
 		min-height: calc(100vh - var(--app-topbar-height, 3.5rem));
 		overflow: hidden;
+		font-kerning: normal;
+		font-variant-ligatures: common-ligatures;
 		padding: clamp(1.5rem, 3vw, 2.5rem);
 		background-color: var(--background);
 		background-image:
@@ -573,17 +575,17 @@
 	.scenario-hero h1 {
 		max-width: 41rem;
 		margin: 0;
-		font-family: Iowan Old Style, Baskerville, 'Times New Roman', serif;
-		font-size: clamp(2.8rem, 4.5vw, 4.9rem);
-		font-weight: 600;
-		letter-spacing: -0.045em;
-		line-height: 0.98;
+		font-family: var(--font-serif);
+		font-size: clamp(3rem, 4.75vw, 5.2rem);
+		font-weight: 500;
+		letter-spacing: -0.02em;
+		line-height: 0.96;
 		text-wrap: balance;
 	}
 
 	.hero-description {
 		max-width: 42rem;
-		margin: 1rem 0 0;
+		margin: 1.125rem 0 0;
 		font-size: clamp(0.98rem, 1.35vw, 1.12rem);
 		line-height: 1.65;
 		color: var(--muted-foreground);
@@ -903,7 +905,7 @@
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 0.65rem;
-		margin-bottom: 0.25rem;
+		margin-bottom: 0.1rem;
 		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 		font-size: 0.62rem;
 		font-weight: 700;
@@ -913,10 +915,12 @@
 	}
 
 	.scenario-folio :global(.reader-heading [data-slot='card-title']) {
-		font-family: Iowan Old Style, Baskerville, 'Times New Roman', serif;
-		font-size: clamp(1.65rem, 2.5vw, 2.25rem);
-		font-weight: 600;
-		line-height: 1.15;
+		font-family: var(--font-serif);
+		font-size: clamp(1.75rem, 2.6vw, 2.375rem);
+		font-weight: 500;
+		letter-spacing: -0.012em;
+		line-height: 1.08;
+		text-wrap: pretty;
 	}
 
 	.scenario-folio :global(.reader-content) {
@@ -973,11 +977,14 @@
 	}
 
 	.step-title {
-		margin: 0.25rem 0 0;
-		font-family: Iowan Old Style, Baskerville, 'Times New Roman', serif;
-		font-size: 1.05rem;
+		max-width: 36rem;
+		margin: 0.2rem 0 0;
+		font-family: var(--font-serif);
+		font-size: 1.25rem;
 		font-weight: 600;
-		letter-spacing: -0.025em;
+		letter-spacing: -0.01em;
+		line-height: 1.15;
+		text-wrap: pretty;
 	}
 
 	.objective-note {
@@ -985,7 +992,7 @@
 		grid-template-columns: auto minmax(0, 1fr);
 		align-items: start;
 		gap: 0.9rem;
-		margin-top: 0.9rem;
+		margin-top: 1rem;
 		padding: 0.8rem 0.9rem;
 		border-left: 3px solid var(--border);
 	}
@@ -1010,7 +1017,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.2rem;
-		margin-top: 0.9rem;
+		margin-top: 1rem;
 	}
 
 	.dialogue-line {
@@ -1070,7 +1077,7 @@
 	}
 
 	.scenario-folio :global(.step-separator) {
-		margin-block: 2rem;
+		margin-block: 2.25rem;
 	}
 
 	.scenario-folio :global(.page-separator) {
@@ -1147,10 +1154,13 @@
 		}
 
 		.scenario-hero h1 {
-			font-size: clamp(2.05rem, 10vw, 3.2rem);
+			font-size: clamp(2.125rem, 10vw, 3.35rem);
+			letter-spacing: -0.015em;
+			line-height: 0.98;
 		}
 
 		.hero-description {
+			margin-top: 0.75rem;
 			font-size: 0.85rem;
 			line-height: 1.5;
 		}
@@ -1198,6 +1208,17 @@
 		.scenario-folio :global(.reader-heading),
 		.scenario-folio :global(.reader-content) {
 			padding-inline: 1rem;
+		}
+
+		.scenario-folio :global(.reader-heading [data-slot='card-title']) {
+			font-size: 1.75rem;
+			line-height: 1.1;
+		}
+
+		.step-title {
+			max-width: none;
+			font-size: 1.1875rem;
+			line-height: 1.18;
 		}
 
 		.dialogue-line {

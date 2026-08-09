@@ -626,7 +626,7 @@
 					<Badge variant="secondary">Global</Badge>
 					<Badge variant="outline">Expected averages</Badge>
 				</div>
-				<h1 class="hero-title mt-3 text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+				<h1 class="hero-title mt-3 text-balance">
 					Dungeon Earnings Estimator
 				</h1>
 				<p class="hero-description mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -1087,7 +1087,7 @@
 									<dt class="text-xs font-medium tracking-wide text-muted-foreground uppercase">
 										Direct-market net / hour
 									</dt>
-									<dd class="metric-value mt-1 break-words text-xl font-semibold tracking-tight tabular-nums">
+									<dd class="metric-value mt-1 break-words">
 										{formatEly(calculation.perHour.directNetEly)}
 									</dd>
 									<dd class="mt-2 text-xs text-muted-foreground">Sell every marketable reward.</dd>
@@ -1096,7 +1096,7 @@
 									<dt class="text-xs font-medium tracking-wide text-muted-foreground uppercase">
 										Potential service-first net / hour
 									</dt>
-									<dd class="metric-value mt-1 break-words text-xl font-semibold tracking-tight tabular-nums">
+									<dd class="metric-value mt-1 break-words">
 										{formatEly(calculation.perHour.potentialNetEly)}
 									</dd>
 									<dd class="mt-2 text-xs text-muted-foreground">
@@ -1168,7 +1168,7 @@
 					<div class="min-w-0">
 						<div class="flex flex-wrap items-end justify-between gap-2">
 							<div>
-								<h3 class="font-medium">Rewards</h3>
+								<h3>Rewards</h3>
 								<p class="mt-1 text-xs text-muted-foreground">
 									Expected quantities stay fractional and already include applicable D5 bonus-bag rewards;
 									no extra item-drop multiplier is applied.
@@ -1270,7 +1270,7 @@
 					<div class="min-w-0">
 						<div class="flex flex-wrap items-end justify-between gap-2">
 							<div>
-								<h3 class="font-medium">Potential service-first strategy</h3>
+								<h3>Potential service-first strategy</h3>
 								<p class="mt-1 text-xs text-muted-foreground">
 									Inputs are allocated in listed order; only leftovers remain in market income.
 								</p>
@@ -1355,7 +1355,7 @@
 					<div class="min-w-0">
 						<div class="flex flex-wrap items-end justify-between gap-2">
 							<div>
-								<h3 class="font-medium">Buff cost breakdown</h3>
+								<h3>Buff cost breakdown</h3>
 								<p class="mt-1 text-xs text-muted-foreground">
 									Optional costs appear first, followed by the essential baseline. Costs are normalized to one hour.
 								</p>
@@ -1476,6 +1476,8 @@
 		--ring: #b97849;
 		position: relative;
 		isolation: isolate;
+		font-kerning: normal;
+		font-variant-ligatures: common-ligatures;
 		color: var(--ledger-ink);
 		color-scheme: light;
 		background:
@@ -1531,11 +1533,11 @@
 
 	.hero-title {
 		max-width: 9ch;
-		font-family: Georgia, 'Times New Roman', ui-serif, serif;
+		font-family: var(--font-serif);
 		font-size: clamp(2.8rem, 4.5vw, 4.7rem);
 		font-weight: 500;
-		line-height: 0.93;
-		letter-spacing: -0.055em;
+		letter-spacing: -0.025em;
+		line-height: 0.96;
 	}
 
 	.hero-description {
@@ -1601,8 +1603,22 @@
 	}
 
 	.hero-art figcaption strong {
-		font-family: Georgia, 'Times New Roman', ui-serif, serif;
-		font-size: 1.08rem;
+		margin-block: 0.08rem;
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		line-height: 1.05;
+	}
+
+	.hero-title,
+	.hero-art figcaption strong,
+	.dungeon-ledger :global(.ledger-card [data-slot='card-title']),
+	.dungeon-ledger :global(.metric-value),
+	.breakdown-section h3 {
+		font-kerning: normal;
+		font-variant-ligatures: common-ligatures;
+		font-variant-numeric: lining-nums;
 	}
 
 	.workspace-grid {
@@ -1647,9 +1663,11 @@
 	}
 
 	.dungeon-ledger :global(.ledger-card [data-slot='card-title']) {
-		font-family: Georgia, 'Times New Roman', ui-serif, serif;
-		font-size: 1.35rem;
+		font-family: var(--font-serif);
+		font-size: 1.4rem;
 		font-weight: 500;
+		letter-spacing: -0.01em;
+		line-height: 1.15;
 	}
 
 	.section-kicker {
@@ -1742,7 +1760,8 @@
 	}
 
 	.dungeon-ledger :global(.estimate-card [data-slot='card-title']) {
-		font-size: 1.65rem;
+		font-size: 1.7rem;
+		line-height: 1.12;
 		color: #fff9eb;
 	}
 
@@ -1758,9 +1777,12 @@
 	}
 
 	.dungeon-ledger :global(.metric-value) {
-		font-family: Georgia, 'Times New Roman', ui-serif, serif;
+		font-family: var(--font-serif);
 		font-size: 1.72rem;
-		font-variant-numeric: tabular-nums;
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		line-height: 1.05;
+		font-variant-numeric: lining-nums;
 		color: #f7d69f;
 	}
 
@@ -1770,9 +1792,11 @@
 	}
 
 	.breakdown-section h3 {
-		font-family: Georgia, 'Times New Roman', ui-serif, serif;
+		font-family: var(--font-serif);
 		font-size: 1.15rem;
 		font-weight: 500;
+		letter-spacing: -0.01em;
+		line-height: 1.15;
 	}
 
 	.ledger-table-scroll {
