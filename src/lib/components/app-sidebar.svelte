@@ -77,6 +77,9 @@
 											<strong>{tool.label}</strong>
 											<small>{tool.description}</small>
 										</span>
+										<span class="tool-nav-portrait" aria-hidden="true">
+											<img src={tool.image} alt="" />
+										</span>
 										<span class="tool-nav-verb">{tool.verb}</span>
 									</a>
 								{/snippet}
