@@ -519,7 +519,7 @@
 		--surface-radius: 0.35rem;
 		--surface-shadow: 0 18px 45px rgb(70 52 27 / 0.08);
 		position: relative;
-		min-height: calc(100vh - 3.5rem);
+		min-height: calc(100vh - var(--app-topbar-height, 3.5rem));
 		overflow: hidden;
 		padding: clamp(1.5rem, 3vw, 2.5rem);
 		background-color: var(--background);

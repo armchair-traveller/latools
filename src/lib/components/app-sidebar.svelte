@@ -2,27 +2,17 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
-	import CircleDollarSignIcon from '@lucide/svelte/icons/circle-dollar-sign';
 	import ExternalLinkIcon from '@lucide/svelte/icons/external-link';
-	import HouseIcon from '@lucide/svelte/icons/house';
-	import PercentIcon from '@lucide/svelte/icons/percent';
-	import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
-	import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
 	import * as Sidebar from '$lib/components/ui/sidebar';
+	import { getActiveTool, toolCount, toolNavigation } from '$lib/tool-navigation';
 
 	const sidebar = Sidebar.useSidebar();
-
-	const navigation = [
-		{ label: 'Home', href: '/', icon: HouseIcon },
-		{ label: 'Specification analyzer', href: '/spec-analyzer', icon: ScanSearchIcon },
-		{ label: 'Dungeon earnings', href: '/dungeon-earnings', icon: CircleDollarSignIcon },
-		{ label: 'Scenario scripts', href: '/scenario-script', icon: BookOpenTextIcon },
-		{ label: 'Event exchange', href: '/event-exchange', icon: ShoppingBasketIcon },
-		{ label: 'Flash sale ranking', href: '/flash-sale', icon: PercentIcon }
-	] as const;
+	let activeTool = $derived(getActiveTool(page.url.pathname));
 
 	function isActive(href: string): boolean {
-		return href === '/' ? page.url.pathname === href : page.url.pathname.startsWith(href);
+		return href === '/'
+			? page.url.pathname === href
+			: page.url.pathname === href || page.url.pathname.startsWith(`${href}/`);
 	}
 
 	function closeMobile(): void {
@@ -30,31 +20,64 @@
 	}
 </script>
 
-<Sidebar.Root collapsible="offcanvas">
-	<Sidebar.Header class="border-b border-sidebar-border p-4">
-		<div class="flex items-center gap-3">
-			<div class="grid size-10 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
-				<BookOpenTextIcon class="size-5" aria-hidden="true" />
-			</div>
-			<div class="min-w-0 flex-1">
-				<p class="truncate font-semibold tracking-tight">LaTale Tools</p>
-				<p class="truncate text-xs text-muted-foreground">English fan utilities</p>
-			</div>
+<Sidebar.Root class="app-sidebar-root" collapsible="icon">
+	<Sidebar.Header
+		class="app-sidebar-header"
+		style={`--route-accent: ${activeTool.accent}; --route-soft: ${activeTool.soft}; --route-deep: ${activeTool.deep};`}
+	>
+		<a href={resolve('/')} class="app-brand" aria-label="LaTale Tools home">
+			<span class="app-brand__mark" aria-hidden="true">
+				<BookOpenTextIcon />
+				<i></i>
+			</span>
+			<span class="app-brand__copy">
+				<small>Community field kit</small>
+				<strong>LaTale Tools</strong>
+			</span>
+		</a>
+		<div class="app-brand-spectrum" aria-hidden="true">
+			{#each toolNavigation as tool (tool.href)}
+				<span style={`--spectrum-color: ${tool.accent}`}></span>
+			{/each}
 		</div>
 	</Sidebar.Header>
 
-	<Sidebar.Content>
-		<Sidebar.Group>
-			<Sidebar.GroupLabel>Tools</Sidebar.GroupLabel>
+	<Sidebar.Content class="app-sidebar-content">
+		<nav class="app-sidebar-nav" aria-label="Tool navigation">
+			<Sidebar.Group class="app-navigation-group">
+			<Sidebar.GroupLabel class="app-navigation-label">
+				<span>Index</span>
+				<span>{String(toolCount).padStart(2, '0')} utilities</span>
+			</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
-				<Sidebar.Menu>
-					{#each navigation as item (item.href)}
-						<Sidebar.MenuItem>
-							<Sidebar.MenuButton isActive={isActive(item.href)} tooltipContent={item.label}>
+				<Sidebar.Menu class="app-navigation">
+					{#each toolNavigation as tool (tool.href)}
+						<Sidebar.MenuItem
+							class="tool-nav-item"
+							style={`--item-accent: ${tool.accent}; --item-soft: ${tool.soft}; --item-deep: ${tool.deep};`}
+						>
+							<Sidebar.MenuButton
+								class="tool-nav-button"
+								size="lg"
+								isActive={isActive(tool.href)}
+								tooltipContent={`${tool.index} · ${tool.label}`}
+							>
 								{#snippet child({ props })}
-									<a href={resolve(item.href)} {...props} onclick={closeMobile}>
-										<item.icon aria-hidden="true" />
-										<span>{item.label}</span>
+									<a
+										href={resolve(tool.href)}
+										aria-current={isActive(tool.href) ? 'page' : undefined}
+										aria-label={`${tool.label}: ${tool.description}`}
+										{...props}
+										class={['tool-nav-button', props.class]}
+										onclick={closeMobile}
+									>
+										<span class="tool-nav-code">{tool.index}</span>
+										<span class="tool-nav-icon"><tool.icon aria-hidden="true" /></span>
+										<span class="tool-nav-copy">
+											<strong>{tool.label}</strong>
+											<small>{tool.description}</small>
+										</span>
+										<span class="tool-nav-verb">{tool.verb}</span>
 									</a>
 								{/snippet}
 							</Sidebar.MenuButton>
@@ -62,20 +85,22 @@
 					{/each}
 				</Sidebar.Menu>
 			</Sidebar.GroupContent>
-		</Sidebar.Group>
+			</Sidebar.Group>
 
-		<Sidebar.Group>
-			<Sidebar.GroupLabel>Source</Sidebar.GroupLabel>
+			<Sidebar.Group class="app-reference-group">
+			<Sidebar.GroupLabel class="app-reference-label">Reference</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					<Sidebar.MenuItem>
-						<Sidebar.MenuButton tooltipContent="Korean fan wiki">
+						<Sidebar.MenuButton class="app-reference-button" tooltipContent="Korean fan wiki">
 							{#snippet child({ props })}
 								<a
 									href="https://latale.wiki/scenario-script"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="Open Korean fan wiki in a new tab"
 									{...props}
+									onclick={closeMobile}
 								>
 									<ExternalLinkIcon aria-hidden="true" />
 									<span>Korean fan wiki</span>
@@ -85,13 +110,26 @@
 					</Sidebar.MenuItem>
 				</Sidebar.Menu>
 			</Sidebar.GroupContent>
-		</Sidebar.Group>
+			</Sidebar.Group>
+		</nav>
 	</Sidebar.Content>
 
-	<Sidebar.Footer class="border-t border-sidebar-border p-4">
-		<p class="text-xs leading-relaxed text-muted-foreground">
-			Unofficial fan project. LaTale and its assets belong to Actoz Soft and their respective
-			owners.
+	<Sidebar.Footer
+		class="app-sidebar-footer"
+		style={`--route-accent: ${activeTool.accent}; --route-soft: ${activeTool.soft}; --route-deep: ${activeTool.deep};`}
+	>
+		<div class="active-tool-card">
+			<div class="active-tool-card__portrait">
+				<img src={activeTool.image} alt="" aria-hidden="true" />
+			</div>
+			<div class="active-tool-card__copy">
+				<small>Now in focus · {activeTool.index}</small>
+				<strong>{activeTool.label}</strong>
+				<span>{activeTool.verb} with confidence</span>
+			</div>
+		</div>
+		<p class="app-disclaimer">
+			Unofficial fan project. LaTale and its assets belong to Actoz Soft and their respective owners.
 		</p>
 	</Sidebar.Footer>
 	<Sidebar.Rail />

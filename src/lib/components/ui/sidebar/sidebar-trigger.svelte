@@ -25,6 +25,7 @@
 	size="icon-sm"
 	class={cn("cn-sidebar-trigger", className)}
 	type="button"
+	aria-expanded={sidebar.isMobile ? sidebar.openMobile : sidebar.open}
 	onclick={(e) => {
 		onclick?.(e);
 		sidebar.toggle();

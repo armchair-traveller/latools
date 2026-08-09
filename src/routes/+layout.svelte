@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
+	import { page } from '$app/state';
 	import AppSidebar from '$lib/components/app-sidebar.svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar';
-	import { Separator } from '$lib/components/ui/separator';
+	import { getActiveTool, lastToolIndex } from '$lib/tool-navigation';
 	import './layout.css';
 
-	let { children } = $props();
+	let { children, data } = $props();
+	let activeTool = $derived(getActiveTool(page.url.pathname));
+	let sidebarOpen = $derived(data.sidebarOpen);
 </script>
 
 <svelte:head>
@@ -14,16 +15,42 @@
 	<meta name="theme-color" content="#fbfaf7" />
 </svelte:head>
 
-<Sidebar.Provider style="--sidebar-width: 17.5rem; --sidebar-width-mobile: 18rem;">
+<Sidebar.Provider
+	bind:open={sidebarOpen}
+	class="shell-provider"
+	data-route={activeTool.key}
+	style={`--sidebar-width: 19rem; --sidebar-width-icon: 5rem; --route-accent: ${activeTool.accent}; --route-soft: ${activeTool.soft}; --route-deep: ${activeTool.deep};`}
+>
 	<AppSidebar />
-	<Sidebar.Inset class="min-w-0">
-		<header class="sticky top-0 z-30 flex h-14 items-center border-b bg-background/95 px-4 backdrop-blur">
-			<Sidebar.Trigger aria-label="Toggle navigation" />
-			<Separator orientation="vertical" class="mx-3 h-4!" />
-			<a href={resolve('/')} class="flex items-center gap-2 text-sm font-semibold tracking-tight">
-				<BookOpenTextIcon class="size-4 text-secondary-foreground" aria-hidden="true" />
-				LaTale Tools
-			</a>
+	<Sidebar.Inset class="shell-inset min-w-0">
+		<header class="shell-topbar">
+			<div class="shell-topbar__inner">
+				<div class="shell-topbar__leading">
+					<Sidebar.Trigger class="shell-menu-trigger" aria-label="Toggle navigation" />
+				</div>
+
+				<div class="shell-route-identity">
+					<div class="shell-route-icon" aria-hidden="true">
+						<activeTool.icon />
+					</div>
+					<div class="shell-route-copy">
+						<p>{activeTool.index} · {activeTool.verb}</p>
+						<p class="shell-route-title">{activeTool.label}</p>
+					</div>
+				</div>
+
+				<div class="shell-topbar__trailing">
+					<div class="shell-route-context">
+						<span>Current utility</span>
+						<strong>{activeTool.context}</strong>
+					</div>
+					<span class="shell-route-count">{activeTool.index} / {lastToolIndex}</span>
+					<img class="shell-route-portrait" src={activeTool.image} alt="" aria-hidden="true" />
+				</div>
+
+				<div class="shell-route-motif" aria-hidden="true"></div>
+			</div>
+			<div class="shell-route-line" aria-hidden="true"></div>
 		</header>
 		{@render children()}
 	</Sidebar.Inset>
