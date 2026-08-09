@@ -625,7 +625,7 @@
 					"salePriceLtc": 630,
 					"purchaseLimit": {
 						"quantity": 25,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -653,7 +653,7 @@
 					"salePriceLtc": 900,
 					"purchaseLimit": {
 						"quantity": 25,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -681,7 +681,7 @@
 					"salePriceLtc": 2700,
 					"purchaseLimit": {
 						"quantity": 50,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -713,7 +713,7 @@
 					"salePriceLtc": 750,
 					"purchaseLimit": {
 						"quantity": 30,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -741,7 +741,7 @@
 					"salePriceLtc": 1095,
 					"purchaseLimit": {
 						"quantity": 30,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -769,7 +769,7 @@
 					"salePriceLtc": 690,
 					"purchaseLimit": {
 						"quantity": 35,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -807,7 +807,7 @@
 					"salePriceLtc": 690,
 					"purchaseLimit": {
 						"quantity": 50,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -835,7 +835,7 @@
 					"salePriceLtc": 690,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -863,7 +863,7 @@
 					"salePriceLtc": 2500,
 					"purchaseLimit": {
 						"quantity": 30,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -891,7 +891,7 @@
 					"salePriceLtc": 2590,
 					"purchaseLimit": {
 						"quantity": 50,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -919,7 +919,7 @@
 					"salePriceLtc": 1590,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -957,7 +957,7 @@
 					"salePriceLtc": 1590,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -985,7 +985,7 @@
 					"salePriceLtc": 2500,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1013,7 +1013,7 @@
 					"salePriceLtc": 790,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1041,7 +1041,7 @@
 					"salePriceLtc": 690,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1069,7 +1069,7 @@
 					"salePriceLtc": 690,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1097,7 +1097,7 @@
 					"salePriceLtc": 1790,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1144,7 +1144,7 @@
 					"salePriceLtc": 2490,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1201,7 +1201,7 @@
 					"salePriceLtc": 2290,
 					"purchaseLimit": {
 						"quantity": 50,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1237,7 +1237,7 @@
 					"salePriceLtc": 3590,
 					"purchaseLimit": {
 						"quantity": 20,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1281,7 +1281,7 @@
 					"salePriceLtc": 690,
 					"purchaseLimit": {
 						"quantity": 35,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1309,7 +1309,7 @@
 					"salePriceLtc": 1095,
 					"purchaseLimit": {
 						"quantity": 35,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1346,7 +1346,7 @@
 					"salePriceLtc": 1095,
 					"purchaseLimit": {
 						"quantity": 20,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1384,7 +1384,7 @@
 					"salePriceLtc": 1200,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1416,7 +1416,7 @@
 					"salePriceLtc": 2700,
 					"purchaseLimit": {
 						"quantity": 50,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1448,7 +1448,7 @@
 					"salePriceLtc": 3500,
 					"purchaseLimit": {
 						"quantity": 20,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1473,7 +1473,7 @@
 						"sourceIds": [
 							"official-poster-2"
 						],
-						"note": "All four component quantities and per-account limit visually verified."
+						"note": "All four component quantities were visually verified; the maintainer confirmed on 2026-08-08 that the listed limit follows the sale-wide stock rule."
 					},
 					"bestFor": "Players who need this permanent pet and its utility items.",
 					"skipIf": "You already own an equivalent pet or do not need the puzzles.",
@@ -1488,7 +1488,7 @@
 					"salePriceLtc": 2290,
 					"purchaseLimit": {
 						"quantity": 50,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1524,7 +1524,7 @@
 					"salePriceLtc": 990,
 					"purchaseLimit": {
 						"quantity": 20,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1570,7 +1570,7 @@
 					"salePriceLtc": 2590,
 					"purchaseLimit": {
 						"quantity": 50,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1598,7 +1598,7 @@
 					"salePriceLtc": 990,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1626,7 +1626,7 @@
 					"salePriceLtc": 790,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{
@@ -1654,7 +1654,7 @@
 					"salePriceLtc": 2500,
 					"purchaseLimit": {
 						"quantity": 15,
-						"scope": "account"
+						"scope": "sale"
 					},
 					"contents": [
 						{

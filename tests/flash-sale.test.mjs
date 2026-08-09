@@ -212,8 +212,18 @@ test('current Festa fixture contains every verified cycle and offer', async () =
 		sale.cycles.map((cycle) => cycle.offers.length),
 		[6, 5, 6, 6, 5, 4]
 	);
-	assert.equal(sale.cycles.flatMap((cycle) => cycle.offers).length, 32);
+	const offers = sale.cycles.flatMap((cycle) => cycle.offers);
+	assert.equal(offers.length, 32);
 	assert.ok(sale.cycles.every((cycle) => cycle.unresolvedSlots.length === 0));
+	assert.equal(offers.filter((entry) => entry.purchaseLimit?.scope === 'sale').length, 32);
+	assert.deepEqual(offers.find((entry) => entry.id === 'r5-kandy-pet').purchaseLimit, {
+		quantity: 20,
+		scope: 'sale'
+	});
+	assert.deepEqual(offers.find((entry) => entry.id === 'r5-advanced-guild').purchaseLimit, {
+		quantity: 20,
+		scope: 'sale'
+	});
 
 	const r2 = rankFlashSaleCycle(sale, currentCatalog, 'r2');
 	assert.deepEqual(r2.map((entry) => entry.id), [

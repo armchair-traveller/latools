@@ -204,7 +204,7 @@ export interface FlashSaleOffer {
 	salePriceLtc: number;
 	purchaseLimit: {
 		quantity: number;
-		scope: 'account' | 'character' | 'unknown';
+		scope: 'sale' | 'account' | 'character' | 'unknown';
 	} | null;
 	contents: FlashSaleOfferContent[];
 	capture: {

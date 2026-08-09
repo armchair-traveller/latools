@@ -180,6 +180,24 @@ export const load: PageLoad = async ({ fetch }) => {
 	const timeline = getFlashSaleTimeline(sale);
 	const rawCompleteness = getFlashSaleCompleteness(sale, catalog);
 	const sources = sourceMap(sale, catalog);
+	const officialPosterUrls = new Set(sale.posterUrls);
+	const posterSourceByCycleId = new Map(
+		sale.cycles.map((cycle) => {
+			const citedSourceIds = new Set(cycle.offers.flatMap((offer) => offer.capture.sourceIds));
+			const posterSource = [...citedSourceIds]
+				.map((sourceId) => sources.get(sourceId))
+				.find((source) => source !== undefined && officialPosterUrls.has(source.url));
+			return [cycle.id, posterSource ?? null] as const;
+		})
+	);
+	const cycleIdsByPosterUrl = new Map<string, string[]>();
+	for (const cycle of sale.cycles) {
+		const posterSource = posterSourceByCycleId.get(cycle.id);
+		if (!posterSource) continue;
+		const cycleIds = cycleIdsByPosterUrl.get(posterSource.url) ?? [];
+		cycleIds.push(cycle.id);
+		cycleIdsByPosterUrl.set(posterSource.url, cycleIds);
+	}
 	const cycleViews = sale.cycles.map((cycle) => {
 		const evaluated = evaluateFlashSaleCycle(sale, catalog, cycle.id);
 		const ranked = rankFlashSaleCycle(sale, catalog, cycle.id);
@@ -194,6 +212,17 @@ export const load: PageLoad = async ({ fetch }) => {
 					left.id.localeCompare(right.id)
 			);
 		const counts = summarizeValuations(offers);
+		const posterSource = posterSourceByCycleId.get(cycle.id);
+		const posterCycleIds = posterSource ? (cycleIdsByPosterUrl.get(posterSource.url) ?? []) : [];
+		const posterCycleIndex = posterCycleIds.indexOf(cycle.id);
+		const posterEdgeInsetPercent = posterCycleIds.length > 2 ? 18 : 25;
+		const posterPositionPercent =
+			posterCycleIds.length <= 1 || posterCycleIndex < 0
+				? 50
+				: Math.round(
+						posterEdgeInsetPercent +
+							(posterCycleIndex / (posterCycleIds.length - 1)) * (100 - posterEdgeInsetPercent * 2)
+					);
 
 		return {
 			id: cycle.id,
@@ -203,6 +232,13 @@ export const load: PageLoad = async ({ fetch }) => {
 			status: cycleStatus(getFlashSaleCycleStatus(cycle)),
 			expectedOffers: cycle.expectedOfferCount,
 			capturedOffers: cycle.offers.length,
+			poster: posterSource
+				? {
+						url: posterSource.url,
+						title: posterSource.title,
+						positionPercent: posterPositionPercent
+					}
+				: null,
 			...counts,
 			offers
 		};

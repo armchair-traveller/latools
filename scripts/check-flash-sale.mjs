@@ -269,7 +269,7 @@ for (const [cycleIndex, cycle] of (sale.cycles ?? []).entries()) {
 		if (offer.purchaseLimit !== null) {
 			check(isPositiveInteger(offer.purchaseLimit?.quantity), `${offerContext}.purchaseLimit.quantity must be positive.`);
 			check(
-				['account', 'character', 'unknown'].includes(offer.purchaseLimit?.scope),
+				['sale', 'account', 'character', 'unknown'].includes(offer.purchaseLimit?.scope),
 				`${offerContext}.purchaseLimit.scope is invalid.`
 			);
 		}
