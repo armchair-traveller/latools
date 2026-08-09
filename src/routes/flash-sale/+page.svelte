@@ -930,11 +930,6 @@
 </div>
 
 <style>
-	:global(.shell-provider[data-route='flash-sale'] .shell-topbar) {
-		border-color: #efbfd5;
-		background: rgb(255 248 252 / 0.92);
-	}
-
 	.flash-sale-route {
 		--background: #fff4f9;
 		--foreground: #3f2148;

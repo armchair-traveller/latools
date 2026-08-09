@@ -132,8 +132,8 @@
 <style>
 	.dispatch {
 		min-height: calc(100vh - 3.5rem);
-		background-color: #f4eedc;
-		background-image: radial-gradient(rgb(23 24 15 / 11%) 0.65px, transparent 0.75px);
+		background-color: #f1f3f1;
+		background-image: radial-gradient(rgb(24 41 34 / 8%) 0.65px, transparent 0.75px);
 		background-size: 8px 8px;
 		color: #17180f;
 	}
@@ -183,7 +183,7 @@
 		min-height: 368px;
 		margin-top: 10px;
 		border: 2px solid #17180f;
-		background: #fffdf7;
+		background: #ffffff;
 		box-shadow: 6px 6px 0 #17180f;
 	}
 
@@ -363,7 +363,7 @@
 		left: 8px;
 		padding: 4px 6px;
 		border: 1px solid #17180f;
-		background: #fffdf7;
+		background: #ffffff;
 		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 		font-size: 7px;
 		font-weight: 800;
@@ -434,7 +434,7 @@
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		border: 2px solid #17180f;
-		background: #fffdf7;
+		background: #ffffff;
 		box-shadow: 3px 3px 0 #17180f;
 	}
 
@@ -619,7 +619,7 @@
 		height: 38px;
 		margin-left: -7px;
 		border: 2px solid #17180f;
-		background: #fffdf7;
+		background: #ffffff;
 		box-shadow: 2px 2px 0 #17180f;
 		object-fit: contain;
 	}

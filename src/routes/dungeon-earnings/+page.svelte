@@ -1446,11 +1446,11 @@
 
 <style>
 	.dungeon-ledger {
-		--ledger-canvas: #f3efe6;
-		--ledger-paper: #fffdf8;
+		--ledger-canvas: #f1f3f1;
+		--ledger-paper: #ffffff;
 		--ledger-ink: #1b1915;
-		--ledger-muted-ink: #6f685f;
-		--ledger-rule: #d8cfc1;
+		--ledger-muted-ink: #66716c;
+		--ledger-rule: #ccd5d0;
 		--ledger-copper: #9b5538;
 		--ledger-copper-deep: #78442d;
 		--ledger-copper-wash: #f2dfca;
@@ -1467,12 +1467,12 @@
 		--primary-foreground: #fffaf0;
 		--secondary: var(--ledger-copper-wash);
 		--secondary-foreground: var(--ledger-copper-deep);
-		--muted: #eee8dc;
+		--muted: #e8ece9;
 		--muted-foreground: var(--ledger-muted-ink);
-		--accent: #e7ddc9;
+		--accent: #dfe7e2;
 		--accent-foreground: #513824;
 		--border: var(--ledger-rule);
-		--input: #cfc4b3;
+		--input: #c5d0ca;
 		--ring: #b97849;
 		position: relative;
 		isolation: isolate;
@@ -1481,7 +1481,7 @@
 		color: var(--ledger-ink);
 		color-scheme: light;
 		background:
-			linear-gradient(90deg, rgb(128 91 58 / 0.035) 1px, transparent 1px) 0 0 / 40px 40px,
+			linear-gradient(90deg, rgb(41 59 50 / 0.04) 1px, transparent 1px) 0 0 / 40px 40px,
 			var(--ledger-canvas);
 	}
 
@@ -1495,7 +1495,7 @@
 		gap: 1rem 2.5rem;
 		min-width: 0;
 		padding-block: 1.75rem;
-		border-block: 1px solid #b7a58f;
+		border-block: 1px solid var(--ledger-rule);
 	}
 
 	.hero-copy {
@@ -1655,7 +1655,7 @@
 		overflow: hidden;
 		border: 1px solid var(--ledger-rule);
 		border-radius: 0.25rem;
-		box-shadow: 0 10px 30px rgb(74 54 34 / 0.04);
+		box-shadow: 0 10px 30px rgb(30 55 47 / 0.05);
 	}
 
 	.dungeon-ledger :global(.ledger-card > [data-slot='card-header']) {
@@ -1676,7 +1676,7 @@
 
 	.dungeon-ledger :global(.dungeon-summary) {
 		border-radius: 0;
-		background: #eee6d9;
+		background: var(--muted);
 	}
 
 	.dungeon-ledger :global(.dungeon-summary img) {
@@ -1686,7 +1686,7 @@
 	.dungeon-ledger :global(.buff-section),
 	.dungeon-ledger :global(.baseline-section) {
 		border-radius: 0.2rem;
-		background: #fbf7ef;
+		background: color-mix(in oklab, var(--card) 92%, var(--muted));
 	}
 
 	.dungeon-ledger :global(.buff-option) {
@@ -1728,7 +1728,7 @@
 
 	.dungeon-ledger :global(.baseline-item) {
 		border-radius: 0.2rem;
-		background: rgb(255 253 248 / 0.7);
+		background: rgb(255 255 255 / 0.72);
 	}
 
 	.dungeon-ledger :global(.estimate-card) {
@@ -1805,7 +1805,7 @@
 	}
 
 	.dungeon-ledger :global(.breakdown-card [data-slot='table-head']) {
-		background: #eee6d9;
+		background: var(--muted);
 		font-size: 0.7rem;
 		font-weight: 700;
 		letter-spacing: 0.05em;
@@ -1814,11 +1814,11 @@
 	}
 
 	.dungeon-ledger :global(.breakdown-card [data-slot='table-row']) {
-		border-color: #e4dcd0;
+		border-color: var(--ledger-rule);
 	}
 
 	.dungeon-ledger :global(.breakdown-card [data-slot='table-row']:hover) {
-		background: #faf1e6;
+		background: color-mix(in oklab, var(--card) 86%, var(--muted));
 	}
 
 	.dungeon-ledger :global(.breakdown-card [data-slot='table-cell']:last-child) {
@@ -1831,18 +1831,18 @@
 	}
 
 	:global(.ledger-sheet) {
-		--background: #fffdf8;
+		--background: #ffffff;
 		--foreground: #1b1915;
-		--card: #fffdf8;
+		--card: #ffffff;
 		--card-foreground: #1b1915;
 		--secondary: #f2dfca;
 		--secondary-foreground: #78442d;
-		--muted: #eee8dc;
-		--muted-foreground: #746d63;
-		--accent: #e7ddc9;
+		--muted: #e8ece9;
+		--muted-foreground: #66716c;
+		--accent: #dfe7e2;
 		--accent-foreground: #513824;
-		--border: #d8cfc1;
-		--input: #cfc4b3;
+		--border: #ccd5d0;
+		--input: #c5d0ca;
 		--ring: #b97849;
 		color-scheme: light;
 	}

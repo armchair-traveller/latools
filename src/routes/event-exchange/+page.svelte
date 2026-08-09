@@ -485,8 +485,8 @@
 	.festival-shell {
 		--festival-ink: #27211e;
 		--festival-ink-soft: #5f554d;
-		--festival-paper: #f5eedf;
-		--festival-paper-light: #fffaf0;
+		--festival-paper: #f1f3f1;
+		--festival-paper-light: #ffffff;
 		--festival-coral: #e96f57;
 		--festival-coral-dark: #a63f30;
 		--festival-saffron: #e6a82d;

@@ -499,25 +499,25 @@
 
 <style>
 	.scenario-folio {
-		--background: #f3eee3;
+		--background: #f1f3f1;
 		--foreground: #203027;
-		--card: #fffdf6;
+		--card: #ffffff;
 		--card-foreground: #203027;
-		--popover: #fffdf6;
+		--popover: #ffffff;
 		--popover-foreground: #203027;
 		--primary: #214d3a;
 		--primary-foreground: #fffaf0;
 		--secondary: #eee0b8;
 		--secondary-foreground: #7b4d18;
-		--muted: #ede7da;
-		--muted-foreground: #685f50;
+		--muted: #e8ece9;
+		--muted-foreground: #66716c;
 		--accent: #dce8dc;
 		--accent-foreground: #214d3a;
-		--border: #d4c8b2;
-		--input: #c9bca5;
+		--border: #ccd5d0;
+		--input: #c5d0ca;
 		--ring: #9b6228;
 		--surface-radius: 0.35rem;
-		--surface-shadow: 0 18px 45px rgb(70 52 27 / 0.08);
+		--surface-shadow: 0 18px 45px rgb(30 55 47 / 0.08);
 		position: relative;
 		min-height: calc(100vh - var(--app-topbar-height, 3.5rem));
 		overflow: hidden;
@@ -754,11 +754,11 @@
 	}
 
 	.scenario-folio :global(.story-browser) {
-		background: #f8f3e8;
+		background: color-mix(in oklab, var(--card) 90%, var(--muted));
 	}
 
 	.scenario-folio :global(.reader-card) {
-		box-shadow: 0 22px 55px rgb(69 49 19 / 0.11), inset 0 0 0 7px #fffaf0;
+		box-shadow: 0 22px 55px rgb(30 55 47 / 0.1), inset 0 0 0 7px #ffffff;
 	}
 
 	.scenario-folio :global(.panel-heading) {
@@ -897,7 +897,7 @@
 
 	.scenario-folio :global(.reader-heading) {
 		padding: 1.1rem 2rem;
-		background: #fffaf0;
+		background: color-mix(in oklab, var(--card) 90%, var(--muted));
 	}
 
 	.reader-eyebrow {

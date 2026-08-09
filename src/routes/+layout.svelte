@@ -12,7 +12,7 @@
 
 <svelte:head>
 	<link rel="icon" href="/favicon.svg" />
-	<meta name="theme-color" content="#fbfaf7" />
+	<meta name="theme-color" content="#f5f6f3" />
 </svelte:head>
 
 <Sidebar.Provider

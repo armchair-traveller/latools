@@ -41,23 +41,23 @@
 :root {
 	font-synthesis: none;
 	color-scheme: light;
-	--background: #fbfaf7;
-	--foreground: #1c1917;
+	--background: #f5f6f3;
+	--foreground: #18201d;
 	--card: #ffffff;
-	--card-foreground: #1c1917;
+	--card-foreground: #18201d;
 	--popover: #ffffff;
-	--popover-foreground: #1c1917;
-	--primary: #25211e;
-	--primary-foreground: #fffaf0;
+	--popover-foreground: #18201d;
+	--primary: #24302c;
+	--primary-foreground: #f7faf8;
 	--secondary: #fef3c7;
 	--secondary-foreground: #92400e;
-	--muted: #f3f0eb;
-	--muted-foreground: #78716c;
+	--muted: #e9edea;
+	--muted-foreground: #66716c;
 	--accent: #fef3c7;
 	--accent-foreground: #92400e;
 	--destructive: #c2410c;
-	--border: #e4e0d8;
-	--input: #e4e0d8;
+	--border: #d6ddd8;
+	--input: #d6ddd8;
 	--ring: #b45309;
 	--chart-1: #b45309;
 	--chart-2: #d97706;
@@ -65,13 +65,13 @@
 	--chart-4: #a8a29e;
 	--chart-5: #44403c;
 	--radius: 0.625rem;
-	--sidebar: #fffdf9;
-	--sidebar-foreground: #1c1917;
-	--sidebar-primary: #25211e;
-	--sidebar-primary-foreground: #fffaf0;
-	--sidebar-accent: #fef3c7;
-	--sidebar-accent-foreground: #92400e;
-	--sidebar-border: #e4e0d8;
+	--sidebar: #17231f;
+	--sidebar-foreground: #edf3ef;
+	--sidebar-primary: #e8f0eb;
+	--sidebar-primary-foreground: #17231f;
+	--sidebar-accent: #25352f;
+	--sidebar-accent-foreground: #ffffff;
+	--sidebar-border: #34463f;
 	--sidebar-ring: #b45309;
 }
 
@@ -210,7 +210,7 @@
 	min-height: 100svh;
 	font-kerning: normal;
 	font-variant-ligatures: common-ligatures;
-	background: #e7dfd1;
+	background: #17231f;
 }
 
 .shell-provider[data-route='specification'] {
@@ -249,6 +249,7 @@
 
 .shell-inset {
 	min-height: 100svh;
+	background: #f1f3f1;
 }
 
 .shell-topbar {
@@ -256,8 +257,8 @@
 	top: 0;
 	z-index: 30;
 	min-width: 0;
-	border-bottom: 1px solid #d8d0c4;
-	background: rgb(251 250 247 / 0.92);
+	border-bottom: 1px solid #d9dfdb;
+	background: rgb(253 254 252 / 0.95);
 	backdrop-filter: blur(18px);
 }
 
@@ -287,7 +288,7 @@
 	z-index: 1;
 	flex: 0 0 auto;
 	padding-right: 1.2rem;
-	border-right: 1px solid #ddd6ca;
+	border-right: 1px solid #d9dfdb;
 }
 
 .shell-menu-trigger {
@@ -437,20 +438,28 @@
 /* Field Notes — expanded navigation */
 
 .app-sidebar-root {
-	--sidebar: #eee7d9;
-	--sidebar-foreground: #1f2924;
-	--sidebar-accent: #f4eadc;
-	--sidebar-accent-foreground: #4e392d;
-	--sidebar-border: #d1c6b4;
+	--sidebar: #17231f;
+	--sidebar-foreground: #edf3ef;
+	--sidebar-accent: #25352f;
+	--sidebar-accent-foreground: #ffffff;
+	--sidebar-border: #34463f;
 	--sidebar-ring: var(--route-accent, #9b5b32);
-	border-right: 1px solid #cfc3b0;
-	box-shadow: 12px 0 32px rgb(65 52 36 / 0.06);
+	border-right: 1px solid var(--sidebar-border);
+	box-shadow: 12px 0 30px rgb(13 28 22 / 0.16);
+	color: var(--sidebar-foreground);
 }
 
 .app-sidebar-root [data-slot='sidebar-inner'] {
 	background:
-		linear-gradient(90deg, rgb(255 255 255 / 0.34), transparent 30%),
+		linear-gradient(115deg, rgb(255 255 255 / 0.035), transparent 42%),
 		var(--sidebar);
+	color: var(--sidebar-foreground);
+}
+
+.app-sidebar-root .app-brand,
+.app-sidebar-root .tool-nav-button,
+.app-sidebar-root .app-reference-button {
+	color: var(--sidebar-foreground);
 }
 
 .app-sidebar-header,
@@ -486,11 +495,11 @@
 	height: 2.65rem;
 	flex: 0 0 auto;
 	place-items: center;
-	border: 1px solid #24332c;
+	border: 1px solid #dce8e1;
 	border-radius: 999px;
-	background: #24332c;
-	box-shadow: inset 0 0 0 4px #24332c, inset 0 0 0 5px rgb(248 242 230 / 0.35);
-	color: #f8f2e6;
+	background: #e8f0eb;
+	box-shadow: inset 0 0 0 4px #e8f0eb, inset 0 0 0 5px rgb(23 35 31 / 0.16);
+	color: #17231f;
 }
 
 .app-brand__mark svg {
@@ -687,7 +696,7 @@
 .app-reference-button {
 	min-height: 2.75rem;
 	border: 1px solid var(--sidebar-border);
-	background: rgb(255 255 255 / 0.28);
+	background: rgb(255 255 255 / 0.035);
 }
 
 .app-sidebar-footer {
@@ -702,11 +711,10 @@
 	overflow: hidden;
 	gap: 0.7rem;
 	padding: 0.55rem 0.75rem 0.55rem 0.45rem;
-	border: 1px solid color-mix(in oklab, var(--route-accent) 28%, #c8beae);
+	border: 1px solid color-mix(in oklab, var(--route-accent) 42%, #ffffff);
 	border-radius: 0.55rem;
-	background:
-		linear-gradient(110deg, var(--route-soft), rgb(255 255 255 / 0.6)),
-		var(--route-soft);
+	background: linear-gradient(110deg, var(--route-soft), #ffffff);
+	color: #18201d;
 }
 
 .active-tool-card__portrait {
@@ -756,7 +764,7 @@
 
 .app-disclaimer {
 	margin: 0;
-	color: color-mix(in oklab, var(--sidebar-foreground) 68%, transparent);
+	color: color-mix(in oklab, var(--sidebar-foreground) 70%, transparent);
 	font-size: 0.625rem;
 	line-height: 1.5;
 }
