@@ -614,28 +614,29 @@
 	/>
 </svelte:head>
 
-<main class="mx-auto w-full max-w-[76rem] px-4 py-8 sm:px-6 md:px-8 md:py-12">
-	<header class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-		<div class="flex items-start gap-4">
-			<div class="grid size-14 shrink-0 place-items-center rounded-2xl bg-secondary text-secondary-foreground">
+<div class="dungeon-ledger mx-auto w-full max-w-[80rem] px-4 py-8 sm:px-6 md:px-8 md:py-12">
+	<header class="ledger-hero grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+		<div class="hero-copy flex items-start gap-4">
+			<div class="hero-mark grid size-14 shrink-0 place-items-center rounded-2xl bg-secondary text-secondary-foreground">
 				<CircleDollarSignIcon class="size-7" aria-hidden="true" />
 			</div>
-			<div>
-				<div class="flex flex-wrap gap-2">
+			<div class="hero-content">
+				<div class="hero-eyebrow flex flex-wrap items-center gap-2">
+					<p class="hero-kicker">Expedition economics</p>
 					<Badge variant="secondary">Global</Badge>
 					<Badge variant="outline">Expected averages</Badge>
 				</div>
-				<h1 class="mt-3 text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+				<h1 class="hero-title mt-3 text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
 					Dungeon Earnings Estimator
 				</h1>
-				<p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+				<p class="hero-description mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
 					Turn one dungeon clear time into direct-market and potential service-inclusive Ely per
 					hour. Missing assumptions stay visible instead of becoming guessed values.
 				</p>
 			</div>
 		</div>
 		<div
-			class="flex flex-wrap gap-2 lg:max-w-md lg:justify-end"
+			class="hero-rules flex flex-wrap gap-2 lg:max-w-md lg:justify-end"
 			role="group"
 			aria-label="Estimator rules"
 		>
@@ -643,12 +644,23 @@
 			<Badge variant="outline">{formatNumber(data.catalog.market.feeRate * 100)}% market fee</Badge>
 			<Badge variant="outline">Enchanting excluded</Badge>
 		</div>
+		{#if selectedDungeon}
+			<figure class="hero-art">
+				<img src={selectedDungeon.image} alt="" />
+				<figcaption>
+					<span>Selected run</span>
+					<strong>{selectedDungeon.name}</strong>
+					<small>{difficulty} · {selectedDungeon.requirement.label}</small>
+				</figcaption>
+			</figure>
+		{/if}
 	</header>
 
-	<div class="mt-8 grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(20rem,0.55fr)]">
-		<div class="flex min-w-0 flex-col gap-5">
-			<Card.Root>
+	<div class="workspace-grid mt-8 grid items-start gap-5">
+		<div class="controls-stack min-w-0">
+			<Card.Root class="ledger-card setup-card">
 				<Card.Header>
+					<p class="section-kicker">01 · Configure the run</p>
 					<Card.Title><h2>Run setup</h2></Card.Title>
 					<Card.Description>
 						Clear time is the full repeat cycle, including entry, loading, and reset time.
@@ -756,7 +768,7 @@
 					</Field.Group>
 				</Card.Content>
 				{#if selectedDungeon}
-					<Card.Footer class="flex-wrap justify-between gap-3">
+					<Card.Footer class="dungeon-summary flex-wrap justify-between gap-3">
 						<div class="flex min-w-0 items-center gap-3">
 							<img
 								src={selectedDungeon.image}
@@ -776,8 +788,11 @@
 				{/if}
 			</Card.Root>
 
-			<Card.Root>
+			{@render estimatePanel()}
+
+			<Card.Root class="ledger-card buffs-card">
 				<Card.Header>
+					<p class="section-kicker">02 · Cost the loadout</p>
 					<Card.Title><h2>Universal buffs</h2></Card.Title>
 					<Card.Description>
 						Material yields assume capped item drop rate. Essentials are always included, while
@@ -793,29 +808,35 @@
 							</Field.Description>
 							<div class="mt-3 flex flex-col gap-4">
 								{#each optionalBuffSections as section (section.id)}
-									<Field.Set class="rounded-xl border p-4">
+									<Field.Set class="buff-section rounded-xl border p-4">
 										<Field.Legend variant="label">{section.title}</Field.Legend>
 										<Field.Description>{section.description}</Field.Description>
 										<Field.Group class="gap-3">
 											{#each section.buffs as buff (buff.id)}
-												<Field.Field orientation="responsive">
+												<Field.Field
+													orientation="horizontal"
+													class="buff-option"
+													data-selected={selectedBuffIds.includes(buff.id)}
+												>
 													{#if buff.icon}
 														<img src={buff.icon} alt="" class="size-9 shrink-0 object-contain" />
 													{/if}
-											<Field.Content>
-												<Field.Label for={`buff-${buff.id}`}>{buff.name}</Field.Label>
-												<Field.Description>
-													{buffDurationDescription(buff)}
-												</Field.Description>
+													<Field.Content class="min-w-0">
+														<Field.Label for={`buff-${buff.id}`}>{buff.name}</Field.Label>
+														<Field.Description>
+															{buffDurationDescription(buff)}
+														</Field.Description>
 													</Field.Content>
-													<div class="flex shrink-0 flex-wrap items-center gap-2">
-														<Badge variant="outline">{buffPriceLabel(buff)}</Badge>
-														{#if buff.id === 'advanced-premium-syrup'}
-															<Badge variant="secondary">Lowest effective price</Badge>
-														{/if}
-														{#if buff.standardPreset}
-															<Badge variant="outline">Preset</Badge>
-														{/if}
+													<div class="buff-actions flex w-full min-w-0 items-start gap-3">
+														<div class="buff-badges flex min-w-0 flex-1 flex-wrap items-center gap-2">
+															<Badge variant="outline">{buffPriceLabel(buff)}</Badge>
+															{#if buff.id === 'advanced-premium-syrup'}
+																<Badge variant="secondary">Lowest effective price</Badge>
+															{/if}
+															{#if buff.standardPreset}
+																<Badge variant="outline">Preset</Badge>
+															{/if}
+														</div>
 														<Switch
 															id={`buff-${buff.id}`}
 															aria-label={`Use ${buff.name}`}
@@ -831,7 +852,7 @@
 							</div>
 						</Field.Set>
 
-						<Field.Set class="rounded-xl border p-4">
+						<Field.Set class="baseline-section rounded-xl border p-4">
 							<Field.Legend variant="label">Essential baseline</Field.Legend>
 							<div class="flex flex-wrap items-center justify-between gap-2">
 								<Field.Description>
@@ -841,7 +862,7 @@
 							</div>
 							<Field.Group class="mt-1 gap-2 sm:grid sm:grid-cols-2">
 								{#each essentialBuffs as buff (buff.id)}
-									<Field.Field orientation="horizontal" class="min-w-0 rounded-lg border p-2.5">
+									<Field.Field orientation="horizontal" class="baseline-item min-w-0 rounded-lg border p-2.5">
 										{#if buff.icon}
 											<img src={buff.icon} alt="" class="size-8 shrink-0 object-contain" />
 										{/if}
@@ -867,20 +888,20 @@
 								<Button variant="outline" size="sm" {...props}>
 									<Settings2Icon data-icon="inline-start" aria-hidden="true" />
 									Price assumptions
-								{#if overrideCount > 0}
-									<Badge variant="secondary">{overrideCount} custom</Badge>
+									{#if overrideCount > 0}
+										<Badge variant="secondary">{overrideCount} custom</Badge>
 									{/if}
 								</Button>
 							{/snippet}
 						</Sheet.Trigger>
-						<Sheet.Content class="data-[side=right]:w-full data-[side=right]:sm:max-w-xl">
-						<Sheet.Header>
-							<Sheet.Title>Price assumptions</Sheet.Title>
-							<Sheet.Description>
-								Override player-market values and provisional economy assumptions from the {formatDate(data.snapshot.asOf)}
-								Global snapshot. Enter full values or shorthand such as 2.5m and 9b. Fixed and
-								zero-cost buffs are maintained in data and are not editable.
-							</Sheet.Description>
+						<Sheet.Content class="ledger-sheet data-[side=right]:w-full data-[side=right]:sm:max-w-xl">
+							<Sheet.Header>
+								<Sheet.Title>Price assumptions</Sheet.Title>
+								<Sheet.Description>
+									Override player-market values and provisional economy assumptions from the {formatDate(data.snapshot.asOf)}
+									Global snapshot. Enter full values or shorthand such as 2.5m and 9b. Fixed and
+									zero-cost buffs are maintained in data and are not editable.
+								</Sheet.Description>
 							</Sheet.Header>
 							<div class="min-h-0 flex-1 overflow-y-auto px-4">
 								<Field.Group>
@@ -945,52 +966,57 @@
 				</Card.Footer>
 			</Card.Root>
 
-			{#if mechanicsIssues.length > 0}
-				<Alert.Root>
-					<InfoIcon aria-hidden="true" />
-					<Alert.Title>Some mechanics are still pending</Alert.Title>
-					<Alert.Description>
-						<p>Unknown rewards are excluded from the known lower bound, never assumed to be zero.</p>
-						<ul class="mt-2 flex list-disc flex-col gap-1 pl-5">
-							{#each mechanicsIssues as issue (issue)}
-								<li>{issue}</li>
-							{/each}
-						</ul>
-					</Alert.Description>
-				</Alert.Root>
-			{/if}
+			{#if mechanicsIssues.length > 0 || missingPriceEntries.length > 0}
+				<div class="notice-stack flex flex-col gap-5">
+					{#if mechanicsIssues.length > 0}
+						<Alert.Root>
+							<InfoIcon aria-hidden="true" />
+							<Alert.Title>Some mechanics are still pending</Alert.Title>
+							<Alert.Description>
+								<p>Unknown rewards are excluded from the known lower bound, never assumed to be zero.</p>
+								<ul class="mt-2 flex list-disc flex-col gap-1 pl-5">
+									{#each mechanicsIssues as issue (issue)}
+										<li>{issue}</li>
+									{/each}
+								</ul>
+							</Alert.Description>
+						</Alert.Root>
+					{/if}
 
-			{#if missingPriceEntries.length > 0}
-				<Alert.Root>
-					<AlertTriangleIcon aria-hidden="true" />
-					<Alert.Title>
-						{selectedUnpricedBuffs.length > 0
-							? 'A selected buff needs a price'
-							: 'Some selected rewards need prices'}
-					</Alert.Title>
-					<Alert.Description>
-						{#if selectedUnpricedBuffs.length > 0}
-							Net Ely/hour is unavailable until every selected buff has a price override.
-						{:else}
-							Unpriced income is omitted, so the estimate is a known-value lower bound.
-						{/if}
-						<Button variant="outline" size="sm" class="mt-3" onclick={() => (assumptionsOpen = true)}>
-							<Settings2Icon data-icon="inline-start" aria-hidden="true" />
-							Review prices
-						</Button>
-					</Alert.Description>
-				</Alert.Root>
+					{#if missingPriceEntries.length > 0}
+						<Alert.Root>
+							<AlertTriangleIcon aria-hidden="true" />
+							<Alert.Title>
+								{selectedUnpricedBuffs.length > 0
+									? 'A selected buff needs a price'
+									: 'Some selected rewards need prices'}
+							</Alert.Title>
+							<Alert.Description>
+								{#if selectedUnpricedBuffs.length > 0}
+									Net Ely/hour is unavailable until every selected buff has a price override.
+								{:else}
+									Unpriced income is omitted, so the estimate is a known-value lower bound.
+								{/if}
+								<Button variant="outline" size="sm" class="mt-3" onclick={() => (assumptionsOpen = true)}>
+									<Settings2Icon data-icon="inline-start" aria-hidden="true" />
+									Review prices
+								</Button>
+							</Alert.Description>
+						</Alert.Root>
+					{/if}
+				</div>
 			{/if}
 		</div>
 
-		<div class="min-w-0 xl:sticky xl:top-20">
-			<Card.Root>
+		{#snippet estimatePanel()}
+		<aside class="estimate-panel min-w-0" aria-labelledby="estimate-heading">
+			<Card.Root class="ledger-card estimate-card">
 				<Card.Header>
-					<div class="flex items-center gap-2 text-secondary-foreground">
+					<div class="estimate-eyebrow flex items-center gap-2">
 						<SparklesIcon class="size-5" aria-hidden="true" />
 						<p class="text-sm font-medium">Live estimate</p>
 					</div>
-					<Card.Title><h2>{selectedDungeon?.name ?? 'Dungeon'} {difficulty}</h2></Card.Title>
+					<Card.Title><h2 id="estimate-heading">{selectedDungeon?.name ?? 'Dungeon'} {difficulty}</h2></Card.Title>
 					<Card.Description>
 						{clearTime === null ? 'Enter a clear time to calculate Ely per hour.' : `${formatNumber(3600 / clearTime)} expected clears per hour.`}
 					</Card.Description>
@@ -1056,21 +1082,21 @@
 									<Badge variant="outline">Custom prices</Badge>
 								{/if}
 							</div>
-							<dl class="mt-5 grid gap-3 sm:grid-cols-2">
-								<div class="rounded-lg border p-3">
+							<dl class="primary-metrics mt-5 grid gap-3 sm:grid-cols-2">
+								<div class="metric-primary rounded-lg border p-3">
 									<dt class="text-xs font-medium tracking-wide text-muted-foreground uppercase">
 										Direct-market net / hour
 									</dt>
-									<dd class="mt-1 break-words text-xl font-semibold tracking-tight tabular-nums">
+									<dd class="metric-value mt-1 break-words text-xl font-semibold tracking-tight tabular-nums">
 										{formatEly(calculation.perHour.directNetEly)}
 									</dd>
 									<dd class="mt-2 text-xs text-muted-foreground">Sell every marketable reward.</dd>
 								</div>
-								<div class="rounded-lg border p-3">
+								<div class="metric-primary rounded-lg border p-3">
 									<dt class="text-xs font-medium tracking-wide text-muted-foreground uppercase">
 										Potential service-first net / hour
 									</dt>
-									<dd class="mt-1 break-words text-xl font-semibold tracking-tight tabular-nums">
+									<dd class="metric-value mt-1 break-words text-xl font-semibold tracking-tight tabular-nums">
 										{formatEly(calculation.perHour.potentialNetEly)}
 									</dd>
 									<dd class="mt-2 text-xs text-muted-foreground">
@@ -1084,7 +1110,7 @@
 								</p>
 							{/if}
 
-							<dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-5">
+							<dl class="secondary-metrics mt-6 grid grid-cols-2 gap-x-4 gap-y-5">
 								<div>
 									<dt class="text-xs text-muted-foreground">Service strategy net / hour</dt>
 									<dd class="mt-1 font-medium tabular-nums">
@@ -1124,12 +1150,14 @@
 					<Badge variant="outline">{data.catalog.market.currency}</Badge>
 				</Card.Footer>
 			</Card.Root>
-		</div>
+		</aside>
+		{/snippet}
 	</div>
 
-	<section class="mt-8" aria-labelledby="breakdown-heading">
-		<Card.Root>
+	<section class="breakdown-section mt-8" aria-labelledby="breakdown-heading">
+		<Card.Root class="ledger-card breakdown-card">
 			<Card.Header>
+				<p class="section-kicker">03 · Audit the estimate</p>
 				<Card.Title><h2 id="breakdown-heading">Earnings breakdown</h2></Card.Title>
 				<Card.Description>
 					Reward and buff rows will reconcile the known per-clear and hourly estimate.
@@ -1150,7 +1178,7 @@
 						</div>
 						<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 						<div
-							class="mt-3 overflow-x-auto rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [&>[data-slot=table-container]]:overflow-visible"
+							class="ledger-table-scroll mt-3 overflow-x-auto rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [&>[data-slot=table-container]]:overflow-visible"
 							role="region"
 							aria-label="Scrollable reward earnings breakdown"
 							tabindex="0"
@@ -1252,7 +1280,7 @@
 						{#if calculation.serviceStrategyRows.length > 0}
 							<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 							<div
-								class="mt-3 overflow-x-auto rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [&>[data-slot=table-container]]:overflow-visible"
+								class="ledger-table-scroll mt-3 overflow-x-auto rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [&>[data-slot=table-container]]:overflow-visible"
 								role="region"
 								aria-label="Scrollable potential service strategy breakdown"
 								tabindex="0"
@@ -1337,7 +1365,7 @@
 						{#if calculation.buffRows.length > 0}
 							<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 							<div
-								class="mt-3 overflow-x-auto rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [&>[data-slot=table-container]]:overflow-visible"
+								class="ledger-table-scroll mt-3 overflow-x-auto rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [&>[data-slot=table-container]]:overflow-visible"
 								role="region"
 								aria-label="Scrollable buff cost breakdown"
 								tabindex="0"
@@ -1385,7 +1413,7 @@
 		</Card.Root>
 	</section>
 
-	<Alert.Root class="mt-8">
+	<Alert.Root class="scope-note mt-8">
 		<InfoIcon aria-hidden="true" />
 		<Alert.Title class="min-w-0">What this estimate includes</Alert.Title>
 		<Alert.Description class="min-w-0">
@@ -1414,4 +1442,444 @@
 			</div>
 		</Alert.Description>
 	</Alert.Root>
-</main>
+</div>
+
+<style>
+	.dungeon-ledger {
+		--ledger-canvas: #f3efe6;
+		--ledger-paper: #fffdf8;
+		--ledger-ink: #1b1915;
+		--ledger-muted-ink: #6f685f;
+		--ledger-rule: #d8cfc1;
+		--ledger-copper: #9b5538;
+		--ledger-copper-deep: #78442d;
+		--ledger-copper-wash: #f2dfca;
+		--ledger-evergreen: #173f37;
+		--ledger-evergreen-soft: #214b43;
+		--ledger-gold: #f0c278;
+		--background: var(--ledger-canvas);
+		--foreground: var(--ledger-ink);
+		--card: var(--ledger-paper);
+		--card-foreground: var(--ledger-ink);
+		--popover: var(--ledger-paper);
+		--popover-foreground: var(--ledger-ink);
+		--primary: #2d2822;
+		--primary-foreground: #fffaf0;
+		--secondary: var(--ledger-copper-wash);
+		--secondary-foreground: var(--ledger-copper-deep);
+		--muted: #eee8dc;
+		--muted-foreground: var(--ledger-muted-ink);
+		--accent: #e7ddc9;
+		--accent-foreground: #513824;
+		--border: var(--ledger-rule);
+		--input: #cfc4b3;
+		--ring: #b97849;
+		position: relative;
+		isolation: isolate;
+		color: var(--ledger-ink);
+		color-scheme: light;
+		background:
+			linear-gradient(90deg, rgb(128 91 58 / 0.035) 1px, transparent 1px) 0 0 / 40px 40px,
+			var(--ledger-canvas);
+	}
+
+	.ledger-hero {
+		position: relative;
+		grid-template-areas:
+			'copy art'
+			'rules art';
+		grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
+		align-items: stretch;
+		gap: 1rem 2.5rem;
+		min-width: 0;
+		padding-block: 1.75rem;
+		border-block: 1px solid #b7a58f;
+	}
+
+	.hero-copy {
+		grid-area: copy;
+		align-self: end;
+		min-width: 0;
+	}
+
+	.hero-content {
+		min-width: 0;
+	}
+
+	.hero-mark {
+		width: 2.75rem;
+		height: 2.75rem;
+		margin-top: 0.35rem;
+		border: 1px solid #b97849;
+		border-radius: 50%;
+		background: transparent;
+		color: #8d4e31;
+	}
+
+	.hero-eyebrow {
+		row-gap: 0.4rem;
+	}
+
+	.hero-kicker,
+	.section-kicker {
+		font-size: 0.66rem;
+		font-weight: 750;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--ledger-copper);
+	}
+
+	.hero-title {
+		max-width: 9ch;
+		font-family: Georgia, 'Times New Roman', ui-serif, serif;
+		font-size: clamp(2.8rem, 4.5vw, 4.7rem);
+		font-weight: 500;
+		line-height: 0.93;
+		letter-spacing: -0.055em;
+	}
+
+	.hero-description {
+		max-width: 38rem;
+		font-size: 0.92rem;
+		line-height: 1.7;
+		color: var(--ledger-muted-ink);
+	}
+
+	.hero-rules {
+		grid-area: rules;
+		align-self: start;
+		justify-content: flex-start;
+		max-width: none;
+	}
+
+	.hero-art {
+		position: relative;
+		grid-area: art;
+		min-width: 0;
+		min-height: 15rem;
+		margin: 0;
+		overflow: hidden;
+		border: 1px solid #8d654d;
+		background: #b97849;
+	}
+
+	.hero-art::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, transparent 38%, rgb(40 24 14 / 0.72));
+		pointer-events: none;
+	}
+
+	.hero-art img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transform: scale(1.28);
+		filter: sepia(0.18) saturate(0.82) contrast(1.05);
+	}
+
+	.hero-art figcaption {
+		position: absolute;
+		z-index: 1;
+		right: 1rem;
+		bottom: 0.9rem;
+		left: 1rem;
+		display: flex;
+		flex-direction: column;
+		color: #fffaf0;
+	}
+
+	.hero-art figcaption span,
+	.hero-art figcaption small {
+		font-size: 0.68rem;
+		font-weight: 650;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: rgb(255 250 240 / 0.9);
+	}
+
+	.hero-art figcaption strong {
+		font-family: Georgia, 'Times New Roman', ui-serif, serif;
+		font-size: 1.08rem;
+	}
+
+	.workspace-grid {
+		gap: 1.5rem;
+		grid-template-columns: minmax(0, 1.52fr) minmax(22rem, 0.82fr);
+		grid-template-areas:
+			'setup estimate'
+			'buffs estimate'
+			'notices estimate';
+	}
+
+	.controls-stack {
+		display: contents;
+	}
+
+	.dungeon-ledger :global(.setup-card) {
+		grid-area: setup;
+	}
+
+	.estimate-panel {
+		grid-area: estimate;
+		min-width: 0;
+	}
+
+	.dungeon-ledger :global(.buffs-card) {
+		grid-area: buffs;
+	}
+
+	.notice-stack {
+		grid-area: notices;
+	}
+
+	.dungeon-ledger :global(.ledger-card) {
+		overflow: hidden;
+		border: 1px solid var(--ledger-rule);
+		border-radius: 0.25rem;
+		box-shadow: 0 10px 30px rgb(74 54 34 / 0.04);
+	}
+
+	.dungeon-ledger :global(.ledger-card > [data-slot='card-header']) {
+		padding-top: 1.35rem;
+	}
+
+	.dungeon-ledger :global(.ledger-card [data-slot='card-title']) {
+		font-family: Georgia, 'Times New Roman', ui-serif, serif;
+		font-size: 1.35rem;
+		font-weight: 500;
+	}
+
+	.section-kicker {
+		margin-bottom: 0.35rem;
+	}
+
+	.dungeon-ledger :global(.dungeon-summary) {
+		border-radius: 0;
+		background: #eee6d9;
+	}
+
+	.dungeon-ledger :global(.dungeon-summary img) {
+		border: 1px solid rgb(120 68 45 / 0.18);
+	}
+
+	.dungeon-ledger :global(.buff-section),
+	.dungeon-ledger :global(.baseline-section) {
+		border-radius: 0.2rem;
+		background: #fbf7ef;
+	}
+
+	.dungeon-ledger :global(.buff-option) {
+		flex-wrap: wrap;
+		align-items: flex-start;
+		padding: 0.7rem;
+		border: 1px solid transparent;
+		border-radius: 0.2rem;
+		transition:
+			border-color 150ms ease,
+			background-color 150ms ease,
+			box-shadow 150ms ease;
+	}
+
+	.dungeon-ledger :global(.buff-option > [data-slot='field-content']) {
+		min-width: 0;
+	}
+
+	.dungeon-ledger :global(.buff-actions) {
+		flex-basis: 100%;
+		padding-inline-start: 2.75rem;
+		padding-inline-end: 0.75rem;
+	}
+
+	.dungeon-ledger :global(.buff-badges) {
+		min-width: 0;
+	}
+
+	.dungeon-ledger :global(.buff-option[data-selected='true']) {
+		border-color: #ddbea6;
+		background: #f8eadc;
+		box-shadow: inset 3px 0 0 #b97849;
+	}
+
+	.dungeon-ledger :global(.buff-option img),
+	.dungeon-ledger :global(.baseline-item img) {
+		filter: drop-shadow(0 3px 5px rgb(86 54 31 / 0.14));
+	}
+
+	.dungeon-ledger :global(.baseline-item) {
+		border-radius: 0.2rem;
+		background: rgb(255 253 248 / 0.7);
+	}
+
+	.dungeon-ledger :global(.estimate-card) {
+		--foreground: #fff9eb;
+		--card: var(--ledger-evergreen);
+		--card-foreground: #fff9eb;
+		--popover: var(--ledger-evergreen);
+		--popover-foreground: #fff9eb;
+		--primary: var(--ledger-gold);
+		--primary-foreground: #3b2a18;
+		--secondary: var(--ledger-gold);
+		--secondary-foreground: #3b2a18;
+		--muted: var(--ledger-evergreen-soft);
+		--muted-foreground: #c7d3cd;
+		--accent: #2b574e;
+		--accent-foreground: #fff9eb;
+		--border: #52736c;
+		--input: #52736c;
+		--ring: var(--ledger-gold);
+		background:
+			linear-gradient(135deg, rgb(255 255 255 / 0.035) 25%, transparent 25%) 0 0 / 18px 18px,
+			var(--ledger-evergreen);
+		border-color: var(--ledger-evergreen);
+		box-shadow: 0 20px 46px rgb(30 55 47 / 0.2);
+	}
+
+	.estimate-eyebrow {
+		color: var(--ledger-gold);
+	}
+
+	.dungeon-ledger :global(.estimate-card [data-slot='card-title']) {
+		font-size: 1.65rem;
+		color: #fff9eb;
+	}
+
+	.dungeon-ledger :global(.estimate-card [data-slot='card-footer']) {
+		border-radius: 0;
+		background: rgb(255 255 255 / 0.055);
+	}
+
+	.dungeon-ledger :global(.metric-primary) {
+		border-color: rgb(240 194 120 / 0.32);
+		border-radius: 0.2rem;
+		background: rgb(255 251 240 / 0.055);
+	}
+
+	.dungeon-ledger :global(.metric-value) {
+		font-family: Georgia, 'Times New Roman', ui-serif, serif;
+		font-size: 1.72rem;
+		font-variant-numeric: tabular-nums;
+		color: #f7d69f;
+	}
+
+	.dungeon-ledger :global(.secondary-metrics) {
+		padding-top: 1.25rem;
+		border-top: 1px solid rgb(240 194 120 / 0.2);
+	}
+
+	.breakdown-section h3 {
+		font-family: Georgia, 'Times New Roman', ui-serif, serif;
+		font-size: 1.15rem;
+		font-weight: 500;
+	}
+
+	.ledger-table-scroll {
+		border: 1px solid var(--ledger-rule);
+		background: var(--ledger-paper);
+	}
+
+	.dungeon-ledger :global(.breakdown-card [data-slot='table-head']) {
+		background: #eee6d9;
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: #5d5044;
+	}
+
+	.dungeon-ledger :global(.breakdown-card [data-slot='table-row']) {
+		border-color: #e4dcd0;
+	}
+
+	.dungeon-ledger :global(.breakdown-card [data-slot='table-row']:hover) {
+		background: #faf1e6;
+	}
+
+	.dungeon-ledger :global(.breakdown-card [data-slot='table-cell']:last-child) {
+		background: rgb(242 223 202 / 0.28);
+	}
+
+	.dungeon-ledger :global(.scope-note) {
+		border-color: #cfaa8c;
+		background: #fbf4e9;
+	}
+
+	:global(.ledger-sheet) {
+		--background: #fffdf8;
+		--foreground: #1b1915;
+		--card: #fffdf8;
+		--card-foreground: #1b1915;
+		--secondary: #f2dfca;
+		--secondary-foreground: #78442d;
+		--muted: #eee8dc;
+		--muted-foreground: #746d63;
+		--accent: #e7ddc9;
+		--accent-foreground: #513824;
+		--border: #d8cfc1;
+		--input: #cfc4b3;
+		--ring: #b97849;
+		color-scheme: light;
+	}
+
+	@media (max-width: 79.999rem) {
+		.workspace-grid {
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-areas:
+				'setup'
+				'estimate'
+				'buffs'
+				'notices';
+		}
+
+		.ledger-hero {
+			grid-template-areas:
+				'copy'
+				'rules'
+				'art';
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.hero-art {
+			min-height: 12rem;
+		}
+	}
+
+	@media (min-width: 80rem) and (min-height: 48rem) {
+		.estimate-panel {
+			position: sticky;
+			top: calc(var(--app-topbar-height, 5.25rem) + 1rem);
+			align-self: start;
+		}
+	}
+
+	@media (max-width: 39.999rem) {
+		.dungeon-ledger {
+			padding-inline: 1rem;
+		}
+
+		.hero-copy {
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+
+		.hero-mark {
+			width: 2.5rem;
+			height: 2.5rem;
+			margin-top: 0;
+		}
+
+		.hero-title {
+			font-size: 2.55rem;
+		}
+
+		.hero-art {
+			min-height: 10.5rem;
+		}
+
+		.dungeon-ledger :global(.buff-actions) {
+			padding-inline-start: 0;
+		}
+	}
+</style>
