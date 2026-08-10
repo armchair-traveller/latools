@@ -90,9 +90,9 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 	const ranked = rankOffers(currentEvent, currentCatalog);
 	const unranked = unrankedOffers(currentEvent, currentCatalog);
 
-	assert.equal(ranked.length, 17);
+	assert.equal(ranked.length, 21);
 	assert.equal(unranked.filter((offer) => offer.item.valuation === 'unique').length, 4);
-	assert.equal(unranked.filter((offer) => offer.item.valuation === 'pending').length, 10);
+	assert.equal(unranked.filter((offer) => offer.item.valuation === 'pending').length, 6);
 	assert.deepEqual(
 		ranked
 			.filter((offer) => offer.itemId === 'premium-abio-coke')
@@ -100,6 +100,50 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 		[
 			{ stage: 2, bundleEly: 18_000_000, elyPerPoint: 1_800_000 },
 			{ stage: 3, bundleEly: 18_000_000, elyPerPoint: 1_800_000 }
+		]
+	);
+	assert.deepEqual(
+		ranked
+			.filter((offer) =>
+				[
+					'bottle-of-orange-stars',
+					'cheerful-tengu-totem-fragment',
+					'permanent-pet-transformation-kit',
+					'potion-of-resurrection'
+				].includes(offer.itemId)
+			)
+			.map(({ itemId, stage, bundleEly, elyPerPoint }) => ({ itemId, stage, bundleEly, elyPerPoint })),
+		[
+			{
+				itemId: 'permanent-pet-transformation-kit',
+				stage: 5,
+				bundleEly: 2_200_000_000,
+				elyPerPoint: 2_200_000_000 / 60
+			},
+			{
+				itemId: 'potion-of-resurrection',
+				stage: 2,
+				bundleEly: 60_000_000,
+				elyPerPoint: 6_000_000
+			},
+			{
+				itemId: 'cheerful-tengu-totem-fragment',
+				stage: 4,
+				bundleEly: 30_000_000,
+				elyPerPoint: 2_000_000
+			},
+			{
+				itemId: 'cheerful-tengu-totem-fragment',
+				stage: 2,
+				bundleEly: 20_000_000,
+				elyPerPoint: 2_000_000
+			},
+			{
+				itemId: 'bottle-of-orange-stars',
+				stage: 5,
+				bundleEly: 50_000_000,
+				elyPerPoint: 50_000_000 / 30
+			}
 		]
 	);
 	assert.deepEqual(
@@ -111,9 +155,15 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 			elyPerPoint
 		})),
 		[
+			{
+				itemId: 'permanent-pet-transformation-kit',
+				stage: 5,
+				slot: 4,
+				bundleEly: 2_200_000_000,
+				elyPerPoint: 2_200_000_000 / 60
+			},
 			{ itemId: 'gatia-sues-stone-7d', stage: 3, slot: 3, bundleEly: 520_000_000, elyPerPoint: 20_800_000 },
 			{ itemId: 'la-tale-adventure-dice', stage: 2, slot: 2, bundleEly: 172_500_000, elyPerPoint: 17_250_000 },
-			{ itemId: 'potion-of-resurrection', stage: 2, slot: 6, bundleEly: 120_000_000, elyPerPoint: 12_000_000 },
 			{ itemId: 'iceflower-charm', stage: 2, slot: 3, bundleEly: 400_000_000, elyPerPoint: 400_000_000 / 35 },
 			{ itemId: 'dungeon-titlebook-1-10-coupon', stage: 5, slot: 7, bundleEly: 900_000_000, elyPerPoint: 11_250_000 }
 		]
