@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
@@ -8,6 +9,32 @@
 
 	const sidebar = Sidebar.useSidebar();
 	let activeTool = $derived(getActiveTool(page.url.pathname));
+	let suppressToolTransitions = $state(false);
+	let toolNavigationSequence = 0;
+
+	onNavigate(({ from, to }) => {
+		if (
+			!from ||
+			!to ||
+			getActiveTool(from.url.pathname).href === getActiveTool(to.url.pathname).href
+		) {
+			return;
+		}
+
+		const navigationSequence = ++toolNavigationSequence;
+		suppressToolTransitions = true;
+
+		return () => {
+			// Keep the guard through one paint so the old and new active styles cannot interpolate.
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					if (navigationSequence === toolNavigationSequence) {
+						suppressToolTransitions = false;
+					}
+				});
+			});
+		};
+	});
 
 	function isActive(href: string): boolean {
 		return href === '/'
@@ -43,7 +70,11 @@
 	</Sidebar.Header>
 
 	<Sidebar.Content class="app-sidebar-content">
-		<nav class="app-sidebar-nav" aria-label="Tool navigation">
+		<nav
+			class="app-sidebar-nav"
+			aria-label="Tool navigation"
+			data-route-transition={suppressToolTransitions ? 'instant' : undefined}
+		>
 			<Sidebar.Group class="app-navigation-group">
 			<Sidebar.GroupLabel class="app-navigation-label">
 				<span>Index</span>

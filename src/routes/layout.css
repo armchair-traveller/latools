@@ -1553,3 +1553,12 @@
 		0 6px 14px color-mix(in oklab, var(--item-deep) 22%, transparent),
 		0 0 20px color-mix(in oklab, var(--item-accent) 32%, transparent);
 }
+
+/* Route selection swaps should be immediate; ordinary pointer hover remains animated. */
+.shell-provider .app-sidebar-nav[data-route-transition='instant'] .tool-nav-button,
+.shell-provider .app-sidebar-nav[data-route-transition='instant'] .tool-nav-button::before,
+.shell-provider .app-sidebar-nav[data-route-transition='instant'] .tool-nav-button::after,
+.shell-provider .app-sidebar-nav[data-route-transition='instant'] .tool-nav-icon,
+.shell-provider .app-sidebar-nav[data-route-transition='instant'] .tool-nav-verb {
+	transition: none;
+}
