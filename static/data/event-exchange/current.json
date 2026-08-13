@@ -1,17 +1,21 @@
 {
-	"id": "groove-anniversary-missions-2026",
-	"title": "Groove Anniversary Missions",
-	"startDate": "2026-07-15",
-	"endDate": "2026-08-12",
-	"reviewedAt": "2026-08-09",
+	"id": "hunter-alvis-missions-2026",
+	"title": "Hunter Alvis’ Missions",
+	"startDate": "2026-08-12",
+	"endDate": "2026-09-09",
+	"reviewedAt": "2026-08-13",
 	"region": "NA",
-	"source": "In-game event exchange screenshots",
+	"source": "In-game event exchange screenshots and Papaya Play event notice",
 	"expectedOfferCount": 39,
 	"stages": [
 		{
 			"number": 1,
-			"missingSlots": [1, 2, 3, 4],
+			"missingSlots": [],
 			"offers": [
+				{ "slot": 1, "itemId": "bottle-of-blue-stars", "icon": "/items/event-exchange/current/stage-1-slot-1.png", "quantity": 50, "pointCost": 15, "accountLimit": 10 },
+				{ "slot": 2, "itemId": "gatia-sues-stone-7d", "icon": "/items/event-exchange/current/stage-1-slot-2.png", "quantity": 1, "pointCost": 25, "accountLimit": 1 },
+				{ "slot": 3, "itemId": "shining-guild-coin", "icon": "/items/event-exchange/current/stage-1-slot-3.png", "quantity": 25, "pointCost": 15, "accountLimit": 20 },
+				{ "slot": 4, "itemId": "mysterious-fragment", "icon": "/items/event-exchange/current/stage-1-slot-4.png", "quantity": 20, "pointCost": 10, "accountLimit": 10 },
 				{ "slot": 5, "itemId": "powder-of-blessing", "icon": "/items/event-exchange/current/stage-1-slot-5.png", "quantity": 15, "pointCost": 10, "accountLimit": 25 },
 				{ "slot": 6, "itemId": "item-drug-100", "icon": "/items/event-exchange/current/stage-1-slot-6.png", "quantity": 1, "pointCost": 20, "accountLimit": 5 },
 				{ "slot": 7, "itemId": "exp-potion-20", "icon": "/items/event-exchange/current/stage-1-slot-7.png", "quantity": 1, "pointCost": 10, "accountLimit": 10 },
@@ -20,24 +24,28 @@
 		},
 		{
 			"number": 2,
-			"missingSlots": [1, 7],
+			"missingSlots": [],
 			"offers": [
+				{ "slot": 1, "itemId": "inventory-bag-box", "icon": "/items/event-exchange/current/stage-2-slot-1.png", "quantity": 1, "pointCost": 5, "accountLimit": 10 },
 				{ "slot": 2, "itemId": "la-tale-adventure-dice", "icon": "/items/event-exchange/current/stage-2-slot-2.png", "quantity": 5, "pointCost": 10, "accountLimit": 20 },
 				{ "slot": 3, "itemId": "iceflower-charm", "icon": "/items/event-exchange/current/stage-2-slot-3.png", "quantity": 1, "pointCost": 35, "accountLimit": 3 },
 				{ "slot": 4, "itemId": "cheerful-tengu-totem-fragment", "icon": "/items/event-exchange/current/stage-2-slot-4.png", "quantity": 10, "pointCost": 10, "accountLimit": 10 },
 				{ "slot": 5, "itemId": "premium-abio-coke", "icon": "/items/event-exchange/current/stage-2-slot-5.png", "quantity": 20, "pointCost": 10, "accountLimit": 10 },
 				{ "slot": 6, "itemId": "potion-of-resurrection", "icon": "/items/event-exchange/current/stage-2-slot-6.png", "quantity": 2, "pointCost": 10, "accountLimit": 10 },
-				{ "slot": 8, "itemId": "heros-exp-potion", "icon": "/items/event-exchange/current/stage-2-slot-8.png", "quantity": 1, "pointCost": 10, "accountLimit": 5 }
+				{ "slot": 7, "itemId": "heros-attack-nostrum-ii", "icon": "/items/event-exchange/current/stage-2-slot-7.png", "quantity": 1, "pointCost": 10, "accountLimit": 5 },
+				{ "slot": 8, "itemId": "weapon-skin-material-coupon", "icon": "/items/event-exchange/current/stage-2-slot-8.png", "quantity": 1, "pointCost": 50, "accountLimit": 1 }
 			]
 		},
 		{
 			"number": 3,
-			"missingSlots": [1, 4],
+			"missingSlots": [],
 			"offers": [
+				{ "slot": 1, "itemId": "item-seal-lock", "icon": "/items/event-exchange/current/stage-3-slot-1.png", "quantity": 2, "pointCost": 10, "accountLimit": 10 },
 				{ "slot": 2, "itemId": "premium-abio-coke", "icon": "/items/event-exchange/current/stage-3-slot-2.png", "quantity": 20, "pointCost": 10, "accountLimit": 10 },
-				{ "slot": 3, "itemId": "gatia-sues-stone-7d", "icon": "/items/event-exchange/current/stage-3-slot-3.png", "quantity": 1, "pointCost": 25, "accountLimit": 1 },
+				{ "slot": 3, "itemId": "season-la-tale-special-support-potion", "icon": "/items/event-exchange/current/stage-3-slot-3.png", "quantity": 1, "pointCost": 20, "accountLimit": 10 },
+				{ "slot": 4, "itemId": "special-stimulant", "icon": "/items/event-exchange/current/stage-3-slot-4.png", "quantity": 1, "pointCost": 50, "accountLimit": 2 },
 				{ "slot": 5, "itemId": "quest-reward-up-potion", "icon": "/items/event-exchange/current/stage-3-slot-5.png", "quantity": 1, "pointCost": 20, "accountLimit": 10 },
-				{ "slot": 6, "itemId": "remind-costume-coupon-v", "icon": "/items/event-exchange/current/stage-3-slot-6.png", "quantity": 1, "pointCost": 35, "accountLimit": 3 },
+				{ "slot": 6, "itemId": "event-baby-pacifier", "icon": "/items/event-exchange/current/stage-3-slot-6.png", "quantity": 1, "pointCost": 70, "accountLimit": 1 },
 				{ "slot": 7, "itemId": "memorial-hero-fragment", "icon": "/items/event-exchange/current/stage-3-slot-7.png", "quantity": 2, "pointCost": 30, "accountLimit": 20 },
 				{ "slot": 8, "itemId": "key-enchantment-puzzle", "icon": "/items/event-exchange/current/stage-3-slot-8.png", "quantity": 1, "pointCost": 10, "accountLimit": 10 }
 			]
@@ -46,14 +54,14 @@
 			"number": 4,
 			"missingSlots": [],
 			"offers": [
-				{ "slot": 1, "itemId": "paragon-of-power-1-day-coupon", "icon": "/items/event-exchange/current/stage-4-slot-1.png", "quantity": 1, "pointCost": 25, "accountLimit": 5 },
-				{ "slot": 2, "itemId": "event-orange-heart-headband", "icon": "/items/event-exchange/current/stage-4-slot-2.png", "quantity": 1, "pointCost": 70, "accountLimit": 1 },
+				{ "slot": 1, "itemId": "relic-essence", "icon": "/items/event-exchange/current/stage-4-slot-1.png", "quantity": 1, "pointCost": 25, "accountLimit": 5 },
+				{ "slot": 2, "itemId": "special-hairstyle-options", "icon": "/items/event-exchange/current/stage-4-slot-2.png", "quantity": 1, "pointCost": 80, "accountLimit": 1 },
 				{ "slot": 3, "itemId": "event-dungeon-point-ticket", "icon": "/items/event-exchange/current/stage-4-slot-3.png", "quantity": 1, "pointCost": 30, "accountLimit": 5 },
 				{ "slot": 4, "itemId": "cheerful-tengu-totem-fragment", "icon": "/items/event-exchange/current/stage-4-slot-4.png", "quantity": 15, "pointCost": 15, "accountLimit": 20 },
 				{ "slot": 5, "itemId": "laititia-dungeon-reset-coupon", "icon": "/items/event-exchange/current/stage-4-slot-5.png", "quantity": 1, "pointCost": 45, "accountLimit": 2 },
 				{ "slot": 6, "itemId": "heros-attack-nostrum-ii", "icon": "/items/event-exchange/current/stage-4-slot-6.png", "quantity": 1, "pointCost": 10, "accountLimit": 5 },
 				{ "slot": 7, "itemId": "stars-blessing-potion", "icon": "/items/event-exchange/current/stage-4-slot-7.png", "quantity": 1, "pointCost": 50, "accountLimit": 3 },
-				{ "slot": 8, "itemId": "shining-stone-of-challenge", "icon": "/items/event-exchange/current/stage-4-slot-8.png", "quantity": 1, "pointCost": 55, "accountLimit": 2 }
+				{ "slot": 8, "itemId": "luxury-mount-box", "icon": "/items/event-exchange/current/stage-4-slot-8.png", "quantity": 1, "pointCost": 30, "accountLimit": 1 }
 			]
 		},
 		{
@@ -64,7 +72,7 @@
 				{ "slot": 2, "itemId": "bottle-of-orange-stars", "icon": "/items/event-exchange/current/stage-5-slot-2.png", "quantity": 50, "pointCost": 30, "accountLimit": 10 },
 				{ "slot": 3, "itemId": "event-justitia-dungeon-reset-ticket", "icon": "/items/event-exchange/current/stage-5-slot-3.png", "quantity": 1, "pointCost": 75, "accountLimit": 2 },
 				{ "slot": 4, "itemId": "permanent-pet-transformation-kit", "icon": "/items/event-exchange/current/stage-5-slot-4.png", "quantity": 1, "pointCost": 60, "accountLimit": 1 },
-				{ "slot": 5, "itemId": "end-game-random-pet-box-i", "icon": "/items/event-exchange/current/stage-5-slot-5.png", "quantity": 1, "pointCost": 100, "accountLimit": 5 },
+				{ "slot": 5, "itemId": "character-slot-card", "icon": "/items/event-exchange/current/stage-5-slot-5.png", "quantity": 1, "pointCost": 100, "accountLimit": 1 },
 				{ "slot": 6, "itemId": "guild-upgrade-stone", "icon": "/items/event-exchange/current/stage-5-slot-6.png", "quantity": 1, "pointCost": 65, "accountLimit": 3 },
 				{ "slot": 7, "itemId": "dungeon-titlebook-1-10-coupon", "icon": "/items/event-exchange/current/stage-5-slot-7.png", "quantity": 1, "pointCost": 80, "accountLimit": 1 }
 			]

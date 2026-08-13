@@ -90,9 +90,13 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 	const ranked = rankOffers(currentEvent, currentCatalog);
 	const unranked = unrankedOffers(currentEvent, currentCatalog);
 
-	assert.equal(ranked.length, 21);
-	assert.equal(unranked.filter((offer) => offer.item.valuation === 'unique').length, 4);
-	assert.equal(unranked.filter((offer) => offer.item.valuation === 'pending').length, 6);
+	assert.equal(currentEvent.id, 'hunter-alvis-missions-2026');
+	assert.equal(currentEvent.startDate, '2026-08-12');
+	assert.equal(currentEvent.endDate, '2026-09-09');
+	assert.deepEqual(getExchangeCompleteness(currentEvent), { captured: 39, missing: 0, total: 39 });
+	assert.equal(ranked.length, 28);
+	assert.equal(unranked.filter((offer) => offer.item.valuation === 'unique').length, 2);
+	assert.equal(unranked.filter((offer) => offer.item.valuation === 'pending').length, 9);
 	assert.deepEqual(
 		ranked
 			.filter((offer) => offer.itemId === 'premium-abio-coke')
@@ -156,16 +160,40 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 		})),
 		[
 			{
+				itemId: 'bottle-of-blue-stars',
+				stage: 1,
+				slot: 1,
+				bundleEly: 1_750_000_000,
+				elyPerPoint: 1_750_000_000 / 15
+			},
+			{
+				itemId: 'inventory-bag-box',
+				stage: 2,
+				slot: 1,
+				bundleEly: 200_000_000,
+				elyPerPoint: 40_000_000
+			},
+			{
 				itemId: 'permanent-pet-transformation-kit',
 				stage: 5,
 				slot: 4,
 				bundleEly: 2_200_000_000,
 				elyPerPoint: 2_200_000_000 / 60
 			},
-			{ itemId: 'gatia-sues-stone-7d', stage: 3, slot: 3, bundleEly: 520_000_000, elyPerPoint: 20_800_000 },
-			{ itemId: 'la-tale-adventure-dice', stage: 2, slot: 2, bundleEly: 172_500_000, elyPerPoint: 17_250_000 },
-			{ itemId: 'iceflower-charm', stage: 2, slot: 3, bundleEly: 400_000_000, elyPerPoint: 400_000_000 / 35 },
-			{ itemId: 'dungeon-titlebook-1-10-coupon', stage: 5, slot: 7, bundleEly: 900_000_000, elyPerPoint: 11_250_000 }
+			{
+				itemId: 'character-slot-card',
+				stage: 5,
+				slot: 5,
+				bundleEly: 3_100_000_000,
+				elyPerPoint: 31_000_000
+			},
+			{
+				itemId: 'weapon-skin-material-coupon',
+				stage: 2,
+				slot: 8,
+				bundleEly: 1_500_000_000,
+				elyPerPoint: 30_000_000
+			}
 		]
 	);
 });
