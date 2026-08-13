@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"currentSaleId": "papayaplay-6332",
+	"currentSaleId": "papayaplay-6347",
 	"sales": [
 		{
 			"id": "papayaplay-6332",
@@ -8,6 +8,13 @@
 			"startsAt": "2026-07-29T20:30:00-04:00",
 			"endsAt": "2026-08-12T19:50:00-04:00",
 			"reviewedAt": "2026-08-06"
+		},
+		{
+			"id": "papayaplay-6347",
+			"title": "[Aug. Sale] Hunter's Shop",
+			"startsAt": "2026-08-12T20:30:00-04:00",
+			"endsAt": "2026-08-26T19:50:00-04:00",
+			"reviewedAt": "2026-08-13"
 		}
 	]
 }

@@ -1,0 +1,1683 @@
+{
+  "schemaVersion": 1,
+  "id": "papayaplay-6347",
+  "postId": 6347,
+  "title": "[Aug. Sale] Hunter's Shop",
+  "region": "NA",
+  "currency": "LTC",
+  "timezone": "America/New_York",
+  "sourceUrl": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6347",
+  "publishedAt": "2026-08-13T00:00:00-04:00",
+  "analyzedAt": "2026-08-13T13:00:01-07:00",
+  "reviewedAt": "2026-08-13",
+  "status": "published",
+  "sourceFingerprint": "sha256:63fbb36a485e15b0fcb220b2f784c2c214bb29a36a769e286350e99299a3d1f0+6fdf3e92206a0cf731ea033ba1c7ad03fef0aa74e5ccff54133addca038ec798+b85e10480097d9ac771f14a117d7b3f7db9e00b89826b83af7ef76e333c497f5",
+  "posterUrls": [
+    "https://cdn.papayaplay.com/SF/1786/5832/8061/0812_LT_Sales_poster1.jpg",
+    "https://cdn.papayaplay.com/SF/1786/5832/8061/0812_LT_Sales_poster2.jpg",
+    "https://cdn.papayaplay.com/SF/1786/5832/8021/0812_LT_Sales_poster3.jpg"
+  ],
+  "expectedOfferCount": 32,
+  "sources": [
+    {
+      "id": "official-sale-6347",
+      "kind": "official-sale",
+      "title": "[Aug. Sale] Hunter's Shop",
+      "url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6347",
+      "accessedAt": "2026-08-13T13:00:01-07:00",
+      "note": "Official post title, displayed publication date, and embedded media list."
+    },
+    {
+      "id": "official-poster-1",
+      "kind": "official-sale",
+      "title": "The Hunter's Shop poster 1",
+      "url": "https://cdn.papayaplay.com/SF/1786/5832/8061/0812_LT_Sales_poster1.jpg",
+      "accessedAt": "2026-08-13T13:00:01-07:00",
+      "note": "Official Royal exchange image; SHA-256 63fbb36a485e15b0fcb220b2f784c2c214bb29a36a769e286350e99299a3d1f0."
+    },
+    {
+      "id": "official-poster-2",
+      "kind": "official-sale",
+      "title": "The Hunter's Shop poster 2",
+      "url": "https://cdn.papayaplay.com/SF/1786/5832/8061/0812_LT_Sales_poster2.jpg",
+      "accessedAt": "2026-08-13T13:00:01-07:00",
+      "note": "Official P1 through P6 flash-sale image; SHA-256 6fdf3e92206a0cf731ea033ba1c7ad03fef0aa74e5ccff54133addca038ec798."
+    },
+    {
+      "id": "official-poster-3",
+      "kind": "official-sale",
+      "title": "The Hunter's Shop poster 3",
+      "url": "https://cdn.papayaplay.com/SF/1786/5832/8021/0812_LT_Sales_poster3.jpg",
+      "accessedAt": "2026-08-13T13:00:01-07:00",
+      "note": "Official decorative closing image; SHA-256 b85e10480097d9ac771f14a117d7b3f7db9e00b89826b83af7ef76e333c497f5."
+    },
+    {
+      "id": "discord-announcement-2026-08-12",
+      "kind": "official-sale",
+      "title": "Official Discord flash-sale announcement (user-provided transcription)",
+      "url": "https://discord.com/",
+      "accessedAt": "2026-08-13T13:00:01-07:00",
+      "note": "Secondary evidence supplied without a message permalink. Per maintainer direction, used for exact UTC boundaries, normalized labels, and conflict resolution except Advanced Guild contents, which follow the poster's two displayed components."
+    },
+    {
+      "id": "market-values",
+      "kind": "market-observation",
+      "title": "Maintainer-confirmed event exchange values",
+      "url": "/data/event-exchange/catalog.json",
+      "accessedAt": "2026-08-13T13:00:01-07:00",
+      "note": "Previously approved exact-item values reused from the existing sale snapshot."
+    },
+    {
+      "id": "maintainer-values-2026-08-05",
+      "kind": "market-observation",
+      "title": "Maintainer-provided Ely valuations",
+      "url": "/data/flash-sale/catalog.json",
+      "accessedAt": "2026-08-13T13:00:01-07:00",
+      "note": "Previously approved values frozen from the prior sale; dated 2026-08-05 or earlier pending maintainer review."
+    }
+  ],
+  "valuationSnapshot": [
+    {
+      "itemId": "storage-expansion-bag-x5",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Awaiting value and confirmation that one catalog unit is the full five-bag package."
+    },
+    {
+      "itemId": "general-inventory-bag",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Awaiting maintainer value."
+    },
+    {
+      "itemId": "memorial-hero-fragment",
+      "status": "priced",
+      "unitEly": 100000000,
+      "method": "market-observation",
+      "confidence": "high",
+      "asOf": "2026-08-03",
+      "sourceIds": [
+        "market-values"
+      ],
+      "note": "Approved value copied into this sale snapshot."
+    },
+    {
+      "itemId": "memorial-reset-crystal",
+      "status": "estimated",
+      "unitEly": 40000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "super-dawn-hammer-coupon",
+      "status": "estimated",
+      "unitEly": 222000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "noble-dawn-hammer",
+      "status": "estimated",
+      "unitEly": 300000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "instance-dungeon-guaranteed-titlebook-coupon-ii",
+      "status": "estimated",
+      "unitEly": 3450000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "runestone-scroll",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "royal-title-guaranteed-coupon",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "mysterious-fragment",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Awaiting maintainer value."
+    },
+    {
+      "itemId": "platinum-hammer",
+      "status": "estimated",
+      "unitEly": 150000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "veil-of-the-night-set-i",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "veil-of-the-night-set-ii",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "ice-flower-charm-exchange",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "goddess-card-eternity-coupon",
+      "status": "estimated",
+      "unitEly": 14000000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "floral-tropical-fashion-set",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "summon-skill-enhancement-scroll",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "advanced-summon-skill-enhancement-scroll",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "shining-dimensional-rift-entry",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Awaiting maintainer value."
+    },
+    {
+      "itemId": "exp-potion-100",
+      "status": "priced",
+      "unitEly": 35000000,
+      "method": "market-observation",
+      "confidence": "high",
+      "asOf": "2026-08-03",
+      "sourceIds": [
+        "market-values"
+      ],
+      "note": "Approved value copied into this sale snapshot."
+    },
+    {
+      "itemId": "exp-potion-20",
+      "status": "priced",
+      "unitEly": 40000000,
+      "method": "market-observation",
+      "confidence": "high",
+      "asOf": "2026-08-03",
+      "sourceIds": [
+        "market-values"
+      ],
+      "note": "Approved value copied into this sale snapshot."
+    },
+    {
+      "itemId": "heros-exp-nostrum",
+      "status": "estimated",
+      "unitEly": 35000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "exp-nostrum",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Awaiting maintainer value."
+    },
+    {
+      "itemId": "stars-blessing-potion",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "paragon-knowledge-7d",
+      "status": "estimated",
+      "unitEly": 1500000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "eoli-energy-extract",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Canonical display name corrected to Eel Energy Extract; maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "bottle-orange-stars",
+      "status": "estimated",
+      "unitEly": 1000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "bottle-shining-stars",
+      "status": "estimated",
+      "unitEly": 400000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "blessed-justitia-dungeon-use-ticket",
+      "status": "estimated",
+      "unitEly": 2200000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "guild-firepower-king-30d",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "greater-guild-coin-box",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "guild-relic-upgrade-stone",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "guild-upgrade-stone",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "guild-reward-ticket",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "champion-points-coupon",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "quest-reward-100-30d-skillbook",
+      "status": "estimated",
+      "unitEly": 888000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "petite-hoot-hoot-30d",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "seres-blessing-account-30d",
+      "status": "estimated",
+      "unitEly": 4950000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "tome-ancients-account-30d",
+      "status": "estimated",
+      "unitEly": 6000000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "paragon-power-30d",
+      "status": "estimated",
+      "unitEly": 6000000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "paragon-knowledge-30d",
+      "status": "estimated",
+      "unitEly": 3000000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "pet-damage-puzzle",
+      "status": "estimated",
+      "unitEly": 110000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "pet-reassign-puzzle",
+      "status": "estimated",
+      "unitEly": 150000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "pet-name-change-coupon",
+      "status": "estimated",
+      "unitEly": 555000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "great-isabel-pet-coupon",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "advanced-guild-food-supply-box",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Awaiting maintainer value."
+    },
+    {
+      "itemId": "future-me-will-level-titlebook",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    },
+    {
+      "itemId": "class-costume-exchange-ticket",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item for post 6347; awaiting a maintainer valuation or explicit personal/unique classification."
+    }
+  ],
+  "cycles": [
+    {
+      "id": "r1",
+      "label": "R1 · Wednesday–Friday",
+      "startsAt": "2026-08-12T20:30:00-04:00",
+      "endsAt": "2026-08-14T20:29:00-04:00",
+      "expectedOfferCount": 6,
+      "unresolvedSlots": [],
+      "offers": [
+        {
+          "id": "r1-storage-inventory",
+          "slot": 1,
+          "name": "Storage Expansion Bag (x5)",
+          "salePriceLtc": 630,
+          "purchaseLimit": {
+            "quantity": 25,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "storage-expansion-bag-x5",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2",
+              "discord-announcement-2026-08-12"
+            ],
+            "note": "Poster says “Storage Inventory Bag X5”; normalized per maintainer direction to the existing catalog label “Storage Expansion Bag (x5),” matching Discord."
+          },
+          "bestFor": "Players who can use the full Storage Expansion Bag (x5) package.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Ely value is pending.",
+            "Catalog unit is the full x5 package, stored as quantity one."
+          ]
+        },
+        {
+          "id": "r1-general-inventory",
+          "slot": 2,
+          "name": "General Inventory Bag (x6)",
+          "salePriceLtc": 900,
+          "purchaseLimit": {
+            "quantity": 25,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "general-inventory-bag",
+              "quantity": 6
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Official “General Inventory Bag X6” normalized to the existing catalog alias “General Inventory Bag (x6).”"
+          },
+          "bestFor": "Players who can use all six General Inventory Bags.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Ely value is pending."
+          ]
+        },
+        {
+          "id": "r1-memorial-x",
+          "slot": 3,
+          "name": "Memorial Package Bundle X",
+          "salePriceLtc": 2700,
+          "purchaseLimit": {
+            "quantity": 50,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "memorial-hero-fragment",
+              "quantity": 350
+            },
+            {
+              "itemId": "memorial-reset-crystal",
+              "quantity": 150
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Memorial Package Bundle X.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Value assumes full use of both components."
+          ]
+        },
+        {
+          "id": "r1-super-dawn",
+          "slot": 4,
+          "name": "Super Dawn Hammer Coupon (x20)",
+          "salePriceLtc": 750,
+          "purchaseLimit": {
+            "quantity": 30,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "super-dawn-hammer-coupon",
+              "quantity": 20
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Official “Super Dawn Hammer Coupon X20” normalized to the existing catalog alias “Super Dawn Hammer Coupon (x20).”"
+          },
+          "bestFor": "Players who can use all twenty Super Dawn Hammer Coupons.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Uses the previously approved per-coupon estimate."
+          ]
+        },
+        {
+          "id": "r1-noble-dawn",
+          "slot": 5,
+          "name": "Noble Dawn Hammer (x20)",
+          "salePriceLtc": 1095,
+          "purchaseLimit": {
+            "quantity": 30,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "noble-dawn-hammer",
+              "quantity": 20
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2",
+              "discord-announcement-2026-08-12"
+            ],
+            "note": "Official “Noble Dawn Hammer Coupon X20” normalized per maintainer direction to the existing catalog alias “Noble Dawn Hammer (x20),” matching Discord."
+          },
+          "bestFor": "Players who can use all twenty Noble Dawn Hammers.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Uses the previously approved per-hammer estimate."
+          ]
+        },
+        {
+          "id": "r1-instance-title-ii",
+          "slot": 6,
+          "name": "Instance Dungeon Guaranteed Titlebook Coupon II",
+          "salePriceLtc": 690,
+          "purchaseLimit": {
+            "quantity": 35,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "instance-dungeon-guaranteed-titlebook-coupon-ii",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Instance Dungeon Guaranteed Titlebook Coupon II.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Title utility remains account-specific."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r2",
+      "label": "R2 · Friday–Monday",
+      "startsAt": "2026-08-14T20:30:00-04:00",
+      "endsAt": "2026-08-17T20:29:00-04:00",
+      "expectedOfferCount": 5,
+      "unresolvedSlots": [],
+      "offers": [
+        {
+          "id": "r2-runestone-scroll",
+          "slot": 1,
+          "name": "Runestone Scroll (x50)",
+          "salePriceLtc": 1390,
+          "purchaseLimit": {
+            "quantity": 50,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "runestone-scroll",
+              "quantity": 50
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2",
+              "discord-announcement-2026-08-12"
+            ],
+            "note": "Sale price 1,390 LTC. Enlarged official pixels show a struck 4,950 LTC, matching the Discord transcription."
+          },
+          "bestFor": "Players who can use every listed component of Runestone Scroll (x50).",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Ely value is pending.",
+            "Official poster shows 4,950 LTC struck."
+          ]
+        },
+        {
+          "id": "r2-royal-title-3-plus-1",
+          "slot": 2,
+          "name": "Royal Title: Guaranteed Titlebook Coupon 3+1",
+          "salePriceLtc": 1990,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "royal-title-guaranteed-coupon",
+              "quantity": 4
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Poster component line says “Royal Title Guaranteed Coupon ×4.” Draft treats it as a new canonical item."
+          },
+          "bestFor": "Players who can use every listed component of Royal Title: Guaranteed Titlebook Coupon 3+1.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "New exact variant; Ely value is pending.",
+            "Do not reuse the older Royal Skill coupon valuation."
+          ]
+        },
+        {
+          "id": "r2-mysterious-fragment",
+          "slot": 3,
+          "name": "Giga Mysterious Fragment (x2000)",
+          "salePriceLtc": 2500,
+          "purchaseLimit": {
+            "quantity": 30,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "mysterious-fragment",
+              "quantity": 2000
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2",
+              "discord-announcement-2026-08-12"
+            ],
+            "note": "Official poster visibly says “Mysterious Fragment X200”; maintainer directed this draft to use Discord's “Giga Mysterious Fragment (x2000)” label and quantity 2000."
+          },
+          "bestFor": "Players who can use all two thousand Mysterious Fragments.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Ely value is pending.",
+            "Maintainer directed this draft to use Discord quantity x2000 over poster quantity x200.",
+            "The poster's 2,990 LTC struck price appears on its conflicting x200 card."
+          ]
+        },
+        {
+          "id": "r2-platinum-hammer",
+          "slot": 4,
+          "name": "Giga Platinum Hammer (x100)",
+          "salePriceLtc": 2590,
+          "purchaseLimit": {
+            "quantity": 50,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "platinum-hammer",
+              "quantity": 100
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2",
+              "discord-announcement-2026-08-12"
+            ],
+            "note": "Official “Platinum Hammer X100” normalized per maintainer direction to Discord's package label “Giga Platinum Hammer (x100),” matching P6. The package contains 100 units of canonical item Platinum Hammer."
+          },
+          "bestFor": "Players who can use all one hundred Platinum Hammers.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Uses the previously approved per-hammer estimate."
+          ]
+        },
+        {
+          "id": "r2-veil-night-i",
+          "slot": 5,
+          "name": "Veil of the Night Set I",
+          "salePriceLtc": 1590,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "veil-of-the-night-set-i",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Veil of the Night Set I.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "New cosmetic; valuation or personal classification is pending."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r3",
+      "label": "R3 · Monday–Wednesday",
+      "startsAt": "2026-08-17T20:30:00-04:00",
+      "endsAt": "2026-08-19T20:29:00-04:00",
+      "expectedOfferCount": 5,
+      "unresolvedSlots": [],
+      "offers": [
+        {
+          "id": "r3-veil-night-ii",
+          "slot": 1,
+          "name": "Veil of the Night Set II",
+          "salePriceLtc": 1590,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "veil-of-the-night-set-ii",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Veil of the Night Set II.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "New cosmetic; valuation or personal classification is pending."
+          ]
+        },
+        {
+          "id": "r3-ice-flower-charm",
+          "slot": 2,
+          "name": "Ice Flower Charm Exchange x10",
+          "salePriceLtc": 990,
+          "purchaseLimit": {
+            "quantity": 30,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "ice-flower-charm-exchange",
+              "quantity": 10
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Ice Flower Charm Exchange x10.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Ely value is pending.",
+            "Official poster shows 1,500 LTC struck."
+          ]
+        },
+        {
+          "id": "r3-goddess-card",
+          "slot": 3,
+          "name": "Goddess' Card of Eternity Coupon",
+          "salePriceLtc": 2500,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "goddess-card-eternity-coupon",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2",
+              "discord-announcement-2026-08-12"
+            ],
+            "note": "Official “Goddess Card of Eternity” and Discord “Goddess' Card of Eternity” normalized per maintainer direction to the existing canonical “Goddess' Card of Eternity Coupon.”"
+          },
+          "bestFor": "Players who can use the Goddess' Card of Eternity Coupon.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Official and Discord labels omit part of the existing canonical name; this draft uses the approved canonical item."
+          ]
+        },
+        {
+          "id": "r3-floral-tropical",
+          "slot": 4,
+          "name": "Floral Tropical Fashion Set",
+          "salePriceLtc": 690,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "floral-tropical-fashion-set",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Floral Tropical Fashion Set.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "New cosmetic; valuation or personal classification is pending."
+          ]
+        },
+        {
+          "id": "r3-summonable-scroll",
+          "slot": 5,
+          "name": "Summonable Scroll Bundle",
+          "salePriceLtc": 690,
+          "purchaseLimit": {
+            "quantity": 25,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "summon-skill-enhancement-scroll",
+              "quantity": 250
+            },
+            {
+              "itemId": "advanced-summon-skill-enhancement-scroll",
+              "quantity": 80
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2",
+              "discord-announcement-2026-08-12"
+            ],
+            "note": "Poster abbreviates contents as “Summon Skill Enh. Scroll ×250 · Advanced ×80.” Draft uses Discord's expanded advanced-item name and 1,990 LTC reference price per maintainer direction; no struck price is visible on the poster."
+          },
+          "bestFor": "Players who can use every listed component of Summonable Scroll Bundle.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Both component Ely values are pending.",
+            "Uses Discord's 1,990 LTC reference price per maintainer direction; no struck price is visible on the official poster."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r4",
+      "label": "R4 · Wednesday–Friday",
+      "startsAt": "2026-08-19T20:30:00-04:00",
+      "endsAt": "2026-08-21T20:29:00-04:00",
+      "expectedOfferCount": 7,
+      "unresolvedSlots": [],
+      "offers": [
+        {
+          "id": "r4-weekly-grinder",
+          "slot": 1,
+          "name": "Weekly Grinder's Package III",
+          "salePriceLtc": 2490,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "shining-dimensional-rift-entry",
+              "quantity": 7
+            },
+            {
+              "itemId": "exp-potion-100",
+              "quantity": 7
+            },
+            {
+              "itemId": "exp-potion-20",
+              "quantity": 7
+            },
+            {
+              "itemId": "heros-exp-nostrum",
+              "quantity": 7
+            },
+            {
+              "itemId": "exp-nostrum",
+              "quantity": 14
+            },
+            {
+              "itemId": "stars-blessing-potion",
+              "quantity": 14
+            },
+            {
+              "itemId": "paragon-knowledge-7d",
+              "quantity": 1
+            },
+            {
+              "itemId": "eoli-energy-extract",
+              "quantity": 28
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Weekly Grinder's Package III.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Some components are pending or personal, so numeric value is a lower bound."
+          ]
+        },
+        {
+          "id": "r4-constellation",
+          "slot": 2,
+          "name": "Constellation Expansion Package",
+          "salePriceLtc": 2290,
+          "purchaseLimit": {
+            "quantity": 50,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "bottle-orange-stars",
+              "quantity": 2000
+            },
+            {
+              "itemId": "bottle-shining-stars",
+              "quantity": 2
+            },
+            {
+              "itemId": "blessed-justitia-dungeon-use-ticket",
+              "quantity": 4
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Constellation Expansion Package.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Uses previously approved component estimates."
+          ]
+        },
+        {
+          "id": "r4-gm-guild-3",
+          "slot": 3,
+          "name": "GM's Guild Bundle III",
+          "salePriceLtc": 3590,
+          "purchaseLimit": {
+            "quantity": 20,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "guild-firepower-king-30d",
+              "quantity": 1
+            },
+            {
+              "itemId": "greater-guild-coin-box",
+              "quantity": 20
+            },
+            {
+              "itemId": "guild-relic-upgrade-stone",
+              "quantity": 6
+            },
+            {
+              "itemId": "guild-upgrade-stone",
+              "quantity": 15
+            },
+            {
+              "itemId": "guild-reward-ticket",
+              "quantity": 50
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2",
+              "discord-announcement-2026-08-12"
+            ],
+            "note": "Official poster visibly shows Limit 15; maintainer directed this draft to use Discord's limit 20 and normalized Roman numeral III label."
+          },
+          "bestFor": "Players who can use every listed component of GM's Guild Bundle III.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "All components are personal or non-comparable.",
+            "Maintainer directed this draft to use Discord limit 20 over poster limit 15."
+          ]
+        },
+        {
+          "id": "r4-instance-title-ii",
+          "slot": 4,
+          "name": "Instance Dungeon Guaranteed Titlebook Coupon II",
+          "salePriceLtc": 690,
+          "purchaseLimit": {
+            "quantity": 35,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "instance-dungeon-guaranteed-titlebook-coupon-ii",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Instance Dungeon Guaranteed Titlebook Coupon II.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Title utility remains account-specific."
+          ]
+        },
+        {
+          "id": "r4-champion-points",
+          "slot": 5,
+          "name": "Champion Points Coupon (x20)",
+          "salePriceLtc": 490,
+          "purchaseLimit": {
+            "quantity": 40,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "champion-points-coupon",
+              "quantity": 20
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Champion Points Coupon (x20).",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Ely value is pending.",
+            "Official poster shows 2,700 LTC struck."
+          ]
+        },
+        {
+          "id": "r4-seres-30d",
+          "slot": 6,
+          "name": "Seres' 30 Days Adventure Package",
+          "salePriceLtc": 1095,
+          "purchaseLimit": {
+            "quantity": 35,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "quest-reward-100-30d-skillbook",
+              "quantity": 1
+            },
+            {
+              "itemId": "petite-hoot-hoot-30d",
+              "quantity": 1
+            },
+            {
+              "itemId": "seres-blessing-account-30d",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Seres' 30 Days Adventure Package.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Petite Hoot Hoot is personal and excluded from numeric value."
+          ]
+        },
+        {
+          "id": "r4-tome-ancients",
+          "slot": 7,
+          "name": "Tome of the Ancients [Account] (30 Day) Skillbook",
+          "salePriceLtc": 1095,
+          "purchaseLimit": {
+            "quantity": 20,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "tome-ancients-account-30d",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Tome of the Ancients [Account] (30 Day) Skillbook.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Value assumes full-duration use."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r5",
+      "label": "R5 · Friday–Monday",
+      "startsAt": "2026-08-21T20:30:00-04:00",
+      "endsAt": "2026-08-24T20:29:00-04:00",
+      "expectedOfferCount": 5,
+      "unresolvedSlots": [],
+      "offers": [
+        {
+          "id": "r5-paragon-30d",
+          "slot": 1,
+          "name": "30 Days of Paragon",
+          "salePriceLtc": 1200,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "paragon-power-30d",
+              "quantity": 1
+            },
+            {
+              "itemId": "paragon-knowledge-30d",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of 30 Days of Paragon.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Value assumes full-duration use of both components."
+          ]
+        },
+        {
+          "id": "r5-memorial-x",
+          "slot": 2,
+          "name": "Memorial Package Bundle X",
+          "salePriceLtc": 2700,
+          "purchaseLimit": {
+            "quantity": 50,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "memorial-hero-fragment",
+              "quantity": 350
+            },
+            {
+              "itemId": "memorial-reset-crystal",
+              "quantity": 150
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Memorial Package Bundle X.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Value assumes full use of both components."
+          ]
+        },
+        {
+          "id": "r5-isabel-pet",
+          "slot": 3,
+          "name": "Great Isabel Pet Package",
+          "salePriceLtc": 3500,
+          "purchaseLimit": {
+            "quantity": 20,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "pet-damage-puzzle",
+              "quantity": 5
+            },
+            {
+              "itemId": "pet-reassign-puzzle",
+              "quantity": 5
+            },
+            {
+              "itemId": "pet-name-change-coupon",
+              "quantity": 1
+            },
+            {
+              "itemId": "great-isabel-pet-coupon",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2",
+              "discord-announcement-2026-08-12"
+            ],
+            "note": "Official poster titles the bundle “Great Isabel Pet Coupon”; normalized per maintainer direction to Discord's clearer “Great Isabel Pet Package.” The contained pet coupon remains a distinct catalog component."
+          },
+          "bestFor": "Players who want Great Isabel and can use every utility in the pet package.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Great Isabel is distinct from Great Kandy Pop and has value pending."
+          ]
+        },
+        {
+          "id": "r5-constellation",
+          "slot": 4,
+          "name": "Constellation Expansion Package",
+          "salePriceLtc": 2290,
+          "purchaseLimit": {
+            "quantity": 50,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "bottle-orange-stars",
+              "quantity": 2000
+            },
+            {
+              "itemId": "bottle-shining-stars",
+              "quantity": 2
+            },
+            {
+              "itemId": "blessed-justitia-dungeon-use-ticket",
+              "quantity": 4
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Constellation Expansion Package.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Uses previously approved component estimates."
+          ]
+        },
+        {
+          "id": "r5-advanced-guild",
+          "slot": 5,
+          "name": "Advanced Guild Package",
+          "salePriceLtc": 990,
+          "purchaseLimit": {
+            "quantity": 20,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "advanced-guild-food-supply-box",
+              "quantity": 20
+            },
+            {
+              "itemId": "greater-guild-coin-box",
+              "quantity": 20
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Maintainer explicitly selected the official poster's two individually tracked components: Advanced Guild Food Supply Box x20 and Greater Guild Coin Box x20. Discord's extra Guild Crop Seed Box x30 is excluded."
+          },
+          "bestFor": "Players who can use every listed component of Advanced Guild Package.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Food supply box value is pending.",
+            "Maintainer selected the official poster's two displayed components; Discord's extra crop seeds are excluded."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r6",
+      "label": "R6 · Monday–Wednesday",
+      "startsAt": "2026-08-24T20:30:00-04:00",
+      "endsAt": "2026-08-26T19:50:00-04:00",
+      "expectedOfferCount": 4,
+      "unresolvedSlots": [],
+      "offers": [
+        {
+          "id": "r6-platinum-hammer",
+          "slot": 1,
+          "name": "Giga Platinum Hammer (x100)",
+          "salePriceLtc": 2590,
+          "purchaseLimit": {
+            "quantity": 50,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "platinum-hammer",
+              "quantity": 100
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Poster title and sub-line confirm a 100-count Platinum Hammer package."
+          },
+          "bestFor": "Players who can use every listed component of Giga Platinum Hammer (x100).",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Uses the previously approved per-hammer estimate."
+          ]
+        },
+        {
+          "id": "r6-future-me-titlebook",
+          "slot": 2,
+          "name": "Future Me Will Level Titlebook",
+          "salePriceLtc": 990,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "future-me-will-level-titlebook",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Future Me Will Level Titlebook.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Ely value is pending."
+          ]
+        },
+        {
+          "id": "r6-goddess-card",
+          "slot": 3,
+          "name": "Goddess' Card of Eternity Coupon",
+          "salePriceLtc": 2500,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "goddess-card-eternity-coupon",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2",
+              "discord-announcement-2026-08-12"
+            ],
+            "note": "Official “Goddess Card of Eternity” and Discord “Goddess' Card of Eternity” normalized per maintainer direction to the existing canonical “Goddess' Card of Eternity Coupon.”"
+          },
+          "bestFor": "Players who can use the Goddess' Card of Eternity Coupon.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Official and Discord labels omit part of the existing canonical name; this draft uses the approved canonical item."
+          ]
+        },
+        {
+          "id": "r6-class-costume",
+          "slot": 4,
+          "name": "Class Costume Exchange Ticket",
+          "salePriceLtc": 390,
+          "purchaseLimit": {
+            "quantity": 50,
+            "scope": "sale"
+          },
+          "contents": [
+            {
+              "itemId": "class-costume-exchange-ticket",
+              "quantity": 1
+            }
+          ],
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-2"
+            ],
+            "note": "Verified from official poster 2."
+          },
+          "bestFor": "Players who can use every listed component of Class Costume Exchange Ticket.",
+          "skipIf": "You do not need this exact offer or cannot use its full contents.",
+          "caveats": [
+            "Valuation or personal classification is pending."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -198,41 +198,76 @@ test('reports capture and valuation completeness independently', () => {
 	});
 });
 
-test('current Festa fixture contains every verified cycle and offer', async () => {
+test("current Hunter's Shop fixture contains every verified cycle and offer", async () => {
 	const [index, currentCatalog, sale] = await Promise.all([
 		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
-		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6332.json', import.meta.url), 'utf8').then(JSON.parse)
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6347.json', import.meta.url), 'utf8').then(JSON.parse)
 	]);
 
 	assert.equal(index.currentSaleId, sale.id);
-	assert.equal(sale.postId, 6332);
+	assert.ok(index.sales.some((entry) => entry.id === 'papayaplay-6332'));
+	assert.equal(sale.postId, 6347);
 	assert.equal(sale.expectedOfferCount, 32);
 	assert.deepEqual(
 		sale.cycles.map((cycle) => cycle.offers.length),
-		[6, 5, 6, 6, 5, 4]
+		[6, 5, 5, 7, 5, 4]
 	);
 	const offers = sale.cycles.flatMap((cycle) => cycle.offers);
 	assert.equal(offers.length, 32);
 	assert.ok(sale.cycles.every((cycle) => cycle.unresolvedSlots.length === 0));
 	assert.equal(offers.filter((entry) => entry.purchaseLimit?.scope === 'sale').length, 32);
-	assert.deepEqual(offers.find((entry) => entry.id === 'r5-kandy-pet').purchaseLimit, {
+	assert.deepEqual(offers.find((entry) => entry.id === 'r4-gm-guild-3').purchaseLimit, {
 		quantity: 20,
 		scope: 'sale'
 	});
-	assert.deepEqual(offers.find((entry) => entry.id === 'r5-advanced-guild').purchaseLimit, {
+	const advancedGuild = offers.find((entry) => entry.id === 'r5-advanced-guild');
+	assert.deepEqual(advancedGuild.purchaseLimit, {
 		quantity: 20,
 		scope: 'sale'
 	});
+	assert.deepEqual(advancedGuild.contents, [
+		{ itemId: 'advanced-guild-food-supply-box', quantity: 20 },
+		{ itemId: 'greater-guild-coin-box', quantity: 20 }
+	]);
+	assert.deepEqual(offers.find((entry) => entry.id === 'r2-mysterious-fragment').contents, [
+		{ itemId: 'mysterious-fragment', quantity: 2000 }
+	]);
+	for (const offerId of [
+		'r1-storage-inventory',
+		'r1-noble-dawn',
+		'r2-runestone-scroll',
+		'r2-mysterious-fragment',
+		'r2-platinum-hammer',
+		'r3-goddess-card',
+		'r3-summonable-scroll',
+		'r4-gm-guild-3',
+		'r5-isabel-pet',
+		'r6-goddess-card'
+	]) {
+		assert.ok(
+			offers
+				.find((entry) => entry.id === offerId)
+				.capture.sourceIds.includes('discord-announcement-2026-08-12')
+		);
+	}
+	assert.deepEqual(advancedGuild.capture.sourceIds, ['official-poster-2']);
 
 	const r2 = rankFlashSaleCycle(sale, currentCatalog, 'r2');
-	assert.deepEqual(r2.map((entry) => entry.id), [
-		'r2-adventure-dice',
-		'r2-platinum-hammer',
-		'r2-royal-title'
-	]);
-	assert.equal(r2[0].bundleEly, 17_250_000_000);
-	assert.equal(r2[0].elyPerLtc, 25_000_000);
+	assert.deepEqual(r2.map((entry) => entry.id), ['r2-platinum-hammer']);
+	assert.equal(r2[0].bundleEly, 15_000_000_000);
+	assert.equal(r2[0].elyPerLtc, 15_000_000_000 / 2_590);
+
+	const platinumHammer = currentCatalog.items.find((entry) => entry.id === 'platinum-hammer');
+	assert.equal(platinumHammer.name, 'Platinum Hammer');
+	assert.deepEqual(platinumHammer.aliases, []);
+	for (const offerId of ['r2-platinum-hammer', 'r6-platinum-hammer']) {
+		const platinumPackage = offers.find((entry) => entry.id === offerId);
+		assert.equal(platinumPackage.name, 'Giga Platinum Hammer (x100)');
+		assert.deepEqual(platinumPackage.contents, [
+			{ itemId: 'platinum-hammer', quantity: 100 }
+		]);
+	}
 
 	const r1Memorial = evaluateFlashSaleCycle(sale, currentCatalog, 'r1').find(
 		(entry) => entry.id === 'r1-memorial-x'
@@ -254,9 +289,9 @@ test('current Festa fixture contains every verified cycle and offer', async () =
 		captured: 32,
 		unresolved: 0,
 		total: 32,
-		fullyValued: 19,
-		partiallyValued: 4,
-		unranked: 9
+		fullyValued: 14,
+		partiallyValued: 3,
+		unranked: 15
 	});
 	assert.ok(
 		sale.cycles
