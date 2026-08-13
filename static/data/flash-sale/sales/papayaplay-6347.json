@@ -64,8 +64,8 @@
       "kind": "market-observation",
       "title": "Maintainer-confirmed event exchange values",
       "url": "/data/event-exchange/catalog.json",
-      "accessedAt": "2026-08-13T13:00:01-07:00",
-      "note": "Previously approved exact-item values reused from the existing sale snapshot."
+      "accessedAt": "2026-08-13T14:22:59-07:00",
+      "note": "Current event exchange catalog values, including the maintainer-confirmed Memorial Hero Fragment update."
     },
     {
       "id": "maintainer-values-2026-08-05",
@@ -100,14 +100,14 @@
     {
       "itemId": "memorial-hero-fragment",
       "status": "priced",
-      "unitEly": 100000000,
+      "unitEly": 60000000,
       "method": "market-observation",
       "confidence": "high",
-      "asOf": "2026-08-03",
+      "asOf": "2026-08-13",
       "sourceIds": [
         "market-values"
       ],
-      "note": "Approved value copied into this sale snapshot."
+      "note": "Maintainer-confirmed 60,000,000 Ely value copied from the current event exchange catalog into this sale snapshot."
     },
     {
       "itemId": "memorial-reset-crystal",

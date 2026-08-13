@@ -199,10 +199,11 @@ test('reports capture and valuation completeness independently', () => {
 });
 
 test("current Hunter's Shop fixture contains every verified cycle and offer", async () => {
-	const [index, currentCatalog, sale] = await Promise.all([
+	const [index, currentCatalog, sale, historicalSale] = await Promise.all([
 		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
-		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6347.json', import.meta.url), 'utf8').then(JSON.parse)
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6347.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6332.json', import.meta.url), 'utf8').then(JSON.parse)
 	]);
 
 	assert.equal(index.currentSaleId, sale.id);
@@ -276,9 +277,22 @@ test("current Hunter's Shop fixture contains every verified cycle and offer", as
 		(entry) => entry.id === 'r5-memorial-x'
 	);
 	assert.equal(r1Memorial.valuationState, 'exact');
-	assert.equal(r1Memorial.bundleEly, 41_000_000_000);
-	assert.equal(r1Memorial.knownBundleEly, 41_000_000_000);
+	assert.equal(r1Memorial.bundleEly, 27_000_000_000);
+	assert.equal(r1Memorial.knownBundleEly, 27_000_000_000);
+	assert.equal(r1Memorial.elyPerLtc, 10_000_000);
 	assert.equal(r5Memorial.knownBundleEly, r1Memorial.knownBundleEly);
+	assert.equal(
+		currentCatalog.items.find((entry) => entry.id === 'memorial-hero-fragment').valuation.unitEly,
+		60_000_000
+	);
+	assert.equal(
+		sale.valuationSnapshot.find((entry) => entry.itemId === 'memorial-hero-fragment').unitEly,
+		60_000_000
+	);
+	assert.equal(
+		historicalSale.valuationSnapshot.find((entry) => entry.itemId === 'memorial-hero-fragment').unitEly,
+		100_000_000
+	);
 
 	const eelEnergy = currentCatalog.items.find((entry) => entry.id === 'eoli-energy-extract');
 	assert.equal(eelEnergy.name, 'Eel Energy Extract');

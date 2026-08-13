@@ -21,7 +21,7 @@
 		{ "id": "special-stimulant", "name": "Special Stimulant", "referenceIcon": "/items/event-exchange/current/stage-3-slot-4.png", "valuation": "priced", "unitEly": 450000000, "priceUpdatedAt": "2026-08-13" },
 		{ "id": "quest-reward-up-potion", "name": "Quest Reward UP! Potion", "referenceIcon": "/items/event-exchange/current/stage-3-slot-5.png", "valuation": "priced", "unitEly": 40000000, "priceUpdatedAt": "2026-08-03" },
 		{ "id": "event-baby-pacifier", "name": "[Event] Baby Pacifier", "referenceIcon": "/items/event-exchange/current/stage-3-slot-6.png", "valuation": "priced", "unitEly": 700000000, "priceUpdatedAt": "2026-08-13" },
-		{ "id": "memorial-hero-fragment", "name": "Memorial Hero Fragment", "referenceIcon": "/items/event-exchange/current/stage-3-slot-7.png", "valuation": "priced", "unitEly": 100000000, "priceUpdatedAt": "2026-08-03" },
+		{ "id": "memorial-hero-fragment", "name": "Memorial Hero Fragment", "referenceIcon": "/items/event-exchange/current/stage-3-slot-7.png", "valuation": "priced", "unitEly": 60000000, "priceUpdatedAt": "2026-08-13" },
 		{ "id": "key-enchantment-puzzle", "name": "Key Enchantment Puzzle", "referenceIcon": "/items/event-exchange/current/stage-3-slot-8.png", "valuation": "pending", "unitEly": null, "priceUpdatedAt": null },
 		{ "id": "relic-essence", "name": "Relic Essence", "referenceIcon": "/items/event-exchange/current/stage-4-slot-1.png", "valuation": "pending", "unitEly": null, "priceUpdatedAt": null },
 		{ "id": "special-hairstyle-options", "name": "Special Hairstyle Options", "referenceIcon": "/items/event-exchange/current/stage-4-slot-2.png", "valuation": "priced", "unitEly": 800000000, "priceUpdatedAt": "2026-08-13" },

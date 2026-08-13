@@ -97,6 +97,10 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 	assert.equal(ranked.length, 28);
 	assert.equal(unranked.filter((offer) => offer.item.valuation === 'unique').length, 2);
 	assert.equal(unranked.filter((offer) => offer.item.valuation === 'pending').length, 9);
+	const memorialHeroFragment = ranked.find((offer) => offer.itemId === 'memorial-hero-fragment');
+	assert.equal(memorialHeroFragment.item.unitEly, 60_000_000);
+	assert.equal(memorialHeroFragment.bundleEly, 120_000_000);
+	assert.equal(memorialHeroFragment.elyPerPoint, 4_000_000);
 	assert.deepEqual(
 		ranked
 			.filter((offer) => offer.itemId === 'premium-abio-coke')

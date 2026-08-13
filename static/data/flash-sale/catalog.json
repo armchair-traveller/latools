@@ -18,6 +18,14 @@
 			"note": "Existing repository values reused only for exact item variants."
 		},
 		{
+			"id": "event-exchange-values-2026-08-13",
+			"kind": "market-observation",
+			"title": "Maintainer-confirmed event exchange values",
+			"url": "/data/event-exchange/catalog.json",
+			"accessedAt": "2026-08-13T14:22:59-07:00",
+			"note": "Maintainer-confirmed Memorial Hero Fragment value update."
+		},
+		{
 			"id": "maintainer-values-2026-08-05",
 			"kind": "market-observation",
 			"title": "Maintainer-provided Ely valuations",
@@ -29,7 +37,7 @@
 	"items": [
 		{ "id": "storage-expansion-bag-x5", "name": "Storage Expansion Bag (x5)", "aliases": ["Storage Expansion Bag (x5)", "Storage Inventory Bag X5"], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "The poster repeats x5 in the item line; confirm package semantics before assigning value." } },
 		{ "id": "general-inventory-bag", "name": "General Inventory Bag", "aliases": ["General Inventory Bag (x6)", "General Inventory Bag X6"], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "Needs a maintainer-confirmed Ely equivalent." } },
-		{ "id": "memorial-hero-fragment", "name": "Memorial Hero Fragment", "aliases": [], "valuation": { "status": "priced", "unitEly": 100000000, "method": "market-observation", "confidence": "high", "asOf": "2026-08-03", "sourceIds": ["event-exchange-values-2026-08-04"], "note": "Reused from the current event exchange catalog." } },
+		{ "id": "memorial-hero-fragment", "name": "Memorial Hero Fragment", "aliases": [], "valuation": { "status": "priced", "unitEly": 60000000, "method": "market-observation", "confidence": "high", "asOf": "2026-08-13", "sourceIds": ["event-exchange-values-2026-08-13"], "note": "Updated from the current event exchange catalog after maintainer confirmation." } },
 		{ "id": "memorial-reset-crystal", "name": "Memorial Reset Crystal", "aliases": [], "valuation": { "status": "estimated", "unitEly": 40000000, "method": "maintainer-estimate", "confidence": "medium", "asOf": "2026-08-05", "sourceIds": ["maintainer-values-2026-08-05"], "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable." } },
 		{ "id": "super-dawn-hammer-coupon", "name": "Super Dawn Hammer Coupon", "aliases": ["Super Dawn Hammer Coupon (x20)", "Super Dawn Hammer Coupon X20"], "valuation": { "status": "estimated", "unitEly": 222000000, "method": "maintainer-estimate", "confidence": "medium", "asOf": "2026-08-05", "sourceIds": ["maintainer-values-2026-08-05"], "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable." } },
 		{ "id": "noble-dawn-hammer", "name": "Noble Dawn Hammer", "aliases": ["Noble Dawn Hammer (x20)", "Noble Dawn Hammer Coupon X20"], "valuation": { "status": "estimated", "unitEly": 300000000, "method": "maintainer-estimate", "confidence": "medium", "asOf": "2026-08-05", "sourceIds": ["maintainer-values-2026-08-05"], "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable." } },
