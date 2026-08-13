@@ -66,7 +66,6 @@ const fixtureSale = {
 	analyzedAt: '2026-08-05T00:00:00Z',
 	reviewedAt: '2026-08-05',
 	status: 'published',
-	sourceFingerprint: 'fixture',
 	posterUrls: ['https://example.com/poster.jpg'],
 	expectedOfferCount: 7,
 	sources: [source],
@@ -205,9 +204,40 @@ test("current Hunter's Shop fixture contains every verified cycle and offer", as
 		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6347.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6332.json', import.meta.url), 'utf8').then(JSON.parse)
 	]);
+	const indexedSales = await Promise.all(
+		index.sales.map((entry) =>
+			readFile(
+				new URL(`../static/data/flash-sale/sales/${encodeURIComponent(entry.id)}.json`, import.meta.url),
+				'utf8'
+			).then(JSON.parse)
+		)
+	);
 
 	assert.equal(index.currentSaleId, sale.id);
 	assert.ok(index.sales.some((entry) => entry.id === 'papayaplay-6332'));
+	const expectedSaleKeys = [
+		'schemaVersion',
+		'id',
+		'postId',
+		'title',
+		'region',
+		'currency',
+		'timezone',
+		'sourceUrl',
+		'publishedAt',
+		'analyzedAt',
+		'reviewedAt',
+		'status',
+		'posterUrls',
+		'expectedOfferCount',
+		'sources',
+		'valuationSnapshot',
+		'cycles'
+	].sort();
+	for (const checkedSale of indexedSales) {
+		assert.deepEqual(Object.keys(checkedSale).sort(), expectedSaleKeys);
+		assert.ok(checkedSale.sources.every((entry) => !/\bSHA-?256\b/i.test(entry.note)));
+	}
 	assert.equal(sale.postId, 6347);
 	assert.equal(sale.expectedOfferCount, 32);
 	assert.deepEqual(

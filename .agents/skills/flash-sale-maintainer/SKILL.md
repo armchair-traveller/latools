@@ -21,7 +21,7 @@ Maintain the checked-in flash-sale dataset from official PapayaPlay evidence. St
 ### 1. Establish the source
 
 1. Resolve the canonical official post URL and stable PapayaPlay `postid`. If asked for the latest sale, navigate the official listing and confirm the post instead of trusting a search snippet.
-2. Record the post title, URL, post ID, publication timestamp, stated sale timezone, source media URLs, capture time, and a reproducible fingerprint for each captured source.
+2. Record the post title, URL, post ID, publication timestamp, stated sale timezone, source media URLs, capture time, and the role of each captured source.
 3. Capture the announcement and each sale panel at legible/native resolution with `agent-browser`. Preserve overlapping captures when content scrolls or spans panels.
 4. Create `.cache/flash-sale/<postid>/` and keep all evidence there. Stop and report the gap when a source panel cannot be captured clearly.
 
@@ -60,13 +60,13 @@ Write both files before proposing any checked-in edit:
 
 Validate JSON syntax and compare the draft with the repository's current schema and validator. The repository implementation is authoritative if it differs from the reference. Do not weaken validation to make a draft pass.
 
-Give the user a compact handoff that links both draft files and identifies every unresolved or catalog-value decision. Ask explicitly whether to publish this specific draft and source fingerprint. Do not infer approval from the original task or from earlier approval of a different draft. Any source or material draft change invalidates approval.
+Give the user a compact handoff that links both draft files and identifies every unresolved or catalog-value decision. Ask explicitly whether to publish this specific draft and its documented material decisions. Do not infer approval from the original task or from earlier approval of a different draft. Any source or material draft change invalidates approval and must be described before requesting approval again.
 
 ### 5. Publish only after approval
 
 After explicit approval of the current draft:
 
-1. Recheck the approved source fingerprint and unresolved-items list.
+1. Recheck the approved source set, documented material decisions, and unresolved-items list.
 2. Apply approved canonical items, aliases, and current valuations to `static/data/flash-sale/catalog.json` when needed.
 3. Create or update `static/data/flash-sale/sales/<sale-id>.json` from the approved snapshot.
 4. Update `static/data/flash-sale/index.json` so its current pointer and metadata select the approved sale. Do not rewrite unrelated historical snapshots.

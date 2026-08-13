@@ -864,7 +864,7 @@
 					<p class="text-sm font-medium">Evidence</p>
 				</div>
 				<Card.Title><h2>Source and review</h2></Card.Title>
-				<Card.Description>Frozen evidence makes each published comparison reproducible.</Card.Description>
+				<Card.Description>Frozen sale data and valuations make each comparison reproducible.</Card.Description>
 			</Card.Header>
 			<Card.Content>
 				<dl class="grid gap-4 sm:grid-cols-2">
@@ -885,13 +885,6 @@
 						<dd class="mt-1 font-medium">{data.meta.sourcePostId}</dd>
 					</div>
 				</dl>
-
-				{#if data.review.sourceFingerprint}
-					<div class="mt-5">
-						<p class="text-xs text-muted-foreground">Source fingerprint</p>
-						<code class="mt-1 block break-all text-xs">{data.review.sourceFingerprint}</code>
-					</div>
-				{/if}
 			</Card.Content>
 			<Card.Footer class="flex-wrap gap-2">
 				{#each data.sources as source (source.id)}

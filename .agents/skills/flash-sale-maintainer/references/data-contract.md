@@ -16,7 +16,7 @@ Use the repository's exact field names and enum values. Preserve stable IDs and 
 
 A sale snapshot must represent these logical groups:
 
-- **Identity and provenance:** sale ID plus official post metadata, source URL/post ID, capture time, and source fingerprint.
+- **Identity and provenance:** sale ID plus official post metadata, source URL/post ID, capture time, and human-readable source roles.
 - **Schedule:** the announcement timezone and ordered sale cycles with explicit boundaries.
 - **Coverage:** expected offer count, captured sources/source regions, and a capture status that exposes incomplete or ambiguous evidence.
 - **Merchandise:** ordered offers and their structured bundle contents, preserving source order, quantities, prices, limits, variants, and cycle relationships.
@@ -41,12 +41,12 @@ Keep all pre-approval artifacts under `.cache/flash-sale/<postid>/`.
 
 Structure `review.md` with these sections:
 
-1. **Source** — canonical URL, post ID, capture time, source list/regions, and fingerprints.
+1. **Source** — canonical URL, post ID, capture time, and source list/regions.
 2. **Two-pass transcription** — expected versus actual offer count, Pass 1 inventory, Pass 2 audit result, and capture status.
 3. **Unresolved evidence** — every illegible, missing, conflicting, or inferred field; write `None` when empty.
 4. **Catalog review** — source label to canonical ID mapping and separate reused, new, changed, stale, ambiguous, and pending valuations. Include exact proposed catalog entries for additions/changes.
 5. **Editorial review** — proposed `bestFor`, `skipIf`, and `caveats`, each traceable to sale facts.
 6. **Publication plan** — exact checked-in files to create or edit and the intended current sale pointer.
-7. **Approval** — the source fingerprint and draft identity the user is being asked to approve.
+7. **Approval** — the draft identity and material decisions the user is being asked to approve.
 
-Handoff to the user with the draft/review paths, pass status, count reconciliation, unresolved evidence, catalog decisions, and planned checked-in files. Request an explicit yes/no publication decision. A changed source fingerprint, offer set, price, cycle, valuation, or editorial conclusion requires a new review and approval.
+Handoff to the user with the draft/review paths, pass status, count reconciliation, unresolved evidence, catalog decisions, material changes since any prior review, and planned checked-in files. Request an explicit yes/no publication decision. A changed source, offer set, price, cycle, valuation, or editorial conclusion requires a new review and approval that describes the change.

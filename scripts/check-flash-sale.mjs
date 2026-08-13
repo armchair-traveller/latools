@@ -157,7 +157,6 @@ check(isInstant(sale.publishedAt), 'sale.publishedAt must be an ISO timestamp.')
 check(isInstant(sale.analyzedAt), 'sale.analyzedAt must be an ISO timestamp.');
 check(isDate(sale.reviewedAt), 'sale.reviewedAt must use YYYY-MM-DD.');
 check(sale.status === 'published', 'The checked-in current sale must be published.');
-check(isNonEmpty(sale.sourceFingerprint), 'sale.sourceFingerprint is required.');
 check(Array.isArray(sale.posterUrls) && sale.posterUrls.length > 0, 'sale.posterUrls must not be empty.');
 check(isPositiveInteger(sale.expectedOfferCount), 'sale.expectedOfferCount must be positive.');
 

@@ -11,7 +11,6 @@
   "analyzedAt": "2026-08-13T13:00:01-07:00",
   "reviewedAt": "2026-08-13",
   "status": "published",
-  "sourceFingerprint": "sha256:63fbb36a485e15b0fcb220b2f784c2c214bb29a36a769e286350e99299a3d1f0+6fdf3e92206a0cf731ea033ba1c7ad03fef0aa74e5ccff54133addca038ec798+b85e10480097d9ac771f14a117d7b3f7db9e00b89826b83af7ef76e333c497f5",
   "posterUrls": [
     "https://cdn.papayaplay.com/SF/1786/5832/8061/0812_LT_Sales_poster1.jpg",
     "https://cdn.papayaplay.com/SF/1786/5832/8061/0812_LT_Sales_poster2.jpg",
@@ -33,7 +32,7 @@
       "title": "The Hunter's Shop poster 1",
       "url": "https://cdn.papayaplay.com/SF/1786/5832/8061/0812_LT_Sales_poster1.jpg",
       "accessedAt": "2026-08-13T13:00:01-07:00",
-      "note": "Official Royal exchange image; SHA-256 63fbb36a485e15b0fcb220b2f784c2c214bb29a36a769e286350e99299a3d1f0."
+      "note": "Official Royal exchange image."
     },
     {
       "id": "official-poster-2",
@@ -41,7 +40,7 @@
       "title": "The Hunter's Shop poster 2",
       "url": "https://cdn.papayaplay.com/SF/1786/5832/8061/0812_LT_Sales_poster2.jpg",
       "accessedAt": "2026-08-13T13:00:01-07:00",
-      "note": "Official P1 through P6 flash-sale image; SHA-256 6fdf3e92206a0cf731ea033ba1c7ad03fef0aa74e5ccff54133addca038ec798."
+      "note": "Official P1 through P6 flash-sale image."
     },
     {
       "id": "official-poster-3",
@@ -49,7 +48,7 @@
       "title": "The Hunter's Shop poster 3",
       "url": "https://cdn.papayaplay.com/SF/1786/5832/8021/0812_LT_Sales_poster3.jpg",
       "accessedAt": "2026-08-13T13:00:01-07:00",
-      "note": "Official decorative closing image; SHA-256 b85e10480097d9ac771f14a117d7b3f7db9e00b89826b83af7ef76e333c497f5."
+      "note": "Official decorative closing image."
     },
     {
       "id": "discord-announcement-2026-08-12",

@@ -240,7 +240,6 @@ export interface FlashSaleAnalysis {
 	analyzedAt: string;
 	reviewedAt: string;
 	status: 'published';
-	sourceFingerprint: string;
 	posterUrls: string[];
 	expectedOfferCount: number;
 	sources: FlashSaleSource[];

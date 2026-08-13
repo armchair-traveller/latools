@@ -11,7 +11,6 @@
 	"analyzedAt": "2026-08-06T18:24:40Z",
 	"reviewedAt": "2026-08-06",
 	"status": "published",
-	"sourceFingerprint": "sha256:9103cad11db04ca4cad1897bf424c45f9aed62f0101498d3d299ca76bf6f9121+cb2748c9fb5f17332749da39ce8535d0c06186e0a782fa170fd00c0127474240",
 	"posterUrls": [
 		"https://cdn.papayaplay.com/SF/1785/3688/6136/0730_LT_Sales_poster1.jpg",
 		"https://cdn.papayaplay.com/SF/1785/3688/6093/0730_LT_Sales_poster2.jpg"
@@ -32,7 +31,7 @@
 			"title": "Festa Flash Sale poster 1",
 			"url": "https://cdn.papayaplay.com/SF/1785/3688/6136/0730_LT_Sales_poster1.jpg",
 			"accessedAt": "2026-08-05T12:00:00-07:00",
-			"note": "Official R1 through R4 offer image; SHA-256 9103cad11db04ca4cad1897bf424c45f9aed62f0101498d3d299ca76bf6f9121."
+			"note": "Official R1 through R4 offer image."
 		},
 		{
 			"id": "official-poster-2",
@@ -40,7 +39,7 @@
 			"title": "Festa Flash Sale poster 2",
 			"url": "https://cdn.papayaplay.com/SF/1785/3688/6093/0730_LT_Sales_poster2.jpg",
 			"accessedAt": "2026-08-05T12:00:00-07:00",
-			"note": "Official R5 and R6 offer image; SHA-256 cb2748c9fb5f17332749da39ce8535d0c06186e0a782fa170fd00c0127474240."
+			"note": "Official R5 and R6 offer image."
 		},
 		{
 			"id": "market-values",

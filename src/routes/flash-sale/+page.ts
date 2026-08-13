@@ -304,8 +304,7 @@ export const load: PageLoad = async ({ fetch }) => {
 			captureStatus:
 				rawCompleteness.unresolved === 0 && counts.unverifiedOffers === 0
 					? 'Verified capture'
-					: 'Review required',
-			sourceFingerprint: sale.sourceFingerprint
+					: 'Review required'
 		},
 		sources: uniqueSources(sale, catalog),
 		methodSummary: 'Objective Ely/LTC = reviewed bundle Ely ÷ sale price in LTC.',
