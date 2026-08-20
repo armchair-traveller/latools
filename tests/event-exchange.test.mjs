@@ -94,13 +94,31 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 	assert.equal(currentEvent.startDate, '2026-08-12');
 	assert.equal(currentEvent.endDate, '2026-09-09');
 	assert.deepEqual(getExchangeCompleteness(currentEvent), { captured: 39, missing: 0, total: 39 });
-	assert.equal(ranked.length, 28);
+	assert.equal(ranked.length, 29);
 	assert.equal(unranked.filter((offer) => offer.item.valuation === 'unique').length, 2);
-	assert.equal(unranked.filter((offer) => offer.item.valuation === 'pending').length, 9);
+	assert.equal(unranked.filter((offer) => offer.item.valuation === 'pending').length, 8);
 	const memorialHeroFragment = ranked.find((offer) => offer.itemId === 'memorial-hero-fragment');
 	assert.equal(memorialHeroFragment.item.unitEly, 60_000_000);
 	assert.equal(memorialHeroFragment.bundleEly, 120_000_000);
 	assert.equal(memorialHeroFragment.elyPerPoint, 4_000_000);
+	assert.deepEqual(
+		['bottle-of-blue-stars', 'mysterious-fragment', 'weapon-skin-material-coupon', 'item-seal-lock'].map(
+			(itemId) => {
+				const offer = ranked.find((entry) => entry.itemId === itemId);
+				return {
+					itemId,
+					unitEly: offer.item.unitEly,
+					bundleEly: offer.bundleEly
+				};
+			}
+		),
+		[
+			{ itemId: 'bottle-of-blue-stars', unitEly: 700_000, bundleEly: 35_000_000 },
+			{ itemId: 'mysterious-fragment', unitEly: 6_250_000, bundleEly: 125_000_000 },
+			{ itemId: 'weapon-skin-material-coupon', unitEly: 150_000_000, bundleEly: 150_000_000 },
+			{ itemId: 'item-seal-lock', unitEly: 60_000_000, bundleEly: 120_000_000 }
+		]
+	);
 	assert.deepEqual(
 		ranked
 			.filter((offer) => offer.itemId === 'premium-abio-coke')
@@ -164,13 +182,6 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 		})),
 		[
 			{
-				itemId: 'bottle-of-blue-stars',
-				stage: 1,
-				slot: 1,
-				bundleEly: 1_750_000_000,
-				elyPerPoint: 1_750_000_000 / 15
-			},
-			{
 				itemId: 'inventory-bag-box',
 				stage: 2,
 				slot: 1,
@@ -192,11 +203,18 @@ test('current event keeps unique rewards separate and ranks confirmed values', a
 				elyPerPoint: 31_000_000
 			},
 			{
-				itemId: 'weapon-skin-material-coupon',
+				itemId: 'gatia-sues-stone-7d',
+				stage: 1,
+				slot: 2,
+				bundleEly: 520_000_000,
+				elyPerPoint: 20_800_000
+			},
+			{
+				itemId: 'la-tale-adventure-dice',
 				stage: 2,
-				slot: 8,
-				bundleEly: 1_500_000_000,
-				elyPerPoint: 30_000_000
+				slot: 2,
+				bundleEly: 172_500_000,
+				elyPerPoint: 17_250_000
 			}
 		]
 	);
