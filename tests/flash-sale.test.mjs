@@ -197,12 +197,13 @@ test('reports capture and valuation completeness independently', () => {
 	});
 });
 
-test("current Hunter's Shop fixture contains every verified cycle and offer", async () => {
-	const [index, currentCatalog, sale, historicalSale] = await Promise.all([
+test('current Back-to-School fixture contains every approved cycle and offer', async () => {
+	const [index, currentCatalog, sale, historicalSale, priorSale] = await Promise.all([
 		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
-		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6347.json', import.meta.url), 'utf8').then(JSON.parse),
-		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6332.json', import.meta.url), 'utf8').then(JSON.parse)
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6382.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6332.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6347.json', import.meta.url), 'utf8').then(JSON.parse)
 	]);
 	const indexedSales = await Promise.all(
 		index.sales.map((entry) =>
@@ -215,6 +216,7 @@ test("current Hunter's Shop fixture contains every verified cycle and offer", as
 
 	assert.equal(index.currentSaleId, sale.id);
 	assert.ok(index.sales.some((entry) => entry.id === 'papayaplay-6332'));
+	assert.ok(index.sales.some((entry) => entry.id === 'papayaplay-6347'));
 	const expectedSaleKeys = [
 		'schemaVersion',
 		'id',
@@ -238,61 +240,67 @@ test("current Hunter's Shop fixture contains every verified cycle and offer", as
 		assert.deepEqual(Object.keys(checkedSale).sort(), expectedSaleKeys);
 		assert.ok(checkedSale.sources.every((entry) => !/\bSHA-?256\b/i.test(entry.note)));
 	}
-	assert.equal(sale.postId, 6347);
-	assert.equal(sale.expectedOfferCount, 32);
+	assert.equal(sale.postId, 6382);
+	assert.equal(sale.publishedAt, '2026-08-27T00:00:00-04:00');
+	assert.equal(sale.expectedOfferCount, 42);
 	assert.deepEqual(
 		sale.cycles.map((cycle) => cycle.offers.length),
-		[6, 5, 5, 7, 5, 4]
+		[8, 8, 7, 7, 5, 7]
+	);
+	assert.deepEqual(
+		sale.cycles.map((cycle) => [cycle.startsAt, cycle.endsAt]),
+		[
+			['2026-08-26T20:30:00-04:00', '2026-08-28T20:29:00-04:00'],
+			['2026-08-28T20:30:00-04:00', '2026-08-31T20:29:00-04:00'],
+			['2026-08-31T20:30:00-04:00', '2026-09-02T20:29:00-04:00'],
+			['2026-09-02T20:30:00-04:00', '2026-09-04T20:29:00-04:00'],
+			['2026-09-04T20:30:00-04:00', '2026-09-07T20:29:00-04:00'],
+			['2026-09-07T20:30:00-04:00', '2026-09-09T19:50:00-04:00']
+		]
 	);
 	const offers = sale.cycles.flatMap((cycle) => cycle.offers);
-	assert.equal(offers.length, 32);
+	assert.equal(offers.length, 42);
 	assert.ok(sale.cycles.every((cycle) => cycle.unresolvedSlots.length === 0));
-	assert.equal(offers.filter((entry) => entry.purchaseLimit?.scope === 'sale').length, 32);
-	assert.deepEqual(offers.find((entry) => entry.id === 'r4-gm-guild-3').purchaseLimit, {
-		quantity: 20,
-		scope: 'sale'
-	});
-	const advancedGuild = offers.find((entry) => entry.id === 'r5-advanced-guild');
-	assert.deepEqual(advancedGuild.purchaseLimit, {
-		quantity: 20,
-		scope: 'sale'
-	});
+	assert.ok(offers.every((entry) => entry.purchaseLimit === null));
+	assert.ok(
+		offers.every(
+			(entry) =>
+				entry.capture.status === 'verified' &&
+				JSON.stringify(entry.capture.sourceIds) === JSON.stringify(['official-poster-1'])
+		)
+	);
+
+	assert.deepEqual(offers.find((entry) => entry.id === 'p1-storage-expansion').contents, [
+		{ itemId: 'storage-expansion-bag', quantity: 10 }
+	]);
+	assert.deepEqual(offers.find((entry) => entry.id === 'p4-back-to-school-bags').contents, [
+		{ itemId: 'storage-expansion-bag', quantity: 5 },
+		{ itemId: 'general-inventory-bag', quantity: 5 }
+	]);
+
+	const advancedGuild = offers.find((entry) => entry.id === 'p5-advanced-guild');
 	assert.deepEqual(advancedGuild.contents, [
 		{ itemId: 'advanced-guild-food-supply-box', quantity: 20 },
-		{ itemId: 'greater-guild-coin-box', quantity: 20 }
+		{ itemId: 'greater-guild-coin-box', quantity: 20 },
+		{ itemId: 'guild-crop-seed-box', quantity: 30 }
 	]);
-	assert.deepEqual(offers.find((entry) => entry.id === 'r2-mysterious-fragment').contents, [
-		{ itemId: 'mysterious-fragment', quantity: 2000 }
+	assert.deepEqual(offers.find((entry) => entry.id === 'p2-mystic-fragment').contents, [
+		{ itemId: 'mysterious-fragment', quantity: 1000 },
+		{ itemId: 'cheerful-tengu-totem-fragment', quantity: 2000 }
 	]);
-	for (const offerId of [
-		'r1-storage-inventory',
-		'r1-noble-dawn',
-		'r2-runestone-scroll',
-		'r2-mysterious-fragment',
-		'r2-platinum-hammer',
-		'r3-goddess-card',
-		'r3-summonable-scroll',
-		'r4-gm-guild-3',
-		'r5-isabel-pet',
-		'r6-goddess-card'
-	]) {
-		assert.ok(
-			offers
-				.find((entry) => entry.id === offerId)
-				.capture.sourceIds.includes('discord-announcement-2026-08-12')
-		);
-	}
-	assert.deepEqual(advancedGuild.capture.sourceIds, ['official-poster-2']);
 
-	const r2 = rankFlashSaleCycle(sale, currentCatalog, 'r2');
-	assert.deepEqual(r2.map((entry) => entry.id), ['r2-platinum-hammer']);
-	assert.equal(r2[0].bundleEly, 15_000_000_000);
-	assert.equal(r2[0].elyPerLtc, 15_000_000_000 / 2_590);
+	const p2 = rankFlashSaleCycle(sale, currentCatalog, 'p2');
+	assert.deepEqual(
+		p2.map((entry) => entry.id),
+		['p2-platinum-hammer', 'p2-constellation-expansion']
+	);
+	assert.equal(p2[0].bundleEly, 15_000_000_000);
+	assert.equal(p2[0].elyPerLtc, 15_000_000_000 / 2_590);
 
 	const platinumHammer = currentCatalog.items.find((entry) => entry.id === 'platinum-hammer');
 	assert.equal(platinumHammer.name, 'Platinum Hammer');
 	assert.deepEqual(platinumHammer.aliases, []);
-	for (const offerId of ['r2-platinum-hammer', 'r6-platinum-hammer']) {
+	for (const offerId of ['p2-platinum-hammer', 'p6-platinum-hammer']) {
 		const platinumPackage = offers.find((entry) => entry.id === offerId);
 		assert.equal(platinumPackage.name, 'Giga Platinum Hammer (x100)');
 		assert.deepEqual(platinumPackage.contents, [
@@ -300,17 +308,26 @@ test("current Hunter's Shop fixture contains every verified cycle and offer", as
 		]);
 	}
 
-	const r1Memorial = evaluateFlashSaleCycle(sale, currentCatalog, 'r1').find(
-		(entry) => entry.id === 'r1-memorial-x'
+	const p1Memorial = evaluateFlashSaleCycle(sale, currentCatalog, 'p1').find(
+		(entry) => entry.id === 'p1-memorial-x'
 	);
-	const r5Memorial = evaluateFlashSaleCycle(sale, currentCatalog, 'r5').find(
-		(entry) => entry.id === 'r5-memorial-x'
+	const p5Memorial = evaluateFlashSaleCycle(sale, currentCatalog, 'p5').find(
+		(entry) => entry.id === 'p5-memorial-x'
 	);
-	assert.equal(r1Memorial.valuationState, 'exact');
-	assert.equal(r1Memorial.bundleEly, 27_000_000_000);
-	assert.equal(r1Memorial.knownBundleEly, 27_000_000_000);
-	assert.equal(r1Memorial.elyPerLtc, 10_000_000);
-	assert.equal(r5Memorial.knownBundleEly, r1Memorial.knownBundleEly);
+	assert.deepEqual(p1Memorial.contents, [
+		{ itemId: 'memorial-hero-fragment', quantity: 350 },
+		{ itemId: 'memorial-reset-crystal', quantity: 150 }
+	]);
+	assert.equal(p1Memorial.valuationState, 'exact');
+	assert.equal(p1Memorial.bundleEly, 27_000_000_000);
+	assert.equal(p1Memorial.knownBundleEly, 27_000_000_000);
+	assert.equal(p1Memorial.elyPerLtc, 10_000_000);
+	assert.deepEqual(p5Memorial.contents, [
+		{ itemId: 'memorial-reset-crystal', quantity: 150 }
+	]);
+	assert.equal(p5Memorial.valuationState, 'exact');
+	assert.equal(p5Memorial.bundleEly, 6_000_000_000);
+	assert.equal(p5Memorial.elyPerLtc, 6_000_000_000 / 2_700);
 	assert.equal(
 		currentCatalog.items.find((entry) => entry.id === 'memorial-hero-fragment').valuation.unitEly,
 		60_000_000
@@ -323,6 +340,35 @@ test("current Hunter's Shop fixture contains every verified cycle and offer", as
 		historicalSale.valuationSnapshot.find((entry) => entry.itemId === 'memorial-hero-fragment').unitEly,
 		100_000_000
 	);
+	assert.equal(
+		priorSale.valuationSnapshot.find((entry) => entry.itemId === 'memorial-hero-fragment').unitEly,
+		60_000_000
+	);
+
+	const newPendingItemIds = [
+		'storage-expansion-bag',
+		'elias-royal-academy-uniform-i',
+		'elias-royal-academy-uniform-ii',
+		'bottle-blue-stars',
+		'shining-laititia-dungeon-reset-coupon',
+		'cheerful-tengu-totem-fragment',
+		'daily-red-storm-potion-30d',
+		'compass-of-eternity-coupon',
+		'bilbradha-fashion-set-i',
+		'bilbradha-fashion-set-ii',
+		'mega-value-afterimage-coupon',
+		'great-kina-pet-coupon',
+		'festival-celebration-emoticon',
+		'latale-anniversary-dance-emoticon',
+		'autumn-titlebook',
+		'class-set-piece-coupon'
+	];
+	for (const itemId of newPendingItemIds) {
+		const item = currentCatalog.items.find((entry) => entry.id === itemId);
+		assert.ok(item, `Missing new catalog item ${itemId}`);
+		assert.equal(item.valuation.status, 'pending');
+		assert.equal(item.valuation.unitEly, null);
+	}
 
 	const eelEnergy = currentCatalog.items.find((entry) => entry.id === 'eoli-energy-extract');
 	assert.equal(eelEnergy.name, 'Eel Energy Extract');
@@ -330,12 +376,12 @@ test("current Hunter's Shop fixture contains every verified cycle and offer", as
 
 	const completeness = getFlashSaleCompleteness(sale, currentCatalog);
 	assert.deepEqual(completeness, {
-		captured: 32,
+		captured: 42,
 		unresolved: 0,
-		total: 32,
-		fullyValued: 14,
-		partiallyValued: 3,
-		unranked: 15
+		total: 42,
+		fullyValued: 15,
+		partiallyValued: 6,
+		unranked: 21
 	});
 	assert.ok(
 		sale.cycles

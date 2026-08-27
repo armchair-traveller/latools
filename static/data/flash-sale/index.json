@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"currentSaleId": "papayaplay-6347",
+	"currentSaleId": "papayaplay-6382",
 	"sales": [
 		{
 			"id": "papayaplay-6332",
@@ -15,6 +15,13 @@
 			"startsAt": "2026-08-12T20:30:00-04:00",
 			"endsAt": "2026-08-26T19:50:00-04:00",
 			"reviewedAt": "2026-08-13"
+		},
+		{
+			"id": "papayaplay-6382",
+			"title": "Back-to-School Flash Deals!",
+			"startsAt": "2026-08-26T20:30:00-04:00",
+			"endsAt": "2026-09-09T19:50:00-04:00",
+			"reviewedAt": "2026-08-26"
 		}
 	]
 }
