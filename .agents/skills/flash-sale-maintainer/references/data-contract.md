@@ -1,6 +1,6 @@
 # Flash-sale data contract and review handoff
 
-Treat the checked-in TypeScript/JavaScript types, fixture data, and `npm run check:flash-sale` validator as authoritative. Inspect them before drafting; retain this reference as a map of file ownership and review expectations rather than a substitute schema.
+Use `src/lib/types.ts` (`FlashSale*`), `scripts/check-flash-sale.mjs`, and an existing sale as the schema authority. `src/lib/flash-sale.js` defines valuation and ranking behavior; `tests/flash-sale.test.mjs` covers it and the checked-in fixtures. This reference records maintenance decisions and validation limits rather than duplicating the schema.
 
 ## Checked-in files
 
@@ -12,41 +12,36 @@ Treat the checked-in TypeScript/JavaScript types, fixture data, and `npm run che
 
 Use the repository's exact field names and enum values. Preserve stable IDs and unrelated history.
 
-## Sale snapshot shape
+## Snapshot semantics
 
-A sale snapshot must represent these logical groups:
-
-- **Identity and provenance:** sale ID plus official post metadata, source URL/post ID, capture time, and human-readable source roles.
-- **Schedule:** the announcement timezone and ordered sale cycles with explicit boundaries.
-- **Coverage:** expected offer count, captured sources/source regions, and a capture status that exposes incomplete or ambiguous evidence.
-- **Merchandise:** ordered offers and their structured bundle contents, preserving source order, quantities, prices, limits, variants, and cycle relationships.
-- **Valuation:** a `valuationSnapshot` containing the reviewed values actually used for this sale. Do not derive historical results from mutable current catalog values.
-- **Editorial guidance:** `bestFor`, `skipIf`, and `caveats` supported by the snapshot rather than generic sales language.
-
-Keep original labels or source references where the checked-in schema supports them. Never place personal account state, purchase history, or unrelated page content in the snapshot.
+- The current schema uses region `NA`, currency `LTC`, and timezone `America/New_York`. Store offset-bearing timestamps consistent with the announced dates, including daylight saving time; preserve stated gaps between cycles.
+- `sourceUrl` identifies the official `latale.papayaplay.com/latale.do?tp=news.view&postid=...` post, and `posterUrls` identify its HTTPS media on `cdn.papayaplay.com`. Source entries record `accessedAt` and human-readable roles in `note`.
+- Preserve cycle order and offer `slot` order. Captured offers plus `unresolvedSlots` must equal each cycle's `expectedOfferCount`, and totals must match the sale. A publishable sale has no unresolved slots and every offer has `capture.status: "verified"` with source IDs. Use capture notes or the review for source-region details.
+- `purchaseLimit: null` means no limit was captured; an explicit quantity with unclear scope uses `scope: "unknown"`. Do not turn absent evidence into an unlimited-purchase claim.
+- The current index entry's title, first start, final end, and review date must agree with the selected snapshot.
+- Keep ranks, Ely totals, and Ely-per-LTC ratios out of the JSON; the application derives them. Review-only metadata belongs in the review artifact, not new schema fields.
 
 ## Catalog contract
 
-- Give every distinct item or variant one stable canonical ID.
-- Use aliases only for labels verified to identify that exact canonical item; an alias is not a fuzzy match rule.
-- Store the current valuation with the repository-required unit, basis/source, and review/effective date.
-- Represent unknown, unique, or non-comparable value with the repository's explicit status rather than a fabricated zero.
-- Copy the approved values used by a sale into its `valuationSnapshot` before publication.
+- Use stable canonical IDs for distinct variants. Aliases identify the exact item and must not collide after case/whitespace normalization. Similar names or icons are insufficient evidence.
+- `contents[].quantity` counts the catalog item's unit. A five-item package and one individual item are different units; verify the mapping before multiplying quantities or reusing a valuation.
+- Numeric `priced` or `estimated` valuations require positive `unitEly`, a supported method, confidence, `asOf` date, and evidence source IDs. Preserve the date and basis of reused evidence rather than making it appear newly observed.
+- `pending` means an unknown value; `unique` means intentionally non-comparable value. Both use null numeric value, confidence, and date, with their corresponding method. A pending valuation is allowed in a published sale; an uncertain offer capture is not.
+- Every component needs a `valuationSnapshot` entry. Snapshot evidence IDs resolve against `sale.sources`; current catalog evidence IDs resolve against `catalog.sources`. Copy the needed evidence when freezing values.
+- Only fully valued, verified offers enter objective rankings. Partially valued bundles have a lower-bound comparison; pending or unique components are not zero-value items.
 
-## Draft files
+## Review artifacts
 
-Keep all pre-approval artifacts under `.cache/flash-sale/<postid>/`.
+For a full refresh, keep `draft.json` and `review.md` under `.cache/flash-sale/<postid>/`. The draft is the proposed `sales/<sale-id>.json` payload, without review wrappers. The schema currently has only `status: "published"`; a staged payload carrying that value is not evidence of approval or completed verification.
 
-`draft.json` must be the proposed `sales/<sale-id>.json` payload in the current checked-in schema. It must not include review-only wrapper fields. Put proposed catalog additions or changes in `review.md` until approval.
+Make the review sufficient to assess the proposed change. Include source provenance and regions, verification performed, expected versus actual counts, unresolved facts, relevant item/unit mappings and valuation decisions, exact catalog additions or changes (including evidence), and intended files/current pointer. Explain editorial conclusions that require judgment and material changes since earlier review. Summarize reused values together when uncontroversial; separate categories or a fixed section template are unnecessary.
 
-Structure `review.md` with these sections:
+Link both artifacts in the handoff and identify any remaining decisions. For a focused authorized correction, the diff and a concise evidence note may be sufficient. Authorization is governed by the skill's scope guidance; the review format does not create an additional approval gate.
 
-1. **Source** — canonical URL, post ID, capture time, and source list/regions.
-2. **Two-pass transcription** — expected versus actual offer count, Pass 1 inventory, Pass 2 audit result, and capture status.
-3. **Unresolved evidence** — every illegible, missing, conflicting, or inferred field; write `None` when empty.
-4. **Catalog review** — source label to canonical ID mapping and separate reused, new, changed, stale, ambiguous, and pending valuations. Include exact proposed catalog entries for additions/changes.
-5. **Editorial review** — proposed `bestFor`, `skipIf`, and `caveats`, each traceable to sale facts.
-6. **Publication plan** — exact checked-in files to create or edit and the intended current sale pointer.
-7. **Approval** — the draft identity and material decisions the user is being asked to approve.
+## Validation limits
 
-Handoff to the user with the draft/review paths, pass status, count reconciliation, unresolved evidence, catalog decisions, material changes since any prior review, and planned checked-in files. Request an explicit yes/no publication decision. A changed source, offer set, price, cycle, valuation, or editorial conclusion requires a new review and approval that describes the change.
+`npm run check:flash-sale` reads the checked-in catalog and the sale selected by `index.currentSaleId`. It does not accept a draft path or validate every historical sale. JSON parsing alone also does not establish schema validity.
+
+For draft or historical-sale validation, use an isolated validation copy with the target sale, proposed catalog, and matching index alongside `package.json`, the validator, and its `src/lib/flash-sale.js` dependency, preserving their repository-relative paths. Run the existing validator there without altering the working tree's current pointer. Report incomplete-draft failures or validation limits accurately; do not relax checks to make an unfinished payload pass.
+
+Fixture tests currently include assertions tied to a particular current sale. When advancing the pointer, update the affected current-sale coverage and retain the old sale's historical assertions. Include necessary fixture-test changes in the review's file list; a data refresh does not justify unrelated application or validator changes.
