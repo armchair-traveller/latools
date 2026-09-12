@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { resolve } from '$app/paths';
+	import { asset, resolve } from '$app/paths';
 	import ArrowRightIcon from '@lucide/svelte/icons/arrow-right';
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
 	import CircleDollarSignIcon from '@lucide/svelte/icons/circle-dollar-sign';
@@ -19,13 +19,13 @@
 	<meta property="og:title" content="LaTale Tools — Adventurer's Dispatch" />
 	<meta property="og:description" content={description} />
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content={`${page.url.origin}${resolve('/og.png')}`} />
+	<meta property="og:image" content={`${page.url.origin}${asset('/og.png')}`} />
 	<meta property="og:image:width" content="1731" />
 	<meta property="og:image:height" content="909" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="LaTale Tools — Adventurer's Dispatch" />
 	<meta name="twitter:description" content={description} />
-	<meta name="twitter:image" content={`${page.url.origin}${resolve('/og.png')}`} />
+	<meta name="twitter:image" content={`${page.url.origin}${asset('/og.png')}`} />
 </svelte:head>
 
 <main class="dispatch">
@@ -41,12 +41,12 @@
 				<p class="kicker">Community toolkit / Global service</p>
 				<h1 id="dispatch-title">A better way<br />through <em>LaTale.</em></h1>
 				<p class="lede">
-					Damage models, Ely routes, story archives, and live reward rankings—five ways to
+					Damage models, Ely routes, quest walkthroughs, and live reward rankings—five ways to
 					spend less time guessing.
 				</p>
 				<div class="actions">
-					<a class="action-primary" href={resolve('/scenario-script')}>
-						Open the archive <ArrowRightIcon aria-hidden="true" />
+					<a class="action-primary" href={resolve('/scenario')}>
+						Open the scenario guide <ArrowRightIcon aria-hidden="true" />
 					</a>
 					<a class="action-secondary" href="#switchboard">View all 05 routes</a>
 				</div>
@@ -62,9 +62,9 @@
 				{/each}
 				<div class="roster-ribbon">Adventurer's<br />dispatch</div>
 				<div class="stats-ticket">
-					<div><strong>143</strong><span>Stories</span></div>
-					<div><strong>50,651</strong><span>Lines</span></div>
-					<div><strong>344</strong><span>Portraits</span></div>
+					<div><strong>143</strong><span>Scenarios</span></div>
+					<div><strong>863</strong><span>Steps</span></div>
+					<div><strong>4</strong><span>Chapters</span></div>
 				</div>
 			</div>
 		</section>
@@ -108,13 +108,13 @@
 				<div class="route-meta"><span>5 stages · current event</span><ArrowRightIcon aria-hidden="true" /></div>
 			</a>
 
-			<a class="route route-story" href={resolve('/scenario-script')}>
+			<a class="route route-story" href={resolve('/scenario')}>
 				<div class="route-head"><strong>04</strong><BookOpenTextIcon aria-hidden="true" /></div>
 				<div>
-					<h3>Scenario scripts</h3>
-					<p>50,651 English lines, ready to search.</p>
+					<h3>Scenario guide</h3>
+					<p>Find every quest, route, and required item.</p>
 				</div>
-				<div class="route-meta"><span>143 stories · 4 chapters</span><ArrowRightIcon aria-hidden="true" /></div>
+				<div class="route-meta"><span>143 scenarios · 863 steps</span><ArrowRightIcon aria-hidden="true" /></div>
 			</a>
 
 			<a class="route route-spec" href={resolve('/spec-analyzer')}>

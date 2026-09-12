@@ -129,7 +129,7 @@
 						<Sidebar.MenuButton class="app-reference-button" tooltipContent="Korean fan wiki">
 							{#snippet child({ props })}
 								<a
-									href="https://latale.wiki/scenario-script"
+									href="https://latale.wiki/progression/scenario"
 									target="_blank"
 									rel="noreferrer"
 									aria-label="Open Korean fan wiki in a new tab"

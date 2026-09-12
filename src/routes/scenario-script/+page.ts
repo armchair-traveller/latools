@@ -1,14 +1,7 @@
-import type { ArchiveIndex } from '$lib/types';
+import { redirect } from '@sveltejs/kit';
+import { resolve } from '$app/paths';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ fetch }) => {
-	const response = await fetch('/data/index.json');
-
-	if (!response.ok) {
-		throw new Error('The story index could not be loaded.');
-	}
-
-	return {
-		archive: (await response.json()) as ArchiveIndex
-	};
+export const load: PageLoad = ({ url }) => {
+	redirect(308, `${resolve('/scenario')}${url.search}`);
 };

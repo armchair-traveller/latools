@@ -1,65 +1,84 @@
-export type StoryType = 'main' | 'sub';
+export type ScenarioType = 'main' | 'sub';
 
-export interface StoryMeta {
+export interface ScenarioItem {
 	id: number;
-	type: StoryType;
+	name: string;
+	description: string;
+	count: number;
+	npc?: string;
+	place?: string;
+	obtainedFrom?: {
+		questId: number;
+		stepName: string;
+		npc: string;
+		place: string;
+		method: string;
+	};
+}
+
+export interface ScenarioDungeon {
+	id: number;
+	name: string;
+	entrance: string;
+	partySize: number;
+}
+
+export interface ScenarioTravel {
+	destination: string;
+	method: string;
+	steps: string[];
+}
+
+export interface ScenarioStep {
+	id: number;
+	name: string;
+	startNpc: string;
+	startPlace: string;
+	objective: string;
+	endNpc: string;
+	endPlace: string;
+	targets: {
+		monsters: string[];
+		items: ScenarioItem[];
+		dungeons: ScenarioDungeon[];
+	};
+	travel: ScenarioTravel[];
+	notes: string[];
+	grantedItems: ScenarioItem[];
+	consumedItems: ScenarioItem[];
+	rewardItems: ScenarioItem[];
+}
+
+export interface ScenarioQuest {
+	id: number;
+	type: ScenarioType;
 	chapter: number;
 	order: number;
 	name: string;
 	level: number;
-	stepCount: number;
-	lineCount: number;
+	ultraLevel: number;
+	requirements: string[];
+	steps: ScenarioStep[];
 }
 
-export interface DialogueChoice {
-	text: string;
-	goto: number;
-	lines?: DialogueLine[];
-}
-
-export interface DialogueLine {
-	id: number;
-	speaker?: string;
-	speakerName?: string;
-	text: string;
-	choices?: DialogueChoice[];
-}
-
-export interface StoryScene {
-	id: number;
-	lines: DialogueLine[];
-}
-
-export interface StoryStep {
-	id: number;
-	name: string;
-	objective?: string;
-	scenes: StoryScene[];
-}
-
-export interface Story {
-	id: number;
-	name: string;
-	type: StoryType;
-	chapter: number;
-	order: number;
-	source: string;
+export interface ScenarioGuide {
+	schemaVersion: 1;
+	sourceLanguage: 'ko';
+	sourceUrl: string;
+	generatedAt: string;
 	updated: string;
-	steps: StoryStep[];
+	source: string;
+	quests: ScenarioQuest[];
+	snapshot: { questCount: number; stepCount: number; sha256: string };
 }
 
-export interface ArchiveIndex {
-	index: StoryMeta[];
-	speakers: Record<string, number>;
-	chapters: Record<string, string>;
-	generatedAt?: string;
-	sourceUrl?: string;
+export interface ScenarioTranslation {
+	schemaVersion: 1;
+	language: 'en';
+	sourceSha256: string;
+	translatedAt: string;
+	strings: Record<string, string>;
 }
-
-export type RenderEntry =
-	| { kind: 'line'; line: DialogueLine; id: string }
-	| { kind: 'choice'; text: string; id: string }
-	| { kind: 'repeated'; id: string };
 
 export type ExchangeValuation = 'priced' | 'unique' | 'pending';
 
