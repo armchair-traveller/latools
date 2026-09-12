@@ -5,6 +5,7 @@ import PackagePlusIcon from '@lucide/svelte/icons/package-plus';
 import PercentIcon from '@lucide/svelte/icons/percent';
 import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
 import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
+import ScrollTextIcon from '@lucide/svelte/icons/scroll-text';
 
 export const toolNavigation = [
 	{
@@ -92,8 +93,22 @@ export const toolNavigation = [
 		image: '/npc/856.png'
 	},
 	{
-		key: 'inventory-expansion',
+		key: 'scenario-script',
 		index: '06',
+		label: 'Scenario script',
+		description: 'Stories · dialogue · characters',
+		verb: 'Read',
+		context: 'English story archive',
+		href: '/scenario-script',
+		icon: ScrollTextIcon,
+		accent: '#997044',
+		soft: '#f3e9d8',
+		deep: '#66451f',
+		image: '/npc/589.png'
+	},
+	{
+		key: 'inventory-expansion',
+		index: '07',
 		label: 'Inventory expansion',
 		description: 'Bags · quests · saved progress',
 		verb: 'Track',

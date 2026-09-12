@@ -1,6 +1,6 @@
 # Scenario walkthrough
 
-The tool at `/scenario` replaces the retired translated dialogue reader. `/scenario-script` redirects to the guide. The source is https://latale.wiki/progression/scenario, the walkthrough revised in the wiki's August 31, 2026 patch notes. The separate `/scenario-script` wiki page is not this tool's data source.
+The tool at `/scenario` is a quest walkthrough. The separate dialogue reader at `/scenario-script` has its own source and fresh translation catalogs; see [scenario-script-maintenance.md](scenario-script-maintenance.md). The walkthrough source is https://latale.wiki/progression/scenario, revised in the wiki's August 31, 2026 patch notes. The wiki's `/scenario-script` page is not the walkthrough's data source.
 
 ## Update
 
@@ -28,4 +28,4 @@ To refresh, stage the new source with `--output .cache/scenario-review`, transla
 
 ## Verification
 
-Run `npm run check:scenario`, `node --test tests/scenario-*.test.mjs`, `npm run check`, and `npm run build`. Use `agent-browser` to check English and Korean title/NPC/dungeon/item search, language switching, combined type/chapter filters, empty results and reset, previous/next scenarios, item descriptions, and responsive layout. Check both direct `#quest-ID` and `#step-ID` links, page reload, browser back/forward, and the legacy URL redirect. Review a late side scenario with Super Level requirements and item acquisition notes as well as the first main scenario.
+Run `npm run check:scenario`, `node --test tests/scenario-guide.test.mjs tests/scenario-sync.test.mjs`, `npm run check`, and `npm run build`. Use `agent-browser` to check English and Korean title/NPC/dungeon/item search, language switching, combined type/chapter filters, empty results and reset, previous/next scenarios, and item descriptions. Check direct `#quest-ID` and `#step-ID` links, reload, browser back/forward, and responsive layout. Review a late side scenario with Super Level requirements and item acquisition notes as well as the first main scenario.

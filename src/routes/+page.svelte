@@ -9,6 +9,7 @@
 	import PercentIcon from '@lucide/svelte/icons/percent';
 	import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
 	import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
+	import ScrollTextIcon from '@lucide/svelte/icons/scroll-text';
 
 	const portraits = ['589', '786', '1399', '1102', '1373', '101', '1202', '721', '741'];
 	const utilityCount = String(toolCount).padStart(2, '0');
@@ -129,8 +130,17 @@
 				<div class="route-meta"><span>7 dungeons · damage efficiency</span><ArrowRightIcon aria-hidden="true" /></div>
 			</a>
 
+			<a class="route route-script" href={resolve('/scenario-script')}>
+				<div class="route-head"><strong>06</strong><ScrollTextIcon aria-hidden="true" /></div>
+				<div>
+					<h3>Scenario script</h3>
+					<p>Read the story, one conversation at a time.</p>
+				</div>
+				<div class="route-meta"><span>English dialogue · 4 chapters</span><ArrowRightIcon aria-hidden="true" /></div>
+			</a>
+
 			<a class="route route-inventory" href={resolve('/inventory-expansion')}>
-				<div class="route-head"><strong>06</strong><PackagePlusIcon aria-hidden="true" /></div>
+				<div class="route-head"><strong>07</strong><PackagePlusIcon aria-hidden="true" /></div>
 				<div>
 					<h3>Inventory expansion</h3>
 					<p>Find expansion bags and track your rewards.</p>
@@ -612,8 +622,13 @@
 		background: #c8b8ff;
 	}
 
-	.route-inventory {
+	.route-script {
 		grid-column: span 4;
+		background: #f3e9d8;
+	}
+
+	.route-inventory {
+		grid-column: 1 / -1;
 		background: #ddf0f1;
 	}
 
@@ -650,6 +665,9 @@
 			grid-column: span 1;
 		}
 
+		.route-inventory {
+			grid-column: 1 / -1;
+		}
 		.event-copy {
 			max-width: 58%;
 		}
@@ -714,6 +732,9 @@
 			min-height: 175px;
 		}
 
+		.route-inventory {
+			grid-column: 1 / -1;
+		}
 	}
 
 	@media (max-width: 560px) {
