@@ -197,7 +197,7 @@ test('reports capture and valuation completeness independently', () => {
 	});
 });
 
-test('current Back-to-School fixture contains every approved cycle and offer', async () => {
+test('historical Back-to-School fixture preserves every approved cycle and offer', async () => {
 	const [index, currentCatalog, sale, historicalSale, priorSale] = await Promise.all([
 		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
@@ -214,7 +214,7 @@ test('current Back-to-School fixture contains every approved cycle and offer', a
 		)
 	);
 
-	assert.equal(index.currentSaleId, sale.id);
+	assert.ok(index.sales.some((entry) => entry.id === sale.id));
 	assert.ok(index.sales.some((entry) => entry.id === 'papayaplay-6332'));
 	assert.ok(index.sales.some((entry) => entry.id === 'papayaplay-6347'));
 	const expectedSaleKeys = [
@@ -366,8 +366,10 @@ test('current Back-to-School fixture contains every approved cycle and offer', a
 	for (const itemId of newPendingItemIds) {
 		const item = currentCatalog.items.find((entry) => entry.id === itemId);
 		assert.ok(item, `Missing new catalog item ${itemId}`);
-		assert.equal(item.valuation.status, 'pending');
-		assert.equal(item.valuation.unitEly, null);
+		const snapshot = sale.valuationSnapshot.find((entry) => entry.itemId === itemId);
+		assert.ok(snapshot, `Missing historical valuation for ${itemId}`);
+		assert.equal(snapshot.status, 'pending');
+		assert.equal(snapshot.unitEly, null);
 	}
 
 	const eelEnergy = currentCatalog.items.find((entry) => entry.id === 'eoli-energy-extract');
@@ -388,4 +390,121 @@ test('current Back-to-School fixture contains every approved cycle and offer', a
 			.flatMap((cycle) => cycle.offers)
 			.every((entry) => !('rank' in entry) && !('bundleEly' in entry) && !('elyPerLtc' in entry))
 	);
+});
+
+test('current Before Mistwood fixture preserves all 25 offers and their valuation evidence', async () => {
+	const [index, currentCatalog, sale] = await Promise.all([
+		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6401.json', import.meta.url), 'utf8').then(JSON.parse)
+	]);
+	assert.equal(index.currentSaleId, sale.id);
+	assert.equal(sale.postId, 6401);
+	assert.equal(sale.title, 'Last Call! Before Mistwood');
+	assert.equal(sale.publishedAt, '2026-09-10T00:00:00-04:00');
+	assert.equal(sale.expectedOfferCount, 25);
+	assert.deepEqual(
+		sale.cycles.map((cycle) => [cycle.id, cycle.expectedOfferCount, cycle.offers.length]),
+		[['r1', 8, 8], ['r2', 9, 9], ['r3', 8, 8]]
+	);
+	assert.deepEqual(
+		sale.cycles.map((cycle) => [cycle.startsAt, cycle.endsAt]),
+		[
+			['2026-09-09T20:30:00-04:00', '2026-09-11T20:29:00-04:00'],
+			['2026-09-11T20:30:00-04:00', '2026-09-14T20:29:00-04:00'],
+			['2026-09-14T20:30:00-04:00', '2026-09-16T19:50:00-04:00']
+		]
+	);
+	assert.deepEqual(
+		sale.cycles.map((cycle) => cycle.offers.map((entry) => entry.salePriceLtc)),
+		[
+			[950, 900, 690, 1990, 690, 2290, 2590, 2500],
+			[1590, 1590, 690, 1290, 4500, 3590, 1095, 1095, 2290],
+			[3500, 3500, 2700, 2500, 2290, 1990, 1200, 990]
+		]
+	);
+	for (const cycle of sale.cycles) {
+		assert.deepEqual(cycle.unresolvedSlots, []);
+		assert.deepEqual(cycle.offers.map((entry) => entry.slot),
+			Array.from({ length: cycle.expectedOfferCount }, (_, slot) => slot + 1));
+	}
+	const offers = sale.cycles.flatMap((cycle) => cycle.offers);
+	assert.ok(offers.every((entry) => entry.purchaseLimit === null));
+	for (const entry of offers) {
+		assert.equal(entry.capture.status, 'verified');
+		assert.deepEqual(entry.capture.sourceIds, ['official-poster-2']);
+		assert.ok(!('rank' in entry) && !('bundleEly' in entry) && !('elyPerLtc' in entry));
+	}
+
+	assert.deepEqual(offers.find((entry) => entry.id === 'r2-summonable-scroll').contents, [
+		{ itemId: 'summonable-upgrade-spellbook', quantity: 250 },
+		{ itemId: 'advanced-summonable-upgrade-spellbook', quantity: 80 }
+	]);
+	assert.deepEqual(offers.find((entry) => entry.id === 'r2-guild-accessory-plus-9').contents, [
+		{ itemId: 'guild-accessory-coupon-plus-9', quantity: 1 }
+	]);
+	assert.deepEqual(offers.find((entry) => entry.id === 'r2-gm-guild-iii').contents, [
+		{ itemId: 'gm-guild-bundle-iii', quantity: 1 }
+	]);
+	assert.deepEqual(offers.find((entry) => entry.id === 'r3-great-nine').contents, [
+		{ itemId: 'great-nine-pet-coupon', quantity: 1 },
+		{ itemId: 'pet-damage-puzzle', quantity: 5 },
+		{ itemId: 'pet-reassign-puzzle', quantity: 1 },
+		{ itemId: 'pet-name-change-coupon', quantity: 1 }
+	]);
+	assert.deepEqual(offers.find((entry) => entry.id === 'r3-great-patchwork-sheepy').contents, [
+		{ itemId: 'great-patchwork-sheepy-pet-coupon', quantity: 1 },
+		{ itemId: 'pet-damage-puzzle', quantity: 5 },
+		{ itemId: 'pet-reassign-puzzle', quantity: 5 },
+		{ itemId: 'pet-name-change-coupon', quantity: 1 }
+	]);
+
+	const blueStars = sale.valuationSnapshot.find((entry) => entry.itemId === 'bottle-blue-stars');
+	assert.equal(blueStars.status, 'priced');
+	assert.equal(blueStars.unitEly, 700_000);
+	assert.equal(blueStars.asOf, '2026-08-20');
+	assert.deepEqual(blueStars.sourceIds, ['event-exchange-values-2026-08-20']);
+	assert.equal(currentCatalog.items.find((entry) => entry.id === 'bottle-blue-stars').valuation.unitEly,
+		700_000);
+	for (const itemId of [
+		'black-highteen-fashion-set-i',
+		'black-highteen-fashion-set-ii',
+		'summonable-upgrade-spellbook',
+		'advanced-summonable-upgrade-spellbook',
+		'yellow-hoppity-mount-coupon',
+		'guild-accessory-coupon-plus-9',
+		'gm-guild-bundle-iii',
+		'great-nine-pet-coupon',
+		'great-patchwork-sheepy-pet-coupon'
+	]) {
+		assert.ok(currentCatalog.items.some((entry) => entry.id === itemId));
+		const snapshot = sale.valuationSnapshot.find((entry) => entry.itemId === itemId);
+		assert.equal(snapshot.status, 'pending');
+		assert.equal(snapshot.unitEly, null);
+	}
+
+	const r1 = rankFlashSaleCycle(sale, currentCatalog, 'r1');
+	assert.equal(r1[0].id, 'r1-adventure-dice');
+	assert.equal(r1[0].bundleEly, 17_250_000_000);
+	assert.equal(r1[0].elyPerLtc, 25_000_000);
+	const r3 = rankFlashSaleCycle(sale, currentCatalog, 'r3');
+	assert.equal(r3[0].id, 'r3-memorial-x');
+	assert.equal(r3[0].bundleEly, 27_000_000_000);
+	assert.equal(r3[0].elyPerLtc, 10_000_000);
+	for (const cycleId of ['r1', 'r3']) {
+		const constellation = evaluateFlashSaleCycle(sale, currentCatalog, cycleId).find(
+			(entry) => entry.id === `${cycleId}-constellation`
+		);
+		assert.equal(constellation.valuationState, 'partial');
+		assert.equal(constellation.knownBundleEly, 6_100_000_000);
+		assert.equal(constellation.rank, null);
+	}
+	assert.deepEqual(getFlashSaleCompleteness(sale, currentCatalog), {
+		captured: 25,
+		unresolved: 0,
+		total: 25,
+		fullyValued: 11,
+		partiallyValued: 6,
+		unranked: 8
+	});
 });

@@ -32,6 +32,22 @@
 			"url": "/data/flash-sale/catalog.json",
 			"accessedAt": "2026-08-06T18:24:40Z",
 			"note": "Internal maintainer estimates supplied for this sale; no external evidence URL was provided."
+		},
+		{
+			"id": "official-sale-6401",
+			"kind": "official-sale",
+			"title": "Last Call! Before Mistwood",
+			"url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6401",
+			"accessedAt": "2026-09-12T18:18:00Z",
+			"note": "Canonical announcement and official recent-news listing identify post 6401 and displayed date 2026.09.10. API PostDate is 2026-09-10 03:50:36.14 without a timezone; publishedAt represents the displayed date at midnight using the repository convention, not a verified posting instant."
+		},
+		{
+			"id": "event-exchange-values-2026-08-20",
+			"kind": "market-observation",
+			"title": "Maintainer-confirmed event exchange values",
+			"url": "/data/event-exchange/catalog.json",
+			"accessedAt": "2026-09-12T18:18:00Z",
+			"note": "Previously approved Bottle of Blue Stars unit value, dated 2026-08-20, reused for the exact item variant. This is existing repository evidence, not a new market observation."
 		}
 	],
 	"items": [
@@ -99,7 +115,7 @@
 		{ "id": "storage-expansion-bag", "name": "Storage Expansion Bag", "aliases": ["Storage Expansion Bag (x10)"], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
 		{ "id": "elias-royal-academy-uniform-i", "name": "Elias Royal Academy Uniform I", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
 		{ "id": "elias-royal-academy-uniform-ii", "name": "Elias Royal Academy Uniform II", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
-		{ "id": "bottle-blue-stars", "name": "Bottle of Blue Stars", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
+		{ "id": "bottle-blue-stars", "name": "Bottle of Blue Stars", "aliases": [], "valuation": { "status": "priced", "unitEly": 700000, "method": "market-observation", "confidence": "high", "asOf": "2026-08-20", "sourceIds": ["event-exchange-values-2026-08-20"], "note": "Reused the previously approved 700,000 Ely per Bottle of Blue Stars from the event exchange catalog, dated 2026-08-20." } },
 		{ "id": "shining-laititia-dungeon-reset-coupon", "name": "Shining Laititia Dungeon Reset Coupon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
 		{ "id": "cheerful-tengu-totem-fragment", "name": "Cheerful Tengu Totem Fragment", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
 		{ "id": "daily-red-storm-potion-30d", "name": "Daily [Red Storm Potion] (30 Days)", "aliases": ["Daily [Red Storm Potion] (30 Days) 1+1"], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
@@ -111,6 +127,15 @@
 		{ "id": "festival-celebration-emoticon", "name": "Festival Celebration Emoticon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
 		{ "id": "latale-anniversary-dance-emoticon", "name": "LaTale Anniversary Dance Emoticon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
 		{ "id": "autumn-titlebook", "name": "Autumn Titlebook", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
-		{ "id": "class-set-piece-coupon", "name": "Class Set Piece Coupon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } }
+		{ "id": "class-set-piece-coupon", "name": "Class Set Piece Coupon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [], "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification." } },
+		{ "id": "black-highteen-fashion-set-i", "name": "Black Highteen Fashion Set I", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": ["official-sale-6401"], "note": "New item from official post 6401; awaiting a maintainer-confirmed Ely value or personal/unique classification." } },
+		{ "id": "black-highteen-fashion-set-ii", "name": "Black Highteen Fashion Set II", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": ["official-sale-6401"], "note": "New item from official post 6401; awaiting a maintainer-confirmed Ely value or personal/unique classification." } },
+		{ "id": "summonable-upgrade-spellbook", "name": "Summonable Upgrade Spellbook", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": ["official-sale-6401"], "note": "New item from official post 6401; awaiting a maintainer-confirmed Ely value or personal/unique classification. The exact Spellbook label in post 6401 has not been confirmed as an alias of Summon Skill Enhancement Scroll." } },
+		{ "id": "advanced-summonable-upgrade-spellbook", "name": "Advanced Summonable Upgrade Spellbook", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": ["official-sale-6401"], "note": "New item from official post 6401; awaiting a maintainer-confirmed Ely value or personal/unique classification. The exact Spellbook label in post 6401 has not been confirmed as an alias of Advanced Summon Skill Enhancement Scroll." } },
+		{ "id": "yellow-hoppity-mount-coupon", "name": "Yellow Hoppity Mount Coupon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": ["official-sale-6401"], "note": "New item from official post 6401; awaiting a maintainer-confirmed Ely value or personal/unique classification." } },
+		{ "id": "guild-accessory-coupon-plus-9", "name": "Guild Accessory Coupon +9", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": ["official-sale-6401"], "note": "New item from official post 6401; awaiting a maintainer-confirmed Ely value or personal/unique classification. One coupon selecting one of the three pictured accessories; the accessory names are not printed." } },
+		{ "id": "gm-guild-bundle-iii", "name": "GM's Guild Bundle III", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": ["official-sale-6401"], "note": "New item from official post 6401; awaiting a maintainer-confirmed Ely value or personal/unique classification. One complete named package. The current poster names three components and abbreviates two others as +2 more, so this package has no component-derived valuation." } },
+		{ "id": "great-nine-pet-coupon", "name": "Great Nine Pet Coupon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": ["official-sale-6401"], "note": "New item from official post 6401; awaiting a maintainer-confirmed Ely value or personal/unique classification." } },
+		{ "id": "great-patchwork-sheepy-pet-coupon", "name": "Great Patchwork Sheepy Pet Coupon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": ["official-sale-6401"], "note": "New item from official post 6401; awaiting a maintainer-confirmed Ely value or personal/unique classification." } }
 	]
 }
