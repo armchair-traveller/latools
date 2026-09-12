@@ -1,6 +1,7 @@
 import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
 import CircleDollarSignIcon from '@lucide/svelte/icons/circle-dollar-sign';
 import HouseIcon from '@lucide/svelte/icons/house';
+import PackagePlusIcon from '@lucide/svelte/icons/package-plus';
 import PercentIcon from '@lucide/svelte/icons/percent';
 import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
 import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
@@ -89,10 +90,24 @@ export const toolNavigation = [
 		soft: '#e5e8fb',
 		deep: '#2f388c',
 		image: '/npc/856.png'
+	},
+	{
+		key: 'inventory-expansion',
+		index: '06',
+		label: 'Inventory expansion',
+		description: 'Bags · quests · saved progress',
+		verb: 'Track',
+		context: 'Inventory reward checklist',
+		href: '/inventory-expansion',
+		icon: PackagePlusIcon,
+		accent: '#247f89',
+		soft: '#ddf0f1',
+		deep: '#16515a',
+		image: '/npc/786.png'
 	}
 ] as const;
 
-export const toolCount = toolNavigation.length;
+export const toolCount = toolNavigation.filter((tool) => tool.href !== '/').length;
 export const lastToolIndex = toolNavigation[toolNavigation.length - 1].index;
 
 export function getActiveTool(pathname: string) {

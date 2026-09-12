@@ -5,6 +5,7 @@ A growing collection of English-language LaTale fan utilities, including a scena
 ## Features
 
 - General-purpose tool landing page at `/`
+- Inventory expansion checklist at `/inventory-expansion`: 137 translated reward sources, English/Korean search, slot totals, and progress saved in the browser
 - Scenario walkthrough at `/scenario` (the former `/scenario-script` URL redirects here)
 - Current event exchange guide at `/event-exchange`, ranked by maintainer-confirmed Ely value per point
 - Current flash sale guide at `/flash-sale`, ranked per cycle by maintainer-confirmed Ely value per LTC

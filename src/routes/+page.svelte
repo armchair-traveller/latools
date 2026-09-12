@@ -1,16 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { asset, resolve } from '$app/paths';
+	import { toolCount } from '$lib/tool-navigation';
 	import ArrowRightIcon from '@lucide/svelte/icons/arrow-right';
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
 	import CircleDollarSignIcon from '@lucide/svelte/icons/circle-dollar-sign';
+	import PackagePlusIcon from '@lucide/svelte/icons/package-plus';
 	import PercentIcon from '@lucide/svelte/icons/percent';
 	import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
 	import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
 
 	const portraits = ['589', '786', '1399', '1102', '1373', '101', '1202', '721', '741'];
+	const utilityCount = String(toolCount).padStart(2, '0');
 	const description =
-		'Five community-made shortcuts through LaTale builds, earnings, stories, events, and sales.';
+		`${toolCount} community-made shortcuts through LaTale builds, earnings, quests, stories, events, sales, and inventory upgrades.`;
 </script>
 
 <svelte:head>
@@ -32,7 +35,7 @@
 	<div class="poster">
 		<div class="metadata-rail">
 			<span>LaTale Tools / Adventurer's Dispatch</span>
-			<span>Vol. 01 · 05 Utilities · <i></i> Status: online</span>
+			<span>Vol. 01 · {utilityCount} Utilities · <i></i> Status: online</span>
 		</div>
 
 		<section class="hero" aria-labelledby="dispatch-title">
@@ -41,14 +44,14 @@
 				<p class="kicker">Community toolkit / Global service</p>
 				<h1 id="dispatch-title">A better way<br />through <em>LaTale.</em></h1>
 				<p class="lede">
-					Damage models, Ely routes, quest walkthroughs, and live reward rankings—five ways to
+					Damage models, Ely routes, quest walkthroughs, stories, rewards, and inventory plans—{toolCount} ways to
 					spend less time guessing.
 				</p>
 				<div class="actions">
 					<a class="action-primary" href={resolve('/scenario')}>
 						Open the scenario guide <ArrowRightIcon aria-hidden="true" />
 					</a>
-					<a class="action-secondary" href="#switchboard">View all 05 routes</a>
+					<a class="action-secondary" href="#switchboard">View all {utilityCount} routes</a>
 				</div>
 				<div class="hero-note"><span>Read</span><span>Calculate</span><span>Rank</span></div>
 			</div>
@@ -71,7 +74,7 @@
 
 		<div class="index-rail">
 			<h2 id="switchboard-title">Choose a route</h2>
-			<p>05 shortcuts through the game <span>→</span></p>
+			<p>{utilityCount} shortcuts through the game <span>→</span></p>
 		</div>
 
 		<section id="switchboard" class="switchboard" aria-labelledby="switchboard-title">
@@ -124,6 +127,15 @@
 					<p>Model damage. Compare enchants.</p>
 				</div>
 				<div class="route-meta"><span>7 dungeons · damage efficiency</span><ArrowRightIcon aria-hidden="true" /></div>
+			</a>
+
+			<a class="route route-inventory" href={resolve('/inventory-expansion')}>
+				<div class="route-head"><strong>06</strong><PackagePlusIcon aria-hidden="true" /></div>
+				<div>
+					<h3>Inventory expansion</h3>
+					<p>Find expansion bags and track your rewards.</p>
+				</div>
+				<div class="route-meta"><span>137 sources · saved checklist</span><ArrowRightIcon aria-hidden="true" /></div>
 			</a>
 		</section>
 	</div>
@@ -496,7 +508,7 @@
 	.switchboard {
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
-		grid-template-rows: repeat(2, 146px);
+		grid-auto-rows: minmax(146px, auto);
 		gap: 8px;
 		padding-top: 8px;
 	}
@@ -580,43 +592,48 @@
 	}
 
 	.route-earnings {
-		grid-column: span 7;
+		grid-column: span 4;
 		background: #d7ff4f;
 	}
 
 	.route-story {
-		grid-column: span 3;
+		grid-column: span 4;
 		background: #17180f;
 		color: #fffdf7;
 	}
 
 	.route-event {
-		grid-column: span 5;
+		grid-column: span 4;
 		background: #ff6257;
 	}
 
 	.route-sale {
-		grid-column: span 5;
+		grid-column: span 4;
 		background: #c8b8ff;
+	}
+
+	.route-inventory {
+		grid-column: span 4;
+		background: #ddf0f1;
 	}
 
 	.event-copy {
 		position: relative;
 		z-index: 2;
-		max-width: calc(100% - 160px);
+		max-width: calc(100% - 90px);
 	}
 
 	.item-strip {
 		position: absolute;
-		right: 24px;
+		right: 10px;
 		bottom: 28px;
 		display: flex;
 		transform: rotate(-3deg);
 	}
 
 	.item-strip img {
-		width: 38px;
-		height: 38px;
+		width: 26px;
+		height: 26px;
 		margin-left: -7px;
 		border: 2px solid #17180f;
 		background: #ffffff;
@@ -627,15 +644,10 @@
 	@media (max-width: 1100px) {
 		.switchboard {
 			grid-template-columns: repeat(2, 1fr);
-			grid-template-rows: repeat(3, 146px);
 		}
 
 		.route {
 			grid-column: span 1;
-		}
-
-		.route-spec {
-			grid-column: span 2;
 		}
 
 		.event-copy {
@@ -695,7 +707,6 @@
 
 		.switchboard {
 			grid-template-columns: repeat(2, 1fr);
-			grid-template-rows: auto;
 		}
 
 		.route {
@@ -703,9 +714,6 @@
 			min-height: 175px;
 		}
 
-		.route-spec {
-			grid-column: span 2;
-		}
 	}
 
 	@media (max-width: 560px) {
@@ -740,8 +748,7 @@
 			grid-template-columns: 1fr;
 		}
 
-		.route,
-		.route-spec {
+		.route {
 			grid-column: span 1;
 		}
 	}

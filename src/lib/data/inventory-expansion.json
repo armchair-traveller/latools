@@ -1,0 +1,1432 @@
+{
+  "sourceUrl": "https://latale.wiki/inventory-expansion",
+  "sourceUpdatedAt": "2026-07-27",
+  "translatedAt": "2026-09-12",
+  "entries": [
+    {
+      "id": "guide-all-0",
+      "source": "guide",
+      "title": "Movement: Learn How to Move!",
+      "originalTitle": "이동: 이동에 대해 알아보자!",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "guide-all-1",
+      "source": "guide",
+      "title": "Storage I: Learn About Storage Inventory!",
+      "originalTitle": "창고 I: 창고 인벤토리에 대해 알아보자!",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "guide-all-2",
+      "source": "guide",
+      "title": "Class Advancement: Complete Your First Class Advancement",
+      "originalTitle": "전직: 1차 전직하기 [Lv.50]",
+      "level": "Lv. 50",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "guide-all-3",
+      "source": "guide",
+      "title": "Subclass: Unlock a Subclass",
+      "originalTitle": "서브클래스: 서브클래스 획득하기 [Lv.140]",
+      "level": "Lv. 140",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "guide-all-4",
+      "source": "guide",
+      "title": "Sacred Hall",
+      "originalTitle": "성스러운 회당 [Lv.215++]",
+      "level": "Lv. 215++",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "guide-all-5",
+      "source": "guide",
+      "title": "Character Awakening II",
+      "originalTitle": "캐릭터 각성 II",
+      "rewards": {
+        "all": 2
+      }
+    },
+    {
+      "id": "guide-equip-0",
+      "source": "guide",
+      "title": "Character Status I",
+      "originalTitle": "상태창 I",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-1",
+      "source": "guide",
+      "title": "NPC I",
+      "originalTitle": "NPC I",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-2",
+      "source": "guide",
+      "title": "Dragon's Lair",
+      "originalTitle": "사룡의 둥지 [Lv.21~24]",
+      "level": "Lv. 21–24",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-3",
+      "source": "guide",
+      "title": "Party",
+      "originalTitle": "파티",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-4",
+      "source": "guide",
+      "title": "Frozen Labyrinth",
+      "originalTitle": "극지의 라비린스 [Lv.100~103]",
+      "level": "Lv. 100–103",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-5",
+      "source": "guide",
+      "title": "Challenge! Frozen Labyrinth",
+      "originalTitle": "도전! 라비린스 [Lv.180]",
+      "level": "Lv. 180",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-6",
+      "source": "guide",
+      "title": "Collapsed Tower Underground",
+      "originalTitle": "붕괴의 탑 지하 [Lv.190++]",
+      "level": "Lv. 190++",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-7",
+      "source": "guide",
+      "title": "Road of Dream",
+      "originalTitle": "꿈의 길 [Lv.195++]",
+      "level": "Lv. 195++",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-8",
+      "source": "guide",
+      "title": "Auction House II",
+      "originalTitle": "거래소 II",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-9",
+      "source": "guide",
+      "title": "Hidden Cave",
+      "originalTitle": "숨겨진 동굴 [Lv.207++]",
+      "level": "Lv. 207++",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-10",
+      "source": "guide",
+      "title": "Dwarf Airship",
+      "originalTitle": "드워프 비공정 [Lv.217++]",
+      "level": "Lv. 217++",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-11",
+      "source": "guide",
+      "title": "Waterfall Tree Forest",
+      "originalTitle": "폭포나무 숲 [Lv.227++]",
+      "level": "Lv. 227++",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-12",
+      "source": "guide",
+      "title": "Twin Cave",
+      "originalTitle": "트윙 키브 [Lv.235++]",
+      "level": "Lv. 235++",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-equip-13",
+      "source": "guide",
+      "title": "Obtain 6 Runeword Runes",
+      "originalTitle": "룬워드 룬 6개 획득 [ULv.500]",
+      "level": "ULv. 500",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "guide-use-0",
+      "source": "guide",
+      "title": "NPC I",
+      "originalTitle": "NPC I",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-1",
+      "source": "guide",
+      "title": "Waypoint I",
+      "originalTitle": "웨이포인트 I",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-2",
+      "source": "guide",
+      "title": "Shangri-La",
+      "originalTitle": "샹그리라 [Lv.40~42]",
+      "level": "Lv. 40–42",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-3",
+      "source": "guide",
+      "title": "Friends",
+      "originalTitle": "친구",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-4",
+      "source": "guide",
+      "title": "Valhalla",
+      "originalTitle": "발할라 [Lv.140]",
+      "level": "Lv. 140",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-5",
+      "source": "guide",
+      "title": "Magic Book Reading Room",
+      "originalTitle": "마법서 열람실 [Lv.180++]",
+      "level": "Lv. 180++",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-6",
+      "source": "guide",
+      "title": "Ymir Institute",
+      "originalTitle": "이미르 연구소 [Lv.190++]",
+      "level": "Lv. 190++",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-7",
+      "source": "guide",
+      "title": "World's Genesis",
+      "originalTitle": "세계수의 환영 [Lv.195++]",
+      "level": "Lv. 195++",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-8",
+      "source": "guide",
+      "title": "Obtain 2 Runeword Runes",
+      "originalTitle": "룬워드 룬 2개 획득 [Lv.208]",
+      "level": "Lv. 208",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-9",
+      "source": "guide",
+      "title": "Auction House III",
+      "originalTitle": "거래소 III",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-10",
+      "source": "guide",
+      "title": "Ruined Castle",
+      "originalTitle": "파괴된 성 [Lv.209++]",
+      "level": "Lv. 209++",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-11",
+      "source": "guide",
+      "title": "Sun Palace",
+      "originalTitle": "태양의 궁전 [Lv.220++]",
+      "level": "Lv. 220++",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-12",
+      "source": "guide",
+      "title": "Jewel Tree Forest",
+      "originalTitle": "보석나무 숲 [Lv.227++]",
+      "level": "Lv. 227++",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-13",
+      "source": "guide",
+      "title": "Chaos Canyon",
+      "originalTitle": "혼돈의 협곡 [Lv.235++]",
+      "level": "Lv. 235++",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-use-14",
+      "source": "guide",
+      "title": "Obtain 7 Runeword Runes",
+      "originalTitle": "룬워드 룬 7개 획득 [ULv.1000]",
+      "level": "ULv. 1000",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "guide-etc-0",
+      "source": "guide",
+      "title": "NPC II",
+      "originalTitle": "NPC II",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-1",
+      "source": "guide",
+      "title": "Waypoint II",
+      "originalTitle": "웨이포인트 II",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-2",
+      "source": "guide",
+      "title": "Couples",
+      "originalTitle": "커플",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-3",
+      "source": "guide",
+      "title": "Pyramid Chamber",
+      "originalTitle": "피라미드 현실 [Lv.60~64]",
+      "level": "Lv. 60–64",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-4",
+      "source": "guide",
+      "title": "Challenge! Fairy Tree",
+      "originalTitle": "도전! 요정수 [Lv.160]",
+      "level": "Lv. 160",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-5",
+      "source": "guide",
+      "title": "Forgotten Garden",
+      "originalTitle": "잊혀진 화원 [Lv.185++]",
+      "level": "Lv. 185++",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-6",
+      "source": "guide",
+      "title": "Road of Flower",
+      "originalTitle": "꽃의 길 [Lv.195++]",
+      "level": "Lv. 195++",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-7",
+      "source": "guide",
+      "title": "Obtain 3 Runeword Runes",
+      "originalTitle": "룬워드 룬 3개 획득 [Lv.216]",
+      "level": "Lv. 216",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-8",
+      "source": "guide",
+      "title": "Moonflower Garden",
+      "originalTitle": "월화원 [Lv.203++]",
+      "level": "Lv. 203++",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-9",
+      "source": "guide",
+      "title": "Manastone Laboratory",
+      "originalTitle": "마석 실험실 [Lv.211++]",
+      "level": "Lv. 211++",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-10",
+      "source": "guide",
+      "title": "Obtain 4 Runeword Runes",
+      "originalTitle": "룬워드 룬 4개 획득 [Lv.224]",
+      "level": "Lv. 224",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-11",
+      "source": "guide",
+      "title": "Sun God's Underground Altar",
+      "originalTitle": "태양신의 지하 제단 [Lv.220++]",
+      "level": "Lv. 220++",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-12",
+      "source": "guide",
+      "title": "Floating Island",
+      "originalTitle": "부유섬 [Lv.235++]",
+      "level": "Lv. 235++",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-13",
+      "source": "guide",
+      "title": "Frozen World",
+      "originalTitle": "얼어붙은 세계 [Lv.235++]",
+      "level": "Lv. 235++",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-etc-14",
+      "source": "guide",
+      "title": "La Tale Adventure: 1,000 Spaces",
+      "originalTitle": "라테일 어드벤처 1,000칸",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "guide-event-0",
+      "source": "guide",
+      "title": "NPC II",
+      "originalTitle": "NPC II",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-1",
+      "source": "guide",
+      "title": "Event System",
+      "originalTitle": "이벤트 시스템",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-2",
+      "source": "guide",
+      "title": "Party Matching",
+      "originalTitle": "파티매칭",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-3",
+      "source": "guide",
+      "title": "Chimera Laboratory",
+      "originalTitle": "키마이라 연구소 [Lv.90~99]",
+      "level": "Lv. 90–99",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-4",
+      "source": "guide",
+      "title": "Challenge! Golden Cloud Realm",
+      "originalTitle": "도전! 금란운계 [Lv.180]",
+      "level": "Lv. 180",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-5",
+      "source": "guide",
+      "title": "Star Cradle",
+      "originalTitle": "별의요람 [Lv.190++]",
+      "level": "Lv. 190++",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-6",
+      "source": "guide",
+      "title": "Road of Moon",
+      "originalTitle": "달의 길 [Lv.195++]",
+      "level": "Lv. 195++",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-7",
+      "source": "guide",
+      "title": "Auction House I",
+      "originalTitle": "거래소 I",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-8",
+      "source": "guide",
+      "title": "Dragon Emperor's Hall",
+      "originalTitle": "용황전 [Lv.205++]",
+      "level": "Lv. 205++",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-9",
+      "source": "guide",
+      "title": "Demon Canyon",
+      "originalTitle": "악마의 협곡 [Lv.213++]",
+      "level": "Lv. 213++",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-10",
+      "source": "guide",
+      "title": "Treasure Cave",
+      "originalTitle": "트레져 케이브 [Lv.222++]",
+      "level": "Lv. 222++",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-11",
+      "source": "guide",
+      "title": "Illusion Mist Swamp",
+      "originalTitle": "환영의 독안개 늪지 [Lv.235++]",
+      "level": "Lv. 235++",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-12",
+      "source": "guide",
+      "title": "Hall of Rest",
+      "originalTitle": "안식의 홀 [Lv.235++]",
+      "level": "Lv. 235++",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-13",
+      "source": "guide",
+      "title": "Obtain 5 Runeword Runes",
+      "originalTitle": "룬워드 룬 5개 획득 [Lv.235]",
+      "level": "Lv. 235",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-event-14",
+      "source": "guide",
+      "title": "Obtain 8 Runeword Runes",
+      "originalTitle": "룬워드 룬 8개 획득 [ULv.2000]",
+      "level": "ULv. 2000",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "guide-storage-0",
+      "source": "guide",
+      "title": "Mounts: Obtain a Mount!",
+      "originalTitle": "탈것: 탈것을 습득해보자!",
+      "rewards": {
+        "storage": 1
+      }
+    },
+    {
+      "id": "guide-storage-1",
+      "source": "guide",
+      "title": "Items: Learn About Item Inventory!",
+      "originalTitle": "아이템: 아이템 인벤토리에 대해 알아보자!",
+      "rewards": {
+        "storage": 1
+      }
+    },
+    {
+      "id": "guide-storage-2",
+      "source": "guide",
+      "title": "Reach Champion Rank 10",
+      "originalTitle": "초인 10등급 달성하기",
+      "rewards": {
+        "storage": 1
+      }
+    },
+    {
+      "id": "guide-storage-3",
+      "source": "guide",
+      "title": "La Tale Adventure: 1,500 Spaces",
+      "originalTitle": "라테일 어드벤처 1,500칸",
+      "rewards": {
+        "storage": 1
+      }
+    },
+    {
+      "id": "story-0",
+      "source": "story",
+      "title": "An Encounter in Hyunmu's Cave",
+      "originalTitle": "현무동에서의 만남",
+      "level": "Lv. 50",
+      "location": "Story progression",
+      "originalLocation": "스토리 진행",
+      "rewards": {
+        "storage": 1
+      }
+    },
+    {
+      "id": "story-1",
+      "source": "story",
+      "title": "The Rampaging Sea Dragon King",
+      "originalTitle": "폭주 해룡왕",
+      "level": "Lv. 85",
+      "location": "Story progression",
+      "originalLocation": "스토리 진행",
+      "rewards": {
+        "storage": 1
+      }
+    },
+    {
+      "id": "story-2",
+      "source": "story",
+      "title": "Kthuka's Priestess",
+      "originalTitle": "크투가의 무녀",
+      "level": "Lv. 91",
+      "location": "Story progression",
+      "originalLocation": "스토리 진행",
+      "rewards": {
+        "storage": 1
+      }
+    },
+    {
+      "id": "story-3",
+      "source": "story",
+      "title": "Reunion",
+      "originalTitle": "재회",
+      "level": "Lv. 180",
+      "location": "Complete remotely",
+      "originalLocation": "원격 완료",
+      "rewards": {
+        "storage": 1
+      }
+    },
+    {
+      "id": "story-4",
+      "source": "story",
+      "title": "To Aurora Forest!",
+      "originalTitle": "오로라의 숲으로!",
+      "level": "Lv. 202",
+      "location": "Aurora Forest · Flari",
+      "originalLocation": "오로라의 숲 · 플라리",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "story-5",
+      "source": "story",
+      "title": "Bad Behavior Has Consequences",
+      "originalTitle": "잘못했으면 혼나야죠.",
+      "level": "Lv. 202",
+      "location": "Aurora Forest · Flari",
+      "originalLocation": "오로라의 숲 · 플라리",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "story-6",
+      "source": "story",
+      "title": "Where the Tragedy Began",
+      "originalTitle": "비극의 시작점으로",
+      "level": "Lv. 205",
+      "location": "Dragon Emperor's Hall · Guiyi",
+      "originalLocation": "용황전 · 기이",
+      "rewards": {
+        "storage": 1
+      }
+    },
+    {
+      "id": "story-7",
+      "source": "story",
+      "title": "The End",
+      "originalTitle": "종결",
+      "level": "Lv. 227",
+      "location": "Lumen · Asma",
+      "originalLocation": "루맨 · 아스마",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "story-8",
+      "source": "story",
+      "title": "Bilbradha, Keeper of the Floating Island",
+      "originalTitle": "부유섬의 관리자, 빌브라트",
+      "level": "Lv. 235",
+      "location": "Floating Island · Bilbradha",
+      "originalLocation": "부유섬 · 빌브라트",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "story-9",
+      "source": "story",
+      "title": "Leviathan, the Divine Beast",
+      "originalTitle": "신수 리바이어던",
+      "level": "Lv. 235",
+      "location": "Coral City · Elena",
+      "originalLocation": "코랄시티 · 엘레나",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "story-10",
+      "source": "story",
+      "title": "A Being That Repeats Destruction",
+      "originalTitle": "멸망을 반복하는 존재",
+      "level": "Lv. 235",
+      "location": "Burning City · Geis",
+      "originalLocation": "불타는 도시 · 기아스",
+      "rewards": {
+        "equipment": 1,
+        "consumables": 1,
+        "etc": 1
+      }
+    },
+    {
+      "id": "dungeon-0",
+      "source": "dungeon",
+      "title": "Showdown! Invoke!",
+      "originalTitle": "대결! 인보크!",
+      "level": "Lv. 21",
+      "location": "Temple of Pluton · Ases",
+      "originalLocation": "플루톤 신전 · 아세스",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "dungeon-1",
+      "source": "dungeon",
+      "title": "The Master of Shangri-La",
+      "originalTitle": "샹그리라의 주인",
+      "level": "Lv. 40",
+      "location": "Arcadia · Zhang Jin",
+      "originalLocation": "아르카디아 · 장진",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "dungeon-2",
+      "source": "dungeon",
+      "title": "The Monster Guarding the King",
+      "originalTitle": "왕을 지키는 마물",
+      "level": "Lv. 56",
+      "location": "Elfa · Yunas",
+      "originalLocation": "엘파 · 유나스",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "dungeon-3",
+      "source": "dungeon",
+      "title": "The Sphinx of the Pyramid",
+      "originalTitle": "피라미드의 스핑크스",
+      "level": "Lv. 60",
+      "location": "Pyramid · Kiara",
+      "originalLocation": "피라미드 · 키아라",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "dungeon-4",
+      "source": "dungeon",
+      "title": "An Encounter with the Sea Dragon King",
+      "originalTitle": "해룡왕과의 만남",
+      "level": "Lv. 85",
+      "location": "Kthuka Ruins Underground · Vima",
+      "originalLocation": "크투가 유적 지하 · 뷔마",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "dungeon-5",
+      "source": "dungeon",
+      "title": "Her Belongings",
+      "originalTitle": "그녀의 물건",
+      "level": "Lv. 90",
+      "location": "Abyss Ruins · Sonia",
+      "originalLocation": "심연의 유적 · 소니아",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "dungeon-6",
+      "source": "dungeon",
+      "title": "The Corrupted Great Dragon",
+      "originalTitle": "침식된 위대한 용",
+      "level": "Lv. 92",
+      "location": "Kthuka Ruins Underground · Vima",
+      "originalLocation": "크투가 유적 지하 · 뷔마",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "dungeon-7",
+      "source": "dungeon",
+      "title": "The Master of the Cursed Place",
+      "originalTitle": "저주받은 장소의 주인",
+      "level": "Lv. 95",
+      "location": "Abyss Ruins · Sonia",
+      "originalLocation": "심연의 유적 · 소니아",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "dungeon-8",
+      "source": "dungeon",
+      "title": "The Master of Ice",
+      "originalTitle": "얼음의 주인",
+      "level": "Lv. 99",
+      "location": "Atlantis · Usher",
+      "originalLocation": "아틀란티스 · 어셔",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "dungeon-9",
+      "source": "dungeon",
+      "title": "Vintor's Belongings",
+      "originalTitle": "빈터의 물건",
+      "level": "Lv. 100",
+      "location": "Snowfield · Rudolph",
+      "originalLocation": "설원 · 루돌프",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "dungeon-10",
+      "source": "dungeon",
+      "title": "Phoenix's Belongings",
+      "originalTitle": "포에닉스의 물건",
+      "level": "Lv. 120",
+      "location": "Bifrost · Cordelia",
+      "originalLocation": "비프로스트 · 코델리아",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "dungeon-11",
+      "source": "dungeon",
+      "title": "The Bird That Rises Again",
+      "originalTitle": "부활하는 새",
+      "level": "Lv. 145",
+      "location": "Space Shuttle Launch Pad · Scylla",
+      "originalLocation": "스페이스 셔틀 발사대 · 스큐라",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "dungeon-12",
+      "source": "dungeon",
+      "title": "A Way to Return",
+      "originalTitle": "회귀 할 수 있는 방법",
+      "level": "Lv. 178",
+      "location": "Silver Branch Mansion Entrance · Varsha",
+      "originalLocation": "은빛가지 저택 입구 · 바르샤",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "dungeon-13",
+      "source": "dungeon",
+      "title": "The Power to Destroy a Continent",
+      "originalTitle": "대륙을 파괴할 힘",
+      "level": "Lv. 180",
+      "location": "Forgotten Plains · Elite Ranger",
+      "originalLocation": "잊혀진 평원 · 엘리트 유격병",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "dungeon-14",
+      "source": "dungeon",
+      "title": "Theseus, the Legendary Hero",
+      "originalTitle": "전설의 영웅 테세우스",
+      "level": "Lv. 180",
+      "location": "Silver Branch Mansion · Taffy",
+      "originalLocation": "은빛가지 저택 · 타피",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "dungeon-15",
+      "source": "dungeon",
+      "title": "Njord, the Titan Guarding the Darkness",
+      "originalTitle": "암흑을 지키는 거신 뇨르드",
+      "level": "Lv. 180",
+      "location": "Collapsed Tower Entrance · Liz",
+      "originalLocation": "붕괴의 탑 입구 · 리즈",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "dungeon-16",
+      "source": "dungeon",
+      "title": "What Elmei Left Behind",
+      "originalTitle": "엘메이가 남긴 것",
+      "level": "Lv. 190",
+      "location": "Drifting City 1 · Muller",
+      "originalLocation": "표류도시 1 · 뮐러",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "dungeon-17",
+      "source": "dungeon",
+      "title": "That Man's Emblem",
+      "originalTitle": "그 남자의 상징물",
+      "level": "Lv. 208",
+      "location": "Riveria, the Free Trade City · Eva",
+      "originalLocation": "자유 무역 도시 리베라 · 에바",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "dungeon-18",
+      "source": "dungeon",
+      "title": "A Symbol of Strength and Power",
+      "originalTitle": "힘과 권력의 상징",
+      "level": "Lv. 208",
+      "location": "Riveria, the Free Trade City · Eva",
+      "originalLocation": "자유 무역 도시 리베라 · 에바",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "dungeon-19",
+      "source": "dungeon",
+      "title": "Free the Water Spirit",
+      "originalTitle": "물의 정령 해방",
+      "level": "Lv. 211",
+      "location": "Riveria, the Free Trade City · Levi",
+      "originalLocation": "자유 무역 도시 리베라 · 레비",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "dungeon-20",
+      "source": "dungeon",
+      "title": "A Clean Retrieval (4)",
+      "originalTitle": "회수는 깔끔하게 (4)",
+      "level": "Lv. 211",
+      "location": "Marin Island · Alvis",
+      "originalLocation": "메린 섬 · 알비스",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "dungeon-21",
+      "source": "dungeon",
+      "title": "Why This World Is Hidden",
+      "originalTitle": "가려진 세계의 이유",
+      "level": "Lv. 235",
+      "location": "Kali · Medea",
+      "originalLocation": "칼리 · 메디아",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "dungeon-22",
+      "source": "dungeon",
+      "title": "At Least I Haven't Burst with Anger",
+      "originalTitle": "화병이 안 난 게 어디",
+      "level": "Lv. 235",
+      "location": "Knossos · Talos",
+      "originalLocation": "크노소스 · 탈로스",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "dungeon-23",
+      "source": "dungeon",
+      "title": "Not Even Enough Time to Sleep",
+      "originalTitle": "잠잘 시간도 모자라",
+      "level": "Lv. 235",
+      "location": "Pneuma · Arche",
+      "originalLocation": "프뉴마 · 아르케",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "dungeon-home",
+      "source": "dungeon",
+      "title": "The Scent of Home",
+      "originalTitle": "고향의 향기",
+      "level": "Lv. 235",
+      "location": "Magic Academy Lobby · Soleil",
+      "originalLocation": "마법학원 로비 · 소레이유",
+      "rewards": {
+        "etc": 1,
+        "event": 1
+      }
+    },
+    {
+      "id": "dungeon-despair",
+      "source": "dungeon",
+      "title": "The Despair That Sought the Goddess",
+      "originalTitle": "여신을 찾아온 절망",
+      "level": "Lv. 235",
+      "location": "Eidos Sanctuary · Argent",
+      "originalLocation": "성역 에이도스 · 아르젠트",
+      "rewards": {
+        "etc": 1,
+        "event": 1
+      }
+    },
+    {
+      "id": "burning-1",
+      "source": "burning",
+      "title": "Dragon's Lair: Invoke",
+      "originalTitle": "사룡의 둥지 인보크",
+      "level": "Stage 1",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "burning-2",
+      "source": "burning",
+      "title": "Sixteenth Moon: Dark Moon Princess",
+      "originalTitle": "십육일의 달 흑월 공주",
+      "level": "Stage 2",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "burning-3",
+      "source": "burning",
+      "title": "Chilled Heart: Sea Dragon King",
+      "originalTitle": "식어버린 심장 해룡왕",
+      "level": "Stage 3",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "burning-4",
+      "source": "burning",
+      "title": "King's Aircraft: King Asura",
+      "originalTitle": "비공부 아수라왕",
+      "level": "Stage 4",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "burning-5",
+      "source": "burning",
+      "title": "Webfoot Octopus Boss Room: Octopus UFO",
+      "originalTitle": "쭈꾸미 보스방 쭈꾸미 UFO",
+      "level": "Stage 5",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "burning-6",
+      "source": "burning",
+      "title": "Big Tube: Bollywood",
+      "originalTitle": "빅튜브 발리우드",
+      "level": "Stage 6",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "burning-7",
+      "source": "burning",
+      "title": "Sky Coliseum: Eve",
+      "originalTitle": "천공성 콜로세움 하와",
+      "level": "Stage 7",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "burning-8",
+      "source": "burning",
+      "title": "Aurora Garden: Aurora",
+      "originalTitle": "오로라의 정원 오로라",
+      "level": "Stage 8",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "burning-9",
+      "source": "burning",
+      "title": "Dragon Emperor's Hall: Tam",
+      "originalTitle": "용황전 탐",
+      "level": "Stage 9",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "burning-10",
+      "source": "burning",
+      "title": "Riveria City Hall: Zekal",
+      "originalTitle": "리베라 시청 제칼",
+      "level": "Stage 10",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "burning-11",
+      "source": "burning",
+      "title": "Ruined Castle: Geminus",
+      "originalTitle": "파괴된 성 게미누스",
+      "level": "Stage 11",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "burning-12",
+      "source": "burning",
+      "title": "Demon Canyon: Gallus",
+      "originalTitle": "악마의 협곡 갤루스",
+      "level": "Stage 12",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "burning-13",
+      "source": "burning",
+      "title": "The Twisted World Tree: Mutant Blue Dragon",
+      "originalTitle": "뒤틀린 세계수 돌연변이 푸룡",
+      "level": "Stage 13",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "burning-14",
+      "source": "burning",
+      "title": "Sun Palace: Darman",
+      "originalTitle": "태양의 궁전 다르만",
+      "level": "Stage 14",
+      "rewards": {
+        "etc": 1
+      }
+    },
+    {
+      "id": "burning-15",
+      "source": "burning",
+      "title": "Chunsik Land Memorial Hall: Sik",
+      "originalTitle": "춘식랜드 기념관 식",
+      "level": "Stage 15",
+      "rewards": {
+        "equipment": 1
+      }
+    },
+    {
+      "id": "burning-16",
+      "source": "burning",
+      "title": "Book of Shadows: Black Flame Dragon",
+      "originalTitle": "그림자의 책 흑염룡",
+      "level": "Stage 16",
+      "rewards": {
+        "event": 1
+      }
+    },
+    {
+      "id": "burning-17",
+      "source": "burning",
+      "title": "Song of the Coral: Kraka",
+      "originalTitle": "산호의 노래 크라카",
+      "level": "Stage 17",
+      "rewards": {
+        "consumables": 1
+      }
+    },
+    {
+      "id": "burning-18",
+      "source": "burning",
+      "title": "Ice Cream Garden: Ancient Calorie",
+      "originalTitle": "아이스크림 정원 에이션트 칼로리",
+      "level": "Stage 18",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "limited-0",
+      "source": "limited",
+      "title": "Beginner Mission A",
+      "originalTitle": "초보자 미션 A",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "equipment": 5
+      }
+    },
+    {
+      "id": "limited-1",
+      "source": "limited",
+      "title": "Beginner Mission C",
+      "originalTitle": "초보자 미션 C",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "all": 4
+      }
+    },
+    {
+      "id": "limited-2",
+      "source": "limited",
+      "title": "Beginner Mission E",
+      "originalTitle": "초보자 미션 E",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "event": 5
+      }
+    },
+    {
+      "id": "limited-3",
+      "source": "limited",
+      "title": "Congratulations on Reaching ULv. 3,000!",
+      "originalTitle": "초월 3000 달성 축하!",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "limited-4",
+      "source": "limited",
+      "title": "Congratulations on Reaching ULv. 4,000!",
+      "originalTitle": "초월 4000 달성 축하!",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "limited-5",
+      "source": "limited",
+      "title": "Newbie and Helper START",
+      "originalTitle": "뉴비와 헬퍼 START",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "all": 2
+      }
+    },
+    {
+      "id": "limited-6",
+      "source": "limited",
+      "title": "Operation: Rescue Taffy (4)",
+      "originalTitle": "타피 탈환 작전 (4)",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "all": 2
+      }
+    },
+    {
+      "id": "limited-7",
+      "source": "limited",
+      "title": "But I'm a Little Scared",
+      "originalTitle": "하지만 조금은 무서워요",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "all": 3
+      }
+    },
+    {
+      "id": "limited-8",
+      "source": "limited",
+      "title": "A Celebrity at Nereis Gateway",
+      "originalTitle": "네레이스 관문의 유명 인사",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "limited-9",
+      "source": "limited",
+      "title": "Lupia's Wish: Beat, Rhythm, Soul..",
+      "originalTitle": "루피아의 소원: Beat, Rhythm, Soul..",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "limited-10",
+      "source": "limited",
+      "title": "A Rather Strange Request",
+      "originalTitle": "어딘가 이상한 의뢰",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "all": 1
+      }
+    },
+    {
+      "id": "limited-11",
+      "source": "limited",
+      "title": "A Memorial Offering for Two Sisters",
+      "originalTitle": "두 자매를 위한 차례상",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "storage": 1
+      }
+    },
+    {
+      "id": "limited-12",
+      "source": "limited",
+      "title": "Hip Pigeon Appears to Celebrate Lunar New Year!",
+      "originalTitle": "설날을 축복하기 위해 힙둘기가 나타났다!",
+      "note": "Limited-time reward; the event may have ended.",
+      "rewards": {
+        "all": 1
+      }
+    }
+  ]
+}
