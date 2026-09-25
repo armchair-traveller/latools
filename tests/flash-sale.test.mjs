@@ -392,13 +392,13 @@ test('historical Back-to-School fixture preserves every approved cycle and offer
 	);
 });
 
-test('current Before Mistwood fixture preserves all 25 offers and their valuation evidence', async () => {
+test('historical Before Mistwood fixture preserves all 25 offers and their valuation evidence', async () => {
 	const [index, currentCatalog, sale] = await Promise.all([
 		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6401.json', import.meta.url), 'utf8').then(JSON.parse)
 	]);
-	assert.equal(index.currentSaleId, sale.id);
+	assert.ok(index.sales.some((entry) => entry.id === sale.id));
 	assert.equal(sale.postId, 6401);
 	assert.equal(sale.title, 'Last Call! Before Mistwood');
 	assert.equal(sale.publishedAt, '2026-09-10T00:00:00-04:00');
@@ -507,4 +507,211 @@ test('current Before Mistwood fixture preserves all 25 offers and their valuatio
 		partiallyValued: 6,
 		unranked: 8
 	});
+});
+
+test('current September fixture follows Discord rounds and the canonical sale poster', async () => {
+	const [index, currentCatalog, sale, beforeMistwood] = await Promise.all([
+		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6421.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6401.json', import.meta.url), 'utf8').then(JSON.parse)
+	]);
+	assert.equal(index.currentSaleId, 'papayaplay-6421');
+	assert.equal(sale.id, index.currentSaleId);
+	assert.equal(sale.postId, 6421);
+	assert.equal(sale.sourceUrl, 'https://latale.papayaplay.com/latale.do?tp=news.view&postid=6421');
+	assert.equal(sale.title, 'Eternal Royal Paradise - New Pet & Premium Items');
+	assert.equal(sale.publishedAt, '2026-09-17T00:00:00-04:00');
+	assert.equal(sale.timezone, 'America/New_York');
+	assert.deepEqual(index.sales.find((entry) => entry.id === sale.id), {
+		id: sale.id,
+		title: sale.title,
+		startsAt: '2026-09-16T20:30:00-04:00',
+		endsAt: '2026-09-30T19:50:00-04:00',
+		reviewedAt: sale.reviewedAt
+	});
+	for (const id of ['papayaplay-6332', 'papayaplay-6347', 'papayaplay-6382', 'papayaplay-6401']) {
+		assert.ok(index.sales.some((entry) => entry.id === id), `Missing historical sale ${id}`);
+	}
+	assert.deepEqual(sale.posterUrls, [
+		'https://cdn.papayaplay.com/SF/1789/6153/7052/0916_LT_Sales_poster1_fixed.jpeg',
+		'https://cdn.papayaplay.com/SF/1789/6087/0834/0916_LT_Sales_poster2.jpeg'
+	]);
+	assert.equal(sale.sources.find((entry) => entry.id === 'official-sale-6421').url, sale.sourceUrl);
+	assert.match(sale.sources.find((entry) => entry.id === 'discord-sale-6421').note, /supplied/i);
+	assert.equal(sale.expectedOfferCount, 34);
+	assert.deepEqual(sale.cycles.map((cycle) => cycle.expectedOfferCount), [7, 7, 5, 5, 5, 5]);
+	assert.deepEqual(sale.cycles.map((cycle) => cycle.offers.length), [7, 7, 5, 5, 5, 5]);
+	assert.deepEqual(
+		sale.cycles.map((cycle) => [cycle.startsAt, cycle.endsAt]),
+		[
+			['2026-09-16T20:30:00-04:00', '2026-09-18T20:29:00-04:00'],
+			['2026-09-18T20:30:00-04:00', '2026-09-21T20:29:00-04:00'],
+			['2026-09-21T20:30:00-04:00', '2026-09-23T20:29:00-04:00'],
+			['2026-09-23T20:30:00-04:00', '2026-09-25T20:29:00-04:00'],
+			['2026-09-25T20:30:00-04:00', '2026-09-28T20:29:00-04:00'],
+			['2026-09-28T20:30:00-04:00', '2026-09-30T19:50:00-04:00']
+		]
+	);
+	assert.deepEqual(
+		sale.cycles.map((cycle) => cycle.offers.map((entry) => entry.id)),
+		[
+			['r1-storage-expansion', 'r1-general-inventory', 'r1-adventure-dice', 'r1-platinum-hammer',
+				'r1-instance-title-ii', 'r1-constellation', 'r1-constellation-expansion'],
+			['r2-goddess-card', 'r2-special-weapon-skin', 'r2-strawberry-patissier-i',
+				'r2-strawberry-patissier-ii', 'r2-night-camping', 'r2-power-picnic', 'r2-autumn-crates'],
+			['r3-mechanical-angel-wings', 'r3-summonable-spellbooks', 'r3-memorial-x',
+				'r3-constellation-expansion', 'r3-gm-guild-iii'],
+			['r4-compass-eternity', 'r4-tome-ancients', 'r4-mystic-fragments', 'r4-seres-30d',
+				'r4-weekly-grinder-iii'],
+			['r5-cosmic-orca', 'r5-paragon-30d', 'r5-memorial-x', 'r5-great-dreamy', 'r5-great-wippy'],
+			['r6-god-crafting', 'r6-masters-hand', 'r6-goddess-card', 'r6-advanced-guild', 'r6-constellation']
+		]
+	);
+	assert.deepEqual(
+		sale.cycles.map((cycle) => cycle.offers.map((entry) => entry.salePriceLtc)),
+		[
+			[950, 900, 690, 2590, 690, 1990, 2290],
+			[2500, 1290, 1590, 1590, 1990, 1790, 4400],
+			[1590, 690, 2700, 2290, 3590],
+			[5000, 1095, 1500, 1095, 2490],
+			[790, 1200, 2700, 3500, 3500],
+			[690, 690, 2500, 990, 1990]
+		]
+	);
+	assert.deepEqual(
+		sale.cycles.map((cycle) => cycle.offers.map((entry) => entry.purchaseLimit.quantity)),
+		[
+			[25, 25, 50, 50, 35, 50, 30],
+			[15, 15, 15, 15, 15, 35, 40],
+			[10, 25, 50, 50, 20],
+			[15, 20, 30, 35, 15],
+			[15, 15, 50, 25, 25],
+			[15, 15, 15, 20, 30]
+		]
+	);
+	for (const cycle of sale.cycles) {
+		assert.deepEqual(cycle.unresolvedSlots, []);
+		assert.deepEqual(cycle.offers.map((entry) => entry.slot),
+			Array.from({ length: cycle.expectedOfferCount }, (_, slot) => slot + 1));
+		for (const entry of cycle.offers) {
+			assert.equal(entry.purchaseLimit.scope, 'sale');
+			assert.equal(entry.capture.status, 'verified');
+			assert.deepEqual(entry.capture.sourceIds,
+				['discord-sale-6421', cycle.id === 'r1' ? 'official-poster-1' : 'official-poster-2']);
+		}
+	}
+	assert.deepEqual(getFlashSaleTimeline(sale, '2026-09-23T20:29:00-04:00'), {
+		status: 'gap', activeCycleId: null, nextCycleId: 'r4'
+	});
+	assert.deepEqual(getFlashSaleTimeline(sale, '2026-09-23T20:30:00-04:00'), {
+		status: 'active', activeCycleId: 'r4', nextCycleId: 'r5'
+	});
+	assert.equal(getFlashSaleTimeline(sale, '2026-09-30T19:50:00-04:00').status, 'ended');
+
+	const offers = new Map(sale.cycles.flatMap((cycle) => cycle.offers).map((entry) => [entry.id, entry]));
+	for (const [offerId, itemId, quantity] of [
+		['r1-storage-expansion', 'storage-expansion-bag', 10],
+		['r1-general-inventory', 'general-inventory-bag', 6],
+		['r1-adventure-dice', 'la-tale-adventure-dice', 500],
+		['r1-platinum-hammer', 'platinum-hammer', 100],
+		['r4-compass-eternity', 'compass-of-eternity-coupon', 5]
+	]) {
+		assert.deepEqual(offers.get(offerId).contents, [{ itemId, quantity }]);
+	}
+	assert.deepEqual(offers.get('r3-summonable-spellbooks').contents, [
+		{ itemId: 'summonable-upgrade-spellbook', quantity: 250 },
+		{ itemId: 'advanced-summonable-upgrade-spell', quantity: 80 }
+	]);
+	assert.deepEqual(offers.get('r3-gm-guild-iii').contents, [
+		{ itemId: 'guild-firepower-king-30d', quantity: 1 },
+		{ itemId: 'greater-guild-coin-box', quantity: 20 },
+		{ itemId: 'guild-relic-upgrade-stone', quantity: 6 },
+		{ itemId: 'guild-upgrade-stone', quantity: 15 },
+		{ itemId: 'guild-reward-ticket', quantity: 50 }
+	]);
+	assert.deepEqual(offers.get('r2-autumn-crates').contents, [
+		{ itemId: 'legends-of-etoile', quantity: 20 },
+		{ itemId: 'soulys-midnight-hunt', quantity: 20 },
+		{ itemId: 'premium-divine-era', quantity: 20 },
+		{ itemId: 'phantasmal-tin-crate', quantity: 20 }
+	]);
+	assert.deepEqual(offers.get('r5-great-dreamy').contents, [
+		{ itemId: 'great-dreamy-fairy-pet-coupon', quantity: 1 },
+		{ itemId: 'pet-damage-puzzle', quantity: 5 },
+		{ itemId: 'pet-reassign-puzzle', quantity: 5 },
+		{ itemId: 'pet-name-change-coupon', quantity: 1 }
+	]);
+	assert.deepEqual(offers.get('r5-great-wippy').contents, [
+		{ itemId: 'wippy-pet-coupon', quantity: 1 },
+		{ itemId: 'pet-damage-puzzle', quantity: 5 },
+		{ itemId: 'pet-reassign-puzzle', quantity: 5 },
+		{ itemId: 'permanent-pet-transformation-kit', quantity: 1 }
+	]);
+	for (const offerId of ['r3-memorial-x', 'r5-memorial-x']) {
+		assert.deepEqual(offers.get(offerId).contents, [
+			{ itemId: 'memorial-hero-fragment', quantity: 350 },
+			{ itemId: 'memorial-reset-crystal', quantity: 150 }
+		]);
+	}
+	assert.deepEqual(offers.get('r6-advanced-guild').contents, [
+		{ itemId: 'advanced-guild-food-supply-box', quantity: 20 },
+		{ itemId: 'greater-guild-coin-box', quantity: 20 },
+		{ itemId: 'guild-crop-seed-box', quantity: 30 }
+	]);
+	assert.deepEqual(offers.get('r1-constellation').contents, offers.get('r6-constellation').contents);
+	assert.deepEqual(offers.get('r1-constellation-expansion').contents,
+		offers.get('r3-constellation-expansion').contents);
+
+	const snapshot = new Map(sale.valuationSnapshot.map((entry) => [entry.itemId, entry]));
+	for (const itemId of [
+		'special-weapon-skin-coupon', 'strawberry-patissier-dessert-set-i',
+		'strawberry-patissier-dessert-set-ii', 'night-camping-chair-coupon', 'legends-of-etoile',
+		'soulys-midnight-hunt', 'premium-divine-era', 'phantasmal-tin-crate',
+		'mechanical-angel-wings-mount-coupon', 'advanced-summonable-upgrade-spell',
+		'cosmic-orca-damage-skin-coupon', 'great-dreamy-fairy-pet-coupon', 'wippy-pet-coupon',
+		'permanent-pet-transformation-kit', 'guaranteed-god-of-crafting-titlebook',
+		'guaranteed-masters-hand-titlebook'
+	]) {
+		const item = currentCatalog.items.find((entry) => entry.id === itemId);
+		assert.ok(item, `Missing new catalog item ${itemId}`);
+		for (const value of [item.valuation, snapshot.get(itemId)]) {
+			assert.equal(value.status, 'pending', itemId);
+			assert.equal(value.method, 'pending', itemId);
+			assert.equal(value.unitEly, null, itemId);
+			assert.equal(value.asOf, null, itemId);
+			assert.equal(value.confidence, null, itemId);
+		}
+	}
+	assert.equal(currentCatalog.items.find((entry) => entry.id === 'wippy-pet-coupon').name, 'Wippy Pet Coupon');
+	assert.equal(currentCatalog.items.find((entry) => entry.id === 'advanced-summonable-upgrade-spell').name,
+		'Advanced Summonable Upgrade Spell');
+	assert.ok(!snapshot.has('advanced-summonable-upgrade-spellbook'));
+	assert.ok(!snapshot.has('storage-expansion-bag-x5'));
+	for (const previousValue of beforeMistwood.valuationSnapshot) {
+		if (snapshot.has(previousValue.itemId)) {
+			assert.deepEqual(snapshot.get(previousValue.itemId), previousValue,
+				`Changed reused evidence for ${previousValue.itemId}`);
+		}
+	}
+	assert.equal(snapshot.get('bottle-blue-stars').asOf, '2026-08-20');
+	assert.equal(snapshot.get('memorial-hero-fragment').asOf, '2026-08-13');
+	assert.equal(snapshot.get('la-tale-adventure-dice').asOf, '2026-08-03');
+	for (const value of sale.valuationSnapshot) {
+		assert.ok(value.sourceIds.every((id) => sale.sources.some((entry) => entry.id === id)));
+	}
+	assert.deepEqual(getFlashSaleCompleteness(sale, currentCatalog), {
+		captured: 34, unresolved: 0, total: 34, fullyValued: 11, partiallyValued: 8, unranked: 15
+	});
+	const r1 = rankFlashSaleCycle(sale, currentCatalog, 'r1');
+	assert.equal(r1[0].id, 'r1-adventure-dice');
+	assert.equal(r1[0].elyPerLtc, 25_000_000);
+	for (const cycleId of ['r1', 'r6']) {
+		const constellation = evaluateFlashSaleCycle(sale, currentCatalog, cycleId).find(
+			(entry) => entry.id === `${cycleId}-constellation`
+		);
+		assert.equal(constellation.valuationState, 'partial');
+		assert.equal(constellation.knownBundleEly, 6_100_000_000);
+		assert.equal(constellation.rank, null);
+	}
 });

@@ -1,0 +1,2033 @@
+{
+	"schemaVersion": 1,
+	"id": "papayaplay-6421",
+	"postId": 6421,
+	"title": "Eternal Royal Paradise - New Pet & Premium Items",
+	"region": "NA",
+	"currency": "LTC",
+	"timezone": "America/New_York",
+	"sourceUrl": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6421",
+	"publishedAt": "2026-09-17T00:00:00-04:00",
+	"analyzedAt": "2026-09-25T02:36:50Z",
+	"reviewedAt": "2026-09-24",
+	"status": "published",
+	"posterUrls": [
+		"https://cdn.papayaplay.com/SF/1789/6153/7052/0916_LT_Sales_poster1_fixed.jpeg",
+		"https://cdn.papayaplay.com/SF/1789/6087/0834/0916_LT_Sales_poster2.jpeg"
+	],
+	"expectedOfferCount": 34,
+	"sources": [
+		{
+			"id": "official-sale-6421",
+			"kind": "official-sale",
+			"title": "Eternal Royal Paradise - New Pet & Premium Items",
+			"url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6421",
+			"accessedAt": "2026-09-25T02:36:50Z",
+			"note": "Canonical sale post linked by the user-supplied Discord announcement and confirmed on the official news listing. Displayed publication date is 2026.09.17; publishedAt uses that date at midnight in the sale timezone, not a verified posting instant. The initial user URL, post 6422, is the separate Mistwood event announcement."
+		},
+		{
+			"id": "discord-sale-6421",
+			"kind": "official-sale",
+			"title": "User-supplied Discord announcement: September Flash Sale — 6 Rounds, 2 Weeks",
+			"url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6421",
+			"accessedAt": "2026-09-25T02:36:50Z",
+			"note": "Source of truth supplied verbatim by the maintainer in this task; not independently retrieved from Discord. No Discord permalink was supplied, so this URL is the sale link contained in the announcement. Discord controls round membership, source order, item names, contents, and Unix timestamp boundaries over conflicting website text. Prices, component quantities, and advertised stock come from the original posters. R1 1789605000–1789777740; R2 1789777800–1790036940; R3 1790037000–1790209740; R4 1790209800–1790382540; R5 1790382600–1790641740; R6 1790641800–1790812200. Counts: 7/7/5/5/5/5."
+		},
+		{
+			"id": "official-poster-1",
+			"kind": "official-sale",
+			"title": "September flash sale: introduction and round 1",
+			"url": "https://cdn.papayaplay.com/SF/1789/6153/7052/0916_LT_Sales_poster1_fixed.jpeg",
+			"accessedAt": "2026-09-25T02:36:50Z",
+			"note": "Original 940×4505 fixed poster; flash sale section at y≈3610–4505 contains seven offers, prices, quantities, and advertised stock. Earlier Royal and Battle Pass sections are outside this snapshot. Poster weekday labels conflict with calendar dates; use Discord timestamps. Offer order follows Discord; capture notes map to poster rows."
+		},
+		{
+			"id": "official-poster-2",
+			"kind": "official-sale",
+			"title": "September flash sale: rounds 2–6",
+			"url": "https://cdn.papayaplay.com/SF/1789/6087/0834/0916_LT_Sales_poster2.jpeg",
+			"accessedAt": "2026-09-25T02:36:50Z",
+			"note": "Original 940×3673 poster with 27 offers across rounds 2–6 (7/5/5/5/5). Prices, component quantities, and STOCK badges visually verified. Numeric schedule agrees with Discord; weekday headings do not and are overridden. Stock badges are advertised round-wide quantities, not observed live remaining stock. Unmultiplied singular components count as one. Source regions follow rows top to bottom, left then right."
+		},
+		{
+			"id": "event-exchange-values-2026-08-04",
+			"kind": "market-observation",
+			"title": "Maintainer-confirmed event exchange values",
+			"url": "/data/event-exchange/catalog.json",
+			"accessedAt": "2026-08-05T12:00:00-07:00",
+			"note": "Existing repository values reused only for exact item variants."
+		},
+		{
+			"id": "event-exchange-values-2026-08-13",
+			"kind": "market-observation",
+			"title": "Maintainer-confirmed event exchange values",
+			"url": "/data/event-exchange/catalog.json",
+			"accessedAt": "2026-08-13T14:22:59-07:00",
+			"note": "Maintainer-confirmed Memorial Hero Fragment value update."
+		},
+		{
+			"id": "maintainer-values-2026-08-05",
+			"kind": "market-observation",
+			"title": "Maintainer-provided Ely valuations",
+			"url": "/data/flash-sale/catalog.json",
+			"accessedAt": "2026-08-06T18:24:40Z",
+			"note": "Previously approved maintainer Ely estimates dated 2026-08-05, reused with original evidence dates. No external evidence URL was provided; these are not new September market observations."
+		},
+		{
+			"id": "official-sale-6401",
+			"kind": "official-sale",
+			"title": "Last Call! Before Mistwood",
+			"url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6401",
+			"accessedAt": "2026-09-12T18:18:00Z",
+			"note": "Canonical announcement and official recent-news listing identify post 6401 and displayed date 2026.09.10. API PostDate is 2026-09-10 03:50:36.14 without a timezone; publishedAt represents the displayed date at midnight using the repository convention, not a verified posting instant."
+		},
+		{
+			"id": "event-exchange-values-2026-08-20",
+			"kind": "market-observation",
+			"title": "Maintainer-confirmed event exchange values",
+			"url": "/data/event-exchange/catalog.json",
+			"accessedAt": "2026-09-12T18:18:00Z",
+			"note": "Previously approved Bottle of Blue Stars unit value, dated 2026-08-20, reused for the exact item variant. This is existing repository evidence, not a new market observation."
+		}
+	],
+	"valuationSnapshot": [
+		{
+			"itemId": "storage-expansion-bag",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification."
+		},
+		{
+			"itemId": "general-inventory-bag",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Needs a maintainer-confirmed Ely equivalent."
+		},
+		{
+			"itemId": "la-tale-adventure-dice",
+			"status": "priced",
+			"unitEly": 34500000,
+			"method": "market-observation",
+			"confidence": "high",
+			"asOf": "2026-08-03",
+			"sourceIds": [
+				"event-exchange-values-2026-08-04"
+			],
+			"note": "Reused from the current event exchange catalog."
+		},
+		{
+			"itemId": "platinum-hammer",
+			"status": "estimated",
+			"unitEly": 150000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable. Giga Platinum Hammer is a package containing this item, not an item alias."
+		},
+		{
+			"itemId": "instance-dungeon-guaranteed-titlebook-coupon-ii",
+			"status": "estimated",
+			"unitEly": 3450000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "bottle-shining-stars",
+			"status": "estimated",
+			"unitEly": 400000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "bottle-blue-stars",
+			"status": "priced",
+			"unitEly": 700000,
+			"method": "market-observation",
+			"confidence": "high",
+			"asOf": "2026-08-20",
+			"sourceIds": [
+				"event-exchange-values-2026-08-20"
+			],
+			"note": "Reused the previously approved 700,000 Ely per Bottle of Blue Stars from the event exchange catalog, dated 2026-08-20."
+		},
+		{
+			"itemId": "shining-laititia-dungeon-reset-coupon",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification."
+		},
+		{
+			"itemId": "bottle-orange-stars",
+			"status": "estimated",
+			"unitEly": 1000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "blessed-justitia-dungeon-use-ticket",
+			"status": "estimated",
+			"unitEly": 2200000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "goddess-card-eternity-coupon",
+			"status": "estimated",
+			"unitEly": 14000000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "special-weapon-skin-coupon",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification."
+		},
+		{
+			"itemId": "strawberry-patissier-dessert-set-i",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. One complete fashion set: Bandana, Top, Bottom, Shoes."
+		},
+		{
+			"itemId": "strawberry-patissier-dessert-set-ii",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. One complete fashion set: Hat, Dress, Shoes, Earrings."
+		},
+		{
+			"itemId": "night-camping-chair-coupon",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification."
+		},
+		{
+			"itemId": "paragon-power-30d",
+			"status": "estimated",
+			"unitEly": 6000000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "picnic-energy-15d",
+			"status": "unique",
+			"unitEly": null,
+			"method": "not-applicable",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+		},
+		{
+			"itemId": "advanced-premium-syrup",
+			"status": "estimated",
+			"unitEly": 240000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "legends-of-etoile",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. One crate from Autumn Adventures Crate Bundle I; not the whole bundle."
+		},
+		{
+			"itemId": "soulys-midnight-hunt",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. One crate from Autumn Adventures Crate Bundle I; not the whole bundle."
+		},
+		{
+			"itemId": "premium-divine-era",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. One crate from Autumn Adventures Crate Bundle I; not the whole bundle."
+		},
+		{
+			"itemId": "phantasmal-tin-crate",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. One crate from Autumn Adventures Crate Bundle I; not the whole bundle."
+		},
+		{
+			"itemId": "mechanical-angel-wings-mount-coupon",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. This flash-sale mount is distinct from the Violet mount in the Royal event."
+		},
+		{
+			"itemId": "summonable-upgrade-spellbook",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6401"
+			],
+			"note": "New item from official post 6401; awaiting a maintainer-confirmed Ely value or personal/unique classification. The exact Spellbook label in post 6401 has not been confirmed as an alias of Summon Skill Enhancement Scroll."
+		},
+		{
+			"itemId": "advanced-summonable-upgrade-spell",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. Exact Discord and poster label; no equivalence to Advanced Summonable Upgrade Spellbook or Advanced Summon Skill Enhancement Scroll is established."
+		},
+		{
+			"itemId": "memorial-hero-fragment",
+			"status": "priced",
+			"unitEly": 60000000,
+			"method": "market-observation",
+			"confidence": "high",
+			"asOf": "2026-08-13",
+			"sourceIds": [
+				"event-exchange-values-2026-08-13"
+			],
+			"note": "Updated from the current event exchange catalog after maintainer confirmation."
+		},
+		{
+			"itemId": "memorial-reset-crystal",
+			"status": "estimated",
+			"unitEly": 40000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "guild-firepower-king-30d",
+			"status": "unique",
+			"unitEly": null,
+			"method": "not-applicable",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+		},
+		{
+			"itemId": "greater-guild-coin-box",
+			"status": "unique",
+			"unitEly": null,
+			"method": "not-applicable",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+		},
+		{
+			"itemId": "guild-relic-upgrade-stone",
+			"status": "unique",
+			"unitEly": null,
+			"method": "not-applicable",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+		},
+		{
+			"itemId": "guild-upgrade-stone",
+			"status": "unique",
+			"unitEly": null,
+			"method": "not-applicable",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+		},
+		{
+			"itemId": "guild-reward-ticket",
+			"status": "unique",
+			"unitEly": null,
+			"method": "not-applicable",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+		},
+		{
+			"itemId": "compass-of-eternity-coupon",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification."
+		},
+		{
+			"itemId": "tome-ancients-account-30d",
+			"status": "estimated",
+			"unitEly": 6000000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "mysterious-fragment",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Needs a maintainer-confirmed Ely value."
+		},
+		{
+			"itemId": "cheerful-tengu-totem-fragment",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification."
+		},
+		{
+			"itemId": "quest-reward-100-30d-skillbook",
+			"status": "estimated",
+			"unitEly": 888000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "petite-hoot-hoot-30d",
+			"status": "unique",
+			"unitEly": null,
+			"method": "not-applicable",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+		},
+		{
+			"itemId": "seres-blessing-account-30d",
+			"status": "estimated",
+			"unitEly": 4950000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "shining-dimensional-rift-entry",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Needs a maintainer-confirmed Ely value."
+		},
+		{
+			"itemId": "exp-potion-100",
+			"status": "priced",
+			"unitEly": 35000000,
+			"method": "market-observation",
+			"confidence": "high",
+			"asOf": "2026-08-03",
+			"sourceIds": [
+				"event-exchange-values-2026-08-04"
+			],
+			"note": "Reused from the current event exchange catalog."
+		},
+		{
+			"itemId": "exp-potion-20",
+			"status": "priced",
+			"unitEly": 40000000,
+			"method": "market-observation",
+			"confidence": "high",
+			"asOf": "2026-08-03",
+			"sourceIds": [
+				"event-exchange-values-2026-08-04"
+			],
+			"note": "Reused from the current event exchange catalog."
+		},
+		{
+			"itemId": "heros-exp-nostrum",
+			"status": "estimated",
+			"unitEly": 35000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "exp-nostrum",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Needs a maintainer-confirmed Ely value."
+		},
+		{
+			"itemId": "stars-blessing-potion",
+			"status": "unique",
+			"unitEly": null,
+			"method": "not-applicable",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+		},
+		{
+			"itemId": "paragon-knowledge-7d",
+			"status": "estimated",
+			"unitEly": 1500000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "eoli-energy-extract",
+			"status": "unique",
+			"unitEly": null,
+			"method": "not-applicable",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Canonical display name corrected to Eel Energy Extract; maintainer designated this item as personal/non-comparable on 2026-08-05."
+		},
+		{
+			"itemId": "cosmic-orca-damage-skin-coupon",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification."
+		},
+		{
+			"itemId": "paragon-knowledge-30d",
+			"status": "estimated",
+			"unitEly": 3000000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "great-dreamy-fairy-pet-coupon",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification."
+		},
+		{
+			"itemId": "pet-damage-puzzle",
+			"status": "estimated",
+			"unitEly": 110000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "pet-reassign-puzzle",
+			"status": "estimated",
+			"unitEly": 150000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "pet-name-change-coupon",
+			"status": "estimated",
+			"unitEly": 555000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		},
+		{
+			"itemId": "wippy-pet-coupon",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. Included in Great Wippy Pet Package under this exact coupon name."
+		},
+		{
+			"itemId": "permanent-pet-transformation-kit",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification."
+		},
+		{
+			"itemId": "guaranteed-god-of-crafting-titlebook",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification."
+		},
+		{
+			"itemId": "guaranteed-masters-hand-titlebook",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [
+				"official-sale-6421",
+				"discord-sale-6421"
+			],
+			"note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. Guaranteed variant explicitly named by Discord and the poster heading."
+		},
+		{
+			"itemId": "advanced-guild-food-supply-box",
+			"status": "pending",
+			"unitEly": null,
+			"method": "pending",
+			"confidence": null,
+			"asOf": null,
+			"sourceIds": [],
+			"note": "Needs a maintainer-confirmed Ely value."
+		},
+		{
+			"itemId": "guild-crop-seed-box",
+			"status": "estimated",
+			"unitEly": 15000000,
+			"method": "maintainer-estimate",
+			"confidence": "medium",
+			"asOf": "2026-08-05",
+			"sourceIds": [
+				"maintainer-values-2026-08-05"
+			],
+			"note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+		}
+	],
+	"cycles": [
+		{
+			"id": "r1",
+			"label": "Round 1 · Wednesday–Friday",
+			"startsAt": "2026-09-16T20:30:00-04:00",
+			"endsAt": "2026-09-18T20:29:00-04:00",
+			"expectedOfferCount": 7,
+			"unresolvedSlots": [],
+			"offers": [
+				{
+					"id": "r1-storage-expansion",
+					"slot": 1,
+					"name": "Storage Expansion Bag (x10)",
+					"salePriceLtc": 950,
+					"purchaseLimit": {
+						"quantity": 25,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "storage-expansion-bag",
+							"quantity": 10
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-1"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 1, round 1, row 1 left."
+					},
+					"bestFor": "Players who need ten storage expansion bags.",
+					"skipIf": "Your storage already meets your needs.",
+					"caveats": [
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 25 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r1-general-inventory",
+					"slot": 2,
+					"name": "General Inventory Bag (x6)",
+					"salePriceLtc": 900,
+					"purchaseLimit": {
+						"quantity": 25,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "general-inventory-bag",
+							"quantity": 6
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-1"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 1, round 1, row 1 right."
+					},
+					"bestFor": "Players who need all six general inventory bags.",
+					"skipIf": "You do not need more general inventory space.",
+					"caveats": [
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 25 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r1-adventure-dice",
+					"slot": 3,
+					"name": "La Tale Adventure Dice Package (x500)",
+					"salePriceLtc": 690,
+					"purchaseLimit": {
+						"quantity": 50,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "la-tale-adventure-dice",
+							"quantity": 500
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-1"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 1, round 1, row 2 left."
+					},
+					"bestFor": "Players with a use for all 500 adventure dice.",
+					"skipIf": "You cannot use the full quantity.",
+					"caveats": [
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 50 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r1-platinum-hammer",
+					"slot": 4,
+					"name": "Giga Platinum Hammer (x100)",
+					"salePriceLtc": 2590,
+					"purchaseLimit": {
+						"quantity": 50,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "platinum-hammer",
+							"quantity": 100
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-1"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 1, round 1, row 4 left. Giga Platinum Hammer is the package title; its contents line specifies Platinum Hammer ×100."
+					},
+					"bestFor": "Players planning enough enchanting to use 100 Platinum Hammers.",
+					"skipIf": "You do not need a large supply of Platinum Hammers.",
+					"caveats": [
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 50 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r1-instance-title-ii",
+					"slot": 5,
+					"name": "Instance Dungeon Guaranteed Titlebook Coupon II",
+					"salePriceLtc": 690,
+					"purchaseLimit": {
+						"quantity": 35,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "instance-dungeon-guaranteed-titlebook-coupon-ii",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-1"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 1, round 1, row 3 left."
+					},
+					"bestFor": "Players missing a useful eligible instance-dungeon title.",
+					"skipIf": "You already own the useful eligible titles.",
+					"caveats": [
+						"Title utility depends on your collection.",
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 35 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r1-constellation",
+					"slot": 6,
+					"name": "Constellation Package",
+					"salePriceLtc": 1990,
+					"purchaseLimit": {
+						"quantity": 50,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "bottle-shining-stars",
+							"quantity": 10
+						},
+						{
+							"itemId": "bottle-blue-stars",
+							"quantity": 3000
+						},
+						{
+							"itemId": "shining-laititia-dungeon-reset-coupon",
+							"quantity": 4
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-1"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 1, round 1, row 2 right."
+					},
+					"bestFor": "Players who need Blue Stars and can use all four Shining Laititia resets.",
+					"skipIf": "You need Orange Stars or cannot use these dungeon resets.",
+					"caveats": [
+						"Some components are pending or personal; the Ely comparison is a lower bound.",
+						"Poster advertises 50 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r1-constellation-expansion",
+					"slot": 7,
+					"name": "Constellation Expansion Package",
+					"salePriceLtc": 2290,
+					"purchaseLimit": {
+						"quantity": 30,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "bottle-orange-stars",
+							"quantity": 2000
+						},
+						{
+							"itemId": "bottle-shining-stars",
+							"quantity": 2
+						},
+						{
+							"itemId": "blessed-justitia-dungeon-use-ticket",
+							"quantity": 4
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-1"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 1, round 1, row 3 right."
+					},
+					"bestFor": "Players who need Orange Stars and can use all four Blessed Justitia entries.",
+					"skipIf": "You cannot use the stars or all four dungeon entries.",
+					"caveats": [
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 30 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				}
+			]
+		},
+		{
+			"id": "r2",
+			"label": "Round 2 · Friday–Monday",
+			"startsAt": "2026-09-18T20:30:00-04:00",
+			"endsAt": "2026-09-21T20:29:00-04:00",
+			"expectedOfferCount": 7,
+			"unresolvedSlots": [],
+			"offers": [
+				{
+					"id": "r2-goddess-card",
+					"slot": 1,
+					"name": "Goddess' Card of Eternity",
+					"salePriceLtc": 2500,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "goddess-card-eternity-coupon",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 2, row 1 left."
+					},
+					"bestFor": "Players who still need the permanent Goddess card upgrade.",
+					"skipIf": "You already own the upgrade or do not benefit from it.",
+					"caveats": [
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r2-special-weapon-skin",
+					"slot": 2,
+					"name": "Special Weapon Skin Coupon",
+					"salePriceLtc": 1290,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "special-weapon-skin-coupon",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 2, row 5 right."
+					},
+					"bestFor": "Players who want the Special Weapon Skin Registration Ticket.",
+					"skipIf": "You do not want this weapon skin.",
+					"caveats": [
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r2-strawberry-patissier-i",
+					"slot": 3,
+					"name": "Strawberry Patissier's Dessert Set I",
+					"salePriceLtc": 1590,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "strawberry-patissier-dessert-set-i",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 2, row 2 full width."
+					},
+					"bestFor": "Players who want the Bandana, Top, Bottom, and Shoes set.",
+					"skipIf": "You do not want this exact fashion set.",
+					"caveats": [
+						"One complete Set I: Bandana, Top, Bottom, Shoes.",
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r2-strawberry-patissier-ii",
+					"slot": 4,
+					"name": "Strawberry Patissier's Dessert Set II",
+					"salePriceLtc": 1590,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "strawberry-patissier-dessert-set-ii",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 2, row 3 full width."
+					},
+					"bestFor": "Players who want the Hat, Dress, Shoes, and Earrings set.",
+					"skipIf": "You do not want this exact fashion set.",
+					"caveats": [
+						"One complete Set II: Hat, Dress, Shoes, Earrings.",
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r2-night-camping",
+					"slot": 5,
+					"name": "Night Camping Chair Coupon",
+					"salePriceLtc": 1990,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "night-camping-chair-coupon",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 2, row 4 right."
+					},
+					"bestFor": "Players who want the Starlit Camping Night Registration Ticket.",
+					"skipIf": "You already own or do not want this chair.",
+					"caveats": [
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r2-power-picnic",
+					"slot": 6,
+					"name": "Power Picnic Pack",
+					"salePriceLtc": 1790,
+					"purchaseLimit": {
+						"quantity": 35,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "paragon-power-30d",
+							"quantity": 1
+						},
+						{
+							"itemId": "picnic-energy-15d",
+							"quantity": 2
+						},
+						{
+							"itemId": "advanced-premium-syrup",
+							"quantity": 10
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 2, row 4 left."
+					},
+					"bestFor": "Players who can use the 30-day Paragon, both 15-day skillbooks, and ten syrups.",
+					"skipIf": "You will not use the durations or the consumables.",
+					"caveats": [
+						"Timed benefits assume full utilization; Picnic Energy has personal value.",
+						"Some components are pending or personal; the Ely comparison is a lower bound.",
+						"Poster advertises 35 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r2-autumn-crates",
+					"slot": 7,
+					"name": "Autumn Adventures Crate Bundle I",
+					"salePriceLtc": 4400,
+					"purchaseLimit": {
+						"quantity": 40,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "legends-of-etoile",
+							"quantity": 20
+						},
+						{
+							"itemId": "soulys-midnight-hunt",
+							"quantity": 20
+						},
+						{
+							"itemId": "premium-divine-era",
+							"quantity": 20
+						},
+						{
+							"itemId": "phantasmal-tin-crate",
+							"quantity": 20
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 2, row 5 left."
+					},
+					"bestFor": "Players who want twenty of each of the four listed crates.",
+					"skipIf": "You do not want all four crate types.",
+					"caveats": [
+						"The poster specifies ×20 each, for 80 crates total.",
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 40 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				}
+			]
+		},
+		{
+			"id": "r3",
+			"label": "Round 3 · Monday–Wednesday",
+			"startsAt": "2026-09-21T20:30:00-04:00",
+			"endsAt": "2026-09-23T20:29:00-04:00",
+			"expectedOfferCount": 5,
+			"unresolvedSlots": [],
+			"offers": [
+				{
+					"id": "r3-mechanical-angel-wings",
+					"slot": 1,
+					"name": "Mechanical Angel Wings Mount Coupon",
+					"salePriceLtc": 1590,
+					"purchaseLimit": {
+						"quantity": 10,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "mechanical-angel-wings-mount-coupon",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 3, row 2 left."
+					},
+					"bestFor": "Players who want the Mechanical Angel Wings mount.",
+					"skipIf": "You already own or do not want this mount.",
+					"caveats": [
+						"The Violet mount in the Royal event is a different variant.",
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 10 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r3-summonable-spellbooks",
+					"slot": 2,
+					"name": "Summonable Upgrade Spellbook Bundle",
+					"salePriceLtc": 690,
+					"purchaseLimit": {
+						"quantity": 25,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "summonable-upgrade-spellbook",
+							"quantity": 250
+						},
+						{
+							"itemId": "advanced-summonable-upgrade-spell",
+							"quantity": 80
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 3, row 1 left."
+					},
+					"bestFor": "Players who can use both listed Summonable upgrade items.",
+					"skipIf": "You do not need these exact upgrade items.",
+					"caveats": [
+						"Includes 250 Summonable Upgrade Spellbooks and 80 Advanced Summonable Upgrade Spells.",
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 25 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r3-memorial-x",
+					"slot": 3,
+					"name": "Memorial Package Bundle X",
+					"salePriceLtc": 2700,
+					"purchaseLimit": {
+						"quantity": 50,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "memorial-hero-fragment",
+							"quantity": 350
+						},
+						{
+							"itemId": "memorial-reset-crystal",
+							"quantity": 150
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 3, row 1 right."
+					},
+					"bestFor": "Players who need both Memorial Hero Fragments and Reset Crystals.",
+					"skipIf": "You cannot use both Memorial components.",
+					"caveats": [
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 50 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r3-constellation-expansion",
+					"slot": 4,
+					"name": "Constellation Expansion Package",
+					"salePriceLtc": 2290,
+					"purchaseLimit": {
+						"quantity": 50,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "bottle-orange-stars",
+							"quantity": 2000
+						},
+						{
+							"itemId": "bottle-shining-stars",
+							"quantity": 2
+						},
+						{
+							"itemId": "blessed-justitia-dungeon-use-ticket",
+							"quantity": 4
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 3, row 2 right."
+					},
+					"bestFor": "Players who need Orange Stars and can use all four Blessed Justitia entries.",
+					"skipIf": "You cannot use the stars or all four dungeon entries.",
+					"caveats": [
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 50 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r3-gm-guild-iii",
+					"slot": 5,
+					"name": "GM's Guild Bundle III",
+					"salePriceLtc": 3590,
+					"purchaseLimit": {
+						"quantity": 20,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "guild-firepower-king-30d",
+							"quantity": 1
+						},
+						{
+							"itemId": "greater-guild-coin-box",
+							"quantity": 20
+						},
+						{
+							"itemId": "guild-relic-upgrade-stone",
+							"quantity": 6
+						},
+						{
+							"itemId": "guild-upgrade-stone",
+							"quantity": 15
+						},
+						{
+							"itemId": "guild-reward-ticket",
+							"quantity": 50
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 3, row 3 left. All five package components are enumerated in Discord and on this poster."
+					},
+					"bestFor": "Guild players who can use the 30-day buff and all four guild resources.",
+					"skipIf": "You do not need these guild resources.",
+					"caveats": [
+						"These components have personal value and are excluded from Ely rankings.",
+						"Poster advertises 20 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				}
+			]
+		},
+		{
+			"id": "r4",
+			"label": "Round 4 · Wednesday–Friday",
+			"startsAt": "2026-09-23T20:30:00-04:00",
+			"endsAt": "2026-09-25T20:29:00-04:00",
+			"expectedOfferCount": 5,
+			"unresolvedSlots": [],
+			"offers": [
+				{
+					"id": "r4-compass-eternity",
+					"slot": 1,
+					"name": "Compass of Eternity Coupon (x5)",
+					"salePriceLtc": 5000,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "compass-of-eternity-coupon",
+							"quantity": 5
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 4, row 2 right."
+					},
+					"bestFor": "Players who need five Compass of Eternity exchange coupons.",
+					"skipIf": "You do not need all five coupons.",
+					"caveats": [
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r4-tome-ancients",
+					"slot": 2,
+					"name": "Tome of the Ancients [Account] (30 Days) Skillbook",
+					"salePriceLtc": 1095,
+					"purchaseLimit": {
+						"quantity": 20,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "tome-ancients-account-30d",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 4, row 3 left."
+					},
+					"bestFor": "Accounts that can use the Tome effect for all 30 days.",
+					"skipIf": "You will not use the full duration.",
+					"caveats": [
+						"The estimate assumes full-duration use.",
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 20 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r4-mystic-fragments",
+					"slot": 3,
+					"name": "Mystic Fragment Package",
+					"salePriceLtc": 1500,
+					"purchaseLimit": {
+						"quantity": 30,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "mysterious-fragment",
+							"quantity": 1000
+						},
+						{
+							"itemId": "cheerful-tengu-totem-fragment",
+							"quantity": 2000
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 4, row 1 right."
+					},
+					"bestFor": "Players who need both Mysterious and Cheerful Tengu Totem Fragments.",
+					"skipIf": "You cannot use both fragment types.",
+					"caveats": [
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 30 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r4-seres-30d",
+					"slot": 4,
+					"name": "Seres' 30 Days Adventure Package",
+					"salePriceLtc": 1095,
+					"purchaseLimit": {
+						"quantity": 35,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "quest-reward-100-30d-skillbook",
+							"quantity": 1
+						},
+						{
+							"itemId": "petite-hoot-hoot-30d",
+							"quantity": 1
+						},
+						{
+							"itemId": "seres-blessing-account-30d",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 4, row 1 left."
+					},
+					"bestFor": "Players who can use the quest, pet, and account benefits for 30 days.",
+					"skipIf": "You will not use the full 30-day benefits.",
+					"caveats": [
+						"Duration estimates assume full use; Petite Hoot Hoot has personal value.",
+						"Some components are pending or personal; the Ely comparison is a lower bound.",
+						"Poster advertises 35 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r4-weekly-grinder-iii",
+					"slot": 5,
+					"name": "Weekly Grinder's Package III",
+					"salePriceLtc": 2490,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "shining-dimensional-rift-entry",
+							"quantity": 7
+						},
+						{
+							"itemId": "exp-potion-100",
+							"quantity": 7
+						},
+						{
+							"itemId": "exp-potion-20",
+							"quantity": 7
+						},
+						{
+							"itemId": "heros-exp-nostrum",
+							"quantity": 7
+						},
+						{
+							"itemId": "exp-nostrum",
+							"quantity": 14
+						},
+						{
+							"itemId": "stars-blessing-potion",
+							"quantity": 14
+						},
+						{
+							"itemId": "paragon-knowledge-7d",
+							"quantity": 1
+						},
+						{
+							"itemId": "eoli-energy-extract",
+							"quantity": 28
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 4, row 2 left."
+					},
+					"bestFor": "Players planning a week of EXP grinding who can use all listed consumables.",
+					"skipIf": "You will not use the entry tickets, seven-day Paragon, or consumable quantities.",
+					"caveats": [
+						"EXP Nostrum and Shining Dimensional Rift Entry values remain pending.",
+						"Some components are pending or personal; the Ely comparison is a lower bound.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				}
+			]
+		},
+		{
+			"id": "r5",
+			"label": "Round 5 · Friday–Monday",
+			"startsAt": "2026-09-25T20:30:00-04:00",
+			"endsAt": "2026-09-28T20:29:00-04:00",
+			"expectedOfferCount": 5,
+			"unresolvedSlots": [],
+			"offers": [
+				{
+					"id": "r5-cosmic-orca",
+					"slot": 1,
+					"name": "Cosmic Orca Damage Skin Coupon",
+					"salePriceLtc": 790,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "cosmic-orca-damage-skin-coupon",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 5, row 3 left."
+					},
+					"bestFor": "Players who want the Cosmic Orca damage skin.",
+					"skipIf": "You already own or do not want this damage skin.",
+					"caveats": [
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r5-paragon-30d",
+					"slot": 2,
+					"name": "30 Days of Paragon",
+					"salePriceLtc": 1200,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "paragon-power-30d",
+							"quantity": 1
+						},
+						{
+							"itemId": "paragon-knowledge-30d",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 5, row 1 left."
+					},
+					"bestFor": "Players who can use both Paragon effects for all 30 days.",
+					"skipIf": "You need only one effect or will not use the full duration.",
+					"caveats": [
+						"The estimate assumes full-duration use of both effects.",
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r5-memorial-x",
+					"slot": 3,
+					"name": "Memorial Package Bundle X",
+					"salePriceLtc": 2700,
+					"purchaseLimit": {
+						"quantity": 50,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "memorial-hero-fragment",
+							"quantity": 350
+						},
+						{
+							"itemId": "memorial-reset-crystal",
+							"quantity": 150
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 5, row 1 right."
+					},
+					"bestFor": "Players who need both Memorial Hero Fragments and Reset Crystals.",
+					"skipIf": "You cannot use both Memorial components.",
+					"caveats": [
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 50 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r5-great-dreamy",
+					"slot": 4,
+					"name": "Great Dreamy the Fairy Pet Package",
+					"salePriceLtc": 3500,
+					"purchaseLimit": {
+						"quantity": 25,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "great-dreamy-fairy-pet-coupon",
+							"quantity": 1
+						},
+						{
+							"itemId": "pet-damage-puzzle",
+							"quantity": 5
+						},
+						{
+							"itemId": "pet-reassign-puzzle",
+							"quantity": 5
+						},
+						{
+							"itemId": "pet-name-change-coupon",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 5, row 2 left."
+					},
+					"bestFor": "Players who want Great Dreamy the Fairy and can use the pet utilities.",
+					"skipIf": "You do not want this pet or cannot use the puzzles and name-change coupon.",
+					"caveats": [
+						"Some components are pending or personal; the Ely comparison is a lower bound.",
+						"Poster advertises 25 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r5-great-wippy",
+					"slot": 5,
+					"name": "Great Wippy Pet Package",
+					"salePriceLtc": 3500,
+					"purchaseLimit": {
+						"quantity": 25,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "wippy-pet-coupon",
+							"quantity": 1
+						},
+						{
+							"itemId": "pet-damage-puzzle",
+							"quantity": 5
+						},
+						{
+							"itemId": "pet-reassign-puzzle",
+							"quantity": 5
+						},
+						{
+							"itemId": "permanent-pet-transformation-kit",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 5, row 2 right."
+					},
+					"bestFor": "Players who want Wippy and can use both sets of puzzles and the transformation kit.",
+					"skipIf": "You do not want this pet or cannot use the kit and puzzles.",
+					"caveats": [
+						"Includes Wippy Pet Coupon and Permanent Pet Transformation Kit, as specified by Discord and the poster.",
+						"Some components are pending or personal; the Ely comparison is a lower bound.",
+						"Poster advertises 25 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				}
+			]
+		},
+		{
+			"id": "r6",
+			"label": "Round 6 · Monday–Wednesday",
+			"startsAt": "2026-09-28T20:30:00-04:00",
+			"endsAt": "2026-09-30T19:50:00-04:00",
+			"expectedOfferCount": 5,
+			"unresolvedSlots": [],
+			"offers": [
+				{
+					"id": "r6-god-crafting",
+					"slot": 1,
+					"name": "Guaranteed God of Crafting Titlebook",
+					"salePriceLtc": 690,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "guaranteed-god-of-crafting-titlebook",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 6, row 1 left."
+					},
+					"bestFor": "Players who want the guaranteed God of Crafting title.",
+					"skipIf": "You already own or do not need this title.",
+					"caveats": [
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r6-masters-hand",
+					"slot": 2,
+					"name": "Guaranteed Master's Hand Titlebook",
+					"salePriceLtc": 690,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "guaranteed-masters-hand-titlebook",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 6, row 1 right."
+					},
+					"bestFor": "Players who want the guaranteed Master's Hand title.",
+					"skipIf": "You already own or do not need this title.",
+					"caveats": [
+						"Ely valuation is pending; this offer is excluded from value rankings.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r6-goddess-card",
+					"slot": 3,
+					"name": "Goddess' Card of Eternity",
+					"salePriceLtc": 2500,
+					"purchaseLimit": {
+						"quantity": 15,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "goddess-card-eternity-coupon",
+							"quantity": 1
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 6, row 3 left."
+					},
+					"bestFor": "Players who still need the permanent Goddess card upgrade.",
+					"skipIf": "You already own the upgrade or do not benefit from it.",
+					"caveats": [
+						"Comparison uses previously approved Ely values with their original evidence dates; current market value may differ.",
+						"Poster advertises 15 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r6-advanced-guild",
+					"slot": 4,
+					"name": "Advanced Guild Package",
+					"salePriceLtc": 990,
+					"purchaseLimit": {
+						"quantity": 20,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "advanced-guild-food-supply-box",
+							"quantity": 20
+						},
+						{
+							"itemId": "greater-guild-coin-box",
+							"quantity": 20
+						},
+						{
+							"itemId": "guild-crop-seed-box",
+							"quantity": 30
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 6, row 2 left."
+					},
+					"bestFor": "Guild players who need the food, coin boxes, and crop seeds.",
+					"skipIf": "You will not use all three resource types.",
+					"caveats": [
+						"Some components are pending or personal; the Ely comparison is a lower bound.",
+						"Poster advertises 20 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				},
+				{
+					"id": "r6-constellation",
+					"slot": 5,
+					"name": "Constellation Package",
+					"salePriceLtc": 1990,
+					"purchaseLimit": {
+						"quantity": 30,
+						"scope": "sale"
+					},
+					"contents": [
+						{
+							"itemId": "bottle-shining-stars",
+							"quantity": 10
+						},
+						{
+							"itemId": "bottle-blue-stars",
+							"quantity": 3000
+						},
+						{
+							"itemId": "shining-laititia-dungeon-reset-coupon",
+							"quantity": 4
+						}
+					],
+					"capture": {
+						"status": "verified",
+						"sourceIds": [
+							"discord-sale-6421",
+							"official-poster-2"
+						],
+						"note": "Discord supplies the round, name, and lineup order. Visually verified price, advertised stock, and component quantities on poster 2, round 6, row 2 right."
+					},
+					"bestFor": "Players who need Blue Stars and can use all four Shining Laititia resets.",
+					"skipIf": "You need Orange Stars or cannot use these dungeon resets.",
+					"caveats": [
+						"Some components are pending or personal; the Ely comparison is a lower bound.",
+						"Poster advertises 30 total units of this offer for its round; this is not live remaining stock or a per-account allowance. Sold-out stock is not replenished."
+					]
+				}
+			]
+		}
+	]
+}

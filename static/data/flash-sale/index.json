@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"currentSaleId": "papayaplay-6401",
+	"currentSaleId": "papayaplay-6421",
 	"sales": [
 		{
 			"id": "papayaplay-6332",
@@ -29,6 +29,13 @@
 			"startsAt": "2026-09-09T20:30:00-04:00",
 			"endsAt": "2026-09-16T19:50:00-04:00",
 			"reviewedAt": "2026-09-12"
+		},
+		{
+			"id": "papayaplay-6421",
+			"title": "Eternal Royal Paradise - New Pet & Premium Items",
+			"startsAt": "2026-09-16T20:30:00-04:00",
+			"endsAt": "2026-09-30T19:50:00-04:00",
+			"reviewedAt": "2026-09-24"
 		}
 	]
 }
