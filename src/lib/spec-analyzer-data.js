@@ -25,13 +25,13 @@
  */
 
 export const SPEC_ANALYZER_DATA_META = Object.freeze({
-	"capturedAt": "2026-08-03",
+	"capturedAt": "2026-10-03",
 	"livePage": "https://latale.wiki/tools/spec-analyzer",
 	"liveAssets": {
-		"skills": "https://latale.wiki/_next/static/chunks/2y0ng-_g5mkjt.js",
-		"jobs": "https://latale.wiki/_next/static/chunks/0fe76q8govmxu.js",
-		"dungeons": "https://latale.wiki/_next/static/chunks/1oo_1qwocq80b.js",
-		"summonsAndDefaults": "https://latale.wiki/_next/static/chunks/33_ax5531q4ef.js"
+		"skills": "https://latale.wiki/_next/static/chunks/1513ulejjkm_5.js",
+		"dungeons": "https://latale.wiki/_next/static/chunks/419nsmuct826j.js",
+		"calculator": "https://latale.wiki/_next/static/chunks/0yzpm1nj2syg9.js",
+		"interface": "https://latale.wiki/_next/static/chunks/0j8b_kjgicd-6.js"
 	},
 	"workbooks": {
 		"english": "https://docs.google.com/spreadsheets/d/1ytrf0W-j_FUBsj071Fbuhz6Tx7Qv2EdsoZEmxyvlwaM/edit",
@@ -52,8 +52,21 @@ export const SPEC_ANALYZER_DATA_META = Object.freeze({
 		"directIdLinked": 324,
 		"placementTotal": 45,
 		"placementGenerated": 0,
-		"placementFallback": 45,
-		"placementIdLinked": 39
+		"placementHybrid": 43,
+		"placementFallback": 2,
+		"placementWeaponGenerated": 42,
+		"placementStrMagGenerated": 33,
+		"placementTotalGenerated": 0,
+		"placementIdLinked": 40,
+		"placementCandidateSkills": 205,
+		"placementCandidateVariants": 293,
+		"placementCandidateBaseVariants": 100,
+		"placementCandidateAwakening1Variants": 189,
+		"placementCandidateAwakening2Variants": 4,
+		"placementCandidateMappedSkills": 23,
+		"placementCandidateUnmappedSkills": 193,
+		"placementCandidateMappedVariants": 23,
+		"placementCandidateUnmappedVariants": 270
 	},
 	"liveDungeonMetadata": {
 		"source": "기준 자료",
@@ -64,7 +77,8 @@ export const SPEC_ANALYZER_DATA_META = Object.freeze({
 			"proofTower": "30층 이상 구간은 기존 계산 의미를 유지하기 위해 35층을 대표값으로 사용"
 		}
 	},
-	"liveSummonGeneratedAt": "2026-07-23"
+	"liveSummonGeneratedAt": "2026-07-23",
+	"calculationModel": "Current wiki reference damage: float32 rounding, level-scaled defense, guard and critical resistance; legacy workbooks retained as usage references."
 });
 
 export const JOBS = Object.freeze([
@@ -6323,7 +6337,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1107025
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6340,7 +6354,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1212007
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6357,7 +6371,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1210105
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6374,7 +6388,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1210004
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6391,7 +6405,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1109406
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.26,
 		"strengthPerLevel": 0.02,
@@ -6408,7 +6422,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1210002
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6425,7 +6439,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			2104104
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6440,7 +6454,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"sourceName": "일렉트릭 웨이브",
 		"skillId": null,
 		"skillIds": [],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6457,7 +6471,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1107033
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.14,
 		"strengthPerLevel": 0.02,
@@ -6474,7 +6488,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1210008
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6491,7 +6505,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1105009
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6508,7 +6522,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1108020
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.22,
 		"strengthPerLevel": 0.02,
@@ -6525,7 +6539,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1212023
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 82,
 		"strengthBase": 1.24,
 		"strengthPerLevel": 0.02,
@@ -6542,7 +6556,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1210036
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 162,
 		"strengthBase": 1.26,
 		"strengthPerLevel": 0.02,
@@ -6560,7 +6574,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 			7001213,
 			7001214
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.6,
 		"strengthPerLevel": 0,
@@ -6577,7 +6591,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			2212004
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.14,
 		"strengthPerLevel": 0.02,
@@ -6592,7 +6606,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"sourceName": "봉인몬스터",
 		"skillId": null,
 		"skillIds": [],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 62,
 		"strengthBase": 1.26,
 		"strengthPerLevel": 0.02,
@@ -6609,7 +6623,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1313250
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6626,7 +6640,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1410056
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6643,7 +6657,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1411056
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.22,
 		"strengthPerLevel": 0.02,
@@ -6660,7 +6674,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1759107
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 82,
 		"strengthBase": 1.14,
 		"strengthPerLevel": 0.02,
@@ -6677,7 +6691,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1759107
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.14,
 		"strengthPerLevel": 0.02,
@@ -6694,7 +6708,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1801312
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1,
 		"strengthPerLevel": 0.02,
@@ -6712,7 +6726,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 			1802306,
 			9990978
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6729,7 +6743,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1803323
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.14,
 		"strengthPerLevel": 0.02,
@@ -6746,7 +6760,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1803805
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6765,7 +6779,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 			1804142,
 			9990993
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 62,
 		"strengthBase": 1.5,
 		"strengthPerLevel": 0.02,
@@ -6782,7 +6796,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1011023
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 62,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6799,7 +6813,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1010024
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 62,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6817,7 +6831,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 			1011025,
 			2402606
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6834,7 +6848,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1010026
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6851,7 +6865,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1010027
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6869,7 +6883,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 			1011028,
 			1012028
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 62,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6886,7 +6900,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			2403101
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 62,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6903,7 +6917,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			2403005
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6918,7 +6932,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"sourceName": "엘메이",
 		"skillId": null,
 		"skillIds": [],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.16,
 		"strengthPerLevel": 0.02,
@@ -6931,9 +6945,11 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"sourceJob": "스타시커",
 		"name": "Turret",
 		"sourceName": "터렛",
-		"skillId": null,
-		"skillIds": [],
-		"coefficientSource": "fallback",
+		"skillId": 2403202,
+		"skillIds": [
+			2403202
+		],
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.1,
 		"strengthPerLevel": 0.02,
@@ -6950,7 +6966,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			2406905
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.14,
 		"strengthPerLevel": 0.02,
@@ -6967,7 +6983,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1803505
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -6984,7 +7000,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1803704
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.16,
 		"strengthPerLevel": 0.02,
@@ -7001,7 +7017,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			2106001
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 82,
 		"strengthBase": 1.3,
 		"strengthPerLevel": 0.02,
@@ -7033,7 +7049,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"skillIds": [
 			1804260
 		],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 42,
 		"strengthBase": 1.2,
 		"strengthPerLevel": 0.02,
@@ -7080,7 +7096,40 @@ export const PLACEMENT_SKILLS = Object.freeze([
 			3807804,
 			3808104,
 			3808204,
-			3808304
+			3808304,
+			3812404,
+			3812504,
+			3812604,
+			3812704,
+			3812804,
+			3812904,
+			3813004,
+			3813104,
+			3813204,
+			3813604,
+			3813704,
+			3813804,
+			3813904,
+			3814004,
+			3814104,
+			3814204,
+			3814304,
+			3814404,
+			3814504,
+			3814904,
+			3815204,
+			3815604,
+			3816004,
+			3816404,
+			3816804,
+			3816904,
+			3817304,
+			3817404,
+			3817504,
+			3817804,
+			3818104,
+			3818204,
+			3818304
 		],
 		"coefficientSource": "fallback",
 		"weaponCoefficient": 42,
@@ -7097,7 +7146,7 @@ export const PLACEMENT_SKILLS = Object.freeze([
 		"sourceName": "무기 타격효과",
 		"skillId": null,
 		"skillIds": [],
-		"coefficientSource": "fallback",
+		"coefficientSource": "hybrid",
 		"weaponCoefficient": 202,
 		"strengthBase": 1,
 		"strengthPerLevel": 0,
@@ -7111,28 +7160,40 @@ export const DUNGEONS = Object.freeze([
 		"id": "wings-of-icarus",
 		"name": "Wings of Icarus",
 		"sourceName": "이카로스의 날개",
-		"normalDefense": 223554,
-		"bossDefense": 223554,
+		"normalDefense": 2187171,
+		"bossDefense": 4374342,
 		"normalDmgReduction": 2187171,
-		"bossDmgReduction": 4374342
+		"bossDmgReduction": 4374342,
+		"normalGuard": 53,
+		"bossGuard": 80,
+		"normalElasticity": 600,
+		"bossElasticity": 700
 	},
 	{
 		"id": "likimo-pelke",
 		"name": "Likimo Pelke",
 		"sourceName": "리키모 펠케",
-		"normalDefense": 245909,
-		"bossDefense": 223554,
+		"normalDefense": 2296529,
+		"bossDefense": 4593058,
 		"normalDmgReduction": 2296529,
-		"bossDmgReduction": 4593058
+		"bossDmgReduction": 4593058,
+		"normalGuard": 53,
+		"bossGuard": 80,
+		"normalElasticity": 600,
+		"bossElasticity": 700
 	},
 	{
 		"id": "amaranth-nova",
 		"name": "Amaranth Nova",
 		"sourceName": "아마란스 노바",
-		"normalDefense": 234731,
-		"bossDefense": 234731,
+		"normalDefense": 2526181,
+		"bossDefense": 5052362,
 		"normalDmgReduction": 2526181,
-		"bossDmgReduction": 5052362
+		"bossDmgReduction": 5052362,
+		"normalGuard": 53,
+		"bossGuard": 80,
+		"normalElasticity": 600,
+		"bossElasticity": 700
 	},
 	{
 		"id": "nornirs-tear",
@@ -7156,10 +7217,14 @@ export const DUNGEONS = Object.freeze([
 		"id": "emeraldia",
 		"name": "Emeraldia",
 		"sourceName": "에메랄디아",
-		"normalDefense": 161439,
-		"bossDefense": 161439,
+		"normalDefense": 1504233,
+		"bossDefense": 3309312,
 		"normalDmgReduction": 1504233,
-		"bossDmgReduction": 3309312
+		"bossDmgReduction": 3309312,
+		"normalGuard": 53,
+		"bossGuard": 80,
+		"normalElasticity": 600,
+		"bossElasticity": 700
 	},
 	{
 		"id": "tower-of-challenge-30",

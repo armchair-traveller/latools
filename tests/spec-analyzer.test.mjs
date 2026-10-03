@@ -1,445 +1,263 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-
 import {
-	DEFAULT_SPEC_INPUTS,
-	DIRECT_SKILLS,
-	DUNGEONS,
-	JOBS,
-	PLACEMENT_SKILLS,
-	SUMMONS,
-	aggregateStats,
-	applyEnchantDelta,
-	applyEnchantReplacementToStats,
-	calcDirectHitDamage,
-	calcPlacementDamage,
-	calculateBuildEfficiency,
-	calculateConversionSummary,
-	calculateDamageEfficiency,
-	calculateHitIndicator,
-	calculateHpComparison,
-	calculateSummonReflection,
-	compareEnchants,
-	damageFactor,
-	inferPlacementMultiplier,
-	parseNumericInput,
-	placementCoreCoefficients,
-	placementCoefficients
+	DEFAULT_SPEC_INPUTS, DEFAULT_SPEC_CALCULATION_SETTINGS, SPEC_ANALYZER_DATA_META,
+	DIRECT_SKILLS, PLACEMENT_SKILLS, DUNGEONS, JOBS, SUMMONS,
+	aggregateStats, applyEnchantDelta, applyEnchantReplacement, applyEnchantReplacementToStats,
+	calcDirectHitDamage, calcPlacementDamage, calculateBuildEfficiency, calculateConversionSummary,
+	calculateDamageEfficiency, calculateHpComparison, compareEnchants, directSkillCoefficient,
+	inferPlacementMultiplier, inspectNumericInput, parseNumericInput, placementCoefficients, resolveDungeon
 } from '../src/lib/spec-analyzer.js';
 
-const closeTo = (actual, expected, epsilon = 0.001) => {
-	assert.ok(Math.abs(actual - expected) <= epsilon, `${actual} should be within ${epsilon} of ${expected}`);
-};
-
-const displayed = (value, fractionDigits = 2) => Number(value.toFixed(fractionDigits));
-
+const closeTo = (actual, expected, tolerance = .0001) => assert.ok(Math.abs(actual - expected) <= tolerance, `${actual} is not within ${tolerance} of ${expected}`);
 const directSkill = DIRECT_SKILLS.find((skill) => skill.name === 'DS-DR');
 const placementSkill = PLACEMENT_SKILLS.find((skill) => skill.name === 'Elmei');
-const dungeon = DUNGEONS[0];
+const dungeon = DUNGEONS.find((entry) => entry.id === 'wings-of-icarus');
+const basicOptions = { directCoefficient: directSkillCoefficient(directSkill), directSkill, placementSkill, dungeon };
+const blankInputs = () => Object.fromEntries(Object.entries(DEFAULT_SPEC_INPUTS).map(([key, value]) => [key, typeof value === 'boolean' ? false : typeof value === 'string' ? 'none' : key === 'characterLevel' ? 235 : 0]));
+const assertFinite = (value) => {
+	if (typeof value === 'number') assert.ok(Number.isFinite(value), `Non-finite output: ${value}`);
+	else if (value && typeof value === 'object') Object.values(value).forEach(assertFinite);
+};
 
-test('default sample aggregates match the live reference values', () => {
-	const stats = aggregateStats(DEFAULT_SPEC_INPUTS);
+test('arithmetic expressions honor precedence, unary parentheses and thousands separators', () => {
+	for (const [source, expected] of [['1,200 + 20 * 3', 1260], ['-(10 + 5) / 2', -7.5], ['2 * --(3 - 1)', 4], ['.5 + 12.', 12.5], ['', 0]]) {
+		assert.deepEqual(inspectNumericInput(source), { value: expected, valid: true });
+	}
+});
 
+test('malformed and unsafe expressions are rejected without partial results', () => {
+	for (const source of ['1 / 0 + 4', '(1 + 2', '1.2.3', '1 +', '1e3', 'Math.random()', 'globalThis.process.exit()', '2 ** 3', '('.repeat(40) + '1' + ')'.repeat(40), '1'.repeat(600), undefined, Infinity]) {
+		assert.equal(inspectNumericInput(source).valid, false, `${source} should be invalid`);
+		assert.equal(parseNumericInput(source), 0);
+	}
+});
+
+test('catalog counts match their captured metadata and selected defaults exist', () => {
+	assert.deepEqual({ jobs: JOBS.length, directSkills: DIRECT_SKILLS.length, placementSkills: PLACEMENT_SKILLS.length, dungeons: DUNGEONS.length, summons: SUMMONS.length }, SPEC_ANALYZER_DATA_META.counts);
+	assert.ok(directSkill && placementSkill && dungeon);
+	assert.equal(directSkillCoefficient(directSkill), 5000);
+	assert.equal(directSkillCoefficient(directSkill, 2), 7000);
+});
+
+test('current reference aggregation adds summon bonuses once and has no old physical weapon bonus', () => {
+	const stats = aggregateStats();
 	closeTo(stats.strMag.total, 4967646.36);
-	closeTo(stats.weaponAttr.total, 36828);
+	closeTo(stats.weaponAttr.total, 36372.6);
 	closeTo(stats.criticalDamage.total, 7416.6);
 	closeTo(stats.minimumDamage.total, 6253.61);
 	closeTo(stats.maximumDamage.total, 7244.72);
 	closeTo(stats.fixedDamage.total, 804685.31);
 	closeTo(stats.normalExtraDamage.total, 814348.74);
 	closeTo(stats.bossExtraDamage.total, 691511.1);
+	assert.equal(aggregateStats({ ...DEFAULT_SPEC_INPUTS, physicalJob: false }).weaponAttr.total, stats.weaponAttr.total);
+	const none = aggregateStats({ ...DEFAULT_SPEC_INPUTS, summonId: 'none' });
+	assert.equal(stats.weaponAttr.flat - none.weaponAttr.flat, 500);
+	assert.equal(stats.weaponAttr.percent - none.weaponAttr.percent, 5);
 });
 
-test('live direct-skill coefficients retain their base and per-level split', () => {
-	const dmDr = DIRECT_SKILLS.find((skill) => skill.name === 'DM-DR');
-	const dmRs = DIRECT_SKILLS.find((skill) => skill.name === 'DM-RS');
-
-	assert.deepEqual(
-		{ baseCoefficient: dmDr?.baseCoefficient, perLevel: dmDr?.perLevel },
-		{ baseCoefficient: 4000, perLevel: 800 }
-	);
-	assert.deepEqual(
-		{ baseCoefficient: dmRs?.baseCoefficient, perLevel: dmRs?.perLevel },
-		{ baseCoefficient: 3500, perLevel: 700 }
-	);
+test('combat inputs follow current supported ranges without clipping domination at100', () => {
+	const stats = aggregateStats({ ...DEFAULT_SPEC_INPUTS, normalDomination: 125, penetration: 120, characterLevel: 0, minDmgPercent: -2 });
+	assert.equal(stats.normalDomination, 125);
+	assert.equal(stats.penetration, 100);
+	assert.equal(stats.characterLevel, 1);
+	assert.equal(stats.minimumDamage.percent, 0);
 });
 
-test('complete live reference catalogs are present', () => {
-	assert.equal(JOBS.length, 39);
-	assert.equal(DIRECT_SKILLS.length, 325);
-	assert.equal(PLACEMENT_SKILLS.length, 45);
-	assert.equal(DUNGEONS.length, 7);
-	assert.equal(SUMMONS.length, 9);
-	assert.ok(DIRECT_SKILLS.some((skill) => skill.name === 'DM-RS'));
-	assert.ok(SUMMONS.some((summon) => summon.id === 'richring'));
-	assert.ok(SUMMONS.some((summon) => summon.id === 'aria'));
-});
-
-test('boss conversion summary matches the live reference sheet', () => {
-	const stats = aggregateStats(DEFAULT_SPEC_INPUTS);
-	const conversion = calculateConversionSummary(stats, { criterion: 'boss' });
-
-	// The reference sheet presents these values to two decimal places. The API
-	// intentionally retains full precision, so parity is asserted at that same
-	// display boundary instead of against an invented hidden-precision value.
-	assert.deepEqual(
-		{
-			criticalToMinimum: displayed(conversion.criticalToMinimum),
-			criticalToMaximum: displayed(conversion.criticalToMaximum),
-			finalCriticalPer1: displayed(conversion.finalCriticalPer1),
-			finalMaximumPer1: displayed(conversion.finalMaximumPer1),
-			finalMinimumPer1: displayed(conversion.finalMinimumPer1),
-			dominationToCritical: displayed(conversion.dominationToCritical),
-			dominationToMaximum: displayed(conversion.dominationToMaximum),
-			dominationToMinimum: displayed(conversion.dominationToMinimum)
-		},
-		{
-			criticalToMinimum: 1.85,
-			criticalToMaximum: 1.89,
-			finalCriticalPer1: 37.3,
-			finalMaximumPer1: 39.17,
-			finalMinimumPer1: 32.37,
-			dominationToCritical: 33.87,
-			dominationToMaximum: 61.27,
-			dominationToMinimum: 58.65
-		}
-	);
-	assert.deepEqual(
-		Object.fromEntries(Object.entries(conversion.damageShares).map(([key, value]) => [key, Math.round(value * 100)])),
-		{ domination: 36, critical: 33, maximum: 16, minimum: 15 }
-	);
-});
-
-test('aggregation applies the live upper caps and physical job bonus', () => {
-	const physical = aggregateStats({ ...DEFAULT_SPEC_INPUTS, summonId: 'none', normalDomination: 250, bossDomination: -5, penetration: 120 });
-	const magical = aggregateStats({ ...DEFAULT_SPEC_INPUTS, summonId: 'none', physicalJob: false });
-
-	assert.equal(physical.weaponAttr.flat - magical.weaponAttr.flat, 115);
-	assert.equal(physical.normalDomination, 100);
-	assert.equal(physical.bossDomination, -5);
-	assert.equal(physical.penetration, 99);
-});
-
-test('damage factor blends average and maximum rolls with back-attack rate', () => {
-	const average = damageFactor({ minimumDamage: 100, maximumDamage: 200, criticalDamage: 0, domination: 0 });
-	const maximum = damageFactor({ minimumDamage: 100, maximumDamage: 200, criticalDamage: 0, domination: 0, backAttackRate: 100 });
-
-	closeTo(average, 2.5);
-	closeTo(maximum, 3.05);
-});
-
-test('direct and placement damage respect dungeon reductions', () => {
-	const stats = aggregateStats(DEFAULT_SPEC_INPUTS);
-	const coefficient = directSkill.baseCoefficient;
-	const directTheory = calcDirectHitDamage({ stats, coefficient }).damage;
-	const directBoss = calcDirectHitDamage({ stats, coefficient, scenario: 'boss', dungeon }).damage;
-	const placementTheory = calcPlacementDamage({ stats, skill: placementSkill }).damage;
-	const placementBoss = calcPlacementDamage({ stats, skill: placementSkill, scenario: 'boss', dungeon }).damage;
-
-	assert.ok(directTheory > directBoss);
-	assert.ok(placementTheory > placementBoss);
-	assert.ok(directBoss > 0);
-	assert.ok(placementBoss > 0);
-});
-
-test('placement coefficients scale from the selected skill level', () => {
-	assert.deepEqual(placementCoefficients(placementSkill, 2), {
-		weaponCoefficient: 42,
-		strengthMultiplier: 1.2,
-		totalMultiplier: 1.415
-	});
-});
-
-test('negative skill levels retain the live reference extrapolation', () => {
-	const negativePlacement = placementCoefficients(placementSkill, -5);
-	assert.equal(negativePlacement.weaponCoefficient, 42);
-	closeTo(negativePlacement.strengthMultiplier, 1.06, 1e-12);
-	closeTo(negativePlacement.totalMultiplier, 1.1, 1e-12);
-	const coefficient = directSkill.baseCoefficient + directSkill.perLevel * -6;
-	assert.equal(coefficient, -1000);
-	assert.equal(calcDirectHitDamage({ stats: aggregateStats(DEFAULT_SPEC_INPUTS), coefficient }).coefficient, -1000);
-	const efficiency = calculateDamageEfficiency({
-		stats: aggregateStats(DEFAULT_SPEC_INPUTS),
-		directCoefficient: coefficient,
-		placementSkill,
-		dungeon
-	});
-	assert.equal(displayed(efficiency.direct.theory.equivalents[1].value), -14.21);
-});
-
-test('paired stat inputs retain negative live edge values', () => {
-	const stats = aggregateStats({ ...DEFAULT_SPEC_INPUTS, critDmgPercent: -200 });
-	assert.equal(stats.criticalDamage.percent, -200);
-	assert.equal(stats.criticalDamage.total, -5260);
-	assert.equal(stats.criticalDamage.per1Pct, -52.6);
-});
-
-test('placement core, hit indicator, reflection, and reverse measurement match live goldens', () => {
-	const stats = aggregateStats(DEFAULT_SPEC_INPUTS);
-	const core = placementCoreCoefficients(19);
-	assert.equal(core.skillLevel, 69);
-	assert.equal(core.weaponCoefficient, 42);
-	closeTo(core.strengthMultiplier, 1.49, 1e-12);
-	closeTo(core.totalMultiplier, 2.22, 1e-12);
-	const earlyCore = placementCoreCoefficients(-45);
-	closeTo(earlyCore.strengthMultiplier, 0.85, 1e-12);
-	closeTo(earlyCore.totalMultiplier, 0.775, 1e-12);
-	closeTo(calculateHitIndicator(stats, 17000).value, 1537977.0276194974, 1e-6);
-	closeTo(calculateSummonReflection(stats, 148).value, 1786130.3920339805, 1e-6);
-	const reverse = inferPlacementMultiplier({
-		stats,
-		skill: placementSkill,
-		dungeon,
-		measuredBossDamage: 47576363562.874985
-	});
-	closeTo(reverse.preMultiplier, 35906689481.415085, 1e-5);
-	closeTo(reverse.inferredTotalMultiplier, 1.325, 1e-12);
-});
-
-test('numeric inputs accept safe additive workbook-style expressions', () => {
-	assert.equal(parseNumericInput('100 + 50 - 12.5'), 137.5);
-	assert.equal(parseNumericInput('(10 + 5) * 2'), 30);
-	assert.equal(parseNumericInput('globalThis.process'), 0);
-});
-
-test('damage efficiency produces finite equivalences and bypass rates', () => {
-	const stats = aggregateStats(DEFAULT_SPEC_INPUTS);
-	const result = calculateDamageEfficiency({
-		stats,
-		directCoefficient: directSkill.baseCoefficient,
-		placementSkill,
-		dungeon
-	});
-
-	for (const group of [result.direct, result.placement]) {
-		for (const scenario of ['theory', 'normal', 'boss']) {
-			assert.ok(group[scenario].damage > 0);
-			assert.equal(group[scenario].equivalents.length, 4);
-			for (const item of group[scenario].equivalents) assert.ok(Number.isFinite(item.value));
+// Independent goldens from latale.wiki's current calculator module and visible
+// practical sheet, captured 2026-10-03: DS-DR0 / Elmei0 / Icarus / sample inputs.
+const currentReference = {
+	theory: { direct: [86414405933.9259, 80069542259, 92759276388], placement: [100121154743.99127, 92796448182, 107445863595] },
+	normal: { direct: [12959357060.305176, 12007832519, 13910881585], placement: [14289195022.012756, 13243820304, 15334570344] },
+	boss: { direct: [2893385468.4555054, 2680942275, 3105828678], placement: [2899077604.5894775, 2686985636, 3111169562] },
+	'boss-theory': { direct: [82413706641.36884, 76362588648, 88464831420], placement: [95289927454.58325, 88318666815, 102261187319] }
+};
+test('direct and placed critical damage match the current reference in every scenario', () => {
+	const stats = aggregateStats();
+	for (const [scenario, values] of Object.entries(currentReference)) {
+		const direct = calcDirectHitDamage({ stats, coefficient: 5000, dungeon, scenario });
+		const placement = calcPlacementDamage({ stats, skill: placementSkill, dungeon, scenario });
+		for (const [kind, result] of [['direct', direct], ['placement', placement]]) {
+			const [average, minimum, maximum] = values[kind];
+			closeTo(result.damage, average);
+			assert.equal(result.minimum, minimum);
+			assert.equal(result.maximum, maximum);
+			assert.ok(minimum <= result.damage && result.damage <= maximum);
 		}
 	}
-	assert.ok(result.bypass.normal.direct > 0 && result.bypass.normal.direct < 100);
-	assert.ok(result.bypass.normal.placement > 0 && result.bypass.normal.placement < 100);
-	assert.ok(result.bypass.boss.direct > 0 && result.bypass.boss.direct < 100);
-	assert.ok(result.bypass.boss.placement > 0 && result.bypass.boss.placement < 100);
 });
 
-test('direct theory efficiency and bypass match the live reference sheet', () => {
-	const stats = aggregateStats(DEFAULT_SPEC_INPUTS);
-	const result = calculateDamageEfficiency({
-		stats,
-		directCoefficient: directSkill.baseCoefficient,
-		placementSkill,
-		dungeon
-	});
-	const theoryEquivalents = Object.fromEntries(result.direct.theory.equivalents.map((item) => [item.key, item]));
-	const expected = {
-		strMag: { value: 349.43, reverse: 4.82 },
-		weaponAttr: { value: 4.94, reverse: 4.76 },
-		fixedDamage: { value: 1045.11, reverse: 2.2 },
-		normalExtraDamage: { value: 1714.35, reverse: 3.66 }
-	};
-
-	for (const [key, reference] of Object.entries(expected)) {
-		const equivalent = theoryEquivalents[key];
-		assert.ok(equivalent, `missing direct theory equivalent for ${key}`);
-		assert.equal(displayed(equivalent.value), reference.value);
-		assert.equal(displayed(equivalent.reverse), reference.reverse);
-		closeTo(equivalent.reverse, stats[key].per1Pct / equivalent.value, 1e-9);
-	}
-	assert.equal(displayed(result.bypass.normal.direct), 78.14);
-	assert.equal(displayed(result.bypass.boss.direct), 56.64);
+test('noncritical boss damage matches the current live practical range table', () => {
+	const stats = aggregateStats();
+	const direct = calcDirectHitDamage({ stats, coefficient: 5000, scenario: 'boss', dungeon, critical: false });
+	const placed = calcPlacementDamage({ stats, skill: placementSkill, scenario: 'boss', dungeon, critical: false });
+	assert.equal(direct.minimum, 115358964);
+	assert.equal(direct.maximum, 133641505);
+	assert.equal(Math.round(direct.damage), 124500233);
+	assert.equal(placed.minimum, 100373013);
+	assert.equal(placed.maximum, 116218505);
+	assert.equal(Math.round(placed.damage), 108295759);
 });
 
-test('all six efficiency panels match live reference values', () => {
-	const result = calculateDamageEfficiency({
-		stats: aggregateStats(DEFAULT_SPEC_INPUTS),
-		directCoefficient: directSkill.baseCoefficient,
-		placementSkill,
-		dungeon
-	});
-	const expected = {
-		'direct.theory': [349.4348558427284, 4.935237892027263, 1045.1092006645965, 1714.3457940726275],
-		'direct.normal': [273.05124539302244, 3.856435127168271, 816.6568504591631, 1339.6037810163464],
-		'direct.boss': [195.5739908194484, 2.762186296096195, 584.9335685850765, 951.1528463079071],
-		'placement.theory': [265.8934551760402, 10.069803363773701, 895.6201580015197, 1469.1313118095102],
-		'placement.normal': [200.7572289958218, 7.602992027410307, 676.2190556143755, 1109.236521051651],
-		'placement.boss': [131.9627701934242, 4.99763766771489, 444.49577374028894, 722.7887799081221]
-	};
-	for (const [path, golden] of Object.entries(expected)) {
-		const [kind, scenario] = path.split('.');
-		const actual = result[kind][scenario].equivalents.map((item) => item.value);
-		actual.forEach((value, index) => closeTo(value, golden[index], 1e-9));
+test('maximum mode selects the top critical roll without changing its range', () => {
+	const stats = aggregateStats();
+	for (const calculate of [() => calcDirectHitDamage({ stats, coefficient: 5000, scenario: 'boss', dungeon, mode: 'maximum' }), () => calcPlacementDamage({ stats, skill: placementSkill, scenario: 'boss', dungeon, mode: 'maximum' })]) {
+		const result = calculate();
+		assert.equal(result.damage, result.maximum);
 	}
 });
 
-test('default damage scenarios match live absolute outputs', () => {
-	const stats = aggregateStats(DEFAULT_SPEC_INPUTS);
-	const directExpected = {
-		theory: 87481986052.16772,
-		'boss-theory': 83429281133.11877,
-		normal: 68359137165.613396,
-		boss: 47251355930.12875
-	};
-	for (const [scenario, expected] of Object.entries(directExpected)) {
-		closeTo(calcDirectHitDamage({ stats, coefficient: directSkill.baseCoefficient, scenario, dungeon }).damage, expected, 1e-3);
-	}
-	const placementExpected = {
-		theory: 99333720255.90181,
-		'boss-theory': 94543319065.8772,
-		normal: 74999824313.90797,
-		boss: 47576363562.875015
-	};
-	for (const [scenario, expected] of Object.entries(placementExpected)) {
-		closeTo(calcPlacementDamage({ stats, skill: placementSkill, scenario, dungeon }).damage, expected, 1e-3);
-	}
+test('simple direct fixture independently verifies coefficient offset and strength efficiency', () => {
+	const stats = aggregateStats({ ...blankInputs(), strMagFlat: 1000, strMagEfficiency: 10, weaponAttrFlat: 100, minDmgFlat: 100, maxDmgFlat: 100, critDmgFlat: 100 });
+	// (floor(1000*1.1) + floor(100*(5000+100)/50)) * 2 critical * 1 roll.
+	assert.equal(calcDirectHitDamage({ stats, coefficient: 5000 }).damage, 22600);
 });
 
-test('enchant comparison applies deltas without mutating the base input', () => {
-	const base = { ...DEFAULT_SPEC_INPUTS };
-	const changed = applyEnchantDelta(base, { strMagPercent: 10 });
-	assert.equal(changed.strMagPercent, base.strMagPercent + 10);
-	assert.equal(base.strMagPercent, DEFAULT_SPEC_INPUTS.strMagPercent);
-
-	const comparison = compareEnchants({
-		inputs: base,
-		oldEnchant: {},
-		newEnchant: { strMagPercent: 10, bossDomination: 2 },
-		directCoefficient: directSkill.baseCoefficient,
-		placementSkill,
-		dungeon
-	});
-	assert.ok(comparison.scenarios.boss.direct.percentChange > 0);
-	assert.ok(comparison.scenarios.boss.placement.percentChange > 0);
+test('defense is level-scaled, guard is a separate percent and critical resistance lowers only crit amplification', () => {
+	const inputs = { ...blankInputs(), strMagFlat: 1_000_000, weaponAttrFlat: 1000, minDmgFlat: 100, maxDmgFlat: 100, critDmgFlat: 100, penetration: 0 };
+	const target = { id: 'test', name: 'Test', normalDefense: 100000, bossDefense: 100000, normalDmgReduction: 0, bossDmgReduction: 0 };
+	const calculate = (values, overrides = {}) => calcDirectHitDamage({ stats: aggregateStats(values), coefficient: 5000, scenario: 'normal', dungeon: { ...target, ...overrides } }).damage;
+	const base = calculate(inputs);
+	assert.ok(calculate({ ...inputs, characterLevel: 300 }) > base);
+	assert.ok(calculate({ ...inputs, penetration: 100 }) > base);
+	closeTo(calculate(inputs, { normalGuard: 50 }), base / 2, 1);
+	closeTo(calculate(inputs, { normalElasticity: 1000 }), base / 2, 1);
+	assert.equal(calculate(inputs, { normalGuard: 100 }), 0);
 });
 
-test('enchant placement scenarios use the live selected-skill/core hybrid', () => {
-	const comparison = compareEnchants({
-		inputs: DEFAULT_SPEC_INPUTS,
-		directCoefficient: directSkill.baseCoefficient,
-		placementSkill,
-		dungeon
-	});
-	const expected = {
-		theory: 166430836957.05814,
-		'boss-theory': 158404655340.5641,
-		normal: 125660083001.41565,
-		boss: 79712850648.74155
-	};
-	for (const [scenario, damage] of Object.entries(expected)) {
-		closeTo(comparison.scenarios[scenario].placement.old, damage, 1e-3);
-		closeTo(comparison.scenarios[scenario].placement.new, damage, 1e-3);
-	}
+test('placement reflection scales damage stats and bypasses player penetration but retains target defense', () => {
+	const stats = aggregateStats();
+	const a = calcPlacementDamage({ stats, skill: placementSkill, scenario: 'boss', dungeon });
+	const b = calcPlacementDamage({ stats: { ...stats, penetration: 0 }, skill: placementSkill, scenario: 'boss', dungeon });
+	assert.equal(a.damage, b.damage);
+	const coefficients = placementCoefficients(placementSkill, 2);
+	closeTo(coefficients.strengthMultiplier, 1.2);
+	assert.ok(calcPlacementDamage({ stats, coefficients, scenario: 'boss', dungeon }).damage > a.damage);
+	const legacyTotal = { ...placementCoefficients(placementSkill), totalMultiplier: 999 };
+	assert.equal(calcPlacementDamage({ stats, coefficients: legacyTotal, scenario: 'boss', dungeon }).damage, a.damage);
 });
 
-test('enchant comparison replaces an old item already included in the base inputs', () => {
-	const base = { ...DEFAULT_SPEC_INPUTS };
-	const snapshot = structuredClone(base);
+test('back attacks add damage and blend probabilities without substituting the maximum roll', () => {
+	const stats = aggregateStats();
+	const direct = (rate) => calcDirectHitDamage({ stats, coefficient: 5000, scenario: 'boss', dungeon, backAttackRate: rate }).damage;
+	assert.ok(direct(100) > direct(0));
+	closeTo(direct(25), .75 * direct(0) + .25 * direct(100));
+	const mixed = calcDirectHitDamage({ stats, coefficient: 5000, scenario: 'boss', dungeon, backAttackRate: 25 });
+	assert.equal(mixed.minimum, calcDirectHitDamage({ stats, coefficient: 5000, scenario: 'boss', dungeon }).minimum);
+	assert.equal(mixed.maximum, calcDirectHitDamage({ stats, coefficient: 5000, scenario: 'boss', dungeon, backAttackRate: 100 }).maximum);
+	const noBonus = { ...stats, backAttackDmg: 0 };
+	assert.equal(calcDirectHitDamage({ stats: noBonus, coefficient: 5000, backAttackRate: 100 }).damage, calcDirectHitDamage({ stats: noBonus, coefficient: 5000 }).damage);
+});
+
+test('physical weapon ranges and magical fixed attributes use the correct roll model', () => {
+	const full = aggregateStats();
+	const range = { ...full, weaponMinimum: full.weaponAttr.total / 2 };
+	assert.ok(calcDirectHitDamage({ stats: range, coefficient: 5000 }).damage < calcDirectHitDamage({ stats: full, coefficient: 5000 }).damage);
+	assert.equal(calcDirectHitDamage({ stats: { ...range, physicalJob: false }, coefficient: 5000 }).damage, calcDirectHitDamage({ stats: { ...full, physicalJob: false }, coefficient: 5000 }).damage);
+});
+
+test('custom dungeon resolves all four defense mechanics and treats resistance as per-mille', () => {
+	const resolved = resolveDungeon(dungeon, { ...DEFAULT_SPEC_CALCULATION_SETTINGS, useCustomDungeonStats: true, customNormalDefense: '10 + 20', customBossDefense: 50, customNormalDmgReduction: 100, customBossDmgReduction: 200, customNormalGuard: 53, customBossGuard: 80, customNormalElasticity: 600, customBossElasticity: 700 });
+	assert.deepEqual(resolved, { id: 'custom', name: 'Custom dungeon', normalDefense: 30, bossDefense: 50, normalDmgReduction: 100, bossDmgReduction: 200, normalGuard: 53, bossGuard: 80, normalElasticity: 600, bossElasticity: 700 });
+});
+
+test('efficiency normalizes measured reference-stat damage gains over a stable probe', () => {
+	const stats = aggregateStats();
+	const result = calculateDamageEfficiency({ stats, ...basicOptions });
+	const extraCrit = aggregateStats({ ...DEFAULT_SPEC_INPUTS, critDmgFlat: DEFAULT_SPEC_INPUTS.critDmgFlat + 100 });
+	const gain = calcDirectHitDamage({ stats: extraCrit, coefficient: 5000, scenario: 'boss', dungeon }).damage - result.direct.boss.damage;
+	assert.equal(result.direct.boss.referenceGain, gain / 100);
+	assert.equal(result.direct.boss.referenceStep, 100);
+	assert.ok(result.placement.boss.referenceGain > 0, 'Reflection rounding must not hide the marginal critical gain');
+	assert.ok(result.placement.boss.equivalents.every((entry) => entry.value > 0));
+	assert.equal(result.direct.boss.equivalents.length, 4);
+	assert.ok(result.direct.boss.equivalents.every((entry) => entry.value > 0));
+	closeTo(result.bypass.boss.direct, 100 * currentReference.boss.direct[0] / currentReference['boss-theory'].direct[0]);
+	assertFinite(result);
+});
+
+test('minimum damage has no marginal benefit in maximum-roll mode or above the maximum cap', () => {
+	const result = calculateDamageEfficiency({ stats: aggregateStats(), ...basicOptions, referenceStat: 'minimum', damageMode: 'maximum' });
+	assert.equal(result.direct.boss.referenceGain, 0);
+	assert.ok(result.direct.boss.equivalents.every((entry) => entry.value === 0));
+	const capped = aggregateStats({ ...DEFAULT_SPEC_INPUTS, minDmgFlat: 999999 });
+	assert.equal(calculateDamageEfficiency({ stats: capped, ...basicOptions, referenceStat: 'minimum' }).direct.theory.referenceGain, 0);
+});
+
+test('theory conversion uses the current direct roll terms and keeps full precision', () => {
+	const stats = aggregateStats();
+	const result = calculateConversionSummary(stats, { criterion: 'boss' });
+	const expected = (stats.minimumDamage.total + stats.maximumDamage.total) * 1.41 / ((100 + stats.criticalDamage.total) * 1.39);
+	closeTo(result.criticalToMinimum, expected, 1e-12);
+	closeTo(Object.values(result.baseShares).reduce((a, b) => a + b), 1, 1e-12);
+});
+
+test('enchant replacement subtracts the old option, preserves summon bonuses and does not mutate inputs', () => {
+	const inputs = { ...DEFAULT_SPEC_INPUTS };
+	const snapshot = structuredClone(inputs);
 	const oldEnchant = { strMagFlat: 1200, critDmgFlat: 20, bossDomination: 1.5 };
 	const newEnchant = { strMagFlat: 1650, critDmgFlat: 12, bossDomination: 2.25 };
-	const replacementDelta = { strMagFlat: 450, critDmgFlat: -8, bossDomination: 0.75 };
-	const comparison = compareEnchants({
-		inputs: base,
-		oldEnchant,
-		newEnchant,
-		directCoefficient: directSkill.baseCoefficient,
-		placementSkill,
-		dungeon
-	});
-
-	assert.deepEqual(base, snapshot);
-	assert.deepEqual(comparison.oldStats, aggregateStats(base));
-	assert.deepEqual(comparison.newStats, aggregateStats(applyEnchantDelta(base, replacementDelta)));
+	const result = compareEnchants({ inputs, oldEnchant, newEnchant, ...basicOptions });
+	assert.deepEqual(inputs, snapshot);
+	assert.deepEqual(result.newStats, aggregateStats(applyEnchantDelta(inputs, { strMagFlat: 450, critDmgFlat: -8, bossDomination: .75 })));
+	assert.deepEqual(applyEnchantReplacementToStats(aggregateStats(inputs), oldEnchant, newEnchant), result.newStats);
+	assert.equal(applyEnchantReplacement(inputs, {}, { backAttackDmg: 10 }).backAttackDmg, inputs.backAttackDmg + 10);
 });
 
-test('enchant replacement applies domination deltas after the existing cap', () => {
-	const capped = aggregateStats({
-		...DEFAULT_SPEC_INPUTS,
-		summonId: 'kardian',
-		normalDomination: 90
-	});
-	assert.equal(capped.normalDomination, 100);
-	const replaced = applyEnchantReplacementToStats(
-		capped,
-		{ normalDomination: 5 },
-		{ normalDomination: 0 }
-	);
-	assert.equal(replaced.normalDomination, 95);
-});
-
-test('HP calibration applies only the replacement delta', () => {
-	const result = calculateHpComparison(
-		{ stamina: 5000, staminaMinus10: 4990, maxHp: 500000, maxHpMinus10: 499600 },
-		{ strMagAll: 100, strMagAllPercent: 2, stamina: 10, hpPercent: 1 },
-		{ strMagAll: 200, strMagAllPercent: 3, stamina: 30, hpPercent: 2 }
-	);
-	assert.ok(result);
-	closeTo(result.staminaMultiplier, 50);
-	closeTo(result.hpMultiplier, 10);
-	assert.ok(result.expected > 500000);
-});
-
-test('build profiles preserve the combined strength and weapon budget', () => {
-	const stats = aggregateStats(DEFAULT_SPEC_INPUTS);
-	const result = calculateBuildEfficiency({
-		stats,
-		directCoefficient: directSkill.baseCoefficient,
-		placementSkill,
-		dungeon
-	});
-	assert.equal(result.profiles.length, 5);
-	for (const profile of result.profiles) closeTo(profile.strMag / 100 + profile.weaponAttr, result.budget, 1);
-});
-
-test('build efficiency separates practical boss output from the raw calculation', () => {
-	const stats = aggregateStats(DEFAULT_SPEC_INPUTS);
-	const result = calculateBuildEfficiency({
-		stats,
-		directCoefficient: directSkill.baseCoefficient,
-		placementSkill,
-		dungeon
-	});
-
-	assert.equal(displayed(result.current.direct.boss / 1_000_000_000, 3), 47.251);
-	assert.deepEqual(result.current.practical, {
-		normalDirect: 875,
-		bossDirect: 14.1754,
-		normalPlacement: 993,
-		bossPlacement: 14.2729
-	});
-	closeTo(result.current.practicalAbsolute.bossDirect / 1_000_000_000, 1.41754, 0.00001);
-	for (const profile of result.profiles) {
-		for (const key of ['normalDirect', 'bossDirect', 'normalPlacement', 'bossPlacement']) {
-			assert.ok(Number.isFinite(profile.practical[key]), `${profile.id}.${key} should be finite`);
-		}
+test('unchanged enchant comparison uses exactly the same damage model as the damage table', () => {
+	const result = compareEnchants({ inputs: DEFAULT_SPEC_INPUTS, oldEnchant: { critDmg: 50 }, newEnchant: { critDmg: 50 }, ...basicOptions });
+	for (const [scenario, reference] of Object.entries(currentReference)) {
+		closeTo(result.scenarios[scenario].direct.old, reference.direct[0]);
+		closeTo(result.scenarios[scenario].placement.old, reference.placement[0]);
+		assert.equal(result.scenarios[scenario].direct.percentChange, 0);
+		assert.equal(result.scenarios[scenario].placement.percentChange, 0);
 	}
 });
 
-test('all rounded build profiles match the live report', () => {
-	const result = calculateBuildEfficiency({
-		stats: aggregateStats(DEFAULT_SPEC_INPUTS),
-		directCoefficient: directSkill.baseCoefficient,
-		placementSkill,
-		dungeon
-	});
-	const expected = {
-		'extreme-weapon': [870, 14.051, 851, 10.1642],
-		'weapon-leaning': [872, 14.0844, 890, 11.2674],
-		balanced: [873, 14.129, 940, 12.7416],
-		'strength-leaning': [874, 14.1634, 980, 13.8757],
-		'extreme-strength': [875, 14.1821, 1001, 14.4943]
-	};
+test('skill-level and back-attack enchant options actually affect the selected skill', () => {
+	const inputs = DEFAULT_SPEC_INPUTS;
+	const levels = compareEnchants({ inputs, newEnchant: { directHitSkillLevel: 1, placementSkillLevel: 1 }, ...basicOptions });
+	assert.ok(levels.scenarios.boss.direct.percentChange > 0);
+	assert.ok(levels.scenarios.boss.placement.percentChange > 0);
+	closeTo(levels.scenarios.boss.direct.new, calcDirectHitDamage({ stats: aggregateStats(inputs), coefficient: 6000, scenario: 'boss', dungeon }).damage);
+	const front = compareEnchants({ inputs, newEnchant: { backAttackDmg: 100 }, ...basicOptions });
+	assert.equal(front.scenarios.boss.direct.percentChange, 0);
+	const back = compareEnchants({ inputs, newEnchant: { backAttackDmg: 100 }, backAttackRate: 100, ...basicOptions });
+	assert.ok(back.scenarios.boss.direct.percentChange > 0);
+});
+
+test('HP calibration returns the baseline unchanged and rejects unusable measurements', () => {
+	const calibration = { stamina: 5000, staminaMinus10: 4990, maxHp: 500000, maxHpMinus10: 499600 };
+	closeTo(calculateHpComparison(calibration).expected, 500000);
+	assert.ok(calculateHpComparison(calibration, {}, { hpPercent: 2, stamina: 10 }).expected > 500000);
+	assert.equal(calculateHpComparison({ ...calibration, staminaMinus10: 5000 }), null);
+	assert.equal(calculateHpComparison({ ...calibration, maxHpMinus10: 600000 }), null);
+	assert.equal(calculateHpComparison({}), null);
+	assert.equal(calculateHpComparison({ stamina: 5000, maxHp: 500000 }), null);
+});
+
+test('builds preserve their stat budget, actual dungeon damage and unrounded changes', () => {
+	const result = calculateBuildEfficiency({ stats: aggregateStats(), ...basicOptions });
+	assert.equal(result.partyScale, 1);
+	closeTo(result.current.practicalAbsolute.bossDirect, currentReference.boss.direct[0]);
+	closeTo(result.current.practicalAbsolute.normalDirect, currentReference.normal.direct[0]);
 	for (const profile of result.profiles) {
-		assert.deepEqual(Object.values(profile.practical), expected[profile.id]);
-		for (const key of ['normalDirect', 'bossDirect', 'normalPlacement', 'bossPlacement']) {
-			assert.ok(Number.isFinite(profile.change[key]));
-		}
+		closeTo(profile.strMag / 100 + profile.weaponAttr, result.budget);
+		closeTo(profile.change.bossDirect, (profile.direct.boss / result.current.direct.boss - 1) * 100);
+		closeTo(profile.practical.bossDirect * 1e8, profile.direct.boss);
 	}
 });
 
-test('zeroed inputs never return NaN or Infinity', () => {
-	const empty = Object.fromEntries(Object.keys(DEFAULT_SPEC_INPUTS).map((key) => [key, typeof DEFAULT_SPEC_INPUTS[key] === 'boolean' ? false : typeof DEFAULT_SPEC_INPUTS[key] === 'string' ? 'none' : 0]));
-	const stats = aggregateStats(empty);
-	const efficiency = calculateDamageEfficiency({ stats, directCoefficient: 0, placementSkill, dungeon });
-	assert.doesNotMatch(JSON.stringify(efficiency), /NaN|Infinity/);
+test('measured placement comparison reports a multiplier against the same modern model', () => {
+	const result = inferPlacementMultiplier({ stats: aggregateStats(), skill: placementSkill, dungeon, measuredBossDamage: currentReference.boss.placement[0] });
+	closeTo(result.inferredTotalMultiplier, 1);
+	closeTo(result.expected, currentReference.boss.placement[0]);
+});
+
+test('zero values stay finite throughout conversion, damage, efficiency and builds', () => {
+	const stats = aggregateStats(blankInputs());
+	assertFinite(calculateConversionSummary(stats));
+	assertFinite(calculateDamageEfficiency({ stats, ...basicOptions }));
+	assertFinite(calculateBuildEfficiency({ stats, ...basicOptions }));
+	assertFinite(compareEnchants({ inputs: blankInputs(), ...basicOptions }));
 });

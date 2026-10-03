@@ -2,8 +2,8 @@
 
 import {
 	DEFAULT_ENCHANT_OPTION,
-	DEFAULT_SPEC_CALCULATION_SETTINGS,
-	DEFAULT_SPEC_INPUTS,
+	DEFAULT_SPEC_CALCULATION_SETTINGS as DATA_SETTINGS,
+	DEFAULT_SPEC_INPUTS as DATA_INPUTS,
 	DEFAULT_SPEC_SELECTIONS,
 	DIRECT_SKILLS,
 	DUNGEONS,
@@ -13,97 +13,91 @@ import {
 	SUMMONS
 } from './spec-analyzer-data.js';
 
-export {
-	DEFAULT_ENCHANT_OPTION,
-	DEFAULT_SPEC_CALCULATION_SETTINGS,
-	DEFAULT_SPEC_INPUTS,
-	DEFAULT_SPEC_SELECTIONS,
-	DIRECT_SKILLS,
-	DUNGEONS,
-	JOBS,
-	PLACEMENT_SKILLS,
-	SPEC_ANALYZER_DATA_META,
-	SUMMONS
-};
+export { DEFAULT_ENCHANT_OPTION, DEFAULT_SPEC_SELECTIONS, DIRECT_SKILLS, DUNGEONS, JOBS, PLACEMENT_SKILLS, SPEC_ANALYZER_DATA_META, SUMMONS };
 
-/** Parse the small arithmetic expressions accepted by the reference workbook UI. */
-export function parseNumericInput(value) {
-	if (typeof value === 'number') return Number.isFinite(value) ? value : 0;
-	if (typeof value !== 'string') {
-		const parsed = Number(value);
-		return Number.isFinite(parsed) ? parsed : 0;
-	}
+export const DEFAULT_SPEC_INPUTS = Object.freeze({
+	...DATA_INPUTS,
+	characterLevel: 235,
+	weaponMinimum: 0,
+	meleeAttack: false,
+	meleeDamage: 0,
+	statusAttack: false,
+	statusDamage: 0
+});
+export const DEFAULT_SPEC_CALCULATION_SETTINGS = Object.freeze({
+	...DATA_SETTINGS,
+	customNormalGuard: 0,
+	customBossGuard: 0,
+	customNormalElasticity: 0,
+	customBossElasticity: 0
+});
+
+/** A bounded arithmetic parser: expressions are never evaluated as JavaScript. */
+export function inspectNumericInput(value) {
+	if (typeof value === 'number') return { value: Number.isFinite(value) ? value : 0, valid: Number.isFinite(value) };
+	if (typeof value !== 'string') return { value: 0, valid: false };
 	const source = value.trim().replaceAll(',', '');
-	if (!source) return 0;
-	if (!/^[\d+\-*/().\s]+$/.test(source)) return 0;
-
+	if (!source) return { value: 0, valid: true };
+	if (source.length > 512 || !/^[\d+\-*/().\s]+$/.test(source)) return { value: 0, valid: false };
 	let index = 0;
-	const skip = () => {
-		while (/\s/.test(source[index] ?? '')) index += 1;
-	};
+	let depth = 0;
+	const skip = () => { while (/\s/.test(source[index] ?? '')) index += 1; };
 	const primary = () => {
 		skip();
+		let sign = 1;
+		while (source[index] === '+' || source[index] === '-') {
+			if (source[index++] === '-') sign *= -1;
+			skip();
+		}
 		if (source[index] === '(') {
+			if (++depth > 32) throw new Error('Expression nesting limit');
 			index += 1;
 			const result = expression();
 			skip();
-			if (source[index] !== ')') throw new Error('unclosed expression');
-			index += 1;
-			return result;
+			if (source[index++] !== ')') throw new Error('Missing parenthesis');
+			depth -= 1;
+			return sign * result;
 		}
-		let sign = 1;
-		while (source[index] === '+' || source[index] === '-') {
-			if (source[index] === '-') sign *= -1;
-			index += 1;
-			skip();
-		}
-		const start = index;
-		while (/[\d.]/.test(source[index] ?? '')) index += 1;
-		if (start === index) throw new Error('number expected');
-		const parsed = Number(source.slice(start, index));
-		if (!Number.isFinite(parsed)) throw new Error('invalid number');
-		return sign * parsed;
+		const match = /^(?:\d+(?:\.\d*)?|\.\d+)/.exec(source.slice(index));
+		if (!match) throw new Error('Number expected');
+		index += match[0].length;
+		return sign * Number(match[0]);
 	};
 	const term = () => {
 		let result = primary();
 		while (true) {
 			skip();
 			const operator = source[index];
-			if (operator !== '*' && operator !== '/') break;
+			if (operator !== '*' && operator !== '/') return result;
 			index += 1;
 			const right = primary();
-			result = operator === '*' ? result * right : right === 0 ? 0 : result / right;
+			if (operator === '/' && right === 0) throw new Error('Division by zero');
+			result = operator === '*' ? result * right : result / right;
 		}
-		return result;
 	};
 	const expression = () => {
 		let result = term();
 		while (true) {
 			skip();
 			const operator = source[index];
-			if (operator !== '+' && operator !== '-') break;
+			if (operator !== '+' && operator !== '-') return result;
 			index += 1;
 			const right = term();
 			result = operator === '+' ? result + right : result - right;
 		}
-		return result;
 	};
-
 	try {
 		const result = expression();
 		skip();
-		return index === source.length && Number.isFinite(result) ? result : 0;
-	} catch {
-		return 0;
-	}
+		return index === source.length && Number.isFinite(result) ? { value: result, valid: true } : { value: 0, valid: false };
+	} catch { return { value: 0, valid: false }; }
 }
-
-const number = (value) => parseNumericInput(value);
-const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, number(value)));
-const divide = (numerator, denominator) => (number(denominator) === 0 ? 0 : number(numerator) / number(denominator));
-const percentChange = (before, after) => (number(before) === 0 ? 0 : (number(after) / number(before) - 1) * 100);
-const round2 = (value) => Math.round(number(value) * 100) / 100;
-const round4 = (value) => Math.round(number(value) * 10000) / 10000;
+export const parseNumericInput = (value) => inspectNumericInput(value).value;
+const number = parseNumericInput;
+const clamp = (value, min, max) => Math.min(max, Math.max(min, number(value)));
+const nonnegative = (value) => Math.max(0, number(value));
+const divide = (a, b) => b === 0 || !Number.isFinite(a / b) ? 0 : a / b;
+const percentChange = (a, b) => a > 0 ? (b / a - 1) * 100 : 0;
 const cloneStats = (stats) => structuredClone(stats);
 
 const pairedStats = [
@@ -116,733 +110,392 @@ const pairedStats = [
 	['normalExtraDamage', 'normalExtraDmgFlat', 'normalExtraDmgPercent'],
 	['bossExtraDamage', 'bossExtraDmgFlat', 'bossExtraDmgPercent']
 ];
+const statPair = (flat, percent) => ({ flat, percent, total: flat * (1 + percent / 100), per1Pct: divide(flat, 100 + percent) });
 
 export function aggregateStats(inputs = DEFAULT_SPEC_INPUTS, options = {}) {
-	const summonId = options.summonId ?? inputs.summonId ?? 'none';
-	const summon = SUMMONS.find((item) => item.id === summonId) ?? SUMMONS[0];
+	const summon = SUMMONS.find((item) => item.id === (options.summonId ?? inputs.summonId)) ?? SUMMONS[0];
 	const bonuses = summon.bonuses ?? {};
-	const result = {};
-
-	for (const [resultKey, flatKey, percentKey] of pairedStats) {
-		let flat = number(inputs[flatKey]) + number(bonuses[flatKey]);
-		if (resultKey === 'weaponAttr' && inputs.physicalJob !== false) flat += 115;
-		const percent = number(inputs[percentKey]) + number(bonuses[percentKey]);
-		result[resultKey] = {
-			flat,
-			percent,
-			total: flat * (1 + percent / 100),
-			per1Pct: divide(flat, 100 + percent)
-		};
-	}
-
+	const result = Object.fromEntries(pairedStats.map(([key, flat, percent]) => [key, statPair(nonnegative(inputs[flat]) + nonnegative(bonuses[flat]), nonnegative(inputs[percent]) + nonnegative(bonuses[percent]))]));
 	return {
 		...result,
-		normalDomination: Math.min(number(inputs.normalDomination) + number(bonuses.normalDomination), 100),
-		bossDomination: Math.min(number(inputs.bossDomination) + number(bonuses.bossDomination), 100),
-		penetration: Math.min(number(inputs.penetration), 99),
-		placementCoreLevel: number(inputs.placementCoreLevel),
-		backAttackDmg: number(inputs.backAttackDmg),
-		strMagEfficiency: number(inputs.strMagEfficiency),
+		normalDomination: nonnegative(inputs.normalDomination) + nonnegative(bonuses.normalDomination),
+		bossDomination: nonnegative(inputs.bossDomination) + nonnegative(bonuses.bossDomination),
+		penetration: clamp(inputs.penetration, 0, 100),
+		placementCoreLevel: nonnegative(inputs.placementCoreLevel),
+		backAttackDmg: nonnegative(inputs.backAttackDmg),
+		strMagEfficiency: nonnegative(inputs.strMagEfficiency),
 		physicalJob: inputs.physicalJob !== false,
-		summonId: summon.id
+		summonId: summon.id,
+		characterLevel: Math.max(1, number(inputs.characterLevel ?? 235)),
+		weaponMinimum: nonnegative(inputs.weaponMinimum),
+		meleeAttack: inputs.meleeAttack === true,
+		meleeDamage: nonnegative(inputs.meleeDamage),
+		statusAttack: inputs.statusAttack === true,
+		statusDamage: nonnegative(inputs.statusDamage)
 	};
 }
 
 export function calculateBaseShares(stats, { criterion = 'normal' } = {}) {
-	const extra = criterion === 'boss' ? stats.bossExtraDamage.total : stats.normalExtraDamage.total;
-	const components = {
-		strMag: stats.strMag.total,
-		weaponAttr: 100 * stats.weaponAttr.total,
-		fixedDamage: stats.fixedDamage.total,
-		extraDamage: extra
-	};
-	const total = Object.values(components).reduce((sum, value) => sum + value, 0);
-	return Object.fromEntries(Object.entries(components).map(([key, value]) => [key, round4(divide(value, total))]));
+	const parts = { strMag: stats.strMag.total, weaponAttr: 100 * stats.weaponAttr.total, fixedDamage: stats.fixedDamage.total, extraDamage: (criterion === 'boss' ? stats.bossExtraDamage : stats.normalExtraDamage).total };
+	const total = Object.values(parts).reduce((sum, value) => sum + value, 0);
+	return Object.fromEntries(Object.entries(parts).map(([key, value]) => [key, divide(value, total)]));
 }
 
+/** Continuous theory ratios. Damage tables below include the game's integer rounding. */
 export function calculateConversionSummary(stats, { criterion = 'normal' } = {}) {
-	const minimum = stats.minimumDamage.total;
+	const minimum = Math.min(stats.minimumDamage.total, stats.maximumDamage.total);
 	const maximum = stats.maximumDamage.total;
+	const average = (minimum + maximum) / 2;
 	const critical = stats.criticalDamage.total;
 	const domination = criterion === 'boss' ? stats.bossDomination : stats.normalDomination;
-	const minimumTerm = 0.95 + Math.min(minimum, maximum) / 100;
-	const maximumTerm = 1.05 + maximum / 100;
-	const average = (minimumTerm + maximumTerm) / 2;
-	const inverse = divide(1, divide(average, 1 + critical / 100) * 2);
-	const minimumRatio = divide(inverse * (1 + stats.minimumDamage.percent / 100), 1 + stats.criticalDamage.percent / 100);
-	const maximumRatio = divide(inverse * (1 + stats.maximumDamage.percent / 100), 1 + stats.criticalDamage.percent / 100);
-	const criticalToMinimum = divide(1, minimumRatio);
-	const criticalToMaximum = divide(1, maximumRatio);
-	const criticalMarginal = (average * (1 + critical / 100)) / 100;
-	const dominationMarginal = (average / 100) * (1 + domination / 100) * (1 + stats.criticalDamage.percent / 100);
-	const maximumMarginal = (critical / 10000) * (1 + domination / 100) * (1 + stats.maximumDamage.percent / 100);
-	const minimumMarginal = (critical / 10000) * (1 + domination / 100) * (1 + stats.minimumDamage.percent / 100);
-	const dominationToCritical = divide(criticalMarginal, dominationMarginal);
-	const dominationToMaximum = divide(criticalMarginal, maximumMarginal) * criticalToMaximum;
-	const dominationToMinimum = divide(criticalMarginal, minimumMarginal) * criticalToMinimum;
-
-	const dominationShare = round2(divide(domination, 100 + domination));
-	const criticalShare = round2(divide(1 + critical / 100, 1 + critical / 100 + average) * (1 - dominationShare));
-	const maximumShare = round2((1 - criticalShare - dominationShare) * divide(maximum / 100, 2 * average));
-	const minimumShare = round2(1 - criticalShare - dominationShare - maximumShare);
-
+	const criticalGain = divide(1 + stats.criticalDamage.percent / 100, 100 + critical);
+	const minimumGain = stats.minimumDamage.total < maximum ? divide(1 + stats.minimumDamage.percent / 100, 2 * average) : 0;
+	const maximumGain = divide((1 + stats.maximumDamage.percent / 100) * (stats.minimumDamage.total > maximum ? 1 : .5), average);
+	const dominationGain = divide(1, 100 + domination);
+	const shares = { minimum: minimum / 2, maximum: maximum / 2, critical: critical, domination: domination };
+	const shareTotal = Object.values(shares).reduce((sum, value) => sum + value, 0);
+	const dominationToCritical = divide(dominationGain, criticalGain);
+	const dominationToMaximum = divide(dominationGain, maximumGain);
+	const dominationToMinimum = divide(dominationGain, minimumGain);
 	return {
 		criterion,
-		criticalToMinimum,
-		criticalToMaximum,
+		criticalToMinimum: divide(criticalGain, minimumGain),
+		criticalToMaximum: divide(criticalGain, maximumGain),
 		finalCriticalPer1: stats.criticalDamage.per1Pct,
 		finalMaximumPer1: stats.maximumDamage.per1Pct,
 		finalMinimumPer1: stats.minimumDamage.per1Pct,
-		dominationToCritical,
-		dominationToMaximum,
-		dominationToMinimum,
-		// Compatibility aliases used by the first local implementation.
+		dominationToCritical, dominationToMaximum, dominationToMinimum,
 		criticalToDomination: dominationToCritical,
 		criticalToMaximumAdjusted: dominationToMaximum,
 		criticalToMinimumAdjusted: dominationToMinimum,
-		damageShares: {
-			minimum: minimumShare,
-			maximum: maximumShare,
-			critical: criticalShare,
-			domination: dominationShare
-		},
+		damageShares: Object.fromEntries(Object.entries(shares).map(([key, value]) => [key, divide(value, shareTotal)])),
 		baseShares: calculateBaseShares(stats, { criterion })
 	};
 }
 
-export function damageFactor({
-	minimumDamage = 0,
-	maximumDamage = 0,
-	criticalDamage = 0,
-	domination = 0,
-	backAttackRate = 0,
-	mode = 'average'
-}) {
-	const minimumTerm = 0.95 + Math.min(number(minimumDamage), number(maximumDamage)) / 100;
-	const maximumTerm = 1.05 + number(maximumDamage) / 100;
-	const average = (minimumTerm + maximumTerm) / 2;
-	const rate = typeof backAttackRate === 'boolean' ? (backAttackRate ? 1 : 0) : clamp(backAttackRate, 0, 100) / 100;
-	const roll = mode === 'maximum' ? maximumTerm : average * (1 - rate) + maximumTerm * rate;
-	return roll * (1 + number(criticalDamage) / 100) * (1 + number(domination) / 100);
+export function damageFactor({ minimumDamage = 0, maximumDamage = 0, criticalDamage = 0, domination = 0, backAttackRate = 0, backAttackDamage = 0, mode = 'average' }) {
+	const maximum = nonnegative(maximumDamage) / 100;
+	const minimum = Math.min(nonnegative(minimumDamage) / 100, maximum);
+	const roll = mode === 'maximum' ? maximum : (minimum + maximum) / 2;
+	const rate = typeof backAttackRate === 'boolean' ? Number(backAttackRate) : clamp(backAttackRate, 0, 100) / 100;
+	return roll * (1 + (nonnegative(criticalDamage) + rate * nonnegative(backAttackDamage)) / 100) * (1 + nonnegative(domination) / 100);
 }
 
 const isBossScenario = (scenario) => scenario === 'boss' || scenario === 'boss-theory';
 const usesDungeon = (scenario) => scenario === 'normal' || scenario === 'boss';
-
-function scenarioValues(stats, scenario) {
-	const boss = isBossScenario(scenario);
-	return {
-		boss,
-		extraDamage: boss ? stats.bossExtraDamage.total : stats.normalExtraDamage.total,
-		domination: boss ? stats.bossDomination : stats.normalDomination
-	};
-}
-
 export function resolveDungeon(dungeon = DUNGEONS[0], settings = {}) {
 	if (!settings.useCustomDungeonStats) return dungeon ?? DUNGEONS[0];
 	return {
-		id: 'custom',
-		name: 'Custom dungeon',
-		normalDefense: number(settings.customNormalDefense),
-		bossDefense: number(settings.customBossDefense),
-		normalDmgReduction: number(settings.customNormalDmgReduction),
-		bossDmgReduction: number(settings.customBossDmgReduction)
+		id: 'custom', name: 'Custom dungeon',
+		normalDefense: nonnegative(settings.customNormalDefense), bossDefense: nonnegative(settings.customBossDefense),
+		normalDmgReduction: nonnegative(settings.customNormalDmgReduction), bossDmgReduction: nonnegative(settings.customBossDmgReduction),
+		normalGuard: clamp(settings.customNormalGuard, 0, 100), bossGuard: clamp(settings.customBossGuard, 0, 100),
+		normalElasticity: clamp(settings.customNormalElasticity, 0, 1000), bossElasticity: clamp(settings.customBossElasticity, 0, 1000)
 	};
 }
 
-export function calcDirectHitDamage({
-	stats,
-	coefficient,
-	scenario = 'theory',
-	dungeon = DUNGEONS[0],
-	backAttackRate = 0,
-	mode = 'average'
-}) {
-	const resolvedCoefficient = number(coefficient);
-	const weaponTerm = (2 * stats.weaponAttr.total * resolvedCoefficient) / 100;
-	const strengthTerm = stats.strMag.total * (1 + stats.strMagEfficiency / 100);
-	const core = strengthTerm + weaponTerm;
-	const values = scenarioValues(stats, scenario);
-	let rawBase = core + stats.fixedDamage.total + values.extraDamage;
-
-	if (usesDungeon(scenario)) {
-		const penetration = stats.penetration / 100;
-		const defense = values.boss ? dungeon.bossDefense : dungeon.normalDefense;
-		const reduction = values.boss ? dungeon.bossDmgReduction : dungeon.normalDmgReduction;
-		rawBase = penetration * core - reduction - (1 - penetration) * defense + stats.fixedDamage.total + values.extraDamage;
-	}
-
-	const factor = damageFactor({
-		minimumDamage: stats.minimumDamage.total,
-		maximumDamage: stats.maximumDamage.total,
-		criticalDamage: stats.criticalDamage.total,
-		domination: values.domination,
-		backAttackRate,
-		mode
-	});
-	return { damage: rawBase * factor, rawBase, factor, coefficient: resolvedCoefficient, scenario };
+export function directSkillCoefficient(skill = DIRECT_SKILLS[0], skillLevel = 0) {
+	return nonnegative(skill.baseCoefficient) + nonnegative(skill.perLevel) * nonnegative(skillLevel);
 }
-
-export function placementCoefficients(skill, skillLevel = 0) {
-	const resolved = skill ?? PLACEMENT_SKILLS[0];
-	const level = number(skillLevel);
-	return {
-		weaponCoefficient: number(resolved.weaponCoefficient),
-		strengthMultiplier: number(resolved.strengthBase) + number(resolved.strengthPerLevel) * level,
-		totalMultiplier: number(resolved.totalBase) + number(resolved.totalPerLevel) * level
-	};
+export function placementCoefficients(skill = PLACEMENT_SKILLS[0], skillLevel = 0) {
+	const level = nonnegative(skillLevel);
+	return { weaponCoefficient: nonnegative(skill.weaponCoefficient), strengthMultiplier: nonnegative(skill.strengthBase) + number(skill.strengthPerLevel) * level, totalMultiplier: nonnegative(skill.totalBase) + number(skill.totalPerLevel) * level };
 }
-
 export function placementCoreCoefficients(coreLevel = 19) {
-	const skillLevel = number(coreLevel) + 50;
-	let step = 0;
-	let rate = 0;
-	let base = 0;
-	if (skillLevel >= 1 && skillLevel <= 10) [step, rate, base] = [skillLevel, 1.5, 0];
-	else if (skillLevel >= 11 && skillLevel <= 40) [step, rate, base] = [skillLevel - 10, 2, 15];
-	else if (skillLevel >= 41 && skillLevel <= 60) [step, rate, base] = [skillLevel - 40, 2.5, 75];
-	else if (skillLevel >= 61 && skillLevel <= 80) [step, rate, base] = [skillLevel - 60, 3, 125];
-	else if (skillLevel > 80) [step, rate, base] = [skillLevel - 80, 3.5, 185];
-	return {
-		skillLevel,
-		weaponCoefficient: 42,
-		strengthMultiplier: 0.8 + 0.01 * skillLevel,
-		totalMultiplier: 0.7 + base / 100 + (step * rate) / 100
-	};
+	const skillLevel = nonnegative(coreLevel) + 50;
+	const tiers = [[10, 0, 1.5], [40, 15, 2], [60, 75, 2.5], [80, 125, 3], [Infinity, 185, 3.5]];
+	const index = tiers.findIndex(([end]) => skillLevel <= end);
+	const [, base, rate] = tiers[index];
+	const start = index === 0 ? 0 : tiers[index - 1][0];
+	return { skillLevel, weaponCoefficient: 42, strengthMultiplier: .8 + .01 * skillLevel, totalMultiplier: .7 + (base + (skillLevel - start) * rate) / 100 };
 }
 
-export function calcPlacementDamage({
-	stats,
-	skill = PLACEMENT_SKILLS[0],
-	skillLevel = 0,
-	coefficients,
-	scenario = 'theory',
-	dungeon = DUNGEONS[0],
-	backAttackRate = 0,
-	mode = 'average'
-}) {
-	const resolvedCoefficients = coefficients ?? placementCoefficients(skill, skillLevel);
-	const values = scenarioValues(stats, scenario);
-	const strengthTerm = stats.strMag.total * resolvedCoefficients.strengthMultiplier;
-	const weaponTerm = stats.weaponAttr.total * resolvedCoefficients.weaponCoefficient;
-	let rawBase = strengthTerm + weaponTerm + stats.fixedDamage.total + values.extraDamage;
-	if (usesDungeon(scenario)) rawBase -= values.boss ? dungeon.bossDmgReduction : dungeon.normalDmgReduction;
-	const factor = damageFactor({
-		minimumDamage: stats.minimumDamage.total,
-		maximumDamage: stats.maximumDamage.total,
-		criticalDamage: stats.criticalDamage.total,
-		domination: values.domination,
-		backAttackRate,
-		mode
+/* Current wiki reference model, captured 2026-10-03. The float32 boundaries and
+ * integer floors are deliberate. Defense is level-scaled; guard and critical
+ * resistance are separate reductions. The old +115 weapon bonus and placement
+ * final multiplier are absent from this model. */
+const f32 = Math.fround;
+function referenceInput(stats, scenario, dungeon, coefficient, coefficients) {
+	const boss = isBossScenario(scenario);
+	const target = usesDungeon(scenario) ? dungeon : null;
+	return {
+		physical: stats.physicalJob,
+		level: stats.characterLevel ?? 235,
+		mainStat: stats.strMag.total,
+		efficiency: stats.strMagEfficiency,
+		weaponMin: stats.weaponMinimum > 0 ? Math.min(stats.weaponMinimum, stats.weaponAttr.total) : stats.weaponAttr.total,
+		weaponMax: stats.weaponAttr.total,
+		directCoef: nonnegative(coefficient),
+		summonScale: 100 * (coefficients?.strengthMultiplier ?? 1.48),
+		summonCoef: 50 * (coefficients?.weaponCoefficient ?? 42) - 100,
+		minRaw: stats.minimumDamage.flat, minFinal: stats.minimumDamage.percent,
+		maxRaw: stats.maximumDamage.flat, maxFinal: stats.maximumDamage.percent,
+		critRaw: stats.criticalDamage.flat, critFinal: stats.criticalDamage.percent,
+		penetration: stats.penetration, fixedDamage: stats.fixedDamage.total,
+		extraDamage: (boss ? stats.bossExtraDamage : stats.normalExtraDamage).total,
+		defense: nonnegative(target?.[boss ? 'bossDefense' : 'normalDefense']),
+		damageReduction: nonnegative(target?.[boss ? 'bossDmgReduction' : 'normalDmgReduction']),
+		guard: clamp(target?.[boss ? 'bossGuard' : 'normalGuard'], 0, 100),
+		elasticity: clamp(target?.[boss ? 'bossElasticity' : 'normalElasticity'], 0, 1000),
+		domination: boss ? stats.bossDomination : stats.normalDomination,
+		backAttackDamage: stats.backAttackDmg,
+		meleeDamage: stats.meleeAttack ? stats.meleeDamage : 0,
+		statusDamage: stats.statusAttack ? stats.statusDamage : 0
+	};
+}
+function referenceBase(input, placement, weapon, backAttack, criticalHit = true) {
+	const strength = placement ? Math.floor(input.mainStat * input.summonScale / 100) : Math.floor(input.mainStat * (1 + input.efficiency / 100));
+	const core = placement ? strength + (weapon + 1) * ((input.summonCoef + 100) / 50) + 1 : strength + Math.floor(weapon * (input.directCoef + 100) / 50);
+	const levelDefense = (input.physical ? 30 : 20) * input.level + 200;
+	const defenseMultiplier = f32(1 - input.defense / (input.defense + levelDefense) * f32((100 - (placement ? 99 : input.penetration)) / 100));
+	const rawBase = f32(f32(f32(f32(core) * defenseMultiplier) + input.fixedDamage) - input.damageReduction);
+	const extraBase = f32(rawBase + input.extraDamage);
+	const critical = placement ? Math.floor((Math.floor((input.critRaw - 50) * input.summonScale / 100) + 50) * (100 + input.critFinal) / 100) : Math.floor(input.critRaw * (100 + input.critFinal) / 100);
+	const bonus = (backAttack ? placement ? 20 : input.backAttackDamage : 0) + (placement ? 0 : input.meleeDamage + input.statusDamage);
+	const factor = f32((100 + bonus + (criticalHit ? Math.floor(critical * (1000 - input.elasticity) / 1000) : 0)) / 100);
+	return { rawBase: extraBase, factor, beforeRoll: f32(extraBase * factor) };
+}
+function referenceRolls(input, placement) {
+	const minimum = Math.floor(input.minRaw * (100 + input.minFinal) / 100);
+	const maximum = Math.floor(input.maxRaw * (100 + input.maxFinal) / 100);
+	const high = placement ? Math.floor(maximum * input.summonScale / 100) + 105 : maximum;
+	return [Math.min(placement ? Math.floor(minimum * input.summonScale / 100) + 95 : minimum, high), high];
+}
+function referenceScore(input, placement, backAttack, mode, criticalHit) {
+	const [minimum, maximum] = referenceRolls(input, placement);
+	const weaponMin = input.physical ? input.weaponMin : input.weaponMax;
+	const weaponMax = input.weaponMax;
+	const domination = f32(f32(100 + input.domination) / 100);
+	const finish = (damage) => Math.floor(damage * (100 - input.guard) / 100 * domination);
+	const rollDamage = (beforeRoll, roll) => Math.floor(f32(beforeRoll * roll) / 100);
+	const ends = [weaponMin, weaponMax].flatMap((weapon) => {
+		const { beforeRoll } = referenceBase(input, placement, weapon, backAttack, criticalHit);
+		return [minimum, maximum].flatMap((roll) => {
+			const damage = rollDamage(beforeRoll, roll);
+			return [finish(damage > 0 ? damage : 1), finish(damage > 0 ? damage : 2)];
+		});
 	});
-	return {
-		damage: rawBase * factor * resolvedCoefficients.totalMultiplier,
-		rawBase,
-		factor,
-		...resolvedCoefficients,
-		scenario
-	};
-}
-
-const EQUIVALENT_STATS = [
-	['strMag', 'Strength / magic'],
-	['weaponAttr', 'Weapon / attribute'],
-	['fixedDamage', 'Fixed damage']
-];
-
-function referenceScale(stats, referenceStat = 'crit', damageMode = 'average') {
-	const minimum = stats.minimumDamage.total;
-	const maximum = stats.maximumDamage.total;
-	const minimumTerm = 0.95 + Math.min(minimum, maximum) / 100;
-	const maximumTerm = 1.05 + maximum / 100;
-	const average = (minimumTerm + maximumTerm) / 2;
-	const critical = divide(1 + stats.criticalDamage.percent / 100, Math.max(100 + stats.criticalDamage.total, 1));
-	const minimumMarginal =
-		minimum <= maximum
-			? divide(1 + stats.minimumDamage.percent / 100, Math.max(200 * average, 1))
-			: 0;
-	const maximumMarginal = divide(
-		1 + stats.maximumDamage.percent / 100,
-		Math.max(100 * (damageMode === 'maximum' ? maximumTerm : 2 * average), 1)
-	);
-	const selected =
-		referenceStat === 'minimum'
-			? minimumMarginal
-			: referenceStat === 'maximum'
-				? maximumMarginal
-				: referenceStat === 'minmax'
-					? minimumMarginal + maximumMarginal
-					: critical;
-	return critical > 0 ? selected / critical : 0;
-}
-
-function efficiencyPanel({ kind, stats, scenario, directCoefficient, placementSkill, placementSkillLevel, dungeon, backAttackRate, damageMode, referenceStat }) {
-	const values = scenarioValues(stats, scenario);
-	const extraKey = values.boss ? 'bossExtraDamage' : 'normalExtraDamage';
-	const criticalPercentMultiplier = 1 + stats.criticalDamage.percent / 100;
-	const criticalTotalDenominator = 100 + stats.criticalDamage.total;
-	let rawBase;
-	let sensitivity;
-	let damage;
-
-	if (kind === 'direct') {
-		const weaponCoefficient = (2 * number(directCoefficient)) / 100;
-		const strengthMultiplier = 1 + stats.strMagEfficiency / 100;
-		const core = weaponCoefficient * stats.weaponAttr.total + strengthMultiplier * stats.strMag.total;
-		rawBase = core + stats.fixedDamage.total + values.extraDamage;
-		if (usesDungeon(scenario)) {
-			const penetration = stats.penetration / 100;
-			const defense = values.boss ? dungeon.bossDefense : dungeon.normalDefense;
-			const reduction = values.boss ? dungeon.bossDmgReduction : dungeon.normalDmgReduction;
-			rawBase = penetration * core - reduction - (1 - penetration) * defense + stats.fixedDamage.total + values.extraDamage;
+	const range = { minimum: Math.min(...ends), maximum: Math.max(...ends) };
+	if (mode === 'maximum') return { ...range, damage: range.maximum };
+	const weapons = weaponMin === weaponMax ? 1 : minimum === maximum ? 16384 : 256;
+	const rolls = minimum === maximum ? 1 : weapons === 256 ? 256 : 16384;
+	if ((weapons === 1 && rolls === 1) || rollDamage(referenceBase(input, placement, weaponMin, backAttack, criticalHit).beforeRoll, minimum) <= 0) return { ...range, damage: (range.minimum + range.maximum) / 2 };
+	let sum = 0;
+	let compensation = 0;
+	for (let w = 0; w < weapons; w += 1) {
+		const weapon = weapons === 1 ? weaponMin : weaponMin + (w + .5) * (weaponMax - weaponMin) / weapons;
+		const { beforeRoll } = referenceBase(input, placement, weapon, backAttack, criticalHit);
+		for (let r = 0; r < rolls; r += 1) {
+			const roll = rolls === 1 ? minimum : minimum + (r + .5) * (maximum - minimum) / rolls;
+			const damage = rollDamage(beforeRoll, roll);
+			if (damage <= 0) return { ...range, damage: (range.minimum + range.maximum) / 2 };
+			const value = finish(damage) - compensation;
+			const next = sum + value;
+			compensation = next - sum - value;
+			sum = next;
 		}
-		sensitivity = {
-			strMag: strengthMultiplier,
-			weaponAttr: weaponCoefficient,
-			fixedDamage: 1,
-			[extraKey]: 1
-		};
-		damage = calcDirectHitDamage({ stats, coefficient: directCoefficient, scenario, dungeon, backAttackRate, mode: damageMode }).damage;
-	} else {
-		const coefficients = placementCoefficients(placementSkill, placementSkillLevel);
-		const core = coefficients.weaponCoefficient * stats.weaponAttr.total + coefficients.strengthMultiplier * stats.strMag.total;
-		rawBase = core + stats.fixedDamage.total + values.extraDamage;
-		if (usesDungeon(scenario)) rawBase -= values.boss ? dungeon.bossDmgReduction : dungeon.normalDmgReduction;
-		sensitivity = {
-			strMag: coefficients.strengthMultiplier,
-			weaponAttr: coefficients.weaponCoefficient,
-			fixedDamage: 1,
-			[extraKey]: 1
-		};
-		damage = calcPlacementDamage({ stats, skill: placementSkill, skillLevel: placementSkillLevel, scenario, dungeon, backAttackRate, mode: damageMode }).damage;
 	}
-
-	const scale = referenceScale(stats, referenceStat, damageMode);
-	const comparisonStats = [...EQUIVALENT_STATS, [extraKey, values.boss ? 'Boss extra damage' : 'Normal extra damage']];
-	const equivalents = comparisonStats.map(([key, label]) => {
-		const percentMultiplier = 1 + stats[key].percent / 100;
-		const denominator = sensitivity[key] * percentMultiplier * criticalTotalDenominator;
-		const nativeValue = rawBase > 0 && percentMultiplier > 0 ? divide(rawBase * criticalPercentMultiplier, denominator) : 0;
-		const value = nativeValue * scale;
-		return {
-			key,
-			label,
-			value,
-			reverse: nativeValue > 0 && scale > 0 ? divide(stats[key].per1Pct, nativeValue) / scale : 0
-		};
-	});
-	return { damage, rawBase, referenceGain: 0, referenceStat, scale, equivalents };
+	return { ...range, damage: sum / (weapons * rolls) };
 }
-
-export function calculateDamageEfficiency({
-	stats,
-	directCoefficient,
-	placementSkill = PLACEMENT_SKILLS[0],
-	placementSkillLevel = 0,
-	dungeon = DUNGEONS[0],
-	backAttackRate,
-	damageMode,
-	referenceStat,
-	settings
-}) {
-	const resolvedSettings = {
-		...DEFAULT_SPEC_CALCULATION_SETTINGS,
-		...settings,
-		...(backAttackRate === undefined ? {} : { backAttackRate }),
-		...(damageMode === undefined ? {} : { damageMode }),
-		...(referenceStat === undefined ? {} : { referenceStat })
-	};
-	const resolvedDungeon = resolveDungeon(dungeon, resolvedSettings);
-	const scenarios = ['theory', 'normal', 'boss'];
-	const direct = {};
-	const placement = {};
-	for (const scenario of scenarios) {
-		const common = {
-			stats,
-			scenario,
-			directCoefficient,
-			placementSkill,
-			placementSkillLevel,
-			dungeon: resolvedDungeon,
-			backAttackRate: resolvedSettings.backAttackRate,
-			damageMode: resolvedSettings.damageMode,
-			referenceStat: resolvedSettings.referenceStat
-		};
-		direct[scenario] = efficiencyPanel({ kind: 'direct', ...common });
-		placement[scenario] = efficiencyPanel({ kind: 'placement', ...common });
-	}
-	const directBossTheory = efficiencyPanel({
-		kind: 'direct', stats, scenario: 'boss-theory', directCoefficient, placementSkill, placementSkillLevel,
-		dungeon: resolvedDungeon, backAttackRate: resolvedSettings.backAttackRate, damageMode: resolvedSettings.damageMode,
-		referenceStat: resolvedSettings.referenceStat
-	});
-	const placementBossTheory = efficiencyPanel({
-		kind: 'placement', stats, scenario: 'boss-theory', directCoefficient, placementSkill, placementSkillLevel,
-		dungeon: resolvedDungeon, backAttackRate: resolvedSettings.backAttackRate, damageMode: resolvedSettings.damageMode,
-		referenceStat: resolvedSettings.referenceStat
-	});
-	const bypass = {
-		normal: {
-			direct: divide(direct.normal.rawBase, direct.theory.rawBase) * 100,
-			placement: divide(placement.normal.rawBase, placement.theory.rawBase) * 100
-		},
-		boss: {
-			direct: divide(direct.boss.rawBase, directBossTheory.rawBase) * 100,
-			placement: divide(placement.boss.rawBase, placementBossTheory.rawBase) * 100
-		}
-	};
+function calculateDamage({ stats, coefficient = 0, coefficients, scenario = 'theory', dungeon = DUNGEONS[0], backAttackRate = 0, mode = 'average', placement = false, critical = true }) {
+	const input = referenceInput(stats, scenario, dungeon, coefficient, coefficients);
+	const rate = clamp(backAttackRate, 0, 100) / 100;
+	const front = referenceScore(input, placement, false, mode, critical);
+	const back = rate === 0 ? front : referenceScore(input, placement, true, mode, critical);
+	const base = referenceBase(input, placement, input.weaponMax, false, critical);
 	return {
-		direct: { ...direct, bossTheory: directBossTheory },
-		placement: { ...placement, bossTheory: placementBossTheory },
-		bypass: { ...bypass, direct: bypass.boss.direct, placement: bypass.boss.placement }
+		damage: front.damage * (1 - rate) + back.damage * rate,
+		minimum: rate === 0 ? front.minimum : rate === 1 ? back.minimum : Math.min(front.minimum, back.minimum),
+		maximum: rate === 0 ? front.maximum : rate === 1 ? back.maximum : Math.max(front.maximum, back.maximum),
+		rawBase: base.rawBase, factor: base.factor, scenario
 	};
 }
-
-const enchantAliases = {
-	minDmgFlat: 'minDmg',
-	maxDmgFlat: 'maxDmg',
-	critDmgFlat: 'critDmg',
-	minDmgPercent: 'finalMinDmg',
-	maxDmgPercent: 'finalMaxDmg',
-	critDmgPercent: 'finalCritDmg',
-	strMagFlat: 'strMagAll',
-	strMagPercent: 'strMagAllPercent',
-	weaponAttrFlat: 'weaponAttr',
-	fixedDmgFlat: 'fixedDmg',
-	normalExtraDmgPercent: 'normalDmgPercent',
-	bossExtraDmgPercent: 'bossDmgPercent'
-};
-
-const enchantToInput = {
-	minDmg: 'minDmgFlat',
-	maxDmg: 'maxDmgFlat',
-	critDmg: 'critDmgFlat',
-	finalMinDmg: 'minDmgPercent',
-	finalMaxDmg: 'maxDmgPercent',
-	finalCritDmg: 'critDmgPercent',
-	strMagAll: 'strMagFlat',
-	strMagAllPercent: 'strMagPercent',
-	strMagEfficiency: 'strMagEfficiency',
-	weaponAttr: 'weaponAttrFlat',
-	weaponAttrPercent: 'weaponAttrPercent',
-	fixedDmg: 'fixedDmgFlat',
-	fixedDmgPercent: 'fixedDmgPercent',
-	normalDmgPercent: 'normalExtraDmgPercent',
-	bossDmgPercent: 'bossExtraDmgPercent',
-	normalDomination: 'normalDomination',
-	bossDomination: 'bossDomination'
-};
-
-function enchantValue(option, key) {
-	if (option?.[key] !== undefined) return number(option[key]);
-	const alias = Object.entries(enchantAliases).find(([, canonical]) => canonical === key)?.[0];
-	return alias ? number(option?.[alias]) : 0;
+export function calcDirectHitDamage(options) {
+	return { ...calculateDamage(options), coefficient: nonnegative(options.coefficient) };
+}
+export function calcPlacementDamage({ skill = PLACEMENT_SKILLS[0], skillLevel = 0, coefficients, ...options }) {
+	const resolved = coefficients ?? placementCoefficients(skill, skillLevel);
+	return { ...calculateDamage({ ...options, coefficients: resolved, placement: true }), ...resolved };
 }
 
-export function enchantDelta(oldEnchant = {}, newEnchant = {}) {
-	return Object.fromEntries(
-		Object.keys(DEFAULT_ENCHANT_OPTION).map((key) => [key, enchantValue(newEnchant, key) - enchantValue(oldEnchant, key)])
-	);
-}
-
-/** Add a raw delta to the displayed base inputs. Retained for public API compatibility. */
-export function applyEnchantDelta(inputs, delta = {}) {
-	const result = { ...inputs };
-	for (const [key, defaultValue] of Object.entries(DEFAULT_SPEC_INPUTS)) {
-		if (typeof defaultValue === 'number') result[key] = number(inputs[key]) + number(delta[key]);
-	}
+const EQUIVALENT_STATS = [['strMag', 'Strength / magic'], ['weaponAttr', 'Weapon / attribute'], ['fixedDamage', 'Fixed damage']];
+function bumped(stats, key, amount) {
+	const result = cloneStats(stats);
+	result[key] = statPair(result[key].flat + amount, result[key].percent);
 	return result;
 }
+function efficiencyPanel(options, kind, scenario) {
+	const { stats, directCoefficient, placementSkill, placementSkillLevel, dungeon, backAttackRate, damageMode, referenceStat } = options;
+	const calculate = (value) => kind === 'direct'
+		? calcDirectHitDamage({ stats: value, coefficient: directCoefficient, scenario, dungeon, backAttackRate, mode: damageMode })
+		: calcPlacementDamage({ stats: value, skill: placementSkill, skillLevel: placementSkillLevel, scenario, dungeon, backAttackRate, mode: damageMode });
+	const baseline = calculate(stats);
+	const referenceKeys = referenceStat === 'minimum' ? ['minimumDamage'] : referenceStat === 'maximum' ? ['maximumDamage'] : referenceStat === 'minmax' ? ['minimumDamage', 'maximumDamage'] : ['criticalDamage'];
+	// Reflection and resistance can round a one-point critical upgrade to zero.
+	// Average across a larger critical probe, then normalize to one point.
+	const referenceStep = referenceStat === 'crit' ? 100 : 1;
+	const referenceStats = referenceKeys.reduce((value, key) => bumped(value, key, referenceStep), stats);
+	const referenceGain = (calculate(referenceStats).damage - baseline.damage) / referenceStep;
+	const extraKey = isBossScenario(scenario) ? 'bossExtraDamage' : 'normalExtraDamage';
+	const equivalents = [...EQUIVALENT_STATS, [extraKey, isBossScenario(scenario) ? 'Boss extra damage' : 'Normal extra damage']].map(([key, label]) => {
+		// A larger probe avoids float32 quantization hiding a one-point stat gain.
+		const probe = Math.max(100, stats[key].flat * .001);
+		const gainPerPoint = (calculate(bumped(stats, key, probe)).damage - baseline.damage) / probe;
+		const value = referenceGain > 0 && gainPerPoint > 0 ? referenceGain / gainPerPoint : 0;
+		return { key, label, value, reverse: divide(stats[key].per1Pct, value) };
+	});
+	return { damage: baseline.damage, rawBase: baseline.rawBase, referenceGain, referenceStat, referenceStep, scale: 1, equivalents };
+}
+export function calculateDamageEfficiency({ stats, directCoefficient, placementSkill = PLACEMENT_SKILLS[0], placementSkillLevel = 0, dungeon = DUNGEONS[0], settings = {}, backAttackRate, damageMode, referenceStat }) {
+	const resolved = { ...DEFAULT_SPEC_CALCULATION_SETTINGS, ...settings };
+	const options = {
+		stats, directCoefficient, placementSkill, placementSkillLevel, dungeon: resolveDungeon(dungeon, resolved),
+		backAttackRate: backAttackRate ?? resolved.backAttackRate,
+		damageMode: damageMode ?? resolved.damageMode,
+		referenceStat: referenceStat ?? resolved.referenceStat
+	};
+	const direct = {};
+	const placement = {};
+	for (const scenario of ['theory', 'normal', 'boss', 'boss-theory']) {
+		const key = scenario === 'boss-theory' ? 'bossTheory' : scenario;
+		direct[key] = efficiencyPanel(options, 'direct', scenario);
+		placement[key] = efficiencyPanel(options, 'placement', scenario);
+	}
+	const bypass = {
+		normal: { direct: divide(direct.normal.damage, direct.theory.damage) * 100, placement: divide(placement.normal.damage, placement.theory.damage) * 100 },
+		boss: { direct: divide(direct.boss.damage, direct.bossTheory.damage) * 100, placement: divide(placement.boss.damage, placement.bossTheory.damage) * 100 }
+	};
+	return { direct, placement, bypass: { ...bypass, direct: bypass.boss.direct, placement: bypass.boss.placement } };
+}
 
-/** Apply a replacement where the old option is already included in the base specification. */
+const enchantToInput = {
+	minDmg: 'minDmgFlat', maxDmg: 'maxDmgFlat', critDmg: 'critDmgFlat',
+	finalMinDmg: 'minDmgPercent', finalMaxDmg: 'maxDmgPercent', finalCritDmg: 'critDmgPercent',
+	strMagAll: 'strMagFlat', strMagAllPercent: 'strMagPercent', strMagEfficiency: 'strMagEfficiency',
+	weaponAttr: 'weaponAttrFlat', weaponAttrPercent: 'weaponAttrPercent', fixedDmg: 'fixedDmgFlat', fixedDmgPercent: 'fixedDmgPercent',
+	normalDmgPercent: 'normalExtraDmgPercent', bossDmgPercent: 'bossExtraDmgPercent',
+	normalDomination: 'normalDomination', bossDomination: 'bossDomination', backAttackDmg: 'backAttackDmg'
+};
+const enchantValue = (option, key) => number(option?.[key] ?? option?.[enchantToInput[key]]);
+export function enchantDelta(oldEnchant = {}, newEnchant = {}) {
+	return Object.fromEntries(Object.keys(DEFAULT_ENCHANT_OPTION).map((key) => [key, enchantValue(newEnchant, key) - enchantValue(oldEnchant, key)]));
+}
+export function applyEnchantDelta(inputs, delta = {}) {
+	const result = { ...inputs };
+	for (const [key, value] of Object.entries(DEFAULT_SPEC_INPUTS)) if (typeof value === 'number') result[key] = number(inputs[key]) + number(delta[key]);
+	return result;
+}
 export function applyEnchantReplacement(inputs, oldEnchant = {}, newEnchant = {}) {
 	const result = { ...inputs };
 	const delta = enchantDelta(oldEnchant, newEnchant);
-	for (const [optionKey, inputKey] of Object.entries(enchantToInput)) {
-		result[inputKey] = number(inputs[inputKey]) + number(delta[optionKey]);
-	}
+	for (const [option, input] of Object.entries(enchantToInput)) result[input] = number(inputs[input]) + delta[option];
 	return result;
 }
-
 export function applyEnchantReplacementToStats(stats, oldEnchant = {}, newEnchant = {}) {
 	const result = cloneStats(stats);
 	const delta = enchantDelta(oldEnchant, newEnchant);
-	const pairs = [
-		['minimumDamage', 'minDmg', 'finalMinDmg'],
-		['maximumDamage', 'maxDmg', 'finalMaxDmg'],
-		['criticalDamage', 'critDmg', 'finalCritDmg'],
-		['strMag', 'strMagAll', 'strMagAllPercent'],
-		['weaponAttr', 'weaponAttr', 'weaponAttrPercent'],
-		['fixedDamage', 'fixedDmg', 'fixedDmgPercent'],
-		['normalExtraDamage', null, 'normalDmgPercent'],
-		['bossExtraDamage', null, 'bossDmgPercent']
-	];
-	for (const [statKey, flatKey, percentKey] of pairs) {
-		if (flatKey) result[statKey].flat += delta[flatKey];
-		result[statKey].percent += delta[percentKey];
-		result[statKey].total = result[statKey].flat * (1 + result[statKey].percent / 100);
-		result[statKey].per1Pct = divide(result[statKey].flat, 100 + result[statKey].percent);
-	}
-	result.normalDomination = Math.min(stats.normalDomination + delta.normalDomination, 100);
-	result.bossDomination = Math.min(stats.bossDomination + delta.bossDomination, 100);
-	result.strMagEfficiency = stats.strMagEfficiency + delta.strMagEfficiency;
+	const inputDeltas = Object.fromEntries(Object.entries(enchantToInput).map(([option, input]) => [input, delta[option]]));
+	for (const [key, flat, percent] of pairedStats) result[key] = statPair(nonnegative(result[key].flat + number(inputDeltas[flat])), nonnegative(result[key].percent + number(inputDeltas[percent])));
+	for (const key of ['normalDomination', 'bossDomination', 'strMagEfficiency', 'backAttackDmg']) result[key] = nonnegative(result[key] + delta[key]);
 	return result;
 }
-
 export function calculateHpComparison(calibration = {}, oldEnchant = {}, newEnchant = {}) {
-	const stamina = number(calibration.stamina);
-	const staminaMinus10 = number(calibration.staminaMinus10);
-	const maxHp = number(calibration.maxHp);
-	const maxHpMinus10 = number(calibration.maxHpMinus10);
-	if (stamina === 0 && maxHp === 0) return null;
+	const stamina = nonnegative(calibration.stamina);
+	const maxHp = nonnegative(calibration.maxHp);
+	const reducedStamina = nonnegative(calibration.staminaMinus10);
+	const reducedHp = nonnegative(calibration.maxHpMinus10);
+	const staminaDifference = stamina - reducedStamina;
+	const hpDifference = maxHp - reducedHp;
+	if (stamina <= 0 || maxHp <= 0 || reducedStamina <= 0 || reducedHp <= 0 || staminaDifference <= 0 || hpDifference <= 0) return null;
 	const delta = enchantDelta(oldEnchant, newEnchant);
-	const staminaDifference = stamina - staminaMinus10;
 	const pureStamina = 10 * staminaDifference;
-	const staminaMultiplier = pureStamina > 0 ? stamina / pureStamina : 0;
-	const hpDifference = maxHp - maxHpMinus10;
-	const hpMultiplier = staminaDifference > 0 ? hpDifference / (4 * staminaDifference) : 0;
-	const hpPlus = hpMultiplier > 0 ? maxHp / hpMultiplier - 4 * stamina : 0;
-	const expected =
-		((pureStamina + delta.strMagAll + delta.stamina) *
-			(staminaMultiplier + delta.strMagAllPercent / 100) *
-			4 +
-			hpPlus) *
-		(hpMultiplier + delta.hpPercent / 100);
+	const staminaMultiplier = stamina / pureStamina;
+	const hpMultiplier = hpDifference / (4 * staminaDifference);
+	const hpPlus = maxHp / hpMultiplier - 4 * stamina;
+	const expected = Math.max(0, ((pureStamina + delta.strMagAll + delta.stamina) * (staminaMultiplier + delta.strMagAllPercent / 100) * 4 + hpPlus) * (hpMultiplier + delta.hpPercent / 100));
 	return { expected, changeRate: percentChange(maxHp, expected), staminaMultiplier, hpMultiplier, hpPlus };
 }
-
-export function compareEnchants({
-	inputs,
-	oldEnchant = {},
-	newEnchant = {},
-	directCoefficient,
-	placementSkill = PLACEMENT_SKILLS[0],
-	placementSkillLevel = 0,
-	dungeon = DUNGEONS[0],
-	backAttackRate = 0,
-	damageMode = 'average',
-	referenceStat = 'crit',
-	hpCalibration
-}) {
+export function compareEnchants({ inputs, oldEnchant = {}, newEnchant = {}, directCoefficient, directSkill, placementSkill = PLACEMENT_SKILLS[0], placementSkillLevel = 0, dungeon = DUNGEONS[0], backAttackRate = 0, damageMode = 'average', referenceStat = 'crit', hpCalibration }) {
 	const oldStats = aggregateStats(inputs);
-	const newStats = applyEnchantReplacementToStats(oldStats, oldEnchant, newEnchant);
+	// Replace at the input layer so summon bonuses and supported caps apply once.
+	const newStats = aggregateStats(applyEnchantReplacement(inputs, oldEnchant, newEnchant));
 	const delta = enchantDelta(oldEnchant, newEnchant);
-	const scenarioNames = ['theory', 'boss-theory', 'normal', 'boss'];
+	const newDirectCoefficient = Math.max(0, number(directCoefficient) + number(directSkill?.perLevel) * delta.directHitSkillLevel);
+	const newPlacementLevel = Math.max(0, number(placementSkillLevel) + delta.placementSkillLevel);
 	const scenarios = {};
-	const changes = {};
-	const selectedPlacementCoefficients = placementCoefficients(placementSkill, placementSkillLevel);
-	const coreCoefficients = placementCoreCoefficients(oldStats.placementCoreLevel);
-	// The live enchant sheet intentionally mixes the selected skill's raw
-	// weapon/strength coefficients with the placement core's final multiplier.
-	const enchantPlacementCoefficients = {
-		...selectedPlacementCoefficients,
-		totalMultiplier: coreCoefficients.totalMultiplier
-	};
-	for (const scenario of scenarioNames) {
-		const oldDirect = calcDirectHitDamage({ stats: oldStats, coefficient: directCoefficient, scenario, dungeon, backAttackRate, mode: damageMode }).damage;
-		const newDirect = calcDirectHitDamage({ stats: newStats, coefficient: directCoefficient, scenario, dungeon, backAttackRate, mode: damageMode }).damage;
-		const oldPlacement = calcPlacementDamage({ stats: oldStats, coefficients: enchantPlacementCoefficients, scenario, dungeon, backAttackRate, mode: damageMode }).damage;
-		const newPlacement = calcPlacementDamage({ stats: newStats, coefficients: enchantPlacementCoefficients, scenario, dungeon, backAttackRate, mode: damageMode }).damage;
-		scenarios[scenario] = {
-			direct: { old: oldDirect, new: newDirect, percentChange: percentChange(oldDirect, newDirect) },
-			placement: { old: oldPlacement, new: newPlacement, percentChange: percentChange(oldPlacement, newPlacement) }
-		};
+	for (const scenario of ['theory', 'boss-theory', 'normal', 'boss']) {
+		const common = { scenario, dungeon, backAttackRate, mode: damageMode };
+		const directOld = calcDirectHitDamage({ stats: oldStats, coefficient: directCoefficient, ...common }).damage;
+		const directNew = calcDirectHitDamage({ stats: newStats, coefficient: newDirectCoefficient, ...common }).damage;
+		const placementOld = calcPlacementDamage({ stats: oldStats, skill: placementSkill, skillLevel: placementSkillLevel, ...common }).damage;
+		const placementNew = calcPlacementDamage({ stats: newStats, skill: placementSkill, skillLevel: newPlacementLevel, ...common }).damage;
+		scenarios[scenario] = { direct: { old: directOld, new: directNew, percentChange: percentChange(directOld, directNew) }, placement: { old: placementOld, new: placementNew, percentChange: percentChange(placementOld, placementNew) } };
 	}
-	changes.directHitTheory = scenarios.theory.direct.percentChange;
-	changes.directHitBossTheory = scenarios['boss-theory'].direct.percentChange;
-	changes.directHitNormal = scenarios.normal.direct.percentChange;
-	changes.directHitBoss = scenarios.boss.direct.percentChange;
-	changes.placementTheory = scenarios.theory.placement.percentChange;
-	changes.placementBossTheory = scenarios['boss-theory'].placement.percentChange;
-	changes.placementNormal = scenarios.normal.placement.percentChange;
-	changes.placementBoss = scenarios.boss.placement.percentChange;
-
-	const efficiencyOptions = { directCoefficient, placementSkill, placementSkillLevel, dungeon, backAttackRate, damageMode, referenceStat };
-	const oldEfficiency = calculateDamageEfficiency({ stats: oldStats, ...efficiencyOptions });
-	const newEfficiency = calculateDamageEfficiency({ stats: newStats, ...efficiencyOptions });
-	const oldConversion = calculateConversionSummary(oldStats, { criterion: 'boss' });
-	const newConversion = calculateConversionSummary(newStats, { criterion: 'boss' });
+	const changes = {};
+	for (const [key, scenario] of [['Theory', 'theory'], ['BossTheory', 'boss-theory'], ['Normal', 'normal'], ['Boss', 'boss']]) {
+		changes[`directHit${key}`] = scenarios[scenario].direct.percentChange;
+		changes[`placement${key}`] = scenarios[scenario].placement.percentChange;
+	}
+	const efficiencyOptions = { placementSkill, dungeon, backAttackRate, damageMode, referenceStat };
+	const oldEfficiency = calculateDamageEfficiency({ stats: oldStats, directCoefficient, placementSkillLevel, ...efficiencyOptions });
+	const newEfficiency = calculateDamageEfficiency({ stats: newStats, directCoefficient: newDirectCoefficient, placementSkillLevel: newPlacementLevel, ...efficiencyOptions });
+	const bypassChange = (side, kind) => ({ old: oldEfficiency.bypass[side][kind], new: newEfficiency.bypass[side][kind], change: newEfficiency.bypass[side][kind] - oldEfficiency.bypass[side][kind] });
 	return {
-		delta,
-		oldStats,
-		newStats,
-		scenarios,
-		changes,
-		conversion: { old: oldConversion, new: newConversion },
+		delta, oldStats, newStats, scenarios, changes,
+		conversion: { old: calculateConversionSummary(oldStats, { criterion: 'boss' }), new: calculateConversionSummary(newStats, { criterion: 'boss' }) },
 		efficiency: { old: oldEfficiency, new: newEfficiency },
 		hp: calculateHpComparison(hpCalibration, oldEnchant, newEnchant),
-		bypass: {
-			normal: {
-				direct: { old: oldEfficiency.bypass.normal.direct, new: newEfficiency.bypass.normal.direct, change: newEfficiency.bypass.normal.direct - oldEfficiency.bypass.normal.direct }
-			},
-			boss: {
-				direct: { old: oldEfficiency.bypass.boss.direct, new: newEfficiency.bypass.boss.direct, change: newEfficiency.bypass.boss.direct - oldEfficiency.bypass.boss.direct }
-			},
-			direct: { old: oldEfficiency.bypass.boss.direct, new: newEfficiency.bypass.boss.direct, change: newEfficiency.bypass.boss.direct - oldEfficiency.bypass.boss.direct },
-			placement: { old: oldEfficiency.bypass.boss.placement, new: newEfficiency.bypass.boss.placement, change: newEfficiency.bypass.boss.placement - oldEfficiency.bypass.boss.placement }
-		}
+		bypass: { normal: { direct: bypassChange('normal', 'direct') }, boss: { direct: bypassChange('boss', 'direct') }, direct: bypassChange('boss', 'direct'), placement: bypassChange('boss', 'placement') }
 	};
 }
 
 export function calculateHitIndicator(stats, coefficient = 17000) {
-	const boss = stats.bossDomination <= stats.normalDomination;
-	const domination = boss ? stats.bossDomination : stats.normalDomination;
-	const extra = boss ? stats.bossExtraDamage.total : stats.normalExtraDamage.total;
-	const physicalBonus = stats.physicalJob ? 115 * (1 + stats.weaponAttr.percent / 100) : 0;
-	const displayedWeapon = stats.weaponAttr.total - physicalBonus;
-	const base =
-		(2 * displayedWeapon * number(coefficient)) / 100 +
-		stats.strMag.total * (1 + stats.strMagEfficiency / 100) +
-		stats.fixedDamage.total +
-		extra;
-	const average =
-		(0.95 + stats.minimumDamage.total / 100 +
-			1.05 + stats.maximumDamage.total / 100) /
-		2;
-	return { side: boss ? 'boss' : 'normal', value: (base * average * (1 + stats.criticalDamage.total / 100) * (1 + domination / 100)) / 100000 };
+	const side = stats.bossDomination <= stats.normalDomination ? 'boss' : 'normal';
+	return { side, value: calcDirectHitDamage({ stats, coefficient, scenario: side === 'boss' ? 'boss-theory' : 'theory' }).damage / 100000 };
 }
-
 export function calculateSummonReflection(stats, reflectionPercent = 148) {
-	const reflection = number(reflectionPercent) / 100;
-	const boss = stats.bossDomination <= stats.normalDomination;
-	const domination = boss ? stats.bossDomination : stats.normalDomination;
-	const extra = boss ? stats.bossExtraDamage.total : stats.normalExtraDamage.total;
-	const base = reflection * (1.08 * stats.strMag.total + stats.fixedDamage.total + extra);
-	const average =
-		(0.95 + (reflection * stats.minimumDamage.total) / 100 +
-			1.05 + (reflection * stats.maximumDamage.total) / 100) /
-		2;
-	const critical = 1 + (reflection * stats.criticalDamage.total) / 100;
-	return { side: boss ? 'boss' : 'normal', value: (base * average * critical * (1 + domination / 100)) / 100000 };
+	const side = stats.bossDomination <= stats.normalDomination ? 'boss' : 'normal';
+	return { side, value: calcPlacementDamage({ stats, coefficients: { weaponCoefficient: 0, strengthMultiplier: nonnegative(reflectionPercent) / 100, totalMultiplier: 1 }, scenario: side === 'boss' ? 'boss-theory' : 'theory' }).damage / 100000 };
 }
-
 export function inferPlacementMultiplier({ stats, skill, skillLevel = 0, dungeon = DUNGEONS[0], measuredBossDamage = 0, mode = 'average' }) {
-	const coefficients = placementCoefficients(skill, skillLevel);
-	const rawBase =
-		stats.weaponAttr.total * coefficients.weaponCoefficient +
-		stats.strMag.total * coefficients.strengthMultiplier +
-		stats.fixedDamage.total +
-		stats.bossExtraDamage.total -
-		dungeon.bossDmgReduction;
-	const preMultiplier = rawBase * damageFactor({
-		minimumDamage: stats.minimumDamage.total,
-		maximumDamage: stats.maximumDamage.total,
-		criticalDamage: stats.criticalDamage.total,
-		domination: stats.bossDomination,
-		mode
-	});
-	const expected = preMultiplier * coefficients.totalMultiplier;
-	return {
-		expected,
-		preMultiplier,
-		selectedTotalMultiplier: coefficients.totalMultiplier,
-		inferredTotalMultiplier: preMultiplier === 0 ? 0 : number(measuredBossDamage) / preMultiplier
-	};
+	const expected = calcPlacementDamage({ stats, skill, skillLevel, dungeon, scenario: 'boss', mode }).damage;
+	return { expected, preMultiplier: expected, selectedTotalMultiplier: 1, inferredTotalMultiplier: divide(nonnegative(measuredBossDamage), expected) };
 }
 
 const BUILD_PROFILES = Object.freeze([
-	{ id: 'extreme-weapon', name: 'Extreme weapon', strengthRatio: 37.5, weaponRatio: 0.625 },
-	{ id: 'weapon-leaning', name: 'Weapon leaning', strengthRatio: 42.85, weaponRatio: 0.5715 },
-	{ id: 'balanced', name: 'Balanced', strengthRatio: 50, weaponRatio: 0.5 },
-	{ id: 'strength-leaning', name: 'Strength leaning', strengthRatio: 55.5, weaponRatio: 0.445 },
-	{ id: 'extreme-strength', name: 'Extreme strength', strengthRatio: 58.5, weaponRatio: 0.415 }
+	{ id: 'extreme-weapon', name: 'Extreme weapon', strengthRatio: 37.5, weaponRatio: .625 },
+	{ id: 'weapon-leaning', name: 'Weapon leaning', strengthRatio: 42.85, weaponRatio: .5715 },
+	{ id: 'balanced', name: 'Balanced', strengthRatio: 50, weaponRatio: .5 },
+	{ id: 'strength-leaning', name: 'Strength leaning', strengthRatio: 55.5, weaponRatio: .445 },
+	{ id: 'extreme-strength', name: 'Extreme strength', strengthRatio: 58.5, weaponRatio: .415 }
 ]);
-
-export function calculateBuildEfficiency({
-	stats,
-	directCoefficient,
-	placementSkill = PLACEMENT_SKILLS[0],
-	placementSkillLevel = 0,
-	dungeon = DUNGEONS[0],
-	backAttackRate = 0,
-	damageMode = 'average'
-}) {
+export function calculateBuildEfficiency({ stats, directCoefficient, placementSkill = PLACEMENT_SKILLS[0], placementSkillLevel = 0, dungeon = DUNGEONS[0], backAttackRate = 0, damageMode = 'average' }) {
 	const budget = stats.strMag.total / 100 + stats.weaponAttr.total;
-	const partyScale = dungeon.id === 'tower-of-challenge-30' ? 0.06 : 0.03;
-	const makeProfile = (profile, profileStats) => {
+	const makeProfile = (profile, value) => {
 		const direct = {};
 		const placement = {};
 		for (const scenario of ['theory', 'boss-theory', 'normal', 'boss']) {
-			direct[scenario] = calcDirectHitDamage({ stats: profileStats, coefficient: directCoefficient, scenario, dungeon, backAttackRate, mode: damageMode }).damage;
-			placement[scenario] = calcPlacementDamage({ stats: profileStats, skill: placementSkill, skillLevel: placementSkillLevel, scenario, dungeon, backAttackRate, mode: damageMode }).damage;
+			direct[scenario] = calcDirectHitDamage({ stats: value, coefficient: directCoefficient, scenario, dungeon, backAttackRate, mode: damageMode }).damage;
+			placement[scenario] = calcPlacementDamage({ stats: value, skill: placementSkill, skillLevel: placementSkillLevel, scenario, dungeon, backAttackRate, mode: damageMode }).damage;
 		}
-		const selectedCoefficients = placementCoefficients(placementSkill, placementSkillLevel);
-		const minimumTerm = 0.95 + profileStats.minimumDamage.total / 100;
-		const maximumTerm = 1.05 + profileStats.maximumDamage.total / 100;
-		const average = (minimumTerm + maximumTerm) / 2;
-		const rate = clamp(backAttackRate, 0, 100) / 100;
-		const roll = damageMode === 'maximum' ? maximumTerm : average * (1 - rate) + maximumTerm * rate;
-		const criticalMultiplier = 1 + profileStats.criticalDamage.total / 100;
-		const normalFactor = roll * criticalMultiplier * (1 + profileStats.normalDomination / 100);
-		const bossFactor = roll * criticalMultiplier * (1 + profileStats.bossDomination / 100);
-		const directCore =
-			profileStats.strMag.total * (1 + profileStats.strMagEfficiency / 100) +
-			(2 * profileStats.weaponAttr.total * number(directCoefficient)) / 100;
-		const directNormalAbsolute =
-			(directCore + profileStats.fixedDamage.total + profileStats.normalExtraDamage.total) * normalFactor;
-		const directBossAbsolute =
-			((profileStats.penetration / 100) * directCore -
-				dungeon.bossDmgReduction -
-				(1 - profileStats.penetration / 100) * dungeon.bossDefense +
-				profileStats.fixedDamage.total +
-				profileStats.bossExtraDamage.total) *
-			bossFactor *
-			partyScale;
-		const placementCore =
-			profileStats.weaponAttr.total * selectedCoefficients.weaponCoefficient +
-			profileStats.strMag.total * selectedCoefficients.strengthMultiplier;
-		const placementNormalAbsolute =
-			(placementCore + profileStats.fixedDamage.total + profileStats.normalExtraDamage.total) *
-			normalFactor *
-			selectedCoefficients.totalMultiplier;
-		const placementBossAbsolute =
-			(placementCore - dungeon.bossDmgReduction + profileStats.fixedDamage.total + profileStats.bossExtraDamage.total) *
-			bossFactor *
-			selectedCoefficients.totalMultiplier *
-			partyScale;
-		const practicalAbsolute = {
-			normalDirect: directNormalAbsolute,
-			bossDirect: directBossAbsolute,
-			normalPlacement: placementNormalAbsolute,
-			bossPlacement: placementBossAbsolute
-		};
-		const practical = {
-			normalDirect: Math.round(directNormalAbsolute * 1e-8),
-			bossDirect: Math.round(directBossAbsolute * 1e-4) / 1e4,
-			normalPlacement: Math.round(placementNormalAbsolute * 1e-8),
-			bossPlacement: Math.round(placementBossAbsolute * 1e-4) / 1e4
-		};
-		return {
-			...profile,
-			strMag: profileStats.strMag.total,
-			weaponAttr: profileStats.weaponAttr.total,
-			direct,
-			placement,
-			practical,
-			practicalEok: practical,
-			practicalAbsolute
-		};
+		const practicalAbsolute = { normalDirect: direct.normal, bossDirect: direct.boss, normalPlacement: placement.normal, bossPlacement: placement.boss };
+		const practical = Object.fromEntries(Object.entries(practicalAbsolute).map(([key, damage]) => [key, damage / 1e8]));
+		return { ...profile, strMag: value.strMag.total, weaponAttr: value.weaponAttr.total, direct, placement, practical, practicalEok: practical, practicalAbsolute };
 	};
 	const current = makeProfile({ id: 'current', name: 'Current' }, stats);
 	const profiles = BUILD_PROFILES.map((profile) => {
-		const profileStats = cloneStats(stats);
-		profileStats.strMag.total = budget * profile.strengthRatio;
-		profileStats.weaponAttr.total = budget * profile.weaponRatio;
-		const result = makeProfile(profile, profileStats);
-		result.change = {
-			normalDirect: percentChange(current.practical.normalDirect, result.practical.normalDirect),
-			bossDirect: percentChange(current.practical.bossDirect, result.practical.bossDirect),
-			normalPlacement: percentChange(current.practical.normalPlacement, result.practical.normalPlacement),
-			bossPlacement: percentChange(current.practical.bossPlacement, result.practical.bossPlacement),
-			directBoss: percentChange(current.practical.bossDirect, result.practical.bossDirect),
-			placementBoss: percentChange(current.practical.bossPlacement, result.practical.bossPlacement)
-		};
+		const value = cloneStats(stats);
+		value.strMag = statPair(divide(budget * profile.strengthRatio, 1 + value.strMag.percent / 100), value.strMag.percent);
+		const weaponRatio = divide(value.weaponMinimum, value.weaponAttr.total);
+		value.weaponAttr = statPair(divide(budget * profile.weaponRatio, 1 + value.weaponAttr.percent / 100), value.weaponAttr.percent);
+		value.weaponMinimum = value.weaponAttr.total * weaponRatio;
+		const result = makeProfile(profile, value);
+		result.change = Object.fromEntries(Object.keys(current.practicalAbsolute).map((key) => [key, percentChange(current.practicalAbsolute[key], result.practicalAbsolute[key])]));
+		result.change.directBoss = result.change.bossDirect;
+		result.change.placementBoss = result.change.bossPlacement;
 		return result;
 	});
-	const currentRatio = budget === 0 ? 0 : (stats.strMag.total / 100 / budget) * 100;
-	const nearest = profiles.reduce(
-		(best, profile) => Math.abs(profile.strengthRatio - currentRatio) < Math.abs(best.strengthRatio - currentRatio) ? profile : best,
-		profiles[0]
-	);
-	return { budget, current, profiles, currentRatio, nearestProfileId: nearest?.id ?? null, partyScale };
+	const currentRatio = divide(stats.strMag.total, budget);
+	const nearest = profiles.reduce((best, profile) => Math.abs(profile.strengthRatio - currentRatio) < Math.abs(best.strengthRatio - currentRatio) ? profile : best);
+	return { budget, current, profiles, currentRatio, nearestProfileId: budget > 0 ? nearest.id : null, partyScale: 1 };
 }

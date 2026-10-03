@@ -5,6 +5,7 @@ A growing collection of English-language LaTale fan utilities, including a scena
 ## Features
 
 - General-purpose tool landing page at `/`
+- Specification Analyzer at `/spec-analyzer`: character stats, current-model damage ranges, upgrade and HP comparisons, stat distribution, a searchable skill catalog, and locally saved builds with JSON import/export
 - Inventory expansion checklist at `/inventory-expansion`: 137 translated reward sources, English/Korean search, slot totals, and progress saved in the browser
 - Scenario walkthrough at `/scenario`
 - Separate dialogue reader at `/scenario-script`, with fresh English translations, the Korean original, character portraits, dialogue choices, and a customizable character name
@@ -73,3 +74,11 @@ See [`docs/scenario-script-maintenance.md`](docs/scenario-script-maintenance.md)
 ## Attribution
 
 This is an unofficial fan project and is not affiliated with Actoz Soft or the official LaTale service. The walkthrough comes from [RamuWiki's scenario guide](https://latale.wiki/progression/scenario), redesigned in its [August 31, 2026 patch notes](https://latale.wiki/patch-notes). LaTale's name, images, game data, and story text belong to Actoz Soft and their respective rights holders.
+
+## Specification Analyzer
+
+The analyzer uses the current [community wiki](https://latale.wiki/tools/spec-analyzer) damage model, including float32 rounding, level-scaled defense, guard, and critical resistance. The English and Korean v3.4.1 workbooks linked on the page provide input guidance and terminology. Inputs come from the buffed detailed Status Window; additional summon bonuses should only be selected when they are absent from those inputs.
+
+The pure engine is in `src/lib/spec-analyzer.js`, catalog provenance in `src/lib/spec-analyzer-data.js`, and validated browser persistence in `src/lib/spec-analyzer-workspace.ts`. The new `latale-spec-analyzer-v3` storage migrates prior drafts and named saves without deleting the old storage. Manual coefficients support skills not included in the catalog. Placed-skill reflection values remain community estimates.
+
+Run `node --test tests/spec-analyzer.test.mjs tests/spec-analyzer-workspace.test.mjs` to verify current reference damage fixtures, calculation invariants, item replacement, and saved-build validation. Update the reference fixtures alongside a reviewed model change; legacy spreadsheet outputs are not current-model goldens.

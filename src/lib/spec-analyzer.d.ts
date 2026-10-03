@@ -29,9 +29,15 @@ export interface SpecInputs {
 	strMagEfficiency: NumericExpression;
 	physicalJob: boolean;
 	summonId: string;
+	characterLevel: NumericExpression;
+	weaponMinimum: NumericExpression;
+	meleeAttack: boolean;
+	meleeDamage: NumericExpression;
+	statusAttack: boolean;
+	statusDamage: NumericExpression;
 }
 
-export type NumericSpecInputKey = Exclude<keyof SpecInputs, 'physicalJob' | 'summonId'>;
+export type NumericSpecInputKey = Exclude<keyof SpecInputs, 'physicalJob' | 'summonId' | 'meleeAttack' | 'statusAttack'>;
 export type EnchantDelta = Partial<Record<NumericSpecInputKey | EnchantOptionKey, NumericExpression>>;
 
 export interface EnchantOption {
@@ -66,6 +72,10 @@ export interface CalculationSettings {
 	customBossDefense: NumericExpression;
 	customNormalDmgReduction: NumericExpression;
 	customBossDmgReduction: NumericExpression;
+	customNormalGuard: NumericExpression;
+	customBossGuard: NumericExpression;
+	customNormalElasticity: NumericExpression;
+	customBossElasticity: NumericExpression;
 	damageMode: DamageMode;
 	referenceStat: ReferenceStat;
 	backAttackRate: NumericExpression;
@@ -107,6 +117,12 @@ export interface AggregatedStats extends Record<AggregateStatKey, AggregateStat>
 	strMagEfficiency: number;
 	physicalJob: boolean;
 	summonId: string;
+	characterLevel: number;
+	weaponMinimum: number;
+	meleeAttack: boolean;
+	meleeDamage: number;
+	statusAttack: boolean;
+	statusDamage: number;
 }
 
 export interface Job {
@@ -131,6 +147,10 @@ export interface Dungeon {
 	bossDefense: number;
 	normalDmgReduction: number;
 	bossDmgReduction: number;
+	normalGuard?: number;
+	bossGuard?: number;
+	normalElasticity?: number;
+	bossElasticity?: number;
 }
 
 export interface DirectSkill {
@@ -173,6 +193,8 @@ export interface PlacementCoefficients {
 
 export interface DamageResult {
 	damage: number;
+	minimum: number;
+	maximum: number;
 	rawBase: number;
 	factor: number;
 	scenario: Scenario;
@@ -193,6 +215,7 @@ export interface EfficiencyPanel {
 	damage: number;
 	rawBase: number;
 	referenceGain: number;
+	referenceStep: number;
 	referenceStat: ReferenceStat;
 	scale: number;
 	equivalents: EfficiencyEquivalent[];
@@ -336,7 +359,9 @@ export const DUNGEONS: ReadonlyArray<Dungeon>;
 export const DIRECT_SKILLS: ReadonlyArray<DirectSkill>;
 export const PLACEMENT_SKILLS: ReadonlyArray<PlacementSkill>;
 
+export function inspectNumericInput(value: unknown): { value: number; valid: boolean };
 export function parseNumericInput(value: unknown): number;
+export function directSkillCoefficient(skill?: DirectSkill, skillLevel?: NumericExpression): number;
 export function aggregateStats(inputs?: SpecInputs, options?: { summonId?: string }): AggregatedStats;
 export function calculateBaseShares(stats: AggregatedStats, options?: { criterion?: 'normal' | 'boss' }): Record<BaseShareKey, number>;
 export function calculateConversionSummary(stats: AggregatedStats, options?: { criterion?: 'normal' | 'boss' }): ConversionSummary;
@@ -346,6 +371,7 @@ export function damageFactor(options: {
 	criticalDamage?: NumericExpression;
 	domination?: NumericExpression;
 	backAttackRate?: NumericExpression | boolean;
+	backAttackDamage?: NumericExpression;
 	mode?: DamageMode;
 }): number;
 export function resolveDungeon(dungeon?: Dungeon, settings?: Partial<CalculationSettings>): Dungeon;
@@ -356,6 +382,7 @@ export function calcDirectHitDamage(options: {
 	dungeon?: Dungeon;
 	backAttackRate?: NumericExpression;
 	mode?: DamageMode;
+	critical?: boolean;
 }): DamageResult;
 export function placementCoefficients(skill?: PlacementSkill, skillLevel?: NumericExpression): PlacementCoefficients;
 export function placementCoreCoefficients(coreLevel?: NumericExpression): PlacementCoefficients & { skillLevel: number };
@@ -368,6 +395,7 @@ export function calcPlacementDamage(options: {
 	dungeon?: Dungeon;
 	backAttackRate?: NumericExpression;
 	mode?: DamageMode;
+	critical?: boolean;
 }): DamageResult;
 export function calculateDamageEfficiency(options: {
 	stats: AggregatedStats;
@@ -390,6 +418,7 @@ export function compareEnchants(options: {
 	oldEnchant?: EnchantDelta;
 	newEnchant?: EnchantDelta;
 	directCoefficient: NumericExpression;
+	directSkill?: DirectSkill;
 	placementSkill?: PlacementSkill;
 	placementSkillLevel?: NumericExpression;
 	dungeon?: Dungeon;
