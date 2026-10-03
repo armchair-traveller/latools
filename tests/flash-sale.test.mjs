@@ -509,15 +509,15 @@ test('historical Before Mistwood fixture preserves all 25 offers and their valua
 	});
 });
 
-test('current September fixture follows Discord rounds and the canonical sale poster', async () => {
+test('historical September fixture follows Discord rounds and the canonical sale poster', async () => {
 	const [index, currentCatalog, sale, beforeMistwood] = await Promise.all([
 		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6421.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6401.json', import.meta.url), 'utf8').then(JSON.parse)
 	]);
-	assert.equal(index.currentSaleId, 'papayaplay-6421');
-	assert.equal(sale.id, index.currentSaleId);
+	assert.equal(sale.id, 'papayaplay-6421');
+	assert.ok(index.sales.some((entry) => entry.id === sale.id));
 	assert.equal(sale.postId, 6421);
 	assert.equal(sale.sourceUrl, 'https://latale.papayaplay.com/latale.do?tp=news.view&postid=6421');
 	assert.equal(sale.title, 'Eternal Royal Paradise - New Pet & Premium Items');
@@ -713,5 +713,142 @@ test('current September fixture follows Discord rounds and the canonical sale po
 		assert.equal(constellation.valuationState, 'partial');
 		assert.equal(constellation.knownBundleEly, 6_100_000_000);
 		assert.equal(constellation.rank, null);
+	}
+});
+
+test('current Pre-Halloween fixture preserves all 36 offers and Discord corrections', async () => {
+	const [index, currentCatalog, sale, septemberSale] = await Promise.all([
+		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6457.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6421.json', import.meta.url), 'utf8').then(JSON.parse)
+	]);
+	assert.equal(index.currentSaleId, 'papayaplay-6457');
+	assert.equal(sale.id, index.currentSaleId);
+	assert.equal(sale.postId, 6457);
+	assert.equal(sale.title, 'Pre-Halloween Flash Sales');
+	assert.equal(sale.sourceUrl, 'https://latale.papayaplay.com/latale.do?tp=news.view&postid=6457');
+	assert.equal(sale.timezone, 'America/New_York');
+	assert.equal(sale.status, 'published');
+	assert.deepEqual(index.sales.find((entry) => entry.id === sale.id), {
+		id: sale.id,
+		title: sale.title,
+		startsAt: '2026-09-30T20:30:00-04:00',
+		endsAt: '2026-10-14T19:50:00-04:00',
+		reviewedAt: sale.reviewedAt
+	});
+	for (const id of ['papayaplay-6332', 'papayaplay-6347', 'papayaplay-6382', 'papayaplay-6401', 'papayaplay-6421']) {
+		assert.ok(index.sales.some((entry) => entry.id === id), `Missing historical sale ${id}`);
+	}
+	assert.ok(sale.sources.some((entry) => entry.url === sale.sourceUrl && /Haunted Harvest/i.test(entry.title)));
+	const discordSource = sale.sources.find((entry) => /discord/i.test(entry.id));
+	assert.ok(discordSource, 'Missing supplied Discord evidence');
+	assert.match(discordSource.note, /supplied/i);
+	const posterSources = new Set(sale.sources.filter((entry) => sale.posterUrls.includes(entry.url)).map((entry) => entry.id));
+	assert.ok(posterSources.size > 0, 'Missing original poster evidence');
+	assert.equal(sale.expectedOfferCount, 36);
+	assert.deepEqual(sale.cycles.map((cycle) => cycle.expectedOfferCount), [7, 8, 6, 5, 5, 5]);
+	assert.deepEqual(sale.cycles.map((cycle) => cycle.offers.length), [7, 8, 6, 5, 5, 5]);
+	assert.deepEqual(sale.cycles.map((cycle) => [cycle.startsAt, cycle.endsAt]), [
+		['2026-09-30T20:30:00-04:00', '2026-10-02T20:29:00-04:00'],
+		['2026-10-02T20:30:00-04:00', '2026-10-05T20:29:00-04:00'],
+		['2026-10-05T20:30:00-04:00', '2026-10-07T20:29:00-04:00'],
+		['2026-10-07T20:30:00-04:00', '2026-10-09T20:29:00-04:00'],
+		['2026-10-09T20:30:00-04:00', '2026-10-12T20:29:00-04:00'],
+		['2026-10-12T20:30:00-04:00', '2026-10-14T19:50:00-04:00']
+	]);
+	assert.deepEqual(sale.cycles.slice(0, 3).map((cycle) => cycle.offers.map((entry) => entry.name)), [
+		['Storage Expansion Bag (x10)', 'General Inventory Bag (x6)', 'La Tale Adventure Dice Package (x500)',
+			'Constellation Package', 'Instance Dungeon Guaranteed Titlebook Coupon II',
+			'Constellation Expansion Package', 'Giga Platinum Hammer (x100)'],
+		['Halloween Souly FX Titlebook', "Goddess' Card of Eternity", 'Blue Halloween Vampire Set I',
+			'Blue Halloween Vampire Set II', 'Power Picnic Pack', 'White Pumpkin Carriage Mount Coupon',
+			'October Adventures Crate Bundle I', 'Halloween Pumpkin Shadow Effect Coupon'],
+		['Summonable Scroll Bundle', 'Memorial Package Bundle X', 'Grim Reaper Fashion Set',
+			'Pumpkin Carriage Mount Coupon', 'Constellation Expansion Package', "GM's Guild Bundle III"]
+	]);
+	assert.deepEqual(sale.cycles.map((cycle) => cycle.offers.map((entry) => entry.salePriceLtc)), [
+		[950, 900, 690, 1990, 690, 2290, 2590],
+		[990, 2500, 1590, 1590, 1790, 1290, 4400, 890],
+		[690, 2700, 1190, 1290, 2290, 3590],
+		[1095, 1500, 2490, 5000, 1095],
+		[1200, 2700, 3500, 3500, 690],
+		[590, 490, 990, 1990, 2500]
+	]);
+	assert.deepEqual(sale.cycles.map((cycle) => cycle.offers.map((entry) => entry.purchaseLimit.quantity)), [
+		[25, 25, 50, 40, 35, 30, 50],
+		[15, 15, 15, 15, 35, 10, 20, 15],
+		[25, 50, 15, 10, 30, 20],
+		[35, 30, 15, 15, 20],
+		[15, 50, 25, 25, 15],
+		[15, 20, 20, 40, 15]
+	]);
+	for (const [cycleIndex, cycle] of sale.cycles.entries()) {
+		assert.deepEqual(cycle.unresolvedSlots, []);
+		assert.deepEqual(cycle.offers.map((entry) => entry.slot),
+			Array.from({ length: cycle.expectedOfferCount }, (_, slot) => slot + 1));
+		for (const entry of cycle.offers) {
+			assert.equal(entry.purchaseLimit.scope, 'unknown');
+			assert.equal(entry.capture.status, 'verified');
+			assert.ok(entry.capture.sourceIds.some((id) => posterSources.has(id)), entry.name);
+			if (cycleIndex < 3) assert.ok(entry.capture.sourceIds.includes(discordSource.id), entry.name);
+			assert.ok(entry.caveats.some((note) => /gift/i.test(note) && /not available|unavailable|disabled|cannot|can't/i.test(note)),
+				`Missing no-gift warning for ${entry.name}`);
+		}
+	}
+	assert.deepEqual(getFlashSaleTimeline(sale, '2026-10-02T20:29:00-04:00'), {
+		status: 'gap', activeCycleId: null, nextCycleId: sale.cycles[1].id
+	});
+	assert.deepEqual(getFlashSaleTimeline(sale, '2026-10-02T20:30:00-04:00'), {
+		status: 'active', activeCycleId: sale.cycles[1].id, nextCycleId: sale.cycles[2].id
+	});
+	assert.equal(getFlashSaleTimeline(sale, '2026-10-14T19:50:00-04:00').status, 'ended');
+
+	const offers = sale.cycles.flatMap((cycle) => cycle.offers);
+	const items = new Map(currentCatalog.items.map((entry) => [entry.id, entry]));
+	const contentsFor = (name) => {
+		const entry = offers.find((offer) => offer.name === name);
+		assert.ok(entry, `Missing offer ${name}`);
+		return entry.contents.map(({ itemId, quantity }) => [items.get(itemId)?.name, quantity]);
+	};
+	assert.deepEqual(contentsFor('Blue Halloween Vampire Set I'), [
+		['Halloween Vampire Veil II', 1], ['Halloween Vampire Suit II', 1],
+		['Halloween Vampire Gloves II', 1], ['Halloween Vampire Boots II', 1], ['Halloween Power Basket', 1]
+	]);
+	assert.deepEqual(contentsFor('Blue Halloween Vampire Set II'), [
+		['Halloween Vampire Bonnet II', 1], ['Halloween Vampire Dress II', 1],
+		['Halloween Vampire Gloves II', 1], ['Halloween Vampire Heels II', 1], ['Halloween Power Basket', 1]
+	]);
+	assert.deepEqual(contentsFor('Grim Reaper Fashion Set'), [
+		["Grim Reaper's Mask", 1], ["Grim Reaper's Ragged Outfit", 1],
+		["Grim Reaper's Skull Gloves", 1], ["Grim Reaper's Skull Boots", 1], ['Halloween Power Basket', 5]
+	]);
+	assert.deepEqual(contentsFor('Summonable Scroll Bundle'), [
+		['Summon Skill Enhancement Scroll', 250], ['Advanced Summon Skill Enhancement Scroll', 80]
+	]);
+	assert.deepEqual(getFlashSaleCompleteness(sale, currentCatalog), {
+		captured: 36, unresolved: 0, total: 36, fullyValued: 11, partiallyValued: 8, unranked: 17
+	});
+
+	const snapshot = new Map(sale.valuationSnapshot.map((entry) => [entry.itemId, entry]));
+	for (const previousValue of septemberSale.valuationSnapshot) {
+		if (snapshot.has(previousValue.itemId) && previousValue.unitEly !== null) {
+			assert.deepEqual(snapshot.get(previousValue.itemId), previousValue,
+				`Changed reused numeric valuation evidence for ${previousValue.itemId}`);
+		}
+	}
+	for (const value of sale.valuationSnapshot) {
+		assert.ok(value.sourceIds.every((id) => sale.sources.some((entry) => entry.id === id)));
+	}
+	for (const name of ['Halloween Power Basket', 'Summon Skill Enhancement Scroll', 'Advanced Summon Skill Enhancement Scroll']) {
+		const item = currentCatalog.items.find((entry) => entry.name === name);
+		assert.ok(item, `Missing exact catalog variant ${name}`);
+		for (const value of [item.valuation, snapshot.get(item.id)]) {
+			assert.equal(value.status, 'pending', name);
+			assert.equal(value.method, 'pending', name);
+			assert.equal(value.unitEly, null, name);
+			assert.equal(value.asOf, null, name);
+			assert.equal(value.confidence, null, name);
+		}
 	}
 });

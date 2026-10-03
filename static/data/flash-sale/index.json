@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"currentSaleId": "papayaplay-6421",
+	"currentSaleId": "papayaplay-6457",
 	"sales": [
 		{
 			"id": "papayaplay-6332",
@@ -36,6 +36,13 @@
 			"startsAt": "2026-09-16T20:30:00-04:00",
 			"endsAt": "2026-09-30T19:50:00-04:00",
 			"reviewedAt": "2026-09-24"
+		},
+		{
+			"id": "papayaplay-6457",
+			"title": "Pre-Halloween Flash Sales",
+			"startsAt": "2026-09-30T20:30:00-04:00",
+			"endsAt": "2026-10-14T19:50:00-04:00",
+			"reviewedAt": "2026-10-02"
 		}
 	]
 }
