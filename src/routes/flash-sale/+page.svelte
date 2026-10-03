@@ -4,6 +4,8 @@
 	import ExternalLinkIcon from '@lucide/svelte/icons/external-link';
 	import GaugeIcon from '@lucide/svelte/icons/gauge';
 	import InfoIcon from '@lucide/svelte/icons/info';
+	import LayoutGridIcon from '@lucide/svelte/icons/layout-grid';
+	import LayoutListIcon from '@lucide/svelte/icons/layout-list';
 	import PackageSearchIcon from '@lucide/svelte/icons/package-search';
 	import PercentIcon from '@lucide/svelte/icons/percent';
 	import RotateCcwIcon from '@lucide/svelte/icons/rotate-ccw';
@@ -11,6 +13,7 @@
 	import SparklesIcon from '@lucide/svelte/icons/sparkles';
 	import TrophyIcon from '@lucide/svelte/icons/trophy';
 	import UserRoundIcon from '@lucide/svelte/icons/user-round';
+	import XIcon from '@lucide/svelte/icons/x';
 	import {
 		calculatePersonalFlashSaleValue,
 		evaluateFlashSaleCycle,
@@ -19,12 +22,15 @@
 	import { Badge, type BadgeVariant } from '$lib/components/ui/badge';
 	import { Button } from '$lib/components/ui/button';
 	import FlashSaleCaveats from '$lib/components/flash-sale-caveats.svelte';
+	import FlashSaleOfferGrid from '$lib/components/flash-sale-offer-grid.svelte';
 	import * as Alert from '$lib/components/ui/alert';
 	import * as Card from '$lib/components/ui/card';
 	import * as Empty from '$lib/components/ui/empty';
 	import * as Field from '$lib/components/ui/field';
 	import * as InputGroup from '$lib/components/ui/input-group';
 	import { Separator } from '$lib/components/ui/separator';
+	import * as Sheet from '$lib/components/ui/sheet';
+	import * as ToggleGroup from '$lib/components/ui/toggle-group';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -44,6 +50,10 @@
 
 	let selectedCycleId = $derived<string>(data.currentCycleId);
 	let viewMode = $state<ViewMode>('objective');
+	let layoutMode = $state<'compact' | 'detailed'>('compact');
+	let inspectedOfferId = $state<string | null>(null);
+	let detailPanel = $state<HTMLDivElement | null>(null);
+	let inspectTrigger: HTMLElement | null = null;
 	let utilityPercentByOfferId = $state<Record<string, number | undefined>>({});
 	let directElyByOfferId = $state<Record<string, number | undefined>>({});
 
@@ -53,6 +63,7 @@
 	let featuredOffer = $derived(
 		selectedCycle?.offers.find((offer) => offer.rank === 1) ?? selectedCycle?.offers[0]
 	);
+	let inspectedOffer = $derived(selectedCycle?.offers.find((offer) => offer.id === inspectedOfferId));
 	let poster = $derived(selectedCycle?.poster ?? null);
 	let posterUrl = $derived(poster?.url ?? null);
 	let posterCycleLabel = $derived(selectedCycle?.label.split(' · ')[0] ?? 'Sale');
@@ -249,6 +260,32 @@
 	function personalRatio(value: PersonalValue | undefined): number | null {
 		return value?.personalElyPerLtc ?? null;
 	}
+
+	function inspectOffer(id: string) {
+		inspectTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+		inspectedOfferId = id;
+	}
+
+	let compactOffers = $derived((selectedCycle?.offers ?? []).map((offer) => ({
+		id: offer.id,
+		name: offer.name,
+		rank: offer.rank,
+		valuation: offer.valuation,
+		statusLabel: valuationLabel(offer.valuation),
+		price: `${integerFormatter.format(offer.priceLtc)} LTC`,
+		bundle: objectiveBundle(offer),
+		efficiency: objectiveRatio(offer),
+		stock: formatLimit(offer.purchaseLimit),
+		stockScope: offer.purchaseLimitScope === 'unknown' ? 'Scope unknown'
+			: offer.purchaseLimitScope === 'account' ? 'Per account'
+				: offer.purchaseLimitScope === 'character' ? 'Per character'
+					: offer.purchaseLimitScope === 'sale' ? 'Sale-wide' : '',
+		componentCount: offer.components.length,
+		contents: offer.components.map(({ name, quantity }) => ({ name, quantity })),
+		personalRank: personalRankById.get(offer.id) ?? null,
+		personalBundle: formatEly(personalBundle(personalValueById.get(offer.id))),
+		personalEfficiency: formatRatio(personalRatio(personalValueById.get(offer.id)))
+	})));
 </script>
 
 <svelte:head>
@@ -264,7 +301,244 @@
 	/>
 </svelte:head>
 
-<div class="flash-sale-route" data-view-mode={viewMode}>
+{#snippet offerCard(offer: OfferView)}
+	<Card.Root
+		class="offer-card"
+		data-rank={offer.rank ?? 'unranked'}
+		data-valuation={offer.valuation}
+	>
+		<Card.Header class="offer-card__header">
+			<div class="offer-card__identity flex min-w-0 items-start gap-3">
+				<div class="offer-card__icon grid size-11 shrink-0 place-items-center rounded-lg bg-muted text-muted-foreground">
+					<PackageSearchIcon class="size-5" aria-hidden="true" />
+				</div>
+				<div class="flex min-w-0 flex-col gap-2">
+					<Card.Title><h3 class="break-words">{offer.name}</h3></Card.Title>
+					<div class="offer-card__badges flex flex-wrap items-center gap-2">
+						<Card.Description>Offer {offer.slot}</Card.Description>
+						{#if offer.rank !== null}
+							<Badge>#{offer.rank} exact</Badge>
+						{:else}
+							<Badge variant={valuationVariant(offer.valuation)}>
+								{valuationLabel(offer.valuation)}
+							</Badge>
+						{/if}
+						{#if viewMode === 'personal' && personalRankById.has(offer.id)}
+							<Badge variant="secondary">
+								Personal #{personalRankById.get(offer.id)}
+							</Badge>
+						{/if}
+					</div>
+				</div>
+			</div>
+
+			<dl class="offer-card__metrics">
+				<div data-metric="price">
+					<dt class="text-xs text-muted-foreground">Price</dt>
+					<dd class="mt-1 font-medium">{integerFormatter.format(offer.priceLtc)} LTC</dd>
+				</div>
+				<div data-metric="bundle">
+					<dt class="text-xs text-muted-foreground">Objective bundle</dt>
+					<dd class="mt-1 font-medium">{objectiveBundle(offer)}</dd>
+				</div>
+				<div data-metric="efficiency">
+					<dt class="text-xs text-muted-foreground">Objective efficiency</dt>
+					<dd class="mt-1 font-medium">{objectiveRatio(offer)}</dd>
+				</div>
+				<div data-metric="limit">
+					<dt class="text-xs text-muted-foreground">
+						{offer.purchaseLimitScope === 'unknown' ? 'Advertised stock' : 'Limit'}
+					</dt>
+					<dd class="mt-1 font-medium">
+						{formatLimit(offer.purchaseLimit)}
+						{#if offer.purchaseLimitScope}
+							<span class="mt-1 block text-xs font-normal text-muted-foreground">
+								{offer.purchaseLimitScope === 'unknown'
+									? 'Scope unknown'
+									: offer.purchaseLimitScope === 'account'
+										? 'Per account'
+										: offer.purchaseLimitScope === 'character'
+											? 'Per character'
+											: 'Sale-wide'}
+							</span>
+						{/if}
+					</dd>
+				</div>
+			</dl>
+		</Card.Header>
+
+		<Card.Content class="offer-card__content flex flex-col gap-6">
+			<div class="offer-card__body">
+				<div class="offer-card__bundle">
+					<h4 id={`evidence-heading-${offer.id}`} class="text-sm font-medium">
+						Bundle contents and evidence
+					</h4>
+					<ul
+						class="evidence-list mt-3"
+						aria-labelledby={`evidence-heading-${offer.id}`}
+					>
+						{#each offer.components as component (component.id)}
+							<li class="evidence-item">
+								<div class="evidence-item__summary">
+									<div class="evidence-item__title">
+										<p>{component.name} ×{component.quantity}</p>
+										<Badge variant="outline">
+											{componentValuationLabel(component.valuation)}
+										</Badge>
+									</div>
+									<dl class="evidence-item__values">
+										<div>
+											<dt>Unit value</dt>
+											<dd>
+												{component.valuation === 'priced' || component.valuation === 'estimated'
+													? formatEly(component.unitEly)
+													: '—'}
+											</dd>
+										</div>
+										<div>
+											<dt>Bundle value</dt>
+											<dd>{componentValue(component)}</dd>
+										</div>
+									</dl>
+								</div>
+
+								<div class="evidence-item__review">
+									<div class="flex flex-wrap gap-1">
+										<Badge variant="secondary">{component.confidence}</Badge>
+										<Badge variant="outline">{evidenceAge(component)}</Badge>
+									</div>
+									<p>{component.evidence}</p>
+									<p class="evidence-item__source">
+										{component.source} · {formatDate(component.priceUpdatedAt)}
+									</p>
+								</div>
+							</li>
+						{/each}
+					</ul>
+				</div>
+
+				<div class="offer-card__guidance">
+					<div>
+						<h4 class="text-sm font-medium">Best for</h4>
+						{#if offer.bestFor.length > 0}
+							<ul class="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
+								{#each offer.bestFor as item (`${offer.id}-best-${item}`)}
+									<li>{item}</li>
+								{/each}
+							</ul>
+						{:else}
+							<p class="mt-2 text-sm text-muted-foreground">No specific use case claimed.</p>
+						{/if}
+					</div>
+					<div>
+						<h4 class="text-sm font-medium">Skip if</h4>
+						{#if offer.skipIf.length > 0}
+							<ul class="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
+								{#each offer.skipIf as item (`${offer.id}-skip-${item}`)}
+									<li>{item}</li>
+								{/each}
+							</ul>
+						{:else}
+							<p class="mt-2 text-sm text-muted-foreground">No specific skip condition claimed.</p>
+						{/if}
+					</div>
+				</div>
+			</div>
+
+			{#if viewMode === 'personal'}
+				<Separator />
+				<Card.Root class="personal-offer-card" size="sm">
+					<Card.Header>
+						<div class="flex items-center gap-2 text-secondary-foreground">
+							<UserRoundIcon class="size-4" aria-hidden="true" />
+							<p class="text-sm font-medium">Your estimate</p>
+						</div>
+						<Card.Title><h4>Personal utility for {offer.name}</h4></Card.Title>
+						<Card.Description>
+							The percentage scales its known objective value. A direct total overrides that estimate.
+						</Card.Description>
+					</Card.Header>
+					<Card.Content>
+						<Field.Group class="grid gap-4 sm:grid-cols-2">
+							<Field.Field data-disabled={offer.knownEly <= 0}>
+								<Field.Label for={`utility-${offer.id}`}>Useful to you</Field.Label>
+								<InputGroup.Root>
+							<InputGroup.Input
+								id={`utility-${offer.id}`}
+								aria-describedby={`utility-description-${offer.id}`}
+										type="number"
+										min="0"
+										max="100"
+										step="1"
+										disabled={offer.knownEly <= 0}
+										value={utilityPercentByOfferId[offer.id] ?? 100}
+										oninput={(event) => setUtilityPercentage(offer.id, event)}
+									/>
+									<InputGroup.Addon align="inline-end">
+										<InputGroup.Text>%</InputGroup.Text>
+									</InputGroup.Addon>
+								</InputGroup.Root>
+							<Field.Description id={`utility-description-${offer.id}`}>
+									{offer.knownEly > 0
+										? "Scales the offer's known objective Ely value."
+										: 'No known Ely base; use a direct value instead.'}
+								</Field.Description>
+							</Field.Field>
+
+							<Field.Field>
+								<Field.Label for={`direct-${offer.id}`}>Direct offer value</Field.Label>
+								<InputGroup.Root>
+							<InputGroup.Input
+								id={`direct-${offer.id}`}
+								aria-describedby={`direct-description-${offer.id}`}
+										type="number"
+										min="0"
+										step="1"
+										placeholder="Optional"
+										value={directElyByOfferId[offer.id] ?? ''}
+										oninput={(event) => setDirectEly(offer.id, event)}
+									/>
+									<InputGroup.Addon align="inline-end">
+										<InputGroup.Text>Ely</InputGroup.Text>
+									</InputGroup.Addon>
+								</InputGroup.Root>
+							<Field.Description id={`direct-description-${offer.id}`}>
+								Overrides component percentages for this bundle.
+							</Field.Description>
+							</Field.Field>
+						</Field.Group>
+					</Card.Content>
+					<Card.Footer
+						class="personal-results flex-wrap gap-x-6 gap-y-2"
+						aria-live="polite"
+					>
+						<p class="text-sm">
+							<span class="text-muted-foreground">Personal bundle:</span>
+							<strong>{formatEly(personalBundle(personalValueById.get(offer.id)))}</strong>
+						</p>
+						<p class="text-sm">
+							<span class="text-muted-foreground">Personal efficiency:</span>
+							<strong>{formatRatio(personalRatio(personalValueById.get(offer.id)))}</strong>
+						</p>
+					</Card.Footer>
+				</Card.Root>
+			{/if}
+		</Card.Content>
+
+		<Card.Footer class="offer-card__footer flex-col items-stretch gap-3">
+			<p class="text-xs leading-relaxed text-foreground/75">
+				{offer.valuation === 'exact'
+					? `Objective rank #${offer.rank} uses only the frozen, reviewed valuation snapshot.`
+					: offer.valuation === 'partial'
+						? 'The known components form a lower bound; this offer is excluded from exact ranks.'
+						: 'This offer remains visible but is excluded from exact numeric ranks.'}
+			</p>
+			<FlashSaleCaveats offerName={offer.name} caveats={offer.caveats} note={offer.note} />
+		</Card.Footer>
+	</Card.Root>
+{/snippet}
+
+<div class="flash-sale-route" data-view-mode={viewMode} data-layout={layoutMode}>
 	<div class="flash-sale-page mx-auto w-full max-w-[84rem] px-4 py-8 sm:px-6 md:px-8 md:py-12">
 	<div class="sale-atmosphere" aria-hidden="true">
 		<span></span>
@@ -293,6 +567,16 @@
 				<div>
 					<p class="sale-hero__eyebrow">Cycle-by-cycle price intelligence</p>
 					<h1>{data.meta.title}</h1>
+					{#if layoutMode === 'compact'}
+						<p class="sale-compact-meta">
+							{saleStatusLabel(data.meta.status)}<span class="px-1" aria-hidden="true">·</span>
+							{formatDate(data.meta.startsAt)} – {formatDate(data.meta.endsAt)}
+							<span class="px-1" aria-hidden="true">·</span>{data.completeness.capturedOffers} offers
+							{#if officialPostUrl}
+								<span class="px-1" aria-hidden="true">·</span><Button href={officialPostUrl} target="_blank" rel="noreferrer" variant="link" size="xs" class="h-auto p-0">Official announcement</Button>
+							{/if}
+						</p>
+					{/if}
 				</div>
 			</div>
 
@@ -344,6 +628,7 @@
 			{/if}
 		</div>
 
+		{#if layoutMode === 'detailed'}
 		<div
 			class="sale-hero__visual"
 			style={`--poster-position: ${poster?.positionPercent ?? 50}%`}
@@ -409,6 +694,19 @@
 				</Card.Root>
 			{/if}
 		</div>
+		{/if}
+		<div class="sale-hero__layout-control">
+			<ToggleGroup.Root
+				type="single"
+				variant="outline"
+				value={layoutMode}
+				onValueChange={(value) => { if (value === 'compact' || value === 'detailed') layoutMode = value; }}
+				aria-label="Offer display"
+			>
+				<ToggleGroup.Item value="compact"><LayoutGridIcon aria-hidden="true" />Overview</ToggleGroup.Item>
+				<ToggleGroup.Item value="detailed"><LayoutListIcon aria-hidden="true" />Detailed</ToggleGroup.Item>
+			</ToggleGroup.Root>
+		</div>
 	</header>
 
 	<Card.Root class="comparison-panel mt-8">
@@ -425,16 +723,17 @@
 				{#if data.cycleViews.length > 1}
 					<div class="cycle-toggle mt-3" role="radiogroup" aria-label="Select sale cycle">
 						{#each data.cycleViews as cycle (cycle.id)}
-							<label class="cycle-toggle__item">
+							<label class="cycle-toggle__item" title={cycle.label} data-current={cycle.status === 'current'}>
 								<input
 									class="sr-only"
 									type="radio"
 									name="flash-sale-cycle"
 									value={cycle.id}
+									aria-label={`${cycle.label}${cycle.status === 'current' ? ' (current)' : ''}`}
 									checked={selectedCycleId === cycle.id}
 									onchange={() => (selectedCycleId = cycle.id)}
 								/>
-								<span>{cycle.label}</span>
+								<span>{layoutMode === 'compact' ? cycle.label.split(' · ')[0] : cycle.label}</span>
 								{#if cycle.status === 'current'}
 									<span class="sr-only">(current)</span>
 								{/if}
@@ -491,7 +790,14 @@
 		{/if}
 	</Card.Root>
 
-	{#if viewMode === 'personal'}
+	{#if viewMode === 'personal' && layoutMode === 'compact'}
+		<div class="compact-personal-note">
+			<p>Open an offer to adjust your estimate. Objective ranks stay unchanged.</p>
+			<Button variant="ghost" size="sm" onclick={resetPersonalInputs}>
+				<RotateCcwIcon data-icon="inline-start" aria-hidden="true" />Reset estimates
+			</Button>
+		</div>
+	{:else if viewMode === 'personal'}
 		<Card.Root class="personal-panel mt-5" size="sm">
 			<Card.Header>
 				<Card.Title><h2>Personal estimate is optional and local</h2></Card.Title>
@@ -520,10 +826,15 @@
 					<h2 id="selected-cycle-heading" class="mt-1 text-xl font-semibold tracking-tight sm:text-2xl">
 						{selectedCycle.label} offers
 					</h2>
-					<p class="mt-2 max-w-3xl text-sm text-muted-foreground">
+					<p class="offer-section__intro mt-2 max-w-3xl text-sm text-muted-foreground">
 						Exact offers appear in rank order. Partial, unique, pending, and unverified offers follow
 						without receiving a misleading numeric rank.
 					</p>
+					{#if layoutMode === 'compact'}
+						<p class="compact-cycle-meta">
+							{formatDateTime(selectedCycle.startsAt)} – {formatDateTime(selectedCycle.endsAt)}
+						</p>
+					{/if}
 				</div>
 				<div
 					class="flex flex-wrap gap-2"
@@ -555,246 +866,19 @@
 						<Alert.Description>{data.purchaseNotice}</Alert.Description>
 					</Alert.Root>
 				{/if}
+				{#if layoutMode === 'compact'}
+					<div class="compact-offers">
+						<FlashSaleOfferGrid offers={compactOffers} personal={viewMode === 'personal'} oninspect={inspectOffer} />
+					</div>
+				{:else}
 				<ul class="offer-grid mt-6 grid gap-6">
 					{#each selectedCycle.offers as offer (offer.id)}
 						<li class="offer-item min-w-0">
-							<Card.Root
-								class="offer-card"
-								data-rank={offer.rank ?? 'unranked'}
-								data-valuation={offer.valuation}
-							>
-								<Card.Header class="offer-card__header">
-									<div class="offer-card__identity flex min-w-0 items-start gap-3">
-										<div class="offer-card__icon grid size-11 shrink-0 place-items-center rounded-lg bg-muted text-muted-foreground">
-											<PackageSearchIcon class="size-5" aria-hidden="true" />
-										</div>
-										<div class="flex min-w-0 flex-col gap-2">
-											<Card.Title><h3 class="break-words">{offer.name}</h3></Card.Title>
-											<div class="offer-card__badges flex flex-wrap items-center gap-2">
-												<Card.Description>Offer {offer.slot}</Card.Description>
-												{#if offer.rank !== null}
-													<Badge>#{offer.rank} exact</Badge>
-												{:else}
-													<Badge variant={valuationVariant(offer.valuation)}>
-														{valuationLabel(offer.valuation)}
-													</Badge>
-												{/if}
-												{#if viewMode === 'personal' && personalRankById.has(offer.id)}
-													<Badge variant="secondary">
-														Personal #{personalRankById.get(offer.id)}
-													</Badge>
-												{/if}
-											</div>
-										</div>
-									</div>
-
-									<dl class="offer-card__metrics">
-										<div data-metric="price">
-											<dt class="text-xs text-muted-foreground">Price</dt>
-											<dd class="mt-1 font-medium">{integerFormatter.format(offer.priceLtc)} LTC</dd>
-										</div>
-										<div data-metric="bundle">
-											<dt class="text-xs text-muted-foreground">Objective bundle</dt>
-											<dd class="mt-1 font-medium">{objectiveBundle(offer)}</dd>
-										</div>
-										<div data-metric="efficiency">
-											<dt class="text-xs text-muted-foreground">Objective efficiency</dt>
-											<dd class="mt-1 font-medium">{objectiveRatio(offer)}</dd>
-										</div>
-										<div data-metric="limit">
-											<dt class="text-xs text-muted-foreground">
-												{offer.purchaseLimitScope === 'unknown' ? 'Advertised stock' : 'Limit'}
-											</dt>
-											<dd class="mt-1 font-medium">
-												{formatLimit(offer.purchaseLimit)}
-												{#if offer.purchaseLimitScope}
-													<span class="mt-1 block text-xs font-normal text-muted-foreground">
-														{offer.purchaseLimitScope === 'unknown'
-															? 'Scope unknown'
-															: offer.purchaseLimitScope === 'account'
-																? 'Per account'
-																: offer.purchaseLimitScope === 'character'
-																	? 'Per character'
-																	: 'Sale-wide'}
-													</span>
-												{/if}
-											</dd>
-										</div>
-									</dl>
-								</Card.Header>
-
-								<Card.Content class="offer-card__content flex flex-col gap-6">
-									<div class="offer-card__body">
-										<div class="offer-card__bundle">
-											<h4 id={`evidence-heading-${offer.id}`} class="text-sm font-medium">
-												Bundle contents and evidence
-											</h4>
-											<ul
-												class="evidence-list mt-3"
-												aria-labelledby={`evidence-heading-${offer.id}`}
-											>
-												{#each offer.components as component (component.id)}
-													<li class="evidence-item">
-														<div class="evidence-item__summary">
-															<div class="evidence-item__title">
-																<p>{component.name} ×{component.quantity}</p>
-																<Badge variant="outline">
-																	{componentValuationLabel(component.valuation)}
-																</Badge>
-															</div>
-															<dl class="evidence-item__values">
-																<div>
-																	<dt>Unit value</dt>
-																	<dd>
-																		{component.valuation === 'priced' || component.valuation === 'estimated'
-																			? formatEly(component.unitEly)
-																			: '—'}
-																	</dd>
-																</div>
-																<div>
-																	<dt>Bundle value</dt>
-																	<dd>{componentValue(component)}</dd>
-																</div>
-															</dl>
-														</div>
-
-														<div class="evidence-item__review">
-															<div class="flex flex-wrap gap-1">
-																<Badge variant="secondary">{component.confidence}</Badge>
-																<Badge variant="outline">{evidenceAge(component)}</Badge>
-															</div>
-															<p>{component.evidence}</p>
-															<p class="evidence-item__source">
-																{component.source} · {formatDate(component.priceUpdatedAt)}
-															</p>
-														</div>
-													</li>
-												{/each}
-											</ul>
-										</div>
-
-										<div class="offer-card__guidance">
-											<div>
-												<h4 class="text-sm font-medium">Best for</h4>
-												{#if offer.bestFor.length > 0}
-													<ul class="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
-														{#each offer.bestFor as item (`${offer.id}-best-${item}`)}
-															<li>{item}</li>
-														{/each}
-													</ul>
-												{:else}
-													<p class="mt-2 text-sm text-muted-foreground">No specific use case claimed.</p>
-												{/if}
-											</div>
-											<div>
-												<h4 class="text-sm font-medium">Skip if</h4>
-												{#if offer.skipIf.length > 0}
-													<ul class="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
-														{#each offer.skipIf as item (`${offer.id}-skip-${item}`)}
-															<li>{item}</li>
-														{/each}
-													</ul>
-												{:else}
-													<p class="mt-2 text-sm text-muted-foreground">No specific skip condition claimed.</p>
-												{/if}
-											</div>
-										</div>
-									</div>
-
-									{#if viewMode === 'personal'}
-										<Separator />
-										<Card.Root class="personal-offer-card" size="sm">
-											<Card.Header>
-												<div class="flex items-center gap-2 text-secondary-foreground">
-													<UserRoundIcon class="size-4" aria-hidden="true" />
-													<p class="text-sm font-medium">Your estimate</p>
-												</div>
-												<Card.Title><h4>Personal utility for {offer.name}</h4></Card.Title>
-												<Card.Description>
-													The percentage scales its known objective value. A direct total overrides that estimate.
-												</Card.Description>
-											</Card.Header>
-											<Card.Content>
-												<Field.Group class="grid gap-4 sm:grid-cols-2">
-													<Field.Field data-disabled={offer.knownEly <= 0}>
-														<Field.Label for={`utility-${offer.id}`}>Useful to you</Field.Label>
-														<InputGroup.Root>
-													<InputGroup.Input
-														id={`utility-${offer.id}`}
-														aria-describedby={`utility-description-${offer.id}`}
-																type="number"
-																min="0"
-																max="100"
-																step="1"
-																disabled={offer.knownEly <= 0}
-																value={utilityPercentByOfferId[offer.id] ?? 100}
-																oninput={(event) => setUtilityPercentage(offer.id, event)}
-															/>
-															<InputGroup.Addon align="inline-end">
-																<InputGroup.Text>%</InputGroup.Text>
-															</InputGroup.Addon>
-														</InputGroup.Root>
-													<Field.Description id={`utility-description-${offer.id}`}>
-															{offer.knownEly > 0
-																? "Scales the offer's known objective Ely value."
-																: 'No known Ely base; use a direct value instead.'}
-														</Field.Description>
-													</Field.Field>
-
-													<Field.Field>
-														<Field.Label for={`direct-${offer.id}`}>Direct offer value</Field.Label>
-														<InputGroup.Root>
-													<InputGroup.Input
-														id={`direct-${offer.id}`}
-														aria-describedby={`direct-description-${offer.id}`}
-																type="number"
-																min="0"
-																step="1"
-																placeholder="Optional"
-																value={directElyByOfferId[offer.id] ?? ''}
-																oninput={(event) => setDirectEly(offer.id, event)}
-															/>
-															<InputGroup.Addon align="inline-end">
-																<InputGroup.Text>Ely</InputGroup.Text>
-															</InputGroup.Addon>
-														</InputGroup.Root>
-													<Field.Description id={`direct-description-${offer.id}`}>
-														Overrides component percentages for this bundle.
-													</Field.Description>
-													</Field.Field>
-												</Field.Group>
-											</Card.Content>
-											<Card.Footer
-												class="personal-results flex-wrap gap-x-6 gap-y-2"
-												aria-live="polite"
-											>
-												<p class="text-sm">
-													<span class="text-muted-foreground">Personal bundle:</span>
-													<strong>{formatEly(personalBundle(personalValueById.get(offer.id)))}</strong>
-												</p>
-												<p class="text-sm">
-													<span class="text-muted-foreground">Personal efficiency:</span>
-													<strong>{formatRatio(personalRatio(personalValueById.get(offer.id)))}</strong>
-												</p>
-											</Card.Footer>
-										</Card.Root>
-									{/if}
-								</Card.Content>
-
-								<Card.Footer class="offer-card__footer flex-col items-stretch gap-3">
-									<p class="text-xs leading-relaxed text-foreground/75">
-										{offer.valuation === 'exact'
-											? `Objective rank #${offer.rank} uses only the frozen, reviewed valuation snapshot.`
-											: offer.valuation === 'partial'
-												? 'The known components form a lower bound; this offer is excluded from exact ranks.'
-												: 'This offer remains visible but is excluded from exact numeric ranks.'}
-									</p>
-									<FlashSaleCaveats offerName={offer.name} caveats={offer.caveats} note={offer.note} />
-								</Card.Footer>
-							</Card.Root>
+							{@render offerCard(offer)}
 						</li>
 					{/each}
 				</ul>
+				{/if}
 			{:else}
 				<Empty.Root class="mt-6 min-h-56 border">
 					<Empty.Header>
@@ -927,6 +1011,41 @@
 	</section>
 	</div>
 </div>
+
+
+<Sheet.Root open={inspectedOffer !== undefined} onOpenChange={(open) => { if (!open) inspectedOfferId = null; }}>
+	<Sheet.Content
+		bind:ref={detailPanel}
+		class="gap-0 data-[side=right]:w-full data-[side=right]:sm:max-w-[52rem]"
+		showCloseButton={false}
+		onOpenAutoFocus={(event) => {
+			event.preventDefault();
+			detailPanel?.querySelector<HTMLButtonElement>('[data-slot="sheet-close"]')?.focus({ preventScroll: true });
+		}}
+		onCloseAutoFocus={(event) => { event.preventDefault(); inspectTrigger?.focus(); }}
+	>
+		<div class="flash-sale-route flash-sale-detail-surface">
+			<Sheet.Header>
+				<div class="flex items-center justify-between gap-3">
+					<Sheet.Title>Package details</Sheet.Title>
+					<Sheet.Close data-slot="sheet-close">
+						{#snippet child({ props })}
+							<Button {...props} variant="ghost" size="icon" class="min-h-10 min-w-10" aria-label="Close package details">
+								<XIcon aria-hidden="true" />
+							</Button>
+						{/snippet}
+					</Sheet.Close>
+				</div>
+				<Sheet.Description>Bundle contents, reviewed values, and buying guidance.</Sheet.Description>
+			</Sheet.Header>
+			<div class="flash-sale-page detail-panel-body">
+				{#if inspectedOffer}
+					<div class="offer-item">{@render offerCard(inspectedOffer)}</div>
+				{/if}
+			</div>
+		</div>
+	</Sheet.Content>
+</Sheet.Root>
 
 <style>
 	.flash-sale-route {
@@ -1968,6 +2087,207 @@
 		.cycle-toggle__item,
 		.view-toggle__item {
 			transition: none;
+		}
+	}
+
+	.sale-hero__layout-control {
+		grid-column: 1 / -1;
+		grid-row: 1;
+		justify-self: end;
+		position: relative;
+		z-index: 2;
+	}
+
+	.sale-hero__layout-control :global([data-slot='toggle-group-item'][data-state='on']) {
+		background: var(--primary);
+		color: var(--primary-foreground);
+		font-weight: 650;
+	}
+
+	.sale-compact-meta,
+	.compact-cycle-meta {
+		margin-top: 0.35rem;
+		color: var(--muted-foreground);
+		font-size: 0.75rem;
+		line-height: 1.5;
+	}
+
+	.compact-offers {
+		margin-top: 1.25rem;
+	}
+
+	.compact-personal-note {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+		margin-top: 0.75rem;
+		color: var(--muted-foreground);
+		font-size: 0.75rem;
+	}
+
+	.flash-sale-route[data-layout='compact'] .flash-sale-page {
+		padding-block: 1rem;
+	}
+
+	.flash-sale-route[data-layout='compact'] .sale-hero {
+		grid-template-columns: minmax(0, 1fr) auto;
+		min-height: 0;
+		gap: 1rem;
+		padding: 1rem 1.25rem;
+		border-radius: 1.5rem;
+		box-shadow: 0.35rem 0.35rem 0 var(--festa-pink);
+	}
+
+	.flash-sale-route[data-layout='compact'] .sale-hero__layout-control {
+		grid-column: 2;
+		grid-row: 1;
+	}
+
+	.flash-sale-route[data-layout='compact'] .sale-hero__copy {
+		grid-column: 1;
+		grid-row: 1;
+	}
+
+	.flash-sale-route[data-layout='compact'] .sale-hero__brand,
+	.flash-sale-route[data-layout='compact'] .sale-hero__badges,
+	.flash-sale-route[data-layout='compact'] .sale-hero__eyebrow,
+	.flash-sale-route[data-layout='compact'] .sale-hero__lede,
+	.flash-sale-route[data-layout='compact'] .sale-hero__facts,
+	.flash-sale-route[data-layout='compact'] .sale-hero__visual,
+	.flash-sale-route[data-layout='compact'] .sale-hero::before,
+	.flash-sale-route[data-layout='compact'] .sale-hero::after,
+	.flash-sale-route[data-layout='compact'] .sale-atmosphere,
+	.flash-sale-route[data-layout='compact'] .offer-section__kicker,
+	.flash-sale-route[data-layout='compact'] .offer-section__intro,
+	.flash-sale-route[data-layout='compact'] :global(.sale-hero__mobile-poster),
+	.flash-sale-route[data-layout='compact'] :global(.comparison-panel__header),
+	.flash-sale-route[data-layout='compact'] :global(.comparison-panel__footer),
+	.flash-sale-route[data-layout='compact'] :global(.comparison-panel [data-slot='field-description']),
+	.flash-sale-route[data-layout='compact'] :global(.comparison-panel [data-slot='field-legend']) {
+		display: none;
+	}
+
+	.flash-sale-route[data-layout='compact'] .sale-hero__title-row {
+		margin-top: 0;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.flash-sale-route[data-layout='compact'] .sale-hero__mark {
+		width: 3rem;
+		height: 3rem;
+		border-radius: 0.85rem;
+		box-shadow: 0.2rem 0.2rem 0 var(--festa-cyan);
+	}
+
+	.flash-sale-route[data-layout='compact'] .sale-hero h1 {
+		max-width: none;
+		font-size: clamp(1.4rem, 2.1vw, 1.9rem);
+		line-height: 1.15;
+		letter-spacing: -0.035em;
+	}
+
+	.flash-sale-route[data-layout='compact'] :global(.comparison-panel) {
+		--card-spacing: 0.65rem;
+		display: block;
+		margin-top: 1rem;
+		padding-block: 0.5rem;
+		border-radius: 1rem;
+		box-shadow: 0.2rem 0.2rem 0 var(--festa-cyan);
+	}
+
+	.flash-sale-route[data-layout='compact'] :global(.comparison-panel__grid) {
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	.flash-sale-route[data-layout='compact'] :global(.cycle-field),
+	.flash-sale-route[data-layout='compact'] :global(.view-field) {
+		min-width: 0;
+		gap: 0;
+		padding: 0;
+		border: 0;
+		background: transparent;
+	}
+
+	.flash-sale-route[data-layout='compact'] .cycle-toggle,
+	.flash-sale-route[data-layout='compact'] .view-toggle {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		margin-top: 0;
+	}
+
+	.flash-sale-route[data-layout='compact'] .cycle-toggle__item,
+	.flash-sale-route[data-layout='compact'] .view-toggle__item {
+		width: auto;
+		min-height: 2.25rem;
+		padding: 0.35rem 0.7rem;
+		font-size: 0.75rem;
+	}
+
+	.flash-sale-route[data-layout='compact'] .cycle-toggle__item[data-current='true']::after {
+		content: '';
+		width: 0.3rem;
+		height: 0.3rem;
+		border-radius: 50%;
+		background: currentColor;
+	}
+
+	.flash-sale-route[data-layout='compact'] .offer-section {
+		margin-top: 1rem;
+	}
+
+	.flash-sale-route[data-layout='compact'] .offer-section__heading {
+		align-items: center;
+		gap: 0.5rem;
+		padding-bottom: 0;
+		border: 0;
+	}
+
+	.flash-sale-route[data-layout='compact'] .offer-section__heading h2 {
+		margin-top: 0;
+		font-size: 1.05rem;
+		letter-spacing: -0.02em;
+	}
+
+	.flash-sale-route[data-layout='compact'] .offer-section :global([data-slot='alert']) {
+		margin-top: 0.65rem;
+	}
+
+	.flash-sale-detail-surface {
+		display: flex;
+		flex-direction: column;
+		min-height: 0;
+		height: 100%;
+		background: var(--background);
+	}
+
+	.detail-panel-body {
+		flex: 1;
+		min-height: 0;
+		overflow-y: auto;
+		padding: 1rem 1rem 1.5rem;
+	}
+
+	@media (max-width: 900px) {
+		.flash-sale-route[data-layout='compact'] :global(.comparison-panel__grid) {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.flash-sale-route[data-layout='compact'] .sale-hero {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.flash-sale-route[data-layout='compact'] .sale-hero__layout-control {
+			grid-column: 1;
+			grid-row: 2;
+			justify-self: start;
 		}
 	}
 </style>
