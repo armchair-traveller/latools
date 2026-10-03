@@ -1,0 +1,1895 @@
+{
+  "classes": {
+    "히어로 (검)": "Hero [Greatsword]",
+    "히어로 (창)": "Hero [Spear]",
+    "검호": "Blade Master",
+    "세이버 (검)": "Savior [Longsword]",
+    "세이버 (둔기)": "Savior [Mace]",
+    "세피로트": "Sefirot",
+    "아크메이지": "Archmage",
+    "파픈스타": "Pop Star",
+    "윈드스토커 (단검)": "Wind Stalker [Dagger]",
+    "윈드스토커 (석궁)": "Wind Stalker [Crossbow]",
+    "윈드스토커 (활)": "Wind Stalker [Bow]",
+    "프라이쉬츠": "Der Freischütz",
+    "소디언": "Swordian",
+    "소울리스 원": "Soulless One",
+    "아크마스터": "Arc Master",
+    "포스마스터": "Force Master",
+    "흑영(도)": "Black Anima [Katana]",
+    "흑영(옥)": "Black Anima [Lantern]",
+    "데미갓(신성)": "Demigod [Divine]",
+    "데미갓(분노)": "Demigod [Rage]",
+    "아그니": "Agni",
+    "다크체이서": "Dark Chaser",
+    "섀도우워커": "Shadow Walker",
+    "게이트키퍼": "Gatekeeper",
+    "검성": "Sword Saint",
+    "하이랜더": "Highlander",
+    "소드댄서": "Sword Dancer",
+    "테러나이트": "Terror Knight",
+    "사이키커": "Psykicker",
+    "팬텀메이지": "Phantom Mage",
+    "마에스트로": "Maestro",
+    "로그마스터": "Rogue Master",
+    "저지먼트": "Judgment",
+    "스타시커": "Star Seeker",
+    "쥬얼스타": "Jewel Star",
+    "윈디아": "Windia",
+    "레이니아": "Rainia",
+    "도깨비": "Dokkaebi",
+    "직업 공용": "All Classes"
+  },
+  "skills": [
+    {
+      "job": "히어로 (검)",
+      "name": "[인피니티] 데드·앤드",
+      "englishName": "[Infinity] Dead End"
+    },
+    {
+      "job": "히어로 (검)",
+      "name": "크로스 크랙",
+      "englishName": "Cross Crack"
+    },
+    {
+      "job": "히어로 (검)",
+      "name": "표풍일식",
+      "englishName": "Wind Eclipse"
+    },
+    {
+      "job": "히어로 (검)",
+      "name": "광풍참",
+      "englishName": "Gale Slash"
+    },
+    {
+      "job": "히어로 (검)",
+      "name": "승천격",
+      "englishName": "Ascending Slash"
+    },
+    {
+      "job": "히어로 (검)",
+      "name": "미티어 웨이브",
+      "englishName": "Meteor Wave"
+    },
+    {
+      "job": "히어로 (검)",
+      "name": "천패처황참",
+      "englishName": "Heavenly Chaos"
+    },
+    {
+      "job": "히어로 (검)",
+      "name": "천파협란",
+      "englishName": "Heaven's Fury"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "[인피니티] 백화요란",
+      "englishName": "[Infinity] Blinding Flowers"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "선풍",
+      "englishName": "Gale"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "버스터 랜스",
+      "englishName": "Buster Lancer"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "허리케인 랜스",
+      "englishName": "Hurricane Lance"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "창룡 풍",
+      "englishName": "Dragon Spear (Wind)"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "추진격",
+      "englishName": "Propelling Strike"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "파워 스파이크",
+      "englishName": "Power Spike"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "창룡 뢰",
+      "englishName": "Dragon Spear (Thunder)"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "헤비 랜스",
+      "englishName": "Heavy Lance"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "창룡승격",
+      "englishName": "Rising Dragon Lance"
+    },
+    {
+      "job": "검호",
+      "name": "[인피니티] 파라노이아",
+      "englishName": "[Infinity] Paranoia"
+    },
+    {
+      "job": "검호",
+      "name": "승천난무",
+      "englishName": "Ascending Sword Dance"
+    },
+    {
+      "job": "검호",
+      "name": "무쌍난무",
+      "englishName": "Rampant Sword Dance"
+    },
+    {
+      "job": "검호",
+      "name": "소울 블레이드",
+      "englishName": "Soul Blade"
+    },
+    {
+      "job": "검호",
+      "name": "크로스 블레이드",
+      "englishName": "Cross Blade"
+    },
+    {
+      "job": "검호",
+      "name": "스피릿",
+      "englishName": "Spirit Dance"
+    },
+    {
+      "job": "검호",
+      "name": "케나인 블레이드",
+      "englishName": "Canine Blade"
+    },
+    {
+      "job": "세이버 (검)",
+      "name": "[인피니티]",
+      "englishName": "[Infinity] Majestic Pentagram"
+    },
+    {
+      "job": "세이버 (검)",
+      "name": "W.브레이크",
+      "englishName": "Wind Break"
+    },
+    {
+      "job": "세이버 (검)",
+      "name": "래퍼드해쉬",
+      "englishName": "Rapid Hack"
+    },
+    {
+      "job": "세이버 (검)",
+      "name": "소드브레스",
+      "englishName": "Sword Breath"
+    },
+    {
+      "job": "세이버 (검)",
+      "name": "데스 블로우",
+      "englishName": "Death Blow"
+    },
+    {
+      "job": "세이버 (검)",
+      "name": "스플래쉬 펀트",
+      "englishName": "Slash Punt"
+    },
+    {
+      "job": "세이버 (검)",
+      "name": "쉴드차지",
+      "englishName": "Shield Charge"
+    },
+    {
+      "job": "세이버 (검)",
+      "name": "쉴드부메랑",
+      "englishName": "Shield Boomerang"
+    },
+    {
+      "job": "세이버 (검)",
+      "name": "가드러쉬",
+      "englishName": "Guard Rush"
+    },
+    {
+      "job": "세이버 (둔기)",
+      "name": "[인피니티] 헤븐앤헬",
+      "englishName": "[Infinity] Heaven and Hell"
+    },
+    {
+      "job": "세이버 (둔기)",
+      "name": "더블 히트",
+      "englishName": "Double Hit"
+    },
+    {
+      "job": "세이버 (둔기)",
+      "name": "카운터 샷",
+      "englishName": "Counter Shot"
+    },
+    {
+      "job": "세이버 (둔기)",
+      "name": "쉴드 차지",
+      "englishName": "Shield Charge [Mace]"
+    },
+    {
+      "job": "세이버 (둔기)",
+      "name": "쉴드 부메랑",
+      "englishName": "Shield Boomerang [Mace]"
+    },
+    {
+      "job": "세이버 (둔기)",
+      "name": "갓 버스트",
+      "englishName": "Gravity Hammer"
+    },
+    {
+      "job": "세이버 (둔기)",
+      "name": "해머 크래쉬",
+      "englishName": "Hammer Crash"
+    },
+    {
+      "job": "세이버 (둔기)",
+      "name": "파워 그라인드",
+      "englishName": "Power Grind"
+    },
+    {
+      "job": "세이버 (둔기)",
+      "name": "파워 밤",
+      "englishName": "Power Bomb"
+    },
+    {
+      "job": "세피로트",
+      "name": "[인피니티]",
+      "englishName": "[Infinity] Wild Fantasy"
+    },
+    {
+      "job": "세피로트",
+      "name": "철산고",
+      "englishName": "Iron Mountain"
+    },
+    {
+      "job": "세피로트",
+      "name": "쌍장타",
+      "englishName": "Twin Fist"
+    },
+    {
+      "job": "세피로트",
+      "name": "돌려차기",
+      "englishName": "Spin Kick"
+    },
+    {
+      "job": "세피로트",
+      "name": "슬라이딩 킥",
+      "englishName": "Sliding Kick"
+    },
+    {
+      "job": "세피로트",
+      "name": "에네르기 파",
+      "englishName": "Energy Wave"
+    },
+    {
+      "job": "세피로트",
+      "name": "참영권",
+      "englishName": "Ghost Fist"
+    },
+    {
+      "job": "세피로트",
+      "name": "호열각",
+      "englishName": "Flame Kick"
+    },
+    {
+      "job": "세피로트",
+      "name": "반월각",
+      "englishName": "Half-Moon Kick"
+    },
+    {
+      "job": "세피로트",
+      "name": "승룡권",
+      "englishName": "Rising Dragon"
+    },
+    {
+      "job": "세피로트",
+      "name": "대지파열",
+      "englishName": "Earth Crash"
+    },
+    {
+      "job": "세피로트",
+      "name": "천룡각",
+      "englishName": "Dragon Kick"
+    },
+    {
+      "job": "세피로트",
+      "name": "환영각",
+      "englishName": "Phantom Kick"
+    },
+    {
+      "job": "세피로트",
+      "name": "선풍각",
+      "englishName": "Tornado Kick"
+    },
+    {
+      "job": "아크메이지",
+      "name": "[인피니티] 플레임뱅가드",
+      "englishName": "[Infinity] Flame Vanguard"
+    },
+    {
+      "job": "아크메이지",
+      "name": "헤일스톤",
+      "englishName": "Hailstone"
+    },
+    {
+      "job": "아크메이지",
+      "name": "아이스플랭크",
+      "englishName": "Ice Flank"
+    },
+    {
+      "job": "아크메이지",
+      "name": "세스티라티나",
+      "englishName": "Cestrilatina"
+    },
+    {
+      "job": "아크메이지",
+      "name": "환염초래",
+      "englishName": "Flame Eruption"
+    },
+    {
+      "job": "아크메이지",
+      "name": "화염지옥",
+      "englishName": "Hellfire"
+    },
+    {
+      "job": "아크메이지",
+      "name": "파이어월",
+      "englishName": "Fire Wall"
+    },
+    {
+      "job": "아크메이지",
+      "name": "사이클론커터",
+      "englishName": "Cyclone Cutter"
+    },
+    {
+      "job": "아크메이지",
+      "name": "에어봄",
+      "englishName": "Air Bomb"
+    },
+    {
+      "job": "아크메이지",
+      "name": "토네이도스윙",
+      "englishName": "Tornado Swing"
+    },
+    {
+      "job": "아크메이지",
+      "name": "어스퀘이크",
+      "englishName": "Earthquake"
+    },
+    {
+      "job": "아크메이지",
+      "name": "스톤스피어",
+      "englishName": "Stone Spear"
+    },
+    {
+      "job": "아크메이지",
+      "name": "천룡아",
+      "englishName": "Sky Dragon"
+    },
+    {
+      "job": "파픈스타",
+      "name": "[인피니티] 세븐사인",
+      "englishName": "[Infinity] Seven Signs"
+    },
+    {
+      "job": "파픈스타",
+      "name": "악마의연주",
+      "englishName": "Devil's Play"
+    },
+    {
+      "job": "파픈스타",
+      "name": "메가데스",
+      "englishName": "Mega-Death"
+    },
+    {
+      "job": "파픈스타",
+      "name": "괴성의연주",
+      "englishName": "Screaming Play"
+    },
+    {
+      "job": "파픈스타",
+      "name": "악마의소리",
+      "englishName": "Devil's Sound"
+    },
+    {
+      "job": "파픈스타",
+      "name": "음표의나락",
+      "englishName": "Hellish Note"
+    },
+    {
+      "job": "파픈스타",
+      "name": "일렉트릭쇼크",
+      "englishName": "Electric Shock"
+    },
+    {
+      "job": "윈드스토커 (단검)",
+      "name": "[인피니티] 카니발매드니스",
+      "englishName": "[Infinity] Carnival Madness"
+    },
+    {
+      "job": "윈드스토커 (단검)",
+      "name": "팬오브나이프",
+      "englishName": "Fan of Knives"
+    },
+    {
+      "job": "윈드스토커 (단검)",
+      "name": "만천화우",
+      "englishName": "Dagger Rain"
+    },
+    {
+      "job": "윈드스토커 (단검)",
+      "name": "크레이지스로우",
+      "englishName": "Crazy Throw"
+    },
+    {
+      "job": "윈드스토커 (단검)",
+      "name": "블리츠",
+      "englishName": "Blitz"
+    },
+    {
+      "job": "윈드스토커 (단검)",
+      "name": "삼중살",
+      "englishName": "Triple Stab"
+    },
+    {
+      "job": "윈드스토커 (단검)",
+      "name": "소리비도",
+      "englishName": "Sonic Dagger"
+    },
+    {
+      "job": "윈드스토커 (단검)",
+      "name": "다크프레닉",
+      "englishName": "Dark Dagger"
+    },
+    {
+      "job": "윈드스토커 (단검)",
+      "name": "매스커레이드",
+      "englishName": "Masquerade"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "[인피니티] 혜성난뢰",
+      "englishName": "[Infinity] Comet Bolt"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "이스케이프샷",
+      "englishName": "Escape Blast"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "갤럭티카매그넘",
+      "englishName": "Galactic Magnum"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "다크스피어스",
+      "englishName": "Dark Spears"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "프레임 샤워",
+      "englishName": "Flame Shower"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "와이드 샷",
+      "englishName": "Wide Shot"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "스트림 샷",
+      "englishName": "Stream Shot"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "로커스트",
+      "englishName": "Locust"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "카운터 어택",
+      "englishName": "Counter Attack"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "리미터해제",
+      "englishName": "Limiter Release"
+    },
+    {
+      "job": "윈드스토커 (활)",
+      "name": "[인피니티] 레이 블래스트",
+      "englishName": "[Infinity] Ray Blast"
+    },
+    {
+      "job": "윈드스토커 (활)",
+      "name": "애로우붐",
+      "englishName": "Arrow Boom"
+    },
+    {
+      "job": "윈드스토커 (활)",
+      "name": "스톰애로우",
+      "englishName": "Storm Arrow"
+    },
+    {
+      "job": "윈드스토커 (활)",
+      "name": "버드헌팅",
+      "englishName": "Bird Hunting"
+    },
+    {
+      "job": "윈드스토커 (활)",
+      "name": "샤이닝 애로우",
+      "englishName": "Shining Arrow"
+    },
+    {
+      "job": "윈드스토커 (활)",
+      "name": "에로우 샷",
+      "englishName": "Arrow Shot"
+    },
+    {
+      "job": "윈드스토커 (활)",
+      "name": "백스텝 에로우",
+      "englishName": "Backstep Arrow"
+    },
+    {
+      "job": "윈드스토커 (활)",
+      "name": "갓버드피니시",
+      "englishName": "Heavenly Bird Strike"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "[인피니티] 팬텀파우스트",
+      "englishName": "[Infinity] Phantom Faust"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "게틀링",
+      "englishName": "Gatling"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "쇼타임",
+      "englishName": "Showtime"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "연사",
+      "englishName": "Rapid Fire"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "플래틱느와르",
+      "englishName": "Flak Noir"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "난사",
+      "englishName": "Spray Down"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "스탭백",
+      "englishName": "Stepback"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "속사",
+      "englishName": "Quick Shot"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "골든샷",
+      "englishName": "Golden Shot"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "아포칼립스",
+      "englishName": "Apocalypse"
+    },
+    {
+      "job": "소디언",
+      "name": "미스틸테인",
+      "englishName": "Mistilteinn"
+    },
+    {
+      "job": "소디언",
+      "name": "라이키리",
+      "englishName": "Raikiri"
+    },
+    {
+      "job": "소디언",
+      "name": "라이트닝",
+      "englishName": "Lightning"
+    },
+    {
+      "job": "소디언",
+      "name": "가에보르그",
+      "englishName": "Gae Bolg"
+    },
+    {
+      "job": "소디언",
+      "name": "발칸",
+      "englishName": "Vulcan"
+    },
+    {
+      "job": "소디언",
+      "name": "라이즈 빔",
+      "englishName": "Rising Beam"
+    },
+    {
+      "job": "소울리스 원",
+      "name": "[인피니티]",
+      "englishName": "[Infinity] Dragon Hazard"
+    },
+    {
+      "job": "소울리스 원",
+      "name": "와일드 소울",
+      "englishName": "Wild Soul"
+    },
+    {
+      "job": "소울리스 원",
+      "name": "자이언트 소울",
+      "englishName": "Giant Soul"
+    },
+    {
+      "job": "소울리스 원",
+      "name": "스위프트 소울",
+      "englishName": "Swift Soul"
+    },
+    {
+      "job": "소울리스 원",
+      "name": "소울 마스터 1",
+      "englishName": "Soul Master I"
+    },
+    {
+      "job": "소울리스 원",
+      "name": "소울 마스터 2",
+      "englishName": "Soul Master II"
+    },
+    {
+      "job": "소울리스 원",
+      "name": "소울 마스터 3",
+      "englishName": "Soul Master III"
+    },
+    {
+      "job": "소울리스 원",
+      "name": "소울 마스터 4",
+      "englishName": "Soul Master IV"
+    },
+    {
+      "job": "아크마스터",
+      "name": "[인피니티] 갤럭시워",
+      "englishName": "[Infinity] Galaxy Wave"
+    },
+    {
+      "job": "아크마스터",
+      "name": "버스트카드",
+      "englishName": "Burst Card"
+    },
+    {
+      "job": "아크마스터",
+      "name": "썬더볼트",
+      "englishName": "Thunderbolt"
+    },
+    {
+      "job": "아크마스터",
+      "name": "샤이닝덱",
+      "englishName": "Shining Deck"
+    },
+    {
+      "job": "아크마스터",
+      "name": "프리덤라이트",
+      "englishName": "Freedom Light"
+    },
+    {
+      "job": "아크마스터",
+      "name": "리플렉션",
+      "englishName": "Reflection"
+    },
+    {
+      "job": "아크마스터",
+      "name": "트윙클",
+      "englishName": "Twinkle"
+    },
+    {
+      "job": "아크마스터",
+      "name": "일리미네이트",
+      "englishName": "Illuminate"
+    },
+    {
+      "job": "아크마스터",
+      "name": "히든카드",
+      "englishName": "Hidden Card"
+    },
+    {
+      "job": "아크마스터",
+      "name": "와일드카드",
+      "englishName": "Wild Cards"
+    },
+    {
+      "job": "포스마스터",
+      "name": "[인피니티] 배니쉬먼트",
+      "englishName": "[Infinity] Banishment"
+    },
+    {
+      "job": "포스마스터",
+      "name": "[♣] 서클볼",
+      "englishName": "[♣] Circle Ball"
+    },
+    {
+      "job": "포스마스터",
+      "name": "[♣] 다크니스덱",
+      "englishName": "[♣] Darkness Deck"
+    },
+    {
+      "job": "포스마스터",
+      "name": "[♣] 타임브레이크",
+      "englishName": "[♣] Time Break"
+    },
+    {
+      "job": "포스마스터",
+      "name": "[♠] 어퍼컷",
+      "englishName": "[♠] Uppercut"
+    },
+    {
+      "job": "포스마스터",
+      "name": "[♠] 레이본",
+      "englishName": "[♠] Rayborn"
+    },
+    {
+      "job": "포스마스터",
+      "name": "[♠] 스페셜킥",
+      "englishName": "[♠] Special Kick"
+    },
+    {
+      "job": "포스마스터",
+      "name": "[◆] 힛앤러쉬",
+      "englishName": "[◆] Hit and Rush"
+    },
+    {
+      "job": "포스마스터",
+      "name": "[◆] 크럼블",
+      "englishName": "[◆] Crumble"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "[인피니티] 그림자 일격",
+      "englishName": "[Infinity] Shadow Strike"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "[초식] 1~3",
+      "englishName": "[Initial Form] 1~3"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "[초식] 4~8",
+      "englishName": "[Initial Form] 4~8"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "[초식] 9~12",
+      "englishName": "[Initial Form] 9~12"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "[연식] 1~4",
+      "englishName": "[Chain Form] 1~4"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "그림자 칼날",
+      "englishName": "Shadow Blade"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "그림자 찢기",
+      "englishName": "Shadow Tear"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "그림자 검",
+      "englishName": "Shadow Sword"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "그림자 춤",
+      "englishName": "Shadow Dance"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "그림자 돌풍",
+      "englishName": "Shadow Whirlwind (Gust)"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "그림자 암습",
+      "englishName": "Shadow Ambush"
+    },
+    {
+      "job": "흑영(옥)",
+      "name": "[인피니티] 소멸의 그림자",
+      "englishName": "[Infinity] Shadow of Extinction"
+    },
+    {
+      "job": "흑영(옥)",
+      "name": "칠흑의 그림자",
+      "englishName": "Shadow of Darkness"
+    },
+    {
+      "job": "흑영(옥)",
+      "name": "매혹의 그림자",
+      "englishName": "Shadow of Fascination"
+    },
+    {
+      "job": "흑영(옥)",
+      "name": "경직의 그림자",
+      "englishName": "Shadow of Stiffness"
+    },
+    {
+      "job": "흑영(옥)",
+      "name": "분노의 그림자",
+      "englishName": "Shadow of Rage"
+    },
+    {
+      "job": "데미갓(신성)",
+      "name": "[인피니티] 지비누",
+      "englishName": "[Infinity] Zivinu"
+    },
+    {
+      "job": "데미갓(신성)",
+      "name": "란샤르",
+      "englishName": "Lansar"
+    },
+    {
+      "job": "데미갓(신성)",
+      "name": "퓨리아",
+      "englishName": "Puria"
+    },
+    {
+      "job": "데미갓(신성)",
+      "name": "글로리아",
+      "englishName": "Gloria"
+    },
+    {
+      "job": "데미갓(신성)",
+      "name": "코르타르",
+      "englishName": "Kortar"
+    },
+    {
+      "job": "데미갓(신성)",
+      "name": "후이나",
+      "englishName": "Huina"
+    },
+    {
+      "job": "데미갓(신성)",
+      "name": "마타르",
+      "englishName": "Matar"
+    },
+    {
+      "job": "데미갓(분노)",
+      "name": "[인피니티] 지비누",
+      "englishName": "[Infinity] Zivinu"
+    },
+    {
+      "job": "데미갓(분노)",
+      "name": "란샤르",
+      "englishName": "Lansar"
+    },
+    {
+      "job": "데미갓(분노)",
+      "name": "퓨리아",
+      "englishName": "Puria"
+    },
+    {
+      "job": "데미갓(분노)",
+      "name": "글로리아",
+      "englishName": "Gloria"
+    },
+    {
+      "job": "데미갓(분노)",
+      "name": "코르타르",
+      "englishName": "Kortar"
+    },
+    {
+      "job": "데미갓(분노)",
+      "name": "후이나",
+      "englishName": "Huina"
+    },
+    {
+      "job": "데미갓(분노)",
+      "name": "크렌치",
+      "englishName": "Krenj"
+    },
+    {
+      "job": "데미갓(분노)",
+      "name": "마타르",
+      "englishName": "Matar"
+    },
+    {
+      "job": "아그니",
+      "name": "[인피니티] 멜트 다운",
+      "englishName": "[Infinity] Meltdown"
+    },
+    {
+      "job": "아그니",
+      "name": "기간틱 스윙",
+      "englishName": "Titan Swing"
+    },
+    {
+      "job": "아그니",
+      "name": "기간틱 슬래시",
+      "englishName": "Titan Slash"
+    },
+    {
+      "job": "아그니",
+      "name": "기간틱 스트라이크",
+      "englishName": "Titan Strike"
+    },
+    {
+      "job": "아그니",
+      "name": "기간틱 버스터",
+      "englishName": "Titan Buster"
+    },
+    {
+      "job": "아그니",
+      "name": "기간틱 러시",
+      "englishName": "Titan Rush"
+    },
+    {
+      "job": "아그니",
+      "name": "플레임 스트라이크",
+      "englishName": "Flame Strike"
+    },
+    {
+      "job": "아그니",
+      "name": "플레임 샷",
+      "englishName": "Flame Shot"
+    },
+    {
+      "job": "아그니",
+      "name": "프레임 버스터",
+      "englishName": "Flame Buster"
+    },
+    {
+      "job": "아그니",
+      "name": "마그마 블래스트",
+      "englishName": "Magma Blast"
+    },
+    {
+      "job": "아그니",
+      "name": "마그마 스피어",
+      "englishName": "Magma Spear"
+    },
+    {
+      "job": "아그니",
+      "name": "인페르노",
+      "englishName": "Inferno"
+    },
+    {
+      "job": "다크체이서",
+      "name": "[인피니티] 블레이징",
+      "englishName": "[Infinity] Blazing"
+    },
+    {
+      "job": "다크체이서",
+      "name": "카리온 어퍼",
+      "englishName": "Carion Upper"
+    },
+    {
+      "job": "다크체이서",
+      "name": "카리온 슬래시",
+      "englishName": "Carion Slash"
+    },
+    {
+      "job": "다크체이서",
+      "name": "카리온 피어스",
+      "englishName": "Carion Pierce"
+    },
+    {
+      "job": "다크체이서",
+      "name": "런지",
+      "englishName": "Lunge"
+    },
+    {
+      "job": "다크체이서",
+      "name": "데들리 샷",
+      "englishName": "Deadly Shot"
+    },
+    {
+      "job": "다크체이서",
+      "name": "샤인 오브 데스",
+      "englishName": "Sign of Death"
+    },
+    {
+      "job": "다크체이서",
+      "name": "트리플 립",
+      "englishName": "Triple Rip"
+    },
+    {
+      "job": "다크체이서",
+      "name": "트리플 컷",
+      "englishName": "Triple Cut"
+    },
+    {
+      "job": "다크체이서",
+      "name": "컨퓨전",
+      "englishName": "Confusion"
+    },
+    {
+      "job": "다크체이서",
+      "name": "체인 위핑",
+      "englishName": "Chain Whip"
+    },
+    {
+      "job": "다크체이서",
+      "name": "체인 스윙",
+      "englishName": "Chain Swing"
+    },
+    {
+      "job": "다크체이서",
+      "name": "체인 스메싱",
+      "englishName": "Chain Smash"
+    },
+    {
+      "job": "다크체이서",
+      "name": "체인 버스트",
+      "englishName": "Chain Burst"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[인피니티] 데몰리션",
+      "englishName": "[Infinity] Demolition"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "더블 피어스",
+      "englishName": "Double Pierce"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "리프 어택",
+      "englishName": "Lift Attack"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[매직랜스] 크러시",
+      "englishName": "[Magic Lance] Crush"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[매직랜스] 다크 블로우",
+      "englishName": "[Magic Lance] Dark Blow"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[헤비랜스] 다크 블로우",
+      "englishName": "[Heavy Lance] Dark Blow"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[매직랜스] 다크 버스트",
+      "englishName": "[Magic Lance] Dark Burst"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[헤비랜스] 다크 버스트",
+      "englishName": "[Heavy Lance] Dark Burst"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[매직랜스] 다크 피어스",
+      "englishName": "[Magic Lance] Dark Pierce"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[헤비랜스] 다크 피어스",
+      "englishName": "[Heavy Lance] Dark Pierce"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[매직랜스] 스퍼트",
+      "englishName": "[Magic Lance] Spurt"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[헤비랜스] 스퍼트",
+      "englishName": "[Heavy Lance] Spurt"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[매직랜스] 다크 스피릿",
+      "englishName": "[Magic Lance] Dark Spirit"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "[헤비랜스] 다크 스피릿",
+      "englishName": "[Heavy Lance] Dark Spirit"
+    },
+    {
+      "job": "게이트키퍼",
+      "name": "[인피니티] 브르탈 링",
+      "englishName": "[Infinity] Brutal Rings"
+    },
+    {
+      "job": "게이트키퍼",
+      "name": "링 슬래시",
+      "englishName": "Ring Slash"
+    },
+    {
+      "job": "게이트키퍼",
+      "name": "라이징 블레이드",
+      "englishName": "Rising Rings"
+    },
+    {
+      "job": "게이트키퍼",
+      "name": "빅풋",
+      "englishName": "Big Foot"
+    },
+    {
+      "job": "게이트키퍼",
+      "name": "아케인 게이트",
+      "englishName": "Gates of Arcane"
+    },
+    {
+      "job": "게이트키퍼",
+      "name": "터닝 샷",
+      "englishName": "Twirling Shot"
+    },
+    {
+      "job": "게이트키퍼",
+      "name": "미스틱 게이트",
+      "englishName": "Mystic Gate"
+    },
+    {
+      "job": "검성",
+      "name": "발도·귀신사냥",
+      "englishName": "Battojutsu · Phantom Slash"
+    },
+    {
+      "job": "검성",
+      "name": "발도·물결베기",
+      "englishName": "Battojutsu · Wave Slash"
+    },
+    {
+      "job": "검성",
+      "name": "발도·폭풍참",
+      "englishName": "Battojutsu · Tempest Slash"
+    },
+    {
+      "job": "검성",
+      "name": "납도·안개비",
+      "englishName": "Sheathe · Misty Rain"
+    },
+    {
+      "job": "검성",
+      "name": "납도·여우비",
+      "englishName": "Sheathe · Sun Shower"
+    },
+    {
+      "job": "검성",
+      "name": "납도·장대비",
+      "englishName": "Battojutsu · Storm Slash"
+    },
+    {
+      "job": "검성",
+      "name": "납도-소나기",
+      "englishName": "Sheathe-Shower"
+    },
+    {
+      "job": "검성",
+      "name": "이슬 찌르기",
+      "englishName": "Dew Strike"
+    },
+    {
+      "job": "검성",
+      "name": "낙화참",
+      "englishName": "Fallen Flower Dance"
+    },
+    {
+      "job": "검성",
+      "name": "섬광참",
+      "englishName": "Flash Step"
+    },
+    {
+      "job": "검성",
+      "name": "와류베기",
+      "englishName": "Sweeping Slash"
+    },
+    {
+      "job": "검성",
+      "name": "유성 가르기",
+      "englishName": "Meteor Cleave"
+    },
+    {
+      "job": "검성",
+      "name": "단풍 쓸기",
+      "englishName": "Maple Sweep"
+    },
+    {
+      "job": "하이랜더",
+      "name": "스파이럴 에디션",
+      "englishName": "Spiral Edition"
+    },
+    {
+      "job": "하이랜더",
+      "name": "스파이럴 스톰",
+      "englishName": "Spiral Storm"
+    },
+    {
+      "job": "하이랜더",
+      "name": "스파이럴 프레스",
+      "englishName": "Spiral Press"
+    },
+    {
+      "job": "하이랜더",
+      "name": "스파이럴 러쉬",
+      "englishName": "Spiral Rush"
+    },
+    {
+      "job": "하이랜더",
+      "name": "스파이럴 이럽션",
+      "englishName": "Spiral Eruption"
+    },
+    {
+      "job": "하이랜더",
+      "name": "스파이럴 차지",
+      "englishName": "Spiral Charge"
+    },
+    {
+      "job": "소드댄서",
+      "name": "비연파천",
+      "englishName": "Flashy Sword Play"
+    },
+    {
+      "job": "소드댄서",
+      "name": "무한검진",
+      "englishName": "Infinite Swordplay"
+    },
+    {
+      "job": "소드댄서",
+      "name": "멸천비검술",
+      "englishName": "Psionic Thrust"
+    },
+    {
+      "job": "소드댄서",
+      "name": "이기어검",
+      "englishName": "Sword Summon"
+    },
+    {
+      "job": "소드댄서",
+      "name": "비연멸천공",
+      "englishName": "Psionic Execution"
+    },
+    {
+      "job": "소드댄서",
+      "name": "비검열참",
+      "englishName": "Luminous Destruction"
+    },
+    {
+      "job": "테러나이트",
+      "name": "파워블리츠",
+      "englishName": "Power Blitz"
+    },
+    {
+      "job": "테러나이트",
+      "name": "스트라이크",
+      "englishName": "Strike"
+    },
+    {
+      "job": "테러나이트",
+      "name": "디스페어",
+      "englishName": "Despair"
+    },
+    {
+      "job": "테러나이트",
+      "name": "파워크래쉬",
+      "englishName": "Power Crash"
+    },
+    {
+      "job": "테러나이트",
+      "name": "일렉트릭 드레인",
+      "englishName": "Electric Drain"
+    },
+    {
+      "job": "테러나이트",
+      "name": "라이프드레인",
+      "englishName": "Life Drain"
+    },
+    {
+      "job": "테러나이트",
+      "name": "데스 헨드",
+      "englishName": "Death Hand"
+    },
+    {
+      "job": "사이키커",
+      "name": "[인파이터] 원투",
+      "englishName": "[Infighter] One-Two Punch"
+    },
+    {
+      "job": "사이키커",
+      "name": "[인파이터] 어퍼",
+      "englishName": "[Infighter] Uppercut"
+    },
+    {
+      "job": "사이키커",
+      "name": "[인파이터] 어퍼 [2동작]",
+      "englishName": "[Infighter] Uppercut [Second Motion]"
+    },
+    {
+      "job": "사이키커",
+      "name": "[인파이터] 훅",
+      "englishName": "[Infighter] Psychic Arts (Hook)"
+    },
+    {
+      "job": "사이키커",
+      "name": "[인파이터] 콤비네이션",
+      "englishName": "[Infighter] Combination"
+    },
+    {
+      "job": "사이키커",
+      "name": "[아웃파이터] 기공",
+      "englishName": "[Outfighter] Energy Wave"
+    },
+    {
+      "job": "사이키커",
+      "name": "[아웃파이터] 웨이브",
+      "englishName": "[Outfighter] Psychic Arts (Quake)"
+    },
+    {
+      "job": "팬텀메이지",
+      "name": "데빌사이드 [어택]",
+      "englishName": "Devil Scythe [Attack]"
+    },
+    {
+      "job": "팬텀메이지",
+      "name": "데빌사이드 [카운터]",
+      "englishName": "Devil Scythe [Counter]"
+    },
+    {
+      "job": "팬텀메이지",
+      "name": "데빌사이드 [트리플]",
+      "englishName": "Devil Scythe [Triple]"
+    },
+    {
+      "job": "팬텀메이지",
+      "name": "데빌사이드 [립]",
+      "englishName": "Devil Scythe [Reap]"
+    },
+    {
+      "job": "팬텀메이지",
+      "name": "데빌사이드 [스틱]",
+      "englishName": "Devil Scythe [Bind]"
+    },
+    {
+      "job": "팬텀메이지",
+      "name": "윈드밀",
+      "englishName": "Windmill"
+    },
+    {
+      "job": "마에스트로",
+      "name": "라르가멘테",
+      "englishName": "Largamente"
+    },
+    {
+      "job": "마에스트로",
+      "name": "그라치오조",
+      "englishName": "Grazioso"
+    },
+    {
+      "job": "마에스트로",
+      "name": "파이어리히",
+      "englishName": "Feierlich"
+    },
+    {
+      "job": "마에스트로",
+      "name": "크레센도",
+      "englishName": "Crescendo"
+    },
+    {
+      "job": "마에스트로",
+      "name": "비르투오소",
+      "englishName": "Virtuoso"
+    },
+    {
+      "job": "마에스트로",
+      "name": "프레스티시모",
+      "englishName": "Prestissimo"
+    },
+    {
+      "job": "로그마스터",
+      "name": "인법_교",
+      "englishName": "[Transcendence] Shackle"
+    },
+    {
+      "job": "로그마스터",
+      "name": "인법_환",
+      "englishName": "[Transcendence] Phantom"
+    },
+    {
+      "job": "로그마스터",
+      "name": "인법_뢰",
+      "englishName": "[Transcendence] Thunder"
+    },
+    {
+      "job": "로그마스터",
+      "name": "인법_속",
+      "englishName": "[Transcendence] Swift"
+    },
+    {
+      "job": "로그마스터",
+      "name": "인법_무",
+      "englishName": "[Transcendence] False Phantom"
+    },
+    {
+      "job": "로그마스터",
+      "name": "인법_경",
+      "englishName": "[Transcendence] Interruption"
+    },
+    {
+      "job": "저지먼트",
+      "name": "기어 슬래시",
+      "englishName": "Gear Slash"
+    },
+    {
+      "job": "저지먼트",
+      "name": "롤 스나이핑",
+      "englishName": "Roll Snipe"
+    },
+    {
+      "job": "저지먼트",
+      "name": "트위스터",
+      "englishName": "Twister"
+    },
+    {
+      "job": "저지먼트",
+      "name": "스나이핑",
+      "englishName": "Snipe"
+    },
+    {
+      "job": "저지먼트",
+      "name": "프라이트",
+      "englishName": "Flight Assault"
+    },
+    {
+      "job": "저지먼트",
+      "name": "트리니티 포스",
+      "englishName": "Trinity Force"
+    },
+    {
+      "job": "저지먼트",
+      "name": "즉결심판",
+      "englishName": "Summary Judgment"
+    },
+    {
+      "job": "저지먼트",
+      "name": "크루얼건",
+      "englishName": "Cruel Shot"
+    },
+    {
+      "job": "저지먼트",
+      "name": "J-31 그레네이드",
+      "englishName": "J-31 Grenade"
+    },
+    {
+      "job": "스타시커",
+      "name": "DM-DR",
+      "englishName": "DM-DR"
+    },
+    {
+      "job": "스타시커",
+      "name": "DM-GR",
+      "englishName": "DM-GR"
+    },
+    {
+      "job": "스타시커",
+      "name": "DM-EMP",
+      "englishName": "DM-EMP"
+    },
+    {
+      "job": "스타시커",
+      "name": "DS-DR",
+      "englishName": "DS-DR"
+    },
+    {
+      "job": "쥬얼스타",
+      "name": "가넷 [레드]",
+      "englishName": "Garnet [Red]"
+    },
+    {
+      "job": "쥬얼스타",
+      "name": "에메랄드 [그린]",
+      "englishName": "Emerald [Green]"
+    },
+    {
+      "job": "쥬얼스타",
+      "name": "디스커버리 [그린]",
+      "englishName": "Discovery [Green]"
+    },
+    {
+      "job": "쥬얼스타",
+      "name": "에메시스트 [퍼플]",
+      "englishName": "Amethyst [Purple]"
+    },
+    {
+      "job": "쥬얼스타",
+      "name": "포에닉스 [레인보우]",
+      "englishName": "Phoenix [Rainbow]"
+    },
+    {
+      "job": "윈디아",
+      "name": "윈드 블레이드 : 차지",
+      "englishName": "Wind Blade : Charge"
+    },
+    {
+      "job": "윈디아",
+      "name": "테일 윈드 : 차지",
+      "englishName": "Tail Wind : Charge"
+    },
+    {
+      "job": "윈디아",
+      "name": "윈드 스톰 : 릴리즈",
+      "englishName": "Wind Storm : Release"
+    },
+    {
+      "job": "윈디아",
+      "name": "플라잉 어택 : 차지",
+      "englishName": "Flying Attack : Charge"
+    },
+    {
+      "job": "윈디아",
+      "name": "스톰 샷 : 릴리즈",
+      "englishName": "Storm Shot : Release"
+    },
+    {
+      "job": "윈디아",
+      "name": "게일 : 차지",
+      "englishName": "Gale : Charge"
+    },
+    {
+      "job": "윈디아",
+      "name": "휠윈드 : 릴리즈",
+      "englishName": "Whirlwind : Release"
+    },
+    {
+      "job": "레이니아",
+      "name": "스윙웨이브",
+      "englishName": "Swing Wave"
+    },
+    {
+      "job": "레이니아",
+      "name": "아쿠아샷",
+      "englishName": "Aqua Shot"
+    },
+    {
+      "job": "레이니아",
+      "name": "워터 프로텍트",
+      "englishName": "Water Protection"
+    },
+    {
+      "job": "레이니아",
+      "name": "빅웨이브",
+      "englishName": "Big Wave"
+    },
+    {
+      "job": "레이니아",
+      "name": "워터캐논",
+      "englishName": "Water Cannon"
+    },
+    {
+      "job": "레이니아",
+      "name": "마엘스트롬",
+      "englishName": "Maelstrom"
+    },
+    {
+      "job": "도깨비",
+      "name": "[인피니티] 환영귀화",
+      "englishName": "[Infinity] Phantom Ascendance"
+    },
+    {
+      "job": "도깨비",
+      "name": "귀화",
+      "englishName": "Spirit Ascendance"
+    },
+    {
+      "job": "도깨비",
+      "name": "업화",
+      "englishName": "Upheaval"
+    },
+    {
+      "job": "도깨비",
+      "name": "클러치 히트",
+      "englishName": "Clutch Shot"
+    },
+    {
+      "job": "도깨비",
+      "name": "홈 런 !",
+      "englishName": "Home Run !"
+    },
+    {
+      "job": "도깨비",
+      "name": "사이클링 히트",
+      "englishName": "Cycling Heatwave"
+    },
+    {
+      "job": "도깨비",
+      "name": "신출귀몰",
+      "englishName": "Shapeshifting"
+    },
+    {
+      "job": "직업 공용",
+      "name": "[각성] 레전드 1",
+      "englishName": "[Awakening] Legend I"
+    },
+    {
+      "job": "직업 공용",
+      "name": "레전드 2",
+      "englishName": "Legend II"
+    },
+    {
+      "job": "직업 공용",
+      "name": "[각성] 코어",
+      "englishName": "[Awakening] Core"
+    },
+    {
+      "job": "직업 공용",
+      "name": "밀키웨이, 유키나 추가대미지",
+      "englishName": "Milky Way, Yukina Added Damage"
+    },
+    {
+      "job": "히어로 (검)",
+      "name": "십자베기",
+      "englishName": "Cross Slash"
+    },
+    {
+      "job": "히어로 (창)",
+      "name": "라이트닝 랜스",
+      "englishName": "Lightning Lance"
+    },
+    {
+      "job": "검호",
+      "name": "케나인 블레이드",
+      "englishName": "Canine Blade"
+    },
+    {
+      "job": "세이버 (검)",
+      "name": "소드브레스",
+      "englishName": "Sword Breath"
+    },
+    {
+      "job": "세이버 (둔기)",
+      "name": "해머타이푼",
+      "englishName": "Hammer Typhoon"
+    },
+    {
+      "job": "세피로트",
+      "name": "대지파열",
+      "englishName": "Earth Crash"
+    },
+    {
+      "job": "아크메이지",
+      "name": "아이스 플랭크",
+      "englishName": "Ice Flank (Summon-Type)"
+    },
+    {
+      "job": "파픈스타",
+      "name": "일렉트릭 웨이브",
+      "englishName": "Electric Wave"
+    },
+    {
+      "job": "윈드스토커 (단검)",
+      "name": "펜 오브 나이프",
+      "englishName": "Fan of Knives (Summon-Type)"
+    },
+    {
+      "job": "윈드스토커 (활)",
+      "name": "에로우 트랩",
+      "englishName": "Arrow Trap"
+    },
+    {
+      "job": "윈드스토커 (석궁)",
+      "name": "와이드 샷",
+      "englishName": "Wide Shot"
+    },
+    {
+      "job": "프라이쉬츠",
+      "name": "디스트로이 홀",
+      "englishName": "Total Destruction"
+    },
+    {
+      "job": "소디언",
+      "name": "하이퍼캐논",
+      "englishName": "Hyper Cannon"
+    },
+    {
+      "job": "소울리스 원",
+      "name": "소울 마스터4 (다크)",
+      "englishName": "Soul Master IV (Dark)"
+    },
+    {
+      "job": "아크마스터",
+      "name": "봉인해제",
+      "englishName": "Release Seal"
+    },
+    {
+      "job": "아크마스터",
+      "name": "버스트 카드",
+      "englishName": "Burst Card (Summon-Type)"
+    },
+    {
+      "job": "포스마스터",
+      "name": "봉인몬스터",
+      "englishName": "Sealed Monster"
+    },
+    {
+      "job": "포스마스터",
+      "name": "스페셜 킥",
+      "englishName": "Special Kick (Summon-Type)"
+    },
+    {
+      "job": "흑영(옥)",
+      "name": "파괴의 그림자",
+      "englishName": "Shadow of Destruction"
+    },
+    {
+      "job": "흑영(도)",
+      "name": "그림자 칼날",
+      "englishName": "Shadow Blade"
+    },
+    {
+      "job": "데미갓(신성)",
+      "name": "글로리아",
+      "englishName": "Gloria"
+    },
+    {
+      "job": "데미갓(분노)",
+      "name": "글로리아",
+      "englishName": "Gloria"
+    },
+    {
+      "job": "아그니",
+      "name": "인페르노",
+      "englishName": "Inferno"
+    },
+    {
+      "job": "다크체이서",
+      "name": "체인버스트",
+      "englishName": "Chain Burst (Summon-Type)"
+    },
+    {
+      "job": "섀도우워커",
+      "name": "다크 스피릿",
+      "englishName": "Dark Spirit (Summon-Type)"
+    },
+    {
+      "job": "게이트키퍼",
+      "name": "트위스트 링",
+      "englishName": "Twisted Rings"
+    },
+    {
+      "job": "검성",
+      "name": "납도 - 장대비",
+      "englishName": "Battojutsu - Storm Slash"
+    },
+    {
+      "job": "하이랜더",
+      "name": "스파이럴 서먼",
+      "englishName": "Spiral Summon"
+    },
+    {
+      "job": "소드댄서",
+      "name": "화령검무",
+      "englishName": "Ritualistic Dance"
+    },
+    {
+      "job": "테러나이트",
+      "name": "카오스존",
+      "englishName": "Chaos Zone"
+    },
+    {
+      "job": "사이키커",
+      "name": "사이킥 아츠 크랙",
+      "englishName": "Psychic Arts (Crack)"
+    },
+    {
+      "job": "팬텀메이지",
+      "name": "사신의 기운",
+      "englishName": "Spirit of the Reaper"
+    },
+    {
+      "job": "마에스트로",
+      "name": "파쇼나토",
+      "englishName": "Passionato"
+    },
+    {
+      "job": "저지먼트",
+      "name": "트위스터",
+      "englishName": "Twister"
+    },
+    {
+      "job": "로그마스터",
+      "name": "인법 난",
+      "englishName": "[Transcendence] Chaos"
+    },
+    {
+      "job": "스타시커",
+      "name": "엘메이",
+      "englishName": "Elmei"
+    },
+    {
+      "job": "스타시커",
+      "name": "터렛",
+      "englishName": "Turret"
+    },
+    {
+      "job": "쥬얼스타",
+      "name": "매직스퀘어",
+      "englishName": "Magic Square"
+    },
+    {
+      "job": "윈디아",
+      "name": "윈드스톰",
+      "englishName": "Wind Storm (Summon-Type)"
+    },
+    {
+      "job": "레이니아",
+      "name": "워터봄",
+      "englishName": "Water Bomb"
+    },
+    {
+      "job": "아크메이지",
+      "name": "천룡아",
+      "englishName": "Sky Dragon"
+    },
+    {
+      "job": "도깨비",
+      "name": "요술 : 귀도",
+      "englishName": "Sorcery : Spirit Path"
+    },
+    {
+      "job": "도깨비",
+      "name": "백귀야행",
+      "englishName": "Night of a Hundred Demons"
+    },
+    {
+      "job": "직업 공용",
+      "name": "설치형 코어",
+      "englishName": "Summon-Type Core"
+    },
+    {
+      "job": "직업 공용",
+      "name": "무기 타격효과",
+      "englishName": "Weapon Hit Effect"
+    },
+    {
+      "job": "팬텀메이지",
+      "name": "데빌사이드[립]",
+      "englishName": "Devil Scythe [Reap] (Summon-Type)"
+    }
+  ]
+}

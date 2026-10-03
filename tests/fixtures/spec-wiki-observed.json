@@ -1,0 +1,355 @@
+{
+  "source": "https://latale.wiki/tools/spec-analyzer",
+  "observedOn": "2026-10-03",
+  "method": "Rendered Actual Damage tab, input DOM values and result text collected using agent-browser. Expected values are displayed integers, not recalculated from source. Critical resistance displayed as percent is converted to the core per-mille unit (×10).",
+  "fixtures": [
+    {
+      "name": "physical",
+      "job": "스타시커",
+      "input": {
+        "level": 235,
+        "mainStat": 4967646.359999999,
+        "efficiency": 3,
+        "weaponMin": 36372.6,
+        "weaponMax": 36372.6,
+        "penetration": 99,
+        "fixedDamage": 804685.31,
+        "directCoef": 5000,
+        "summonScale": 115.99999999999999,
+        "summonCoef": 2000,
+        "minRaw": 4499,
+        "minFinal": 39,
+        "maxRaw": 5327,
+        "maxFinal": 36,
+        "critRaw": 5260,
+        "critFinal": 41,
+        "backAttackDamage": 242,
+        "meleeDamage": 0,
+        "statusDamage": 0,
+        "defense": 4374342,
+        "damageReduction": 4374342,
+        "guard": 80,
+        "elasticity": 700,
+        "extraDamage": 691511.1,
+        "domination": 57.4,
+        "backAttack": false,
+        "melee": false,
+        "status": false,
+        "attackType": "physical"
+      },
+      "expected": {
+        "directNoncrit": {
+          "min": 115358964,
+          "max": 133641505,
+          "average": 124500233
+        },
+        "directCrit": {
+          "min": 2680942275,
+          "max": 3105828678,
+          "average": 2893385468
+        },
+        "summonNoncrit": {
+          "min": 100373013,
+          "max": 116218505,
+          "average": 108295759
+        },
+        "summonCrit": {
+          "min": 2686985636,
+          "max": 3111169562,
+          "average": 2899077605
+        }
+      },
+      "summonBossSummary": 2899077605
+    },
+    {
+      "name": "magical",
+      "job": "스타시커",
+      "input": {
+        "level": 235,
+        "mainStat": 4967646.359999999,
+        "efficiency": 3,
+        "weaponMax": 36372.6,
+        "penetration": 99,
+        "fixedDamage": 804685.31,
+        "directCoef": 5000,
+        "summonScale": 115.99999999999999,
+        "summonCoef": 2000,
+        "minRaw": 4499,
+        "minFinal": 39,
+        "maxRaw": 5327,
+        "maxFinal": 36,
+        "critRaw": 5260,
+        "critFinal": 41,
+        "backAttackDamage": 242,
+        "meleeDamage": 0,
+        "statusDamage": 0,
+        "defense": 4374342,
+        "damageReduction": 4374342,
+        "guard": 80,
+        "elasticity": 700,
+        "extraDamage": 691511.1,
+        "domination": 57.4,
+        "backAttack": false,
+        "melee": false,
+        "status": false,
+        "attackType": "magical",
+        "weaponMin": 36372.6
+      },
+      "expected": {
+        "directNoncrit": {
+          "min": 115358035,
+          "max": 133640435,
+          "average": 124499234
+        },
+        "directCrit": {
+          "min": 2680920820,
+          "max": 3105803715,
+          "average": 2893362355
+        },
+        "summonNoncrit": {
+          "min": 100372111,
+          "max": 116217460,
+          "average": 108294786
+        },
+        "summonCrit": {
+          "min": 2686961498,
+          "max": 3111141504,
+          "average": 2899051449
+        }
+      },
+      "summonBossSummary": 2899051449
+    },
+    {
+      "name": "phantom",
+      "job": "팬텀메이지",
+      "input": {
+        "level": 235,
+        "mainStat": 4967646.359999999,
+        "efficiency": 3,
+        "weaponMax": 36372.6,
+        "penetration": 99,
+        "fixedDamage": 804685.31,
+        "directCoef": 4500,
+        "summonScale": 110.00000000000001,
+        "summonCoef": 2000,
+        "minRaw": 4499,
+        "minFinal": 39,
+        "maxRaw": 5327,
+        "maxFinal": 36,
+        "critRaw": 5260,
+        "critFinal": 41,
+        "backAttackDamage": 242,
+        "meleeDamage": 0,
+        "statusDamage": 0,
+        "defense": 4374342,
+        "damageReduction": 4374342,
+        "guard": 80,
+        "elasticity": 700,
+        "extraDamage": 691511.1,
+        "domination": 57.4,
+        "backAttack": false,
+        "melee": false,
+        "status": false,
+        "attackType": "magical",
+        "weaponMin": 36372.6
+      },
+      "expected": {
+        "directNoncrit": {
+          "min": 108269832,
+          "max": 125428850,
+          "average": 116849341
+        },
+        "directCrit": {
+          "min": 2516190826,
+          "max": 2914966563,
+          "average": 2715578693
+        },
+        "summonNoncrit": {
+          "min": 88772353,
+          "max": 102776313,
+          "average": 95774334
+        },
+        "summonCrit": {
+          "min": 2259256525,
+          "max": 2615657152,
+          "average": 2437456873
+        }
+      },
+      "summonBossSummary": 2437468051
+    },
+    {
+      "name": "phantom-physical",
+      "job": "팬텀메이지",
+      "input": {
+        "level": 235,
+        "mainStat": 4967646.359999999,
+        "efficiency": 3,
+        "weaponMin": 36372.6,
+        "weaponMax": 36372.6,
+        "penetration": 99,
+        "fixedDamage": 804685.31,
+        "directCoef": 4500,
+        "summonScale": 110.00000000000001,
+        "summonCoef": 2000,
+        "minRaw": 4499,
+        "minFinal": 39,
+        "maxRaw": 5327,
+        "maxFinal": 36,
+        "critRaw": 5260,
+        "critFinal": 41,
+        "backAttackDamage": 242,
+        "meleeDamage": 0,
+        "statusDamage": 0,
+        "defense": 4374342,
+        "damageReduction": 4374342,
+        "guard": 80,
+        "elasticity": 700,
+        "extraDamage": 691511.1,
+        "domination": 57.4,
+        "backAttack": false,
+        "melee": false,
+        "status": false,
+        "attackType": "physical"
+      },
+      "expected": {
+        "directNoncrit": {
+          "min": 108270709,
+          "max": 125429881,
+          "average": 116850296
+        },
+        "directCrit": {
+          "min": 2516211457,
+          "max": 2914990494,
+          "average": 2715600957
+        },
+        "summonNoncrit": {
+          "min": 88773166,
+          "max": 102777254,
+          "average": 95775210
+        },
+        "summonCrit": {
+          "min": 2259277155,
+          "max": 2615681290,
+          "average": 2437479229
+        }
+      },
+      "summonBossSummary": 2437468051
+    },
+    {
+      "name": "phantom-backattack",
+      "job": "팬텀메이지",
+      "input": {
+        "level": 235,
+        "mainStat": 4967646.359999999,
+        "efficiency": 3,
+        "weaponMax": 36372.6,
+        "penetration": 99,
+        "fixedDamage": 804685.31,
+        "directCoef": 4500,
+        "summonScale": 110.00000000000001,
+        "summonCoef": 2000,
+        "minRaw": 4499,
+        "minFinal": 39,
+        "maxRaw": 5327,
+        "maxFinal": 36,
+        "critRaw": 5260,
+        "critFinal": 41,
+        "backAttackDamage": 242,
+        "meleeDamage": 0,
+        "statusDamage": 0,
+        "defense": 4374342,
+        "damageReduction": 4374342,
+        "guard": 80,
+        "elasticity": 700,
+        "extraDamage": 691511.1,
+        "domination": 57.4,
+        "backAttack": true,
+        "melee": false,
+        "status": false,
+        "attackType": "magical",
+        "weaponMin": 36372.6
+      },
+      "expected": {
+        "directNoncrit": {
+          "min": 370282840,
+          "max": 428966697,
+          "average": 399624766
+        },
+        "directCrit": {
+          "min": 2778203589,
+          "max": 3218504243,
+          "average": 2998353948
+        },
+        "summonNoncrit": {
+          "min": 106526832,
+          "max": 123331581,
+          "average": 114929205
+        },
+        "summonCrit": {
+          "min": 2277010919,
+          "max": 2636212375,
+          "average": 2456611579
+        }
+      },
+      "summonBossSummary": 2456622853
+    },
+    {
+      "name": "phantom-backattack-physical",
+      "job": "팬텀메이지",
+      "input": {
+        "level": 235,
+        "mainStat": 4967646.359999999,
+        "efficiency": 3,
+        "weaponMin": 36372.6,
+        "weaponMax": 36372.6,
+        "penetration": 99,
+        "fixedDamage": 804685.31,
+        "directCoef": 4500,
+        "summonScale": 110.00000000000001,
+        "summonCoef": 2000,
+        "minRaw": 4499,
+        "minFinal": 39,
+        "maxRaw": 5327,
+        "maxFinal": 36,
+        "critRaw": 5260,
+        "critFinal": 41,
+        "backAttackDamage": 242,
+        "meleeDamage": 0,
+        "statusDamage": 0,
+        "defense": 4374342,
+        "damageReduction": 4374342,
+        "guard": 80,
+        "elasticity": 700,
+        "extraDamage": 691511.1,
+        "domination": 57.4,
+        "backAttack": true,
+        "melee": false,
+        "status": false,
+        "attackType": "physical"
+      },
+      "expected": {
+        "directNoncrit": {
+          "min": 370285857,
+          "max": 428970204,
+          "average": 399628037
+        },
+        "directCrit": {
+          "min": 2778226695,
+          "max": 3218530856,
+          "average": 2998378761
+        },
+        "summonNoncrit": {
+          "min": 106527805,
+          "max": 123332716,
+          "average": 114930259
+        },
+        "summonCrit": {
+          "min": 2277031756,
+          "max": 2636236512,
+          "average": 2456634126
+        }
+      },
+      "summonBossSummary": 2456622853
+    }
+  ]
+}

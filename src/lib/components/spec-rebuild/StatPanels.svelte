@@ -1,0 +1,63 @@
+<script lang="ts">
+	import * as E from '$lib/spec-engine/engine.js';
+	let { stats = $bindable(), computed, indicators, hybrid = false, computedSides, indicatorCoef = 17000, reflection = 148 }: { stats:E.BaseStats; computed:E.ComputedStats; indicators:{combatPower:number;direct:{value:number};summon:{value:number}}; hybrid?:boolean; computedSides:Record<E.CombatSide,E.ComputedStats>; indicatorCoef?:number;reflection?:number } = $props();
+	let sideStats = $derived(E.ensureHybridCombatStats(stats));
+	let sideIndicators = $derived({physical:E.calcHitIndicatorSummary(computedSides.physical,true,indicatorCoef,reflection),magical:E.calcHitIndicatorSummary(computedSides.magical,false,indicatorCoef,reflection)});
+	const active = (side:E.CombatSide) => hybrid || stats.isPhysicalJob === (side==='physical');
+	const total = (key:string,side:E.CombatSide) => active(side) ? (hybrid?computedSides[side][key]:computed[key]) : 0;
+	const raw = (key:string,side:E.CombatSide) => hybrid ? sideStats[side][key] : stats[key];
+	function update(key:string,value:string,side?:E.CombatSide){const parsed=Math.max(0,Number(value)||0);const number=key==='penetration'?Math.min(100,parsed):parsed;if(side&&hybrid){stats=E.updateHybridCombatStat(stats,side,key,number);}else stats[key]=number;}
+	const inputValue = (value: number | undefined) => value ? Number(value.toFixed(6)) : '';
+	const fmt = (n: number) => n ? Math.round(n).toLocaleString('en-US') : '–';
+	const bonusRows = [
+		['Strength / Magic','strMagPlus','strMagPercent','red'],
+		['Weapon / Element','weaponAttrPlus','weaponAttrPercent','blue'],
+		['Normal monster damage','normalExtraDmgPlus','normalExtraDmgPercent','blue'],
+		['Boss monster damage','bossExtraDmgPlus','bossExtraDmgPercent','blue'],
+		['Critical damage','critDmgPlus','critDmgPercent','blue'],
+		['Minimum damage','minDmgPlus','minDmgPercent','blue'],
+		['Maximum damage','maxDmgPlus','maxDmgPercent','blue'],
+		['Fixed damage','fixedDmgPlus','fixedDmgPercent','blue']
+	];
+	const totalRows = [['Critical damage','critDmg'],['Minimum damage','minDmg'],['Maximum damage','maxDmg'],['Fixed damage','fixedDmg']];
+</script>
+<div class="status-panels">
+	<section class="game-panel" aria-label="Ability details">
+		<div class="game-title"><span class="mascot" aria-hidden="true"></span><h3>Ability Details</h3><span class="window-close" aria-hidden="true">×</span></div>
+		<div class="panel-inside">
+			<div class="combat-band"><span>⚔ Combat Power</span><strong>{fmt(hybrid?(sideIndicators.physical.combatPower+sideIndicators.magical.combatPower)/2:indicators.combatPower)}</strong></div>
+			<div class="primary-stats">
+				<div class="primary-left"><div class="primary red"><span>Strength</span><strong>{fmt(total('strMag','physical'))}</strong></div><div class="primary blue"><span>Magic</span><strong>{fmt(total('strMag','magical'))}</strong></div><div class="primary green"><span>Stamina</span><strong>–</strong></div><div class="primary gold"><span>Luck</span><strong>–</strong></div></div>
+				<div class="secondary blue"><div><span>HP</span><strong>–</strong></div><div><span>SP</span><strong>–</strong></div><div><span>Weapon attack</span><strong>{fmt(total('weaponAttr','physical'))}</strong></div><div><span>Elemental intensity</span><strong>{fmt(total('weaponAttr','magical'))}</strong></div><div><span>Defense</span><strong>–</strong></div><div><span>Resistance</span><strong>–</strong></div></div>
+			</div>
+			<div class="blue stats-block">
+				<div class="stat-head"><span></span><span>Physical</span><span>Magic</span></div>
+				<div class="stat-row"><span>Accuracy</span><span>–</span><span>–</span></div>
+				<div class="stat-row"><span>Penetration</span>{#each ['physical','magical'] as side (side)}{#if active(side as E.CombatSide)}<input aria-label={side+' penetration'} type="number" min="0" max="100" step="any" value={inputValue(raw('penetration',side as E.CombatSide))} placeholder="–" oninput={(e)=>update('penetration',e.currentTarget.value,side as E.CombatSide)}/>{:else}<span>–</span>{/if}{/each}</div>
+				<div class="stat-row"><span>Critical rate</span><span>–</span><span>–</span></div>
+				{#each totalRows as row (row[1])}<div class="stat-row"><span>{row[0]}</span><strong>{fmt(total(row[1],'physical'))}</strong><strong>{fmt(total(row[1],'magical'))}</strong></div>{/each}
+				<div class="stat-row"><span>Back attack damage</span>{#each ['physical','magical'] as side (side)}{#if active(side as E.CombatSide)}<input aria-label={side+' back attack damage'} type="number" min="0" step="any" value={inputValue(raw('backAttackDmg',side as E.CombatSide))} placeholder="–" oninput={(e)=>update('backAttackDmg',e.currentTarget.value,side as E.CombatSide)}/>{:else}<span>–</span>{/if}{/each}</div>
+				<div class="stat-row"><span>Damage reduction</span><span>–</span><span>–</span></div><div class="stat-row"><span>Evasion</span><span>–</span><span>–</span></div>
+			</div>
+			<div class="blue stats-block"><div class="stat-head"><span></span><span>Normal</span><span>Boss</span></div><div class="stat-row"><span>Monster extra damage</span><strong>{fmt(computed.normalExtraDmg)}</strong><strong>{fmt(computed.bossExtraDmg)}</strong></div><div class="stat-row"><span>Domination %</span><input aria-label="Normal domination" type="number" step="any" value={inputValue(stats.normalDomination)} placeholder="–" oninput={(e)=>update('normalDomination',e.currentTarget.value)}/><input aria-label="Boss domination" type="number" step="any" value={inputValue(stats.bossDomination)} placeholder="–" oninput={(e)=>update('bossDomination',e.currentTarget.value)}/></div></div>
+			<div class="blue passive-stats">{#each ['Cooldown reduction','Experience','Ely gain','Quest reward','Item drop rate','Movement speed'] as label (label)}<div><span>{label}</span><span>–</span></div>{/each}</div>
+		</div>
+	</section>
+	<section class="game-panel" aria-label="Additional details">
+		<div class="game-title"><span class="mascot" aria-hidden="true"></span><h3>Additional Details</h3><span class="window-close" aria-hidden="true">×</span></div>
+		<div class="panel-inside">
+			<div class="combat-band indicator-band"><div class="stat-head"><span></span><span>Physical</span><span>Magic</span></div><div class="stat-row"><span>Direct hit</span><strong>{active('physical') ? fmt(hybrid?sideIndicators.physical.direct.value:indicators.direct.value) : '–'}</strong><strong>{active('magical') ? fmt(hybrid?sideIndicators.magical.direct.value:indicators.direct.value) : '–'}</strong></div><div class="stat-row"><span>Summon hit</span><strong>{active('physical') ? fmt(hybrid?sideIndicators.physical.summon.value:indicators.summon.value) : '–'}</strong><strong>{active('magical') ? fmt(hybrid?sideIndicators.magical.summon.value:indicators.summon.value) : '–'}</strong></div></div>
+			<div class="bonus-head"><span>Additional stats</span><span>Flat +</span><span>Final %</span></div>
+			{#each bonusRows as row (row[1])}
+				{#each (hybrid&&!['normalExtraDmgPlus','bossExtraDmgPlus'].includes(row[1])?['physical','magical']:[stats.isPhysicalJob?'physical':'magical']) as side (side)}
+				<div class={['bonus-row',row[3]]}><label for={'bonus-'+row[1]+'-'+side}>{row[0]}{hybrid&&!row[1].includes('Extra') ? (side==='physical'?' (P)':' (M)'):''}</label><input id={'bonus-'+row[1]+'-'+side} aria-label={row[0]+' flat bonus '+side} type="number" min="0" step="any" value={inputValue(row[1].includes('Extra')?stats[row[1]]:raw(row[1],side as E.CombatSide))} placeholder="–" oninput={(e)=>update(row[1],e.currentTarget.value,row[1].includes('Extra')?undefined:side as E.CombatSide)}/><input aria-label={row[0]+' percent bonus '+side} type="number" min="0" step="any" value={inputValue(row[1].includes('Extra')?stats[row[2]]:raw(row[2],side as E.CombatSide))} placeholder="–" oninput={(e)=>update(row[2],e.currentTarget.value,row[1].includes('Extra')?undefined:side as E.CombatSide)}/></div>
+				{/each}
+			{/each}
+			{#each (hybrid?['physical','magical']:[stats.isPhysicalJob?'physical':'magical']) as side (side)}<div class="bonus-row blue"><label for={'stat-efficiency-'+side}>Strength / Magic efficiency{hybrid?(side==='physical'?' (P)':' (M)'):''}</label><span></span><input id={'stat-efficiency-'+side} aria-label={'Strength Magic efficiency percent '+side} type="number" min="0" step="any" value={inputValue(raw('strMagEfficiency',side as E.CombatSide))} placeholder="–" oninput={(e)=>update('strMagEfficiency',e.currentTarget.value,side as E.CombatSide)}/></div>{/each}
+			<div class="blue passive-stats additional-bottom">{#each ['Close range damage','Status damage','Damage reduction %','Option proc chance','Skill target count','Summon experience','Constellation points'] as label (label)}<div><span>{label}</span><span>–</span></div>{/each}</div>
+		</div>
+	</section>
+</div>
+<style>
+	.status-panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;margin:14px 0 20px;font-size:13px;}.game-panel{border:1px solid #75a9b4;border-radius:12px;background:#c8d5d9;box-shadow:inset 0 0 0 2px #e5f3f1;overflow:hidden;padding:8px 9px 10px;color:#e6f4f7;font-family:Arial,sans-serif;text-shadow:0 1px 1px #3e6673;}.game-title{display:flex;align-items:center;gap:7px;padding:2px 2px 14px;height:49px;}.game-title h3{font-size:21px;line-height:1;font-weight:900;color:#fff;text-shadow:-1px -1px 0 #494d4d,1px -1px 0 #494d4d,-1px 1px 0 #494d4d,2px 2px 0 #494d4d;letter-spacing:-.6px;}.mascot{display:block;flex:none;width:33px;height:35px;background:url('/spec-rebuild/r-event-003.png') -264px -289px;}.window-close{margin-left:auto;font-size:25px;font-weight:900;background:#778483;border:2px solid #a4b3b6;border-radius:8px;line-height:23px;width:27px;text-align:center;box-shadow:inset 0 -3px 3px #52625f;}.panel-inside{background:#effbfc;padding:5px;border-radius:6px;display:flex;flex-direction:column;gap:3px;}.blue{background-color:#57818e;background-image:url('/spec-rebuild/25-2q-02.png');background-position:-2400px -2730px;background-size:3072px 3072px;background-repeat:no-repeat;}.red{background:linear-gradient(110deg,#866b69,#785b5a);}.green{background:linear-gradient(110deg,#627c61,#657961);}.gold{background:linear-gradient(110deg,#8c8351,#8b804e);}.combat-band{background:linear-gradient(#245b80,#2a7390 80%,#63bdd0);border-radius:4px;min-height:46px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;}.combat-band strong{color:#ffffaa;}.primary-stats{display:grid;grid-template-columns:42% 1fr;gap:3px;}.primary-left{display:flex;flex-direction:column;gap:3px;}.primary{padding:7px 5px;display:flex;justify-content:space-between;border-radius:4px;min-height:30px;gap:5px;}.secondary{border-radius:4px;padding:5px 7px;display:flex;flex-direction:column;justify-content:space-around;}.secondary div{display:flex;justify-content:space-between;gap:3px;font-size:12px;}.stats-block{border-radius:3px;padding:0 5px 6px;}.stat-head,.stat-row{display:grid;grid-template-columns:minmax(0,1.7fr) 1fr 1fr;gap:5px;align-items:center;line-height:23px;}.stat-head{background:#7a9eac;margin:0 -5px 4px;padding:0 5px;line-height:19px;color:#f5ffff;}.stat-head span:not(:first-child),.stat-row>*:not(:first-child){text-align:right;}.stat-row input,.bonus-row input{width:100%;min-width:0;border:0;background:transparent;text-align:right;color:#fff;font-weight:700;text-shadow:0 1px 1px #3e6673;padding:2px 3px;font-size:13px;border-radius:2px;appearance:textfield;}.stat-row input::-webkit-inner-spin-button,.bonus-row input::-webkit-inner-spin-button{appearance:none;}.stat-row input:hover,.bonus-row input:hover{background:#ffffff12;}.stat-row input:focus,.bonus-row input:focus{outline:1px solid #f3e58c;background:#153e5480;}.passive-stats{padding:5px 7px;border-radius:3px;line-height:21px;}.passive-stats div{display:flex;justify-content:space-between;}.indicator-band{display:block;padding:0 6px 7px;}.indicator-band .stat-head{background:#224d6ca8;margin:0 -6px 4px;padding:0 6px;}.bonus-head,.bonus-row{display:grid;grid-template-columns:minmax(0,1.65fr) 1.1fr .7fr;gap:3px;align-items:center;}.bonus-head{font-size:11px;color:#587983;text-shadow:none;line-height:25px;padding:0 7px;}.bonus-head span:not(:first-child){text-align:right;}.bonus-row{min-height:38px;padding:3px 6px;border-radius:3px;font-size:12px;}.bonus-row input{color:#f5ffb0;}.bonus-row input:last-child{color:#a3ff4d;}.bonus-row input::placeholder{color:#e4fbbd;opacity:1;}.additional-bottom{flex:1;min-height:155px;}@media(max-width:760px){.status-panels{grid-template-columns:1fr;max-width:520px;margin-inline:auto;}.game-title h3{font-size:21px;}}
+</style>
