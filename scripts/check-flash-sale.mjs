@@ -150,6 +150,9 @@ for (const [itemIndex, item] of (catalog.items ?? []).entries()) {
 check(sale.id === index.currentSaleId, 'The current sale file id must match index.currentSaleId.');
 check(isPositiveInteger(sale.postId), 'sale.postId must be a positive integer.');
 check(isNonEmpty(sale.title), 'sale.title is required.');
+if (sale.purchaseNotice !== undefined) {
+	check(isNonEmpty(sale.purchaseNotice), 'sale.purchaseNotice must be a non-empty string when provided.');
+}
 check(sale.region === 'NA', 'sale.region must be NA.');
 check(sale.currency === 'LTC', 'sale.currency must be LTC.');
 check(sale.timezone === 'America/New_York', 'sale.timezone must be America/New_York.');

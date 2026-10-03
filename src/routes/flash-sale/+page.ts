@@ -286,6 +286,7 @@ export const load: PageLoad = async ({ fetch }) => {
 			timeZone: sale.timezone,
 			sourcePostId: String(sale.postId)
 		},
+		purchaseNotice: sale.purchaseNotice ?? null,
 		currentCycleId,
 		cycleViews,
 		completeness: {

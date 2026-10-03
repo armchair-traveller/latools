@@ -3,6 +3,7 @@
 	import Clock3Icon from '@lucide/svelte/icons/clock-3';
 	import ExternalLinkIcon from '@lucide/svelte/icons/external-link';
 	import GaugeIcon from '@lucide/svelte/icons/gauge';
+	import InfoIcon from '@lucide/svelte/icons/info';
 	import PackageSearchIcon from '@lucide/svelte/icons/package-search';
 	import PercentIcon from '@lucide/svelte/icons/percent';
 	import RotateCcwIcon from '@lucide/svelte/icons/rotate-ccw';
@@ -17,6 +18,8 @@
 	} from '$lib/flash-sale.js';
 	import { Badge, type BadgeVariant } from '$lib/components/ui/badge';
 	import { Button } from '$lib/components/ui/button';
+	import FlashSaleCaveats from '$lib/components/flash-sale-caveats.svelte';
+	import * as Alert from '$lib/components/ui/alert';
 	import * as Card from '$lib/components/ui/card';
 	import * as Empty from '$lib/components/ui/empty';
 	import * as Field from '$lib/components/ui/field';
@@ -546,46 +549,46 @@
 			</div>
 
 			{#if selectedCycle.offers.length > 0}
-				<ul class="offer-grid mt-6 grid gap-5 xl:grid-cols-2">
+				{#if data.purchaseNotice}
+					<Alert.Root class="mt-5" role="note">
+						<InfoIcon aria-hidden="true" />
+						<Alert.Description>{data.purchaseNotice}</Alert.Description>
+					</Alert.Root>
+				{/if}
+				<ul class="offer-grid mt-6 grid gap-6">
 					{#each selectedCycle.offers as offer (offer.id)}
 						<li class="offer-item min-w-0">
 							<Card.Root
-								class="offer-card h-full"
+								class="offer-card"
 								data-rank={offer.rank ?? 'unranked'}
 								data-valuation={offer.valuation}
 							>
 								<Card.Header class="offer-card__header">
-									<Card.Action>
-										<div class="offer-card__badges flex flex-col items-end gap-1">
-										{#if offer.rank !== null}
-											<Badge>#{offer.rank} exact</Badge>
-										{:else}
-											<Badge variant={valuationVariant(offer.valuation)}>
-												{valuationLabel(offer.valuation)}
-											</Badge>
-										{/if}
-										{#if viewMode === 'personal' && personalRankById.has(offer.id)}
-											<Badge variant="secondary">
-												Personal #{personalRankById.get(offer.id)}
-											</Badge>
-										{/if}
-										</div>
-									</Card.Action>
-									<div class="offer-card__identity flex min-w-0 items-start gap-3 pr-20">
+									<div class="offer-card__identity flex min-w-0 items-start gap-3">
 										<div class="offer-card__icon grid size-11 shrink-0 place-items-center rounded-lg bg-muted text-muted-foreground">
 											<PackageSearchIcon class="size-5" aria-hidden="true" />
 										</div>
-										<div class="min-w-0">
+										<div class="flex min-w-0 flex-col gap-2">
 											<Card.Title><h3 class="break-words">{offer.name}</h3></Card.Title>
-											<Card.Description>
-												Offer {offer.slot} · {integerFormatter.format(offer.priceLtc)} LTC
-											</Card.Description>
+											<div class="offer-card__badges flex flex-wrap items-center gap-2">
+												<Card.Description>Offer {offer.slot}</Card.Description>
+												{#if offer.rank !== null}
+													<Badge>#{offer.rank} exact</Badge>
+												{:else}
+													<Badge variant={valuationVariant(offer.valuation)}>
+														{valuationLabel(offer.valuation)}
+													</Badge>
+												{/if}
+												{#if viewMode === 'personal' && personalRankById.has(offer.id)}
+													<Badge variant="secondary">
+														Personal #{personalRankById.get(offer.id)}
+													</Badge>
+												{/if}
+											</div>
 										</div>
 									</div>
-								</Card.Header>
 
-								<Card.Content class="offer-card__content flex flex-col gap-6">
-									<dl class="offer-card__metrics grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4">
+									<dl class="offer-card__metrics">
 										<div data-metric="price">
 											<dt class="text-xs text-muted-foreground">Price</dt>
 											<dd class="mt-1 font-medium">{integerFormatter.format(offer.priceLtc)} LTC</dd>
@@ -599,100 +602,102 @@
 											<dd class="mt-1 font-medium">{objectiveRatio(offer)}</dd>
 										</div>
 										<div data-metric="limit">
-											<dt class="text-xs text-muted-foreground">Limit</dt>
+											<dt class="text-xs text-muted-foreground">
+												{offer.purchaseLimitScope === 'unknown' ? 'Advertised stock' : 'Limit'}
+											</dt>
 											<dd class="mt-1 font-medium">
 												{formatLimit(offer.purchaseLimit)}
+												{#if offer.purchaseLimitScope}
+													<span class="mt-1 block text-xs font-normal text-muted-foreground">
+														{offer.purchaseLimitScope === 'unknown'
+															? 'Scope unknown'
+															: offer.purchaseLimitScope === 'account'
+																? 'Per account'
+																: offer.purchaseLimitScope === 'character'
+																	? 'Per character'
+																	: 'Sale-wide'}
+													</span>
+												{/if}
 											</dd>
 										</div>
 									</dl>
+								</Card.Header>
 
-									<Separator />
-
-									<div class="min-w-0">
-										<h4 id={`evidence-heading-${offer.id}`} class="text-sm font-medium">
-											Bundle contents and evidence
-										</h4>
-										<ul
-											class="evidence-list mt-3"
-											aria-labelledby={`evidence-heading-${offer.id}`}
-										>
-											{#each offer.components as component (component.id)}
-												<li class="evidence-item">
-													<div class="evidence-item__summary">
-														<div class="evidence-item__title">
-															<p>{component.name} ×{component.quantity}</p>
-															<Badge variant="outline">
-																{componentValuationLabel(component.valuation)}
-															</Badge>
-														</div>
-														<dl class="evidence-item__values">
-															<div>
-																<dt>Unit value</dt>
-																<dd>
-																	{component.valuation === 'priced' || component.valuation === 'estimated'
-																		? formatEly(component.unitEly)
-																		: '—'}
-																</dd>
+								<Card.Content class="offer-card__content flex flex-col gap-6">
+									<div class="offer-card__body">
+										<div class="offer-card__bundle">
+											<h4 id={`evidence-heading-${offer.id}`} class="text-sm font-medium">
+												Bundle contents and evidence
+											</h4>
+											<ul
+												class="evidence-list mt-3"
+												aria-labelledby={`evidence-heading-${offer.id}`}
+											>
+												{#each offer.components as component (component.id)}
+													<li class="evidence-item">
+														<div class="evidence-item__summary">
+															<div class="evidence-item__title">
+																<p>{component.name} ×{component.quantity}</p>
+																<Badge variant="outline">
+																	{componentValuationLabel(component.valuation)}
+																</Badge>
 															</div>
-															<div>
-																<dt>Bundle value</dt>
-																<dd>{componentValue(component)}</dd>
-															</div>
-														</dl>
-													</div>
-
-													<div class="evidence-item__review">
-														<div class="flex flex-wrap gap-1">
-															<Badge variant="secondary">{component.confidence}</Badge>
-															<Badge variant="outline">{evidenceAge(component)}</Badge>
+															<dl class="evidence-item__values">
+																<div>
+																	<dt>Unit value</dt>
+																	<dd>
+																		{component.valuation === 'priced' || component.valuation === 'estimated'
+																			? formatEly(component.unitEly)
+																			: '—'}
+																	</dd>
+																</div>
+																<div>
+																	<dt>Bundle value</dt>
+																	<dd>{componentValue(component)}</dd>
+																</div>
+															</dl>
 														</div>
-														<p>{component.evidence}</p>
-														<p class="evidence-item__source">
-															{component.source} · {formatDate(component.priceUpdatedAt)}
-														</p>
-													</div>
-												</li>
-											{/each}
-										</ul>
-									</div>
 
-									<div class="grid gap-4 sm:grid-cols-3">
-										<div>
-											<h4 class="text-sm font-medium">Best for</h4>
-											{#if offer.bestFor.length > 0}
-												<ul class="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
-													{#each offer.bestFor as item (`${offer.id}-best-${item}`)}
-														<li>{item}</li>
-													{/each}
-												</ul>
-											{:else}
-												<p class="mt-2 text-sm text-muted-foreground">No specific use case claimed.</p>
-											{/if}
+														<div class="evidence-item__review">
+															<div class="flex flex-wrap gap-1">
+																<Badge variant="secondary">{component.confidence}</Badge>
+																<Badge variant="outline">{evidenceAge(component)}</Badge>
+															</div>
+															<p>{component.evidence}</p>
+															<p class="evidence-item__source">
+																{component.source} · {formatDate(component.priceUpdatedAt)}
+															</p>
+														</div>
+													</li>
+												{/each}
+											</ul>
 										</div>
-										<div>
-											<h4 class="text-sm font-medium">Skip if</h4>
-											{#if offer.skipIf.length > 0}
-												<ul class="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
-													{#each offer.skipIf as item (`${offer.id}-skip-${item}`)}
-														<li>{item}</li>
-													{/each}
-												</ul>
-											{:else}
-												<p class="mt-2 text-sm text-muted-foreground">No specific skip condition claimed.</p>
-											{/if}
-										</div>
-										<div>
-											<h4 class="text-sm font-medium">Caveats</h4>
-											{#if offer.caveats.length > 0 || offer.note}
-												<ul class="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
-													{#if offer.note}<li>{offer.note}</li>{/if}
-													{#each offer.caveats as item (`${offer.id}-caveat-${item}`)}
-														<li>{item}</li>
-													{/each}
-												</ul>
-											{:else}
-												<p class="mt-2 text-sm text-muted-foreground">No additional caveats.</p>
-											{/if}
+
+										<div class="offer-card__guidance">
+											<div>
+												<h4 class="text-sm font-medium">Best for</h4>
+												{#if offer.bestFor.length > 0}
+													<ul class="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
+														{#each offer.bestFor as item (`${offer.id}-best-${item}`)}
+															<li>{item}</li>
+														{/each}
+													</ul>
+												{:else}
+													<p class="mt-2 text-sm text-muted-foreground">No specific use case claimed.</p>
+												{/if}
+											</div>
+											<div>
+												<h4 class="text-sm font-medium">Skip if</h4>
+												{#if offer.skipIf.length > 0}
+													<ul class="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
+														{#each offer.skipIf as item (`${offer.id}-skip-${item}`)}
+															<li>{item}</li>
+														{/each}
+													</ul>
+												{:else}
+													<p class="mt-2 text-sm text-muted-foreground">No specific skip condition claimed.</p>
+												{/if}
+											</div>
 										</div>
 									</div>
 
@@ -776,7 +781,7 @@
 									{/if}
 								</Card.Content>
 
-								<Card.Footer class="offer-card__footer">
+								<Card.Footer class="offer-card__footer flex-col items-stretch gap-3">
 									<p class="text-xs leading-relaxed text-foreground/75">
 										{offer.valuation === 'exact'
 											? `Objective rank #${offer.rank} uses only the frozen, reviewed valuation snapshot.`
@@ -784,6 +789,7 @@
 												? 'The known components form a lower bound; this offer is excluded from exact ranks.'
 												: 'This offer remains visible but is excluded from exact numeric ranks.'}
 									</p>
+									<FlashSaleCaveats offerName={offer.name} caveats={offer.caveats} note={offer.note} />
 								</Card.Footer>
 							</Card.Root>
 						</li>
@@ -1511,8 +1517,8 @@
 		letter-spacing: -0.045em;
 	}
 
-	.offer-grid {
-		counter-reset: offers;
+	.offer-item {
+		container: offer / inline-size;
 	}
 
 	.flash-sale-page :global(.offer-card) {
@@ -1558,6 +1564,10 @@
 	}
 
 	.flash-sale-page :global(.offer-card__header) {
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-rows: auto;
+		align-items: center;
+		gap: 1.25rem;
 		padding-bottom: 1rem;
 		border-bottom: 1.5px dashed #dcafc5;
 		background: rgb(255 255 255 / 0.48);
@@ -1565,6 +1575,7 @@
 
 	.flash-sale-page :global(.offer-card__identity) {
 		align-items: center;
+		overflow-wrap: anywhere;
 	}
 
 	.flash-sale-page :global(.offer-card__icon) {
@@ -1586,6 +1597,36 @@
 	.flash-sale-page :global(.offer-card__badges [data-slot='badge']) {
 		border: 1px solid var(--festa-plum);
 		box-shadow: 0.12rem 0.12rem 0 rgb(75 33 79 / 0.16);
+	}
+
+	.offer-card__metrics {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.65rem;
+		min-width: 0;
+		margin: 0;
+	}
+
+	.offer-card__body {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		align-items: start;
+		gap: 1.5rem;
+	}
+
+	.offer-card__bundle {
+		container: bundle / inline-size;
+		min-width: 0;
+	}
+
+	.offer-card__guidance {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		align-content: start;
+		gap: 1.25rem;
+		min-width: 0;
+		line-height: 1.65;
+		overflow-wrap: anywhere;
 	}
 
 	.flash-sale-page :global(.offer-card__metrics > div) {
@@ -1618,7 +1659,7 @@
 
 	.evidence-item {
 		display: grid;
-		grid-template-columns: minmax(0, 1.05fr) minmax(13rem, 0.95fr);
+		grid-template-columns: minmax(0, 1fr);
 		gap: 1rem;
 		min-width: 0;
 		padding: 1rem;
@@ -1677,8 +1718,8 @@
 	}
 
 	.evidence-item__review {
-		padding-left: 1rem;
-		border-left: 1px dashed #d8aec2;
+		padding-top: 0.85rem;
+		border-top: 1px dashed var(--border);
 	}
 
 	.evidence-item__review > p {
@@ -1737,6 +1778,58 @@
 		letter-spacing: -0.025em;
 	}
 
+	@container offer (min-width: 36rem) {
+		.offer-card__metrics {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+
+		.offer-card__guidance {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@container offer (min-width: 56rem) {
+		.flash-sale-page :global(.offer-card) {
+			--card-spacing: 1.5rem;
+		}
+
+		.flash-sale-page :global(.offer-card__header) {
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1.85fr);
+			gap: 1.75rem;
+			padding-bottom: 1.5rem;
+		}
+
+		.offer-card__body {
+			grid-template-columns: minmax(0, 1fr) 15rem;
+			gap: 1.75rem;
+		}
+
+		.offer-card__guidance {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 1.5rem;
+			padding-left: 1.5rem;
+			border-left: 1px dashed var(--border);
+		}
+
+		.flash-sale-page :global(.offer-card__metrics dd) {
+			font-size: 1rem;
+			font-weight: 700;
+		}
+	}
+
+	@container bundle (min-width: 34rem) {
+		.evidence-item {
+			grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+		}
+
+		.evidence-item__review {
+			padding-top: 0;
+			padding-left: 1rem;
+			border-top: 0;
+			border-left: 1px dashed var(--border);
+		}
+	}
+
 	@media (min-width: 960px) {
 		.flash-sale-page :global(.comparison-panel) {
 			display: grid;
@@ -1773,16 +1866,8 @@
 
 	@media (max-width: 720px) {
 		.evidence-item {
-			grid-template-columns: minmax(0, 1fr);
 			gap: 0.85rem;
 			padding: 0.9rem;
-		}
-
-		.evidence-item__review {
-			padding-top: 0.85rem;
-			padding-left: 0;
-			border-top: 1px dashed #d8aec2;
-			border-left: 0;
 		}
 
 		.sale-atmosphere span {
@@ -1846,27 +1931,6 @@
 			align-items: flex-start;
 		}
 
-		.flash-sale-page :global(.offer-card__header) {
-			display: grid;
-			grid-template-columns: minmax(0, 1fr);
-		}
-
-		.flash-sale-page :global(.offer-card__header [data-slot='card-action']) {
-			position: static;
-			grid-row: 1;
-			grid-column: 1;
-			justify-self: start;
-			margin-bottom: 0.35rem;
-		}
-
-		.flash-sale-page :global(.offer-card__badges) {
-			align-items: flex-start;
-		}
-
-		.flash-sale-page :global(.offer-card__identity) {
-			grid-row: 2;
-			padding-right: 0;
-		}
 	}
 
 	@media (max-width: 440px) {
@@ -1898,9 +1962,6 @@
 			color: var(--festa-plum);
 		}
 
-		.flash-sale-page :global(.offer-card__metrics) {
-			grid-template-columns: minmax(0, 1fr);
-		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {

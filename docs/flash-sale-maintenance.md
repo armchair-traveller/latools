@@ -13,4 +13,6 @@ Focused, authorized corrections use the existing evidence and repository diff wh
 
 The public files are `static/data/flash-sale/index.json`, `static/data/flash-sale/catalog.json`, and `static/data/flash-sale/sales/<sale-id>.json`. Raw announcement captures stay in `.cache` and are not committed.
 
+Use the optional sale-level `purchaseNotice` for a short, evidence-backed restriction buyers need to see before choosing an offer. It stays visible above the offers while each package's caveats are collapsed by default. Keep detailed explanations and capture notes in the existing offer fields. Omit `purchaseNotice` when no sale-wide notice is needed; when present, it must be a non-empty string. Notices apply only to their own snapshot: do not carry them into later sales without evidence for that sale.
+
 Authorization to edit the data does not itself authorize a commit, push, pull request, or deployment.

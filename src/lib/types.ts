@@ -251,6 +251,7 @@ export interface FlashSaleAnalysis {
 	id: string;
 	postId: number;
 	title: string;
+	purchaseNotice?: string;
 	region: 'NA';
 	currency: 'LTC';
 	timezone: 'America/New_York';
