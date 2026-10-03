@@ -6,6 +6,7 @@ A growing collection of English-language LaTale fan utilities, including a scena
 
 - General-purpose tool landing page at `/`
 - Specification Analyzer at `/spec-analyzer`: character stats, current-model damage ranges, upgrade and HP comparisons, stat distribution, a searchable skill catalog, and locally saved builds with JSON import/export
+- Equipment score at `/equipment-score`: compare weighted options across 16 equipment types using [RamuWiki's equipment score model](https://latale.wiki/tools/equipment-score)
 - Inventory expansion checklist at `/inventory-expansion`: 137 translated reward sources, English/Korean search, slot totals, and progress saved in the browser
 - Scenario walkthrough at `/scenario`
 - Separate dialogue reader at `/scenario-script`, with fresh English translations, the Korean original, character portraits, dialogue choices, and a customizable character name
@@ -40,6 +41,8 @@ npm run build
 The app uses the current SvelteKit CLI defaults with TypeScript, Tailwind CSS, `@sveltejs/adapter-vercel`, and shadcn-svelte.
 
 See [`docs/event-exchange-maintenance.md`](docs/event-exchange-maintenance.md) and [`docs/flash-sale-maintenance.md`](docs/flash-sale-maintenance.md) for the Codex-assisted update workflows. Raw screenshots, drafts, and generated review sheets stay under the ignored `.cache/` directory.
+
+The equipment calculator's source snapshot, preserved formula details, and verification steps are documented in [`docs/equipment-score-reference.md`](docs/equipment-score-reference.md).
 
 ## Project-scoped agent skills
 

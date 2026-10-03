@@ -4,6 +4,7 @@ import HouseIcon from '@lucide/svelte/icons/house';
 import PackagePlusIcon from '@lucide/svelte/icons/package-plus';
 import PercentIcon from '@lucide/svelte/icons/percent';
 import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
+import ScaleIcon from '@lucide/svelte/icons/scale';
 import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
 import ScrollTextIcon from '@lucide/svelte/icons/scroll-text';
 
@@ -119,6 +120,20 @@ export const toolNavigation = [
 		soft: '#ddf0f1',
 		deep: '#16515a',
 		image: '/npc/786.png'
+	},
+	{
+		key: 'equipment-score',
+		index: '08',
+		label: 'Equipment score',
+		description: 'Options · weights · comparisons',
+		verb: 'Compare',
+		context: 'Weighted equipment options',
+		href: '/equipment-score',
+		icon: ScaleIcon,
+		accent: '#a06c2c',
+		soft: '#f3e6cf',
+		deep: '#674319',
+		image: '/npc/1399.png'
 	}
 ] as const;
 

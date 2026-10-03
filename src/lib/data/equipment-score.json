@@ -1,0 +1,5671 @@
+{
+	"source": {
+		"url": "https://latale.wiki/tools/equipment-score",
+		"retrievedAt": "2026-10-03",
+		"dataSourceUrl": "https://latale.wiki/_next/static/chunks/1c8hxr6dxj4ml.js",
+		"dataSourceSha256": "e0b16aec721c772be4432f62953cf652e18dcc1bac61cab1baf43efdea6e2104",
+		"contributor": "쌀또뽀끼"
+	},
+	"EQUIPMENT_SCORE_EXAMPLES": {
+		"weapon": {
+			"critDamage": 181,
+			"maxDamage": 180,
+			"minDamage": 172,
+			"allStatPercent": 13,
+			"weaponAttrPercent": 16
+		},
+		"spiritStone": {
+			"strPercent": 13,
+			"maxDamage": 150,
+			"minDamage": 133,
+			"strMag": 16885,
+			"allStat": 11273
+		},
+		"ikaHat": {
+			"accuracyPercent": 139,
+			"critDamage": 90,
+			"weaponAttr": 184,
+			"strMag": 21999,
+			"allStat": 5498
+		},
+		"ikaUpperLower": {
+			"weaponAttrPercent": 20,
+			"allStatPercent": 21,
+			"maxDamage": 70,
+			"strMag": 20596,
+			"allStat": 8142
+		},
+		"ikaGloves": {
+			"weaponAttrPercent": 14,
+			"critDamage": 117,
+			"bossDomination": 3.5,
+			"allStat": 15104,
+			"minDamage": 98
+		},
+		"ikaShoes": {
+			"critDamage": 149,
+			"allStatPercent": 19,
+			"strMag": 5897,
+			"allStat": 5559,
+			"minDamage": 101
+		},
+		"gardenHat": {},
+		"gardenUpperLower": {},
+		"gardenGloves": {},
+		"gardenShoes": {},
+		"tearEarring": {},
+		"tearCloak": {},
+		"tearRing": {},
+		"belialEarring": {},
+		"belialCloak": {},
+		"belialRing": {}
+	},
+	"EQUIPMENT_SCORE_GRADE_LABELS": {
+		"base": "Unenhanced",
+		"transcendence": "Transcendent",
+		"combined": "Combined",
+		"full": "Fully enhanced"
+	},
+	"EQUIPMENT_SCORE_KIND_CONFIGS": {
+		"weapon": {
+			"label": "Weapon",
+			"group": "basic",
+			"grades": [
+				"base",
+				"transcendence"
+			],
+			"icon": "https://latale.wiki/icons/무기-지원가.png",
+			"originalLabel": "무기"
+		},
+		"spiritStone": {
+			"label": "Spirit Stone",
+			"group": "basic",
+			"grades": [
+				"base",
+				"transcendence"
+			],
+			"icon": "https://latale.wiki/icons/정령석-지원가.png",
+			"originalLabel": "정령석"
+		},
+		"ikaHat": {
+			"label": "Ika / Grendel Helmet",
+			"group": "ika",
+			"grades": [
+				"base",
+				"transcendence"
+			],
+			"icon": "https://latale.wiki/icons/투구-그렌델.png",
+			"penalty": {
+				"optionKey": "accuracyPercent",
+				"thresholdByGrade": {
+					"base": 79,
+					"transcendence": 139,
+					"combined": 139
+				},
+				"perPoint": 0.08,
+				"label": "Accuracy shortfall penalty",
+				"originalLabel": "명중 부족 감점"
+			},
+			"note": "This table has a higher scoring standard than weapons and Spirit Stones. Consider rating thresholds (70 / 84 / 90) about 10 points lower for Ika / Grendel equipment.",
+			"originalLabel": "이카/그렌델 모자",
+			"originalNote": "무기·정령석 대비 점수 기준이 높게 잡힌 표라, 등급 판정(70·84·90점)은 10점 정도 낮춰 봐도 좋습니다."
+		},
+		"ikaUpperLower": {
+			"label": "Ika / Grendel Top / Bottom",
+			"group": "ika",
+			"grades": [
+				"base",
+				"transcendence"
+			],
+			"icon": "https://latale.wiki/icons/갑옷-그렌델.png",
+			"note": "This table has a higher scoring standard than weapons and Spirit Stones. Consider rating thresholds (70 / 84 / 90) about 10 points lower for Ika / Grendel equipment.",
+			"originalLabel": "이카/그렌델 상·하의",
+			"originalNote": "무기·정령석 대비 점수 기준이 높게 잡힌 표라, 등급 판정(70·84·90점)은 10점 정도 낮춰 봐도 좋습니다."
+		},
+		"ikaGloves": {
+			"label": "Ika / Grendel Gloves",
+			"group": "ika",
+			"grades": [
+				"base",
+				"transcendence"
+			],
+			"icon": "https://latale.wiki/icons/장갑-그렌델.png",
+			"note": "This table has a higher scoring standard than weapons and Spirit Stones. Consider rating thresholds (70 / 84 / 90) about 10 points lower for Ika / Grendel equipment.",
+			"originalLabel": "이카/그렌델 장갑",
+			"originalNote": "무기·정령석 대비 점수 기준이 높게 잡힌 표라, 등급 판정(70·84·90점)은 10점 정도 낮춰 봐도 좋습니다."
+		},
+		"ikaShoes": {
+			"label": "Ika / Grendel Shoes",
+			"group": "ika",
+			"grades": [
+				"base",
+				"transcendence"
+			],
+			"icon": "https://latale.wiki/icons/신발-그렌델.png",
+			"note": "This table has a higher scoring standard than weapons and Spirit Stones. Consider rating thresholds (70 / 84 / 90) about 10 points lower for Ika / Grendel equipment.",
+			"originalLabel": "이카/그렌델 신발",
+			"originalNote": "무기·정령석 대비 점수 기준이 높게 잡힌 표라, 등급 판정(70·84·90점)은 10점 정도 낮춰 봐도 좋습니다."
+		},
+		"gardenHat": {
+			"label": "Garden Combined Helmet",
+			"group": "garden",
+			"grades": [
+				"combined"
+			],
+			"icon": "https://latale.wiki/icons/투구-정원.png",
+			"penalty": {
+				"optionKey": "accuracyPercent",
+				"thresholdByGrade": {
+					"base": 79,
+					"transcendence": 139,
+					"combined": 139
+				},
+				"perPoint": 0.08,
+				"label": "Accuracy shortfall penalty",
+				"originalLabel": "명중 부족 감점"
+			},
+			"comparisonLabel": "Ika / Grendel equivalent score",
+			"note": "Add the Strength / Magic option to the separate Strength or Magic option and enter the combined value.",
+			"originalLabel": "정원 결합 모자",
+			"originalNote": "근력/마법력과 근력 또는 마법력 옵션은 합산해 입력하세요.",
+			"originalComparisonLabel": "이카/그렌델 환산 점수"
+		},
+		"gardenUpperLower": {
+			"label": "Garden Combined Top / Bottom",
+			"group": "garden",
+			"grades": [
+				"combined"
+			],
+			"icon": "https://latale.wiki/icons/갑옷-정원.png",
+			"comparisonLabel": "Ika / Grendel equivalent score",
+			"note": "Add the Strength / Magic option to the separate Strength or Magic option and enter the combined value.",
+			"originalLabel": "정원 결합 상·하의",
+			"originalNote": "근력/마법력과 근력 또는 마법력 옵션은 합산해 입력하세요.",
+			"originalComparisonLabel": "이카/그렌델 환산 점수"
+		},
+		"gardenGloves": {
+			"label": "Garden Combined Gloves",
+			"group": "garden",
+			"grades": [
+				"combined"
+			],
+			"icon": "https://latale.wiki/icons/장갑-정원.png",
+			"comparisonLabel": "Ika / Grendel equivalent score",
+			"note": "Add the Strength / Magic option to the separate Strength or Magic option and enter the combined value.",
+			"originalLabel": "정원 결합 장갑",
+			"originalNote": "근력/마법력과 근력 또는 마법력 옵션은 합산해 입력하세요.",
+			"originalComparisonLabel": "이카/그렌델 환산 점수"
+		},
+		"gardenShoes": {
+			"label": "Garden Combined Shoes",
+			"group": "garden",
+			"grades": [
+				"combined"
+			],
+			"icon": "https://latale.wiki/icons/신발-정원.png",
+			"comparisonLabel": "Ika / Grendel equivalent score",
+			"note": "Add the Strength / Magic option to the separate Strength or Magic option and enter the combined value.",
+			"originalLabel": "정원 결합 신발",
+			"originalNote": "근력/마법력과 근력 또는 마법력 옵션은 합산해 입력하세요.",
+			"originalComparisonLabel": "이카/그렌델 환산 점수"
+		},
+		"tearEarring": {
+			"label": "Tear Earrings",
+			"group": "tear",
+			"grades": [
+				"full"
+			],
+			"icon": "https://latale.wiki/icons/귀걸이-눈물.png",
+			"comparisonLabel": "Belial equivalent score",
+			"originalLabel": "눈물 귀걸이",
+			"originalComparisonLabel": "벨리알 환산 점수"
+		},
+		"tearCloak": {
+			"label": "Tear Cloak",
+			"group": "tear",
+			"grades": [
+				"full"
+			],
+			"icon": "https://latale.wiki/icons/망토-눈물.png",
+			"comparisonLabel": "Belial equivalent score",
+			"originalLabel": "눈물 망토",
+			"originalComparisonLabel": "벨리알 환산 점수"
+		},
+		"tearRing": {
+			"label": "Tear Ring",
+			"group": "tear",
+			"grades": [
+				"full"
+			],
+			"icon": "https://latale.wiki/icons/반지-눈물.png",
+			"comparisonLabel": "Belial equivalent score",
+			"originalLabel": "눈물 반지",
+			"originalComparisonLabel": "벨리알 환산 점수"
+		},
+		"belialEarring": {
+			"label": "Belial Earrings",
+			"group": "belial",
+			"grades": [
+				"base",
+				"transcendence"
+			],
+			"icon": "https://latale.wiki/icons/귀걸이-벨리알-풀강.png",
+			"originalLabel": "벨리알 귀걸이"
+		},
+		"belialCloak": {
+			"label": "Belial Cloak",
+			"group": "belial",
+			"grades": [
+				"base",
+				"transcendence"
+			],
+			"icon": "https://latale.wiki/icons/망토-벨리알-풀강.png",
+			"originalLabel": "벨리알 망토"
+		},
+		"belialRing": {
+			"label": "Belial Ring",
+			"group": "belial",
+			"grades": [
+				"base",
+				"transcendence"
+			],
+			"icon": "https://latale.wiki/icons/반지-벨리알-풀강.png",
+			"originalLabel": "벨리알 반지"
+		}
+	},
+	"EQUIPMENT_SCORE_KIND_GROUPS": [
+		{
+			"label": "Weapons & Spirit Stones",
+			"kinds": [
+				"weapon",
+				"spiritStone"
+			],
+			"originalLabel": "무기·정령석"
+		},
+		{
+			"label": "Ika / Grendel",
+			"kinds": [
+				"ikaHat",
+				"ikaUpperLower",
+				"ikaGloves",
+				"ikaShoes"
+			],
+			"originalLabel": "이카/그렌델"
+		},
+		{
+			"label": "Garden Combined",
+			"kinds": [
+				"gardenHat",
+				"gardenUpperLower",
+				"gardenGloves",
+				"gardenShoes"
+			],
+			"originalLabel": "정원 결합"
+		},
+		{
+			"label": "Tear",
+			"kinds": [
+				"tearEarring",
+				"tearCloak",
+				"tearRing"
+			],
+			"originalLabel": "눈물"
+		},
+		{
+			"label": "Belial",
+			"kinds": [
+				"belialEarring",
+				"belialCloak",
+				"belialRing"
+			],
+			"originalLabel": "벨리알"
+		}
+	],
+	"EQUIPMENT_SCORE_OPTIONS": {
+		"weapon": [
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 201,
+				"transcendenceMax": 261,
+				"baseBonus": 60,
+				"baseMaxByProfile": {
+					"strMag": 201,
+					"weapon": 201,
+					"balance": 201
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 261,
+					"weapon": 261,
+					"balance": 261
+				},
+				"baseBonusByProfile": {
+					"strMag": 60,
+					"weapon": 60,
+					"balance": 60
+				},
+				"weightByProfile": {
+					"strMag": 0.2641261498,
+					"weapon": 0.2641261498,
+					"balance": 0.2641261498
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "maxDamage",
+				"label": "Maximum damage",
+				"baseMax": 261,
+				"transcendenceMax": 339,
+				"baseBonus": 78,
+				"baseMaxByProfile": {
+					"strMag": 261,
+					"weapon": 261,
+					"balance": 261
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 339,
+					"weapon": 339,
+					"balance": 339
+				},
+				"baseBonusByProfile": {
+					"strMag": 78,
+					"weapon": 78,
+					"balance": 78
+				},
+				"weightByProfile": {
+					"strMag": 0.24007884363,
+					"weapon": 0.24007884363,
+					"balance": 0.24007884363
+				},
+				"includeInTotal": true,
+				"originalLabel": "최대 대미지"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 261,
+				"transcendenceMax": 339,
+				"baseBonus": 78,
+				"baseMaxByProfile": {
+					"strMag": 261,
+					"weapon": 261,
+					"balance": 261
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 339,
+					"weapon": 339,
+					"balance": 339
+				},
+				"baseBonusByProfile": {
+					"strMag": 78,
+					"weapon": 78,
+					"balance": 78
+				},
+				"weightByProfile": {
+					"strMag": 0.13718791065,
+					"weapon": 0.13718791065,
+					"balance": 0.13718791065
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "allStatPercent",
+				"label": "All stats %",
+				"baseMax": 21,
+				"transcendenceMax": 24,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 21,
+					"weapon": 21,
+					"balance": 21
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 24,
+					"weapon": 24,
+					"balance": 24
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.22076215506,
+					"weapon": 0.13797634691,
+					"balance": 0.17936931208
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯%"
+			},
+			{
+				"key": "weaponAttrPercent",
+				"label": "Weapon attack %",
+				"baseMax": 21,
+				"transcendenceMax": 24,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 21,
+					"weapon": 21,
+					"balance": 21
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 24,
+					"weapon": 24,
+					"balance": 24
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.13797634691,
+					"weapon": 0.22076215506,
+					"balance": 0.17936931208
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력%"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 24001,
+				"transcendenceMax": 31201,
+				"baseBonus": 7200,
+				"baseMaxByProfile": {
+					"strMag": 24001,
+					"weapon": 24001,
+					"balance": 24001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 31201,
+					"weapon": 31201,
+					"balance": 31201
+				},
+				"baseBonusByProfile": {
+					"strMag": 7200,
+					"weapon": 7200,
+					"balance": 7200
+				},
+				"weightByProfile": {
+					"strMag": 0.13666228647,
+					"weapon": 0.09461629435,
+					"balance": 0.10750209055
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack",
+				"baseMax": 351,
+				"transcendenceMax": 456,
+				"baseBonus": 105,
+				"baseMaxByProfile": {
+					"strMag": 351,
+					"weapon": 351,
+					"balance": 351
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 456,
+					"weapon": 456,
+					"balance": 456
+				},
+				"baseBonusByProfile": {
+					"strMag": 105,
+					"weapon": 105,
+					"balance": 105
+				},
+				"weightByProfile": {
+					"strMag": 0.09609067017,
+					"weapon": 0.15374507227,
+					"balance": 0.11530880421
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 30001,
+				"transcendenceMax": 39001,
+				"baseBonus": 9000,
+				"baseMaxByProfile": {
+					"strMag": 30001,
+					"weapon": 30001,
+					"balance": 30001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 39001,
+					"weapon": 39001,
+					"balance": 39001
+				},
+				"baseBonusByProfile": {
+					"strMag": 9000,
+					"weapon": 9000,
+					"balance": 9000
+				},
+				"weightByProfile": {
+					"strMag": 0.125004166667,
+					"weapon": 0.07569303548,
+					"balance": 0.11647742205
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 21,
+				"transcendenceMax": 24,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 21,
+					"weapon": 21,
+					"balance": 21
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 24,
+					"weapon": 24,
+					"balance": 24
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.05519053877,
+					"weapon": 0.02759526939,
+					"balance": 0.04139290407
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 301,
+				"transcendenceMax": 391,
+				"baseBonus": 90,
+				"baseMaxByProfile": {
+					"strMag": 301,
+					"weapon": 301,
+					"balance": 301
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 391,
+					"weapon": 391,
+					"balance": 391
+				},
+				"baseBonusByProfile": {
+					"strMag": 90,
+					"weapon": 90,
+					"balance": 90
+				},
+				"weightByProfile": {
+					"strMag": 0.08241054131,
+					"weapon": 0.13180541311,
+					"balance": 0.09888407407
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			}
+		],
+		"spiritStone": [
+			{
+				"key": "strPercent",
+				"label": "Strength %",
+				"baseMax": 14,
+				"transcendenceMax": 17,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 17,
+					"weapon": 17,
+					"balance": 17
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.246,
+					"weapon": 0.202,
+					"balance": 0.222
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력%"
+			},
+			{
+				"key": "maxDamage",
+				"label": "Maximum damage",
+				"baseMax": 161,
+				"transcendenceMax": 209,
+				"baseBonus": 48,
+				"baseMaxByProfile": {
+					"strMag": 161,
+					"weapon": 161,
+					"balance": 161
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 209,
+					"weapon": 209,
+					"balance": 209
+				},
+				"baseBonusByProfile": {
+					"strMag": 48,
+					"weapon": 48,
+					"balance": 48
+				},
+				"weightByProfile": {
+					"strMag": 0.278,
+					"weapon": 0.296,
+					"balance": 0.313
+				},
+				"includeInTotal": true,
+				"originalLabel": "최대 대미지"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 161,
+				"transcendenceMax": 209,
+				"baseBonus": 48,
+				"baseMaxByProfile": {
+					"strMag": 161,
+					"weapon": 161,
+					"balance": 161
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 209,
+					"weapon": 209,
+					"balance": 209
+				},
+				"baseBonusByProfile": {
+					"strMag": 48,
+					"weapon": 48,
+					"balance": 48
+				},
+				"weightByProfile": {
+					"strMag": 0.159,
+					"weapon": 0.169,
+					"balance": 0.179
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 18001,
+				"transcendenceMax": 23401,
+				"baseBonus": 5400,
+				"baseMaxByProfile": {
+					"strMag": 18001,
+					"weapon": 18001,
+					"balance": 18001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 23401,
+					"weapon": 23401,
+					"balance": 23401
+				},
+				"baseBonusByProfile": {
+					"strMag": 5400,
+					"weapon": 5400,
+					"balance": 5400
+				},
+				"weightByProfile": {
+					"strMag": 0.159,
+					"weapon": 0.13,
+					"balance": 0.143
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 14001,
+				"transcendenceMax": 18201,
+				"baseBonus": 4200,
+				"baseMaxByProfile": {
+					"strMag": 14001,
+					"weapon": 14001,
+					"balance": 14001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"baseBonusByProfile": {
+					"strMag": 4200,
+					"weapon": 4200,
+					"balance": 4200
+				},
+				"weightByProfile": {
+					"strMag": 0.159,
+					"weapon": 0.168,
+					"balance": 0.143
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack",
+				"baseMax": 201,
+				"transcendenceMax": 261,
+				"baseBonus": 60,
+				"baseMaxByProfile": {
+					"strMag": 201,
+					"weapon": 201,
+					"balance": 201
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 261,
+					"weapon": 261,
+					"balance": 261
+				},
+				"baseBonusByProfile": {
+					"strMag": 60,
+					"weapon": 60,
+					"balance": 60
+				},
+				"weightByProfile": {
+					"strMag": 0.099,
+					"weapon": 0.16,
+					"balance": 0.14
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 201,
+				"transcendenceMax": 261,
+				"baseBonus": 60,
+				"baseMaxByProfile": {
+					"strMag": 201,
+					"weapon": 201,
+					"balance": 201
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 261,
+					"weapon": 261,
+					"balance": 261
+				},
+				"baseBonusByProfile": {
+					"strMag": 60,
+					"weapon": 60,
+					"balance": 60
+				},
+				"weightByProfile": {
+					"strMag": 0.099,
+					"weapon": 0.16,
+					"balance": 0.14
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "accuracyPercent",
+				"label": "Accuracy %",
+				"baseMax": 70,
+				"transcendenceMax": 91,
+				"baseBonus": 21,
+				"baseMaxByProfile": {
+					"strMag": 70,
+					"weapon": 70,
+					"balance": 70
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 21,
+					"weapon": 21,
+					"balance": 21
+				},
+				"weightByProfile": {
+					"strMag": 0.069,
+					"weapon": 0.0735,
+					"balance": 0.099
+				},
+				"includeInTotal": true,
+				"originalLabel": "명중률%"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 14,
+				"transcendenceMax": 17,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 17,
+					"weapon": 17,
+					"balance": 17
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.069,
+					"weapon": 0.0367,
+					"balance": 0.058
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 14,
+				"transcendenceMax": 17,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 17,
+					"weapon": 17,
+					"balance": 17
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.069,
+					"weapon": 0.0734,
+					"balance": 0.078
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 18001,
+				"transcendenceMax": 23401,
+				"baseBonus": 5400,
+				"baseMaxByProfile": {
+					"strMag": 18001,
+					"weapon": 18001,
+					"balance": 18001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 23401,
+					"weapon": 23401,
+					"balance": 23401
+				},
+				"baseBonusByProfile": {
+					"strMag": 5400,
+					"weapon": 5400,
+					"balance": 5400
+				},
+				"weightByProfile": {
+					"strMag": 0.037,
+					"weapon": 0.03935,
+					"balance": 0.0417
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			},
+			{
+				"key": "bossDamage",
+				"label": "Boss monster additional damage",
+				"baseMax": 48001,
+				"transcendenceMax": 62401,
+				"baseBonus": 14400,
+				"baseMaxByProfile": {
+					"strMag": 48001,
+					"weapon": 48001,
+					"balance": 48001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 62401,
+					"weapon": 62401,
+					"balance": 62401
+				},
+				"baseBonusByProfile": {
+					"strMag": 14400,
+					"weapon": 14400,
+					"balance": 14400
+				},
+				"weightByProfile": {
+					"strMag": 0.0246,
+					"weapon": 0.013,
+					"balance": 0.0194
+				},
+				"includeInTotal": false,
+				"originalLabel": "보스 몬스터 추가 대미지"
+			},
+			{
+				"key": "normalDamage",
+				"label": "Normal monster additional damage",
+				"baseMax": 48001,
+				"transcendenceMax": 62401,
+				"baseBonus": 14400,
+				"baseMaxByProfile": {
+					"strMag": 48001,
+					"weapon": 48001,
+					"balance": 48001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 62401,
+					"weapon": 62401,
+					"balance": 62401
+				},
+				"baseBonusByProfile": {
+					"strMag": 14400,
+					"weapon": 14400,
+					"balance": 14400
+				},
+				"weightByProfile": {
+					"strMag": 0.0246,
+					"weapon": 0.013,
+					"balance": 0.0194
+				},
+				"includeInTotal": false,
+				"originalLabel": "일반 몬스터 추가 대미지"
+			}
+		],
+		"ikaHat": [
+			{
+				"key": "accuracyPercent",
+				"label": "Accuracy %",
+				"baseMax": 171,
+				"transcendenceMax": 231,
+				"baseBonus": 60,
+				"baseMaxByProfile": {
+					"strMag": 171,
+					"weapon": 171,
+					"balance": 171
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 231,
+					"weapon": 231,
+					"balance": 231
+				},
+				"baseBonusByProfile": {
+					"strMag": 60,
+					"weapon": 60,
+					"balance": 60
+				},
+				"weightByProfile": {
+					"strMag": 0.1544,
+					"weapon": 0.1619,
+					"balance": 0.1646
+				},
+				"includeInTotal": true,
+				"originalLabel": "명중률%"
+			},
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 121,
+				"transcendenceMax": 166,
+				"baseBonus": 45,
+				"baseMaxByProfile": {
+					"strMag": 121,
+					"weapon": 121,
+					"balance": 121
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 166,
+					"weapon": 166,
+					"balance": 166
+				},
+				"baseBonusByProfile": {
+					"strMag": 45,
+					"weapon": 45,
+					"balance": 45
+				},
+				"weightByProfile": {
+					"strMag": 0.2946,
+					"weapon": 0.2905,
+					"balance": 0.2952
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "normalDomination",
+				"label": "Normal monster domination",
+				"baseMax": 5.1,
+				"transcendenceMax": 6,
+				"baseBonus": 0.9,
+				"baseMaxByProfile": {
+					"strMag": 5.1,
+					"weapon": 5.1,
+					"balance": 5.1
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 6,
+					"weapon": 6,
+					"balance": 6
+				},
+				"baseBonusByProfile": {
+					"strMag": 0.9,
+					"weapon": 0.9,
+					"balance": 0.9
+				},
+				"weightByProfile": {
+					"strMag": 0.198,
+					"weapon": 0.2077,
+					"balance": 0.211
+				},
+				"includeInTotal": true,
+				"originalLabel": "일반 지배력"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 241,
+				"transcendenceMax": 331,
+				"baseBonus": 90,
+				"baseMaxByProfile": {
+					"strMag": 241,
+					"weapon": 241,
+					"balance": 241
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 331,
+					"weapon": 331,
+					"balance": 331
+				},
+				"baseBonusByProfile": {
+					"strMag": 90,
+					"weapon": 90,
+					"balance": 90
+				},
+				"weightByProfile": {
+					"strMag": 0.111,
+					"weapon": 0.194,
+					"balance": 0.1485
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 24001,
+				"transcendenceMax": 33001,
+				"baseBonus": 9000,
+				"baseMaxByProfile": {
+					"strMag": 24001,
+					"weapon": 24001,
+					"balance": 24001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 33001,
+					"weapon": 33001,
+					"balance": 33001
+				},
+				"baseBonusByProfile": {
+					"strMag": 9000,
+					"weapon": 4200,
+					"balance": 4200
+				},
+				"weightByProfile": {
+					"strMag": 0.1762,
+					"weapon": 0.132,
+					"balance": 0.161
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 19001,
+				"transcendenceMax": 25901,
+				"baseBonus": 6900,
+				"baseMaxByProfile": {
+					"strMag": 19001,
+					"weapon": 19001,
+					"balance": 19001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 25901,
+					"weapon": 25901,
+					"balance": 25901
+				},
+				"baseBonusByProfile": {
+					"strMag": 6900,
+					"weapon": 60,
+					"balance": 60
+				},
+				"weightByProfile": {
+					"strMag": 0.1772,
+					"weapon": 0.1447,
+					"balance": 0.168
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 151,
+				"transcendenceMax": 205,
+				"baseBonus": 54,
+				"baseMaxByProfile": {
+					"strMag": 151,
+					"weapon": 151,
+					"balance": 151
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 205,
+					"weapon": 205,
+					"balance": 205
+				},
+				"baseBonusByProfile": {
+					"strMag": 54,
+					"weapon": 54,
+					"balance": 54
+				},
+				"weightByProfile": {
+					"strMag": 0.099,
+					"weapon": 0.099,
+					"balance": 0.099
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 20,
+				"transcendenceMax": 20,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 21
+				},
+				"weightByProfile": {
+					"strMag": 0.0765,
+					"weapon": 0.0406,
+					"balance": 0.062
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 13,
+				"transcendenceMax": 13,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 13,
+					"weapon": 13,
+					"balance": 13
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 13,
+					"weapon": 13,
+					"balance": 13
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.0539,
+					"weapon": 0.0563,
+					"balance": 0.0572
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 121,
+				"transcendenceMax": 121,
+				"baseBonus": 45,
+				"baseMaxByProfile": {
+					"strMag": 121,
+					"weapon": 121,
+					"balance": 121
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 121,
+					"weapon": 121,
+					"balance": 121
+				},
+				"baseBonusByProfile": {
+					"strMag": 45,
+					"weapon": 45,
+					"balance": 45
+				},
+				"weightByProfile": {
+					"strMag": 0.0555,
+					"weapon": 0.097,
+					"balance": 0.0787
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 24001,
+				"transcendenceMax": 33001,
+				"baseBonus": 9000,
+				"baseMaxByProfile": {
+					"strMag": 24001,
+					"weapon": 24001,
+					"balance": 24001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 33001,
+					"weapon": 33001,
+					"balance": 24001
+				},
+				"baseBonusByProfile": {
+					"strMag": 9000,
+					"weapon": 9000,
+					"balance": 9000
+				},
+				"weightByProfile": {
+					"strMag": 0.0503,
+					"weapon": 0.0528,
+					"balance": 0.0537
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		],
+		"ikaUpperLower": [
+			{
+				"key": "weaponAttrPercent",
+				"label": "Weapon attack / Elemental intensity %",
+				"baseMax": 20,
+				"transcendenceMax": 23,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 23,
+					"weapon": 23,
+					"balance": 23
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.1729,
+					"weapon": 0.2887,
+					"balance": 0.2331
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력%"
+			},
+			{
+				"key": "allStatPercent",
+				"label": "All stats %",
+				"baseMax": 25,
+				"transcendenceMax": 28,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 25,
+					"weapon": 25,
+					"balance": 25
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 28,
+					"weapon": 28,
+					"balance": 28
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.3368,
+					"weapon": 0.2197,
+					"balance": 0.2837
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯%"
+			},
+			{
+				"key": "maxDamage",
+				"label": "Maximum damage",
+				"baseMax": 121,
+				"transcendenceMax": 166,
+				"baseBonus": 45,
+				"baseMaxByProfile": {
+					"strMag": 121,
+					"weapon": 121,
+					"balance": 121
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 166,
+					"weapon": 166,
+					"balance": 166
+				},
+				"baseBonusByProfile": {
+					"strMag": 45,
+					"weapon": 45,
+					"balance": 45
+				},
+				"weightByProfile": {
+					"strMag": 0.1744,
+					"weapon": 0.182,
+					"balance": 0.1808
+				},
+				"includeInTotal": true,
+				"originalLabel": "최대 대미지"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 241,
+				"transcendenceMax": 331,
+				"baseBonus": 90,
+				"baseMaxByProfile": {
+					"strMag": 241,
+					"weapon": 241,
+					"balance": 241
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 331,
+					"weapon": 331,
+					"balance": 331
+				},
+				"baseBonusByProfile": {
+					"strMag": 90,
+					"weapon": 90,
+					"balance": 90
+				},
+				"weightByProfile": {
+					"strMag": 0.0992,
+					"weapon": 0.1731,
+					"balance": 0.1286
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 24001,
+				"transcendenceMax": 33001,
+				"baseBonus": 9000,
+				"baseMaxByProfile": {
+					"strMag": 24001,
+					"weapon": 24001,
+					"balance": 24001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 33001,
+					"weapon": 33001,
+					"balance": 33001
+				},
+				"baseBonusByProfile": {
+					"strMag": 9000,
+					"weapon": 9000,
+					"balance": 9000
+				},
+				"weightByProfile": {
+					"strMag": 0.1579,
+					"weapon": 0.1295,
+					"balance": 0.1481
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 19001,
+				"transcendenceMax": 25901,
+				"baseBonus": 6900,
+				"baseMaxByProfile": {
+					"strMag": 19001,
+					"weapon": 19001,
+					"balance": 19001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 25901,
+					"weapon": 25901,
+					"balance": 25901
+				},
+				"baseBonusByProfile": {
+					"strMag": 6900,
+					"weapon": 6900,
+					"balance": 6900
+				},
+				"weightByProfile": {
+					"strMag": 0.1602,
+					"weapon": 0.1365,
+					"balance": 0.1543
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 151,
+				"transcendenceMax": 206,
+				"baseBonus": 54,
+				"baseMaxByProfile": {
+					"strMag": 151,
+					"weapon": 151,
+					"balance": 151
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 206,
+					"weapon": 206,
+					"balance": 206
+				},
+				"baseBonusByProfile": {
+					"strMag": 54,
+					"weapon": 54,
+					"balance": 54
+				},
+				"weightByProfile": {
+					"strMag": 0.1233,
+					"weapon": 0.1275,
+					"balance": 0.1269
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 20,
+				"transcendenceMax": 23,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 23,
+					"weapon": 23,
+					"balance": 23
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.0692,
+					"weapon": 0.0361,
+					"balance": 0.0538
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 13,
+				"transcendenceMax": 16,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 13,
+					"weapon": 13,
+					"balance": 13
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 16,
+					"weapon": 16,
+					"balance": 16
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.0481,
+					"weapon": 0.0539,
+					"balance": 0.0523
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 121,
+				"transcendenceMax": 166,
+				"baseBonus": 45,
+				"baseMaxByProfile": {
+					"strMag": 121,
+					"weapon": 121,
+					"balance": 121
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 166,
+					"weapon": 166,
+					"balance": 166
+				},
+				"baseBonusByProfile": {
+					"strMag": 45,
+					"weapon": 45,
+					"balance": 45
+				},
+				"weightByProfile": {
+					"strMag": 0.0496,
+					"weapon": 0.0865,
+					"balance": 0.0643
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 24001,
+				"transcendenceMax": 33001,
+				"baseBonus": 9000,
+				"baseMaxByProfile": {
+					"strMag": 24001,
+					"weapon": 24001,
+					"balance": 24001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 33001,
+					"weapon": 33001,
+					"balance": 33001
+				},
+				"baseBonusByProfile": {
+					"strMag": 9000,
+					"weapon": 9000,
+					"balance": 9000
+				},
+				"weightByProfile": {
+					"strMag": 0.0466,
+					"weapon": 0.0494,
+					"balance": 0.0503
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		],
+		"ikaGloves": [
+			{
+				"key": "weaponAttrPercent",
+				"label": "Weapon attack / Elemental intensity %",
+				"baseMax": 20,
+				"transcendenceMax": 23,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 23,
+					"weapon": 23,
+					"balance": 23
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.1882,
+					"weapon": 0.2757,
+					"balance": 0.2375
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력%"
+			},
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 121,
+				"transcendenceMax": 166,
+				"baseBonus": 45,
+				"baseMaxByProfile": {
+					"strMag": 121,
+					"weapon": 121,
+					"balance": 121
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 166,
+					"weapon": 166,
+					"balance": 166
+				},
+				"baseBonusByProfile": {
+					"strMag": 45,
+					"weapon": 45,
+					"balance": 45
+				},
+				"weightByProfile": {
+					"strMag": 0.2717,
+					"weapon": 0.2488,
+					"balance": 0.2637
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "bossDomination",
+				"label": "Boss monster domination",
+				"baseMax": 5.1,
+				"transcendenceMax": 6,
+				"baseBonus": 0.9,
+				"baseMaxByProfile": {
+					"strMag": 5.1,
+					"weapon": 5.1,
+					"balance": 5.1
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 6,
+					"weapon": 6,
+					"balance": 6
+				},
+				"baseBonusByProfile": {
+					"strMag": 0.9,
+					"weapon": 0.9,
+					"balance": 0.9
+				},
+				"weightByProfile": {
+					"strMag": 0.1842,
+					"weapon": 0.1798,
+					"balance": 0.1806
+				},
+				"includeInTotal": true,
+				"originalLabel": "보스 몬스터 지배력"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 241,
+				"transcendenceMax": 331,
+				"baseBonus": 90,
+				"baseMaxByProfile": {
+					"strMag": 241,
+					"weapon": 241,
+					"balance": 241
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 331,
+					"weapon": 331,
+					"balance": 331
+				},
+				"baseBonusByProfile": {
+					"strMag": 90,
+					"weapon": 90,
+					"balance": 90
+				},
+				"weightByProfile": {
+					"strMag": 0.108,
+					"weapon": 0.1653,
+					"balance": 0.1311
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 24001,
+				"transcendenceMax": 33001,
+				"baseBonus": 9000,
+				"baseMaxByProfile": {
+					"strMag": 24001,
+					"weapon": 24001,
+					"balance": 24001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 33001,
+					"weapon": 33001,
+					"balance": 33001
+				},
+				"baseBonusByProfile": {
+					"strMag": 9000,
+					"weapon": 9000,
+					"balance": 9000
+				},
+				"weightByProfile": {
+					"strMag": 0.1718,
+					"weapon": 0.1236,
+					"balance": 0.1509
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 19001,
+				"transcendenceMax": 25901,
+				"baseBonus": 6900,
+				"baseMaxByProfile": {
+					"strMag": 19001,
+					"weapon": 19001,
+					"balance": 19001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 25901,
+					"weapon": 25901,
+					"balance": 25901
+				},
+				"baseBonusByProfile": {
+					"strMag": 6900,
+					"weapon": 6900,
+					"balance": 6900
+				},
+				"weightByProfile": {
+					"strMag": 0.184,
+					"weapon": 0.1304,
+					"balance": 0.1673
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 151,
+				"transcendenceMax": 206,
+				"baseBonus": 54,
+				"baseMaxByProfile": {
+					"strMag": 151,
+					"weapon": 151,
+					"balance": 151
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 206,
+					"weapon": 206,
+					"balance": 206
+				},
+				"baseBonusByProfile": {
+					"strMag": 54,
+					"weapon": 54,
+					"balance": 54
+				},
+				"weightByProfile": {
+					"strMag": 0.1233,
+					"weapon": 0.1245,
+					"balance": 0.1303
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 20,
+				"transcendenceMax": 23,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 23,
+					"weapon": 23,
+					"balance": 23
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.0692,
+					"weapon": 0.048,
+					"balance": 0.0548
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 13,
+				"transcendenceMax": 16,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 13,
+					"weapon": 13,
+					"balance": 13
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 16,
+					"weapon": 16,
+					"balance": 16
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.0481,
+					"weapon": 0.047,
+					"balance": 0.0508
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 121,
+				"transcendenceMax": 166,
+				"baseBonus": 45,
+				"baseMaxByProfile": {
+					"strMag": 121,
+					"weapon": 121,
+					"balance": 121
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 166,
+					"weapon": 166,
+					"balance": 166
+				},
+				"baseBonusByProfile": {
+					"strMag": 45,
+					"weapon": 45,
+					"balance": 45
+				},
+				"weightByProfile": {
+					"strMag": 0.0496,
+					"weapon": 0.0827,
+					"balance": 0.0655
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 24001,
+				"transcendenceMax": 33001,
+				"baseBonus": 9000,
+				"baseMaxByProfile": {
+					"strMag": 24001,
+					"weapon": 24001,
+					"balance": 24001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 33001,
+					"weapon": 33001,
+					"balance": 33001
+				},
+				"baseBonusByProfile": {
+					"strMag": 9000,
+					"weapon": 9000,
+					"balance": 9000
+				},
+				"weightByProfile": {
+					"strMag": 0.0466,
+					"weapon": 0.047,
+					"balance": 0.0492
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		],
+		"ikaShoes": [
+			{
+				"key": "moveSpeedPercent",
+				"label": "Movement speed %",
+				"baseMax": 171,
+				"transcendenceMax": 231,
+				"baseBonus": 60,
+				"baseMaxByProfile": {
+					"strMag": 171,
+					"weapon": 171,
+					"balance": 171
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 231,
+					"weapon": 231,
+					"balance": 231
+				},
+				"baseBonusByProfile": {
+					"strMag": 60,
+					"weapon": 60,
+					"balance": 60
+				},
+				"weightByProfile": {
+					"strMag": 0.0915,
+					"weapon": 0.1312,
+					"balance": 0.1236
+				},
+				"includeInTotal": true,
+				"originalLabel": "이동속도%"
+			},
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 151,
+				"transcendenceMax": 205,
+				"baseBonus": 54,
+				"baseMaxByProfile": {
+					"strMag": 151,
+					"weapon": 151,
+					"balance": 151
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 205,
+					"weapon": 205,
+					"balance": 205
+				},
+				"baseBonusByProfile": {
+					"strMag": 54,
+					"weapon": 54,
+					"balance": 54
+				},
+				"weightByProfile": {
+					"strMag": 0.281,
+					"weapon": 0.3281,
+					"balance": 0.309
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "allStatPercent",
+				"label": "All stats %",
+				"baseMax": 25,
+				"transcendenceMax": 28,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 25,
+					"weapon": 25,
+					"balance": 25
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 28,
+					"weapon": 28,
+					"balance": 28
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.3077,
+					"weapon": 0.2241,
+					"balance": 0.2743
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯%"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 241,
+				"transcendenceMax": 331,
+				"baseBonus": 90,
+				"baseMaxByProfile": {
+					"strMag": 241,
+					"weapon": 241,
+					"balance": 241
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 331,
+					"weapon": 331,
+					"balance": 331
+				},
+				"baseBonusByProfile": {
+					"strMag": 90,
+					"weapon": 90,
+					"balance": 90
+				},
+				"weightByProfile": {
+					"strMag": 0.0885,
+					"weapon": 0.1765,
+					"balance": 0.1243
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 24001,
+				"transcendenceMax": 33001,
+				"baseBonus": 9000,
+				"baseMaxByProfile": {
+					"strMag": 24001,
+					"weapon": 24001,
+					"balance": 24001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 33001,
+					"weapon": 33001,
+					"balance": 33001
+				},
+				"baseBonusByProfile": {
+					"strMag": 9000,
+					"weapon": 9000,
+					"balance": 9000
+				},
+				"weightByProfile": {
+					"strMag": 0.1456,
+					"weapon": 0.132,
+					"balance": 0.1432
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 19001,
+				"transcendenceMax": 25901,
+				"baseBonus": 6900,
+				"baseMaxByProfile": {
+					"strMag": 19001,
+					"weapon": 19001,
+					"balance": 19001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 25901,
+					"weapon": 25901,
+					"balance": 25901
+				},
+				"baseBonusByProfile": {
+					"strMag": 6900,
+					"weapon": 6900,
+					"balance": 6900
+				},
+				"weightByProfile": {
+					"strMag": 0.1554,
+					"weapon": 0.1392,
+					"balance": 0.1492
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 151,
+				"transcendenceMax": 205,
+				"baseBonus": 54,
+				"baseMaxByProfile": {
+					"strMag": 151,
+					"weapon": 151,
+					"balance": 151
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 205,
+					"weapon": 205,
+					"balance": 205
+				},
+				"baseBonusByProfile": {
+					"strMag": 54,
+					"weapon": 54,
+					"balance": 54
+				},
+				"weightByProfile": {
+					"strMag": 0.1137,
+					"weapon": 0.1312,
+					"balance": 0.1236
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 20,
+				"transcendenceMax": 23,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 23,
+					"weapon": 23,
+					"balance": 23
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.0638,
+					"weapon": 0.0368,
+					"balance": 0.052
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 13,
+				"transcendenceMax": 16,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 13,
+					"weapon": 13,
+					"balance": 13
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 16,
+					"weapon": 16,
+					"balance": 16
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.0444,
+					"weapon": 0.0512,
+					"balance": 0.0482
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 121,
+				"transcendenceMax": 166,
+				"baseBonus": 45,
+				"baseMaxByProfile": {
+					"strMag": 121,
+					"weapon": 121,
+					"balance": 121
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 166,
+					"weapon": 166,
+					"balance": 166
+				},
+				"baseBonusByProfile": {
+					"strMag": 45,
+					"weapon": 45,
+					"balance": 45
+				},
+				"weightByProfile": {
+					"strMag": 0.0458,
+					"weapon": 0.0883,
+					"balance": 0.0622
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 24001,
+				"transcendenceMax": 33001,
+				"baseBonus": 9000,
+				"baseMaxByProfile": {
+					"strMag": 24001,
+					"weapon": 24001,
+					"balance": 24001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 33001,
+					"weapon": 33001,
+					"balance": 33001
+				},
+				"baseBonusByProfile": {
+					"strMag": 9000,
+					"weapon": 9000,
+					"balance": 9000
+				},
+				"weightByProfile": {
+					"strMag": 0.0444,
+					"weapon": 0.0512,
+					"balance": 0.0482
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		],
+		"gardenHat": [
+			{
+				"key": "accuracyPercent",
+				"label": "Accuracy %",
+				"baseMax": 197,
+				"transcendenceMax": 197,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 197,
+					"weapon": 197,
+					"balance": 197
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 197,
+					"weapon": 197,
+					"balance": 197
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.2193,
+					"weapon": 0.2297,
+					"balance": 0.2265
+				},
+				"includeInTotal": true,
+				"originalLabel": "명중률%"
+			},
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.2475,
+					"weapon": 0.2551,
+					"balance": 0.2514
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "normalDomination",
+				"label": "Normal monster domination",
+				"baseMax": 5.3,
+				"transcendenceMax": 5.3,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 5.3,
+					"weapon": 5.3,
+					"balance": 5.3
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 5.3,
+					"weapon": 5.3,
+					"balance": 5.3
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.197,
+					"weapon": 0.2064,
+					"balance": 0.2035
+				},
+				"includeInTotal": true,
+				"originalLabel": "일반 지배력"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 221,
+				"transcendenceMax": 221,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 221,
+					"weapon": 221,
+					"balance": 221
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 221,
+					"weapon": 221,
+					"balance": 221
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0822,
+					"weapon": 0.1577,
+					"balance": 0.1166
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMagCombined",
+				"label": "Strength / Magic + Strength or Magic",
+				"baseMax": 52002,
+				"transcendenceMax": 52002,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 52002,
+					"weapon": 52002,
+					"balance": 52002
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 52002,
+					"weapon": 52002,
+					"balance": 52002
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.3141,
+					"weapon": 0.2531,
+					"balance": 0.2994
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력 + 근력 또는 마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 20801,
+				"transcendenceMax": 20801,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 20801,
+					"weapon": 20801,
+					"balance": 20801
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 20801,
+					"weapon": 20801,
+					"balance": 20801
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.1747,
+					"weapon": 0.1519,
+					"balance": 0.1651
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.1217,
+					"weapon": 0.1275,
+					"balance": 0.1257
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 14,
+				"transcendenceMax": 14,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.052,
+					"weapon": 0.0273,
+					"balance": 0.0403
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 14,
+				"transcendenceMax": 14,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.052,
+					"weapon": 0.0545,
+					"balance": 0.0537
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0487,
+					"weapon": 0.085,
+					"balance": 0.0619
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 26001,
+				"transcendenceMax": 26001,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 26001,
+					"weapon": 26001,
+					"balance": 26001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 26001,
+					"weapon": 26001,
+					"balance": 26001
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.052,
+					"weapon": 0.0545,
+					"balance": 0.0537
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		],
+		"gardenUpperLower": [
+			{
+				"key": "weaponAttrPercent",
+				"label": "Weapon attack / Elemental intensity %",
+				"baseMax": 20,
+				"transcendenceMax": 20,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.188,
+					"weapon": 0.2783,
+					"balance": 0.2339
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력%"
+			},
+			{
+				"key": "allStatPercent",
+				"label": "All stats %",
+				"baseMax": 25,
+				"transcendenceMax": 25,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 25,
+					"weapon": 25,
+					"balance": 25
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 25,
+					"weapon": 25,
+					"balance": 25
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.3289,
+					"weapon": 0.2485,
+					"balance": 0.2924
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯%"
+			},
+			{
+				"key": "maxDamage",
+				"label": "Maximum damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.1477,
+					"weapon": 0.1563,
+					"balance": 0.1532
+				},
+				"includeInTotal": true,
+				"originalLabel": "최대 대미지"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 221,
+				"transcendenceMax": 221,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 221,
+					"weapon": 221,
+					"balance": 221
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 221,
+					"weapon": 221,
+					"balance": 221
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0831,
+					"weapon": 0.161,
+					"balance": 0.1184
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMagCombined",
+				"label": "Strength / Magic + Strength or Magic",
+				"baseMax": 52002,
+				"transcendenceMax": 52002,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 52002,
+					"weapon": 52001,
+					"balance": 52001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 52002,
+					"weapon": 52001,
+					"balance": 52001
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.3177,
+					"weapon": 0.2584,
+					"balance": 0.3041
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력 + 근력 또는 마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 20801,
+				"transcendenceMax": 20801,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 20801,
+					"weapon": 20801,
+					"balance": 20801
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 20801,
+					"weapon": 20801,
+					"balance": 20801
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.1767,
+					"weapon": 0.1551,
+					"balance": 0.1676
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.1231,
+					"weapon": 0.1302,
+					"balance": 0.1277
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 14,
+				"transcendenceMax": 14,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0526,
+					"weapon": 0.0278,
+					"balance": 0.0409
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 14,
+				"transcendenceMax": 14,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0526,
+					"weapon": 0.0557,
+					"balance": 0.0546
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0492,
+					"weapon": 0.0868,
+					"balance": 0.0629
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 26001,
+				"transcendenceMax": 26001,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 26001,
+					"weapon": 26001,
+					"balance": 26001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 26001,
+					"weapon": 26001,
+					"balance": 26001
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0526,
+					"weapon": 0.0557,
+					"balance": 0.0546
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		],
+		"gardenGloves": [
+			{
+				"key": "weaponAttrPercent",
+				"label": "Weapon attack / Elemental intensity %",
+				"baseMax": 20,
+				"transcendenceMax": 20,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 20,
+					"weapon": 20,
+					"balance": 20
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.196114,
+					"weapon": 0.261194,
+					"balance": 0.224834
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력%"
+			},
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.255049,
+					"weapon": 0.244403,
+					"balance": 0.24636
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "bossDomination",
+				"label": "Boss monster domination",
+				"baseMax": 5.3,
+				"transcendenceMax": 5.3,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 5.3,
+					"weapon": 5.3,
+					"balance": 5.3
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 5.3,
+					"weapon": 5.3,
+					"balance": 5.3
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.206521,
+					"weapon": 0.197761,
+					"balance": 0.197436
+				},
+				"includeInTotal": true,
+				"originalLabel": "보스 몬스터 지배력"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 221,
+				"transcendenceMax": 221,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 221,
+					"weapon": 221,
+					"balance": 221
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 221,
+					"weapon": 221,
+					"balance": 221
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.08403,
+					"weapon": 0.151119,
+					"balance": 0.128885
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMagCombined",
+				"label": "Strength / Magic + Strength or Magic",
+				"baseMax": 52002,
+				"transcendenceMax": 52002,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 52002,
+					"weapon": 52002,
+					"balance": 52002
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 52002,
+					"weapon": 52002,
+					"balance": 52002
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.321293,
+					"weapon": 0.266791,
+					"balance": 0.307284
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력 + 근력 또는 마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 20801,
+				"transcendenceMax": 20801,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 20801,
+					"weapon": 20801,
+					"balance": 20801
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 20801,
+					"weapon": 20801,
+					"balance": 20801
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.178707,
+					"weapon": 0.145522,
+					"balance": 0.174297
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.124525,
+					"weapon": 0.122201,
+					"balance": 0.12818
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 14,
+				"transcendenceMax": 14,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.053232,
+					"weapon": 0.052239,
+					"balance": 0.054795
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 14,
+				"transcendenceMax": 14,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.053232,
+					"weapon": 0.052239,
+					"balance": 0.054795
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.04981,
+					"weapon": 0.081455,
+					"balance": 0.063112
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 26001,
+				"transcendenceMax": 26001,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 26001,
+					"weapon": 26001,
+					"balance": 26001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 26001,
+					"weapon": 26001,
+					"balance": 26001
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.053232,
+					"weapon": 0.052239,
+					"balance": 0.054795
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		],
+		"gardenShoes": [
+			{
+				"key": "moveSpeedPercent",
+				"label": "Movement speed %",
+				"baseMax": 197,
+				"transcendenceMax": 197,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 197,
+					"weapon": 197,
+					"balance": 197
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 197,
+					"weapon": 197,
+					"balance": 197
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.1331,
+					"weapon": 0.119,
+					"balance": 0.1324
+				},
+				"includeInTotal": true,
+				"originalLabel": "이동속도%"
+			},
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 197,
+				"transcendenceMax": 197,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 197,
+					"weapon": 197,
+					"balance": 197
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 197,
+					"weapon": 197,
+					"balance": 197
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.3102,
+					"weapon": 0.3608,
+					"balance": 0.3345
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "allStatPercent",
+				"label": "All stats %",
+				"baseMax": 25,
+				"transcendenceMax": 25,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 25,
+					"weapon": 25,
+					"balance": 25
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 25,
+					"weapon": 25,
+					"balance": 25
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.2756,
+					"weapon": 0.2289,
+					"balance": 0.2547
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯%"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 221,
+				"transcendenceMax": 221,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 221,
+					"weapon": 221,
+					"balance": 221
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 221,
+					"weapon": 221,
+					"balance": 221
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0696,
+					"weapon": 0.1484,
+					"balance": 0.1031
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMagCombined",
+				"label": "Strength / Magic + Strength or Magic",
+				"baseMax": 52002,
+				"transcendenceMax": 52002,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 52002,
+					"weapon": 52002,
+					"balance": 52002
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 52002,
+					"weapon": 52002,
+					"balance": 52002
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.2661,
+					"weapon": 0.2381,
+					"balance": 0.2649
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력 + 근력 또는 마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 20801,
+				"transcendenceMax": 20801,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 20801,
+					"weapon": 20801,
+					"balance": 20801
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 20801,
+					"weapon": 20801,
+					"balance": 20801
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.148,
+					"weapon": 0.1429,
+					"balance": 0.146
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.1031,
+					"weapon": 0.12,
+					"balance": 0.1112
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 14,
+				"transcendenceMax": 14,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0441,
+					"weapon": 0.0256,
+					"balance": 0.0357
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 14,
+				"transcendenceMax": 14,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0441,
+					"weapon": 0.0513,
+					"balance": 0.0475
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 131,
+				"transcendenceMax": 131,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 131,
+					"weapon": 131,
+					"balance": 131
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0413,
+					"weapon": 0.08,
+					"balance": 0.0548
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 26001,
+				"transcendenceMax": 26001,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 26001,
+					"weapon": 26001,
+					"balance": 26001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 26001,
+					"weapon": 26001,
+					"balance": 26001
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0441,
+					"weapon": 0.0513,
+					"balance": 0.0475
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		],
+		"tearEarring": [
+			{
+				"key": "maxDamage",
+				"label": "Maximum damage",
+				"baseMax": 91,
+				"transcendenceMax": 91,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.20083682,
+					"weapon": 0.19904624,
+					"balance": 0.20242488
+				},
+				"includeInTotal": true,
+				"originalLabel": "최대 대미지"
+			},
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 91,
+				"transcendenceMax": 91,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.28661088,
+					"weapon": 0.28405557,
+					"balance": 0.28887717
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "penetration",
+				"label": "Penetration",
+				"baseMax": 53,
+				"transcendenceMax": 53,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 53,
+					"weapon": 53,
+					"balance": 53
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 53,
+					"weapon": 53,
+					"balance": 53
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.041841,
+					"weapon": 0.04146797,
+					"balance": 0.04217185
+				},
+				"includeInTotal": true,
+				"originalLabel": "관통력"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 157,
+				"transcendenceMax": 157,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 157,
+					"weapon": 157,
+					"balance": 157
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 157,
+					"weapon": 157,
+					"balance": 157
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.13849372,
+					"weapon": 0.22869583,
+					"balance": 0.17343173
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 18201,
+				"transcendenceMax": 18201,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.19037657,
+					"weapon": 0.13477089,
+					"balance": 0.16447022
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 14301,
+				"transcendenceMax": 14301,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14301,
+					"weapon": 14301,
+					"balance": 14301
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14301,
+					"weapon": 14301,
+					"balance": 14301
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.18410042,
+					"weapon": 0.15343147,
+					"balance": 0.17079599
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 91,
+				"transcendenceMax": 91,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.10460251,
+					"weapon": 0.10366991,
+					"balance": 0.10542963
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 12,
+				"transcendenceMax": 12,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.06694561,
+					"weapon": 0.03317437,
+					"balance": 0.05060622
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 12,
+				"transcendenceMax": 12,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.05439331,
+					"weapon": 0.05390836,
+					"balance": 0.05482341
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 91,
+				"transcendenceMax": 91,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.05230126,
+					"weapon": 0.08770475,
+					"balance": 0.06589352
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 18201,
+				"transcendenceMax": 18201,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.05648536,
+					"weapon": 0.05598175,
+					"balance": 0.056932
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			},
+			{
+				"key": "normalDamagePercent",
+				"label": "Normal monster additional damage %",
+				"baseMax": 12,
+				"transcendenceMax": 12,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.057842,
+					"weapon": 0.04026,
+					"balance": 0.04964
+				},
+				"includeInTotal": true,
+				"originalLabel": "일반 몬스터 추가 대미지%"
+			},
+			{
+				"key": "fixedDamage",
+				"label": "Fixed damage",
+				"baseMax": 32401,
+				"transcendenceMax": 32401,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 32401,
+					"weapon": 32401,
+					"balance": 32401
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 32401,
+					"weapon": 32401,
+					"balance": 32401
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.064568,
+					"weapon": 0.03077,
+					"balance": 0.04803
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지"
+			}
+		],
+		"tearCloak": [
+			{
+				"key": "allStatPercent",
+				"label": "All stats %",
+				"baseMax": 17,
+				"transcendenceMax": 17,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 17,
+					"weapon": 17,
+					"balance": 17
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 17,
+					"weapon": 17,
+					"balance": 17
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.33957553,
+					"weapon": 0.24702121,
+					"balance": 0.30211893
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯%"
+			},
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 91,
+				"transcendenceMax": 91,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.22721598,
+					"weapon": 0.26445801,
+					"balance": 0.24880383
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "fixedDamage",
+				"label": "Fixed damage",
+				"baseMax": 32401,
+				"transcendenceMax": 32401,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 32401,
+					"weapon": 32401,
+					"balance": 32401
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 32401,
+					"weapon": 32401,
+					"balance": 32401
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.06242197,
+					"weapon": 0.03632665,
+					"balance": 0.05126452
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 209,
+				"transcendenceMax": 209,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 209,
+					"weapon": 209,
+					"balance": 209
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 209,
+					"weapon": 209,
+					"balance": 209
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.10436954,
+					"weapon": 0.20226678,
+					"balance": 0.14285714
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 18201,
+				"transcendenceMax": 18201,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.15730337,
+					"weapon": 0.13077594,
+					"balance": 0.14764183
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 14301,
+				"transcendenceMax": 14301,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14301,
+					"weapon": 14301,
+					"balance": 14301
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14301,
+					"weapon": 14301,
+					"balance": 14301
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.16229713,
+					"weapon": 0.15402499,
+					"balance": 0.15857826
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 91,
+				"transcendenceMax": 91,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.11360799,
+					"weapon": 0.132229,
+					"balance": 0.12440191
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 12,
+				"transcendenceMax": 12,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.05992509,
+					"weapon": 0.03487358,
+					"balance": 0.04921394
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 12,
+				"transcendenceMax": 12,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.05992509,
+					"weapon": 0.06974717,
+					"balance": 0.06561859
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 91,
+				"transcendenceMax": 91,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0454432,
+					"weapon": 0.0880558,
+					"balance": 0.06220096
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 18201,
+				"transcendenceMax": 18201,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.0474407,
+					"weapon": 0.05521651,
+					"balance": 0.05194805
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			},
+			{
+				"key": "normalDamagePercent",
+				"label": "Normal monster additional damage %",
+				"baseMax": 12,
+				"transcendenceMax": 12,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.05992509,
+					"weapon": 0.03487358,
+					"balance": 0.04921394
+				},
+				"includeInTotal": true,
+				"originalLabel": "일반 몬스터 추가 대미지%"
+			},
+			{
+				"key": "bossDamagePercent",
+				"label": "Boss monster additional damage %",
+				"baseMax": 12,
+				"transcendenceMax": 12,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.05992509,
+					"weapon": 0.03487358,
+					"balance": 0.04921394
+				},
+				"includeInTotal": true,
+				"originalLabel": "보스 몬스터 추가 대미지%"
+			}
+		],
+		"tearRing": [
+			{
+				"key": "weaponAttrPercent",
+				"label": "Weapon attack / Elemental intensity %",
+				"baseMax": 15,
+				"transcendenceMax": 15,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 15,
+					"weapon": 15,
+					"balance": 15
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 15,
+					"weapon": 15,
+					"balance": 15
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.201776,
+					"weapon": 0.307692,
+					"balance": 0.260208
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력%"
+			},
+			{
+				"key": "maxDamage",
+				"label": "Maximum damage",
+				"baseMax": 91,
+				"transcendenceMax": 91,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.171375,
+					"weapon": 0.163333,
+					"balance": 0.170003
+				},
+				"includeInTotal": true,
+				"originalLabel": "최대 대미지"
+			},
+			{
+				"key": "cooldownReduction",
+				"label": "Cooldown reduction",
+				"baseMax": 6.5,
+				"transcendenceMax": 6.5,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 6.5,
+					"weapon": 6.5,
+					"balance": 6.5
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 6.5,
+					"weapon": 6.5,
+					"balance": 6.5
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.282486,
+					"weapon": 0.269231,
+					"balance": 0.280224
+				},
+				"includeInTotal": true,
+				"originalLabel": "쿨타임 감소"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 157,
+				"transcendenceMax": 157,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 157,
+					"weapon": 157,
+					"balance": 157
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 157,
+					"weapon": 157,
+					"balance": 157
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.084477,
+					"weapon": 0.134179,
+					"balance": 0.10475
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 18201,
+				"transcendenceMax": 18201,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.169492,
+					"weapon": 0.102564,
+					"balance": 0.137443
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 14301,
+				"transcendenceMax": 14301,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 14301,
+					"weapon": 14301,
+					"balance": 14301
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 14301,
+					"weapon": 14301,
+					"balance": 14301
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.174872,
+					"weapon": 0.125641,
+					"balance": 0.152122
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 91,
+				"transcendenceMax": 91,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.122411,
+					"weapon": 0.116667,
+					"balance": 0.12143
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 12,
+				"transcendenceMax": 12,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.064568,
+					"weapon": 0.030769,
+					"balance": 0.048038
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 12,
+				"transcendenceMax": 12,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.064568,
+					"weapon": 0.061538,
+					"balance": 0.064051
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 91,
+				"transcendenceMax": 91,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 91,
+					"weapon": 91,
+					"balance": 91
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.048964,
+					"weapon": 0.077769,
+					"balance": 0.060715
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 18201,
+				"transcendenceMax": 18201,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 18201,
+					"weapon": 18201,
+					"balance": 18201
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.051116,
+					"weapon": 0.048718,
+					"balance": 0.050707
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			},
+			{
+				"key": "fixedDamage",
+				"label": "Fixed damage",
+				"baseMax": 32401,
+				"transcendenceMax": 32401,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 32401,
+					"weapon": 32401,
+					"balance": 32401
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 32401,
+					"weapon": 32401,
+					"balance": 32401
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.057842,
+					"weapon": 0.04026,
+					"balance": 0.04964
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지"
+			},
+			{
+				"key": "bossDamagePercent",
+				"label": "Boss monster additional damage %",
+				"baseMax": 12,
+				"transcendenceMax": 12,
+				"baseBonus": 0,
+				"baseMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 12,
+					"weapon": 12,
+					"balance": 12
+				},
+				"baseBonusByProfile": {
+					"strMag": 0,
+					"weapon": 0,
+					"balance": 0
+				},
+				"weightByProfile": {
+					"strMag": 0.064568,
+					"weapon": 0.03077,
+					"balance": 0.04803
+				},
+				"includeInTotal": true,
+				"originalLabel": "보스 몬스터 추가 대미지%"
+			}
+		],
+		"belialEarring": [
+			{
+				"key": "maxDamage",
+				"label": "Maximum damage",
+				"baseMax": 101,
+				"transcendenceMax": 137,
+				"baseBonus": 36,
+				"baseMaxByProfile": {
+					"strMag": 101,
+					"weapon": 101,
+					"balance": 101
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 137,
+					"weapon": 137,
+					"balance": 137
+				},
+				"baseBonusByProfile": {
+					"strMag": 36,
+					"weapon": 36,
+					"balance": 36
+				},
+				"weightByProfile": {
+					"strMag": 0.20083682,
+					"weapon": 0.19904624,
+					"balance": 0.20242488
+				},
+				"includeInTotal": true,
+				"originalLabel": "최대 대미지"
+			},
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 101,
+				"transcendenceMax": 137,
+				"baseBonus": 36,
+				"baseMaxByProfile": {
+					"strMag": 101,
+					"weapon": 101,
+					"balance": 101
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 137,
+					"weapon": 137,
+					"balance": 137
+				},
+				"baseBonusByProfile": {
+					"strMag": 36,
+					"weapon": 36,
+					"balance": 36
+				},
+				"weightByProfile": {
+					"strMag": 0.28661088,
+					"weapon": 0.28405557,
+					"balance": 0.28887717
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "penetration",
+				"label": "Penetration",
+				"baseMax": 51,
+				"transcendenceMax": 69,
+				"baseBonus": 18,
+				"baseMaxByProfile": {
+					"strMag": 51,
+					"weapon": 51,
+					"balance": 51
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 69,
+					"weapon": 69,
+					"balance": 69
+				},
+				"baseBonusByProfile": {
+					"strMag": 18,
+					"weapon": 18,
+					"balance": 18
+				},
+				"weightByProfile": {
+					"strMag": 0.041841,
+					"weapon": 0.04146797,
+					"balance": 0.04217185
+				},
+				"includeInTotal": true,
+				"originalLabel": "관통력"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 161,
+				"transcendenceMax": 221,
+				"baseBonus": 60,
+				"baseMaxByProfile": {
+					"strMag": 161,
+					"weapon": 161,
+					"balance": 161
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 221,
+					"weapon": 221,
+					"balance": 221
+				},
+				"baseBonusByProfile": {
+					"strMag": 60,
+					"weapon": 60,
+					"balance": 60
+				},
+				"weightByProfile": {
+					"strMag": 0.13849372,
+					"weapon": 0.22869583,
+					"balance": 0.17343173
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 20001,
+				"transcendenceMax": 27501,
+				"baseBonus": 7500,
+				"baseMaxByProfile": {
+					"strMag": 20001,
+					"weapon": 20001,
+					"balance": 20001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 27501,
+					"weapon": 27501,
+					"balance": 27501
+				},
+				"baseBonusByProfile": {
+					"strMag": 7500,
+					"weapon": 7500,
+					"balance": 7500
+				},
+				"weightByProfile": {
+					"strMag": 0.19037657,
+					"weapon": 0.13477089,
+					"balance": 0.16447022
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 15001,
+				"transcendenceMax": 20401,
+				"baseBonus": 5400,
+				"baseMaxByProfile": {
+					"strMag": 15001,
+					"weapon": 15001,
+					"balance": 15001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 20401,
+					"weapon": 20401,
+					"balance": 20401
+				},
+				"baseBonusByProfile": {
+					"strMag": 5400,
+					"weapon": 5400,
+					"balance": 5400
+				},
+				"weightByProfile": {
+					"strMag": 0.18410042,
+					"weapon": 0.15343147,
+					"balance": 0.17079599
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 101,
+				"transcendenceMax": 125,
+				"baseBonus": 24,
+				"baseMaxByProfile": {
+					"strMag": 101,
+					"weapon": 101,
+					"balance": 101
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 125,
+					"weapon": 125,
+					"balance": 125
+				},
+				"baseBonusByProfile": {
+					"strMag": 24,
+					"weapon": 24,
+					"balance": 24
+				},
+				"weightByProfile": {
+					"strMag": 0.10460251,
+					"weapon": 0.10366991,
+					"balance": 0.10542963
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 16,
+				"transcendenceMax": 19,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 16,
+					"weapon": 16,
+					"balance": 16
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 19,
+					"weapon": 19,
+					"balance": 19
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.06694561,
+					"weapon": 0.03317437,
+					"balance": 0.05060622
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 13,
+				"transcendenceMax": 16,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 13,
+					"weapon": 13,
+					"balance": 13
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 16,
+					"weapon": 16,
+					"balance": 16
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.05439331,
+					"weapon": 0.05390836,
+					"balance": 0.05482341
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 101,
+				"transcendenceMax": 125,
+				"baseBonus": 24,
+				"baseMaxByProfile": {
+					"strMag": 101,
+					"weapon": 101,
+					"balance": 101
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 125,
+					"weapon": 125,
+					"balance": 125
+				},
+				"baseBonusByProfile": {
+					"strMag": 24,
+					"weapon": 24,
+					"balance": 24
+				},
+				"weightByProfile": {
+					"strMag": 0.05230126,
+					"weapon": 0.08770475,
+					"balance": 0.06589352
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 20001,
+				"transcendenceMax": 27501,
+				"baseBonus": 7500,
+				"baseMaxByProfile": {
+					"strMag": 20001,
+					"weapon": 20001,
+					"balance": 20001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 27501,
+					"weapon": 27501,
+					"balance": 27501
+				},
+				"baseBonusByProfile": {
+					"strMag": 7500,
+					"weapon": 7500,
+					"balance": 7500
+				},
+				"weightByProfile": {
+					"strMag": 0.05648536,
+					"weapon": 0.05598175,
+					"balance": 0.056932
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		],
+		"belialCloak": [
+			{
+				"key": "allStatPercent",
+				"label": "All stats %",
+				"baseMax": 16,
+				"transcendenceMax": 19,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 16,
+					"weapon": 16,
+					"balance": 16
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 19,
+					"weapon": 19,
+					"balance": 19
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.28652751,
+					"weapon": 0.2,
+					"balance": 0.24899194
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯%"
+			},
+			{
+				"key": "critDamage",
+				"label": "Critical damage",
+				"baseMax": 101,
+				"transcendenceMax": 137,
+				"baseBonus": 36,
+				"baseMaxByProfile": {
+					"strMag": 101,
+					"weapon": 101,
+					"balance": 101
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 137,
+					"weapon": 137,
+					"balance": 137
+				},
+				"baseBonusByProfile": {
+					"strMag": 36,
+					"weapon": 36,
+					"balance": 36
+				},
+				"weightByProfile": {
+					"strMag": 0.24857685,
+					"weapon": 0.27578947,
+					"balance": 0.2641129
+				},
+				"includeInTotal": true,
+				"originalLabel": "크리티컬 대미지"
+			},
+			{
+				"key": "fixedDamage",
+				"label": "Fixed damage",
+				"baseMax": 40001,
+				"transcendenceMax": 53501,
+				"baseBonus": 13500,
+				"baseMaxByProfile": {
+					"strMag": 40001,
+					"weapon": 40001,
+					"balance": 40001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 53501,
+					"weapon": 53501,
+					"balance": 53501
+				},
+				"baseBonusByProfile": {
+					"strMag": 13500,
+					"weapon": 13500,
+					"balance": 13500
+				},
+				"weightByProfile": {
+					"strMag": 0.07590133,
+					"weapon": 0.04210526,
+					"balance": 0.06048387
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 241,
+				"transcendenceMax": 331,
+				"baseBonus": 90,
+				"baseMaxByProfile": {
+					"strMag": 241,
+					"weapon": 241,
+					"balance": 241
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 331,
+					"weapon": 331,
+					"balance": 331
+				},
+				"baseBonusByProfile": {
+					"strMag": 90,
+					"weapon": 90,
+					"balance": 90
+				},
+				"weightByProfile": {
+					"strMag": 0.1256167,
+					"weapon": 0.23221053,
+					"balance": 0.16582661
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 20001,
+				"transcendenceMax": 27501,
+				"baseBonus": 7500,
+				"baseMaxByProfile": {
+					"strMag": 20001,
+					"weapon": 20001,
+					"balance": 20001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 27501,
+					"weapon": 27501,
+					"balance": 27501
+				},
+				"baseBonusByProfile": {
+					"strMag": 7500,
+					"weapon": 7500,
+					"balance": 7500
+				},
+				"weightByProfile": {
+					"strMag": 0.17267552,
+					"weapon": 0.13684211,
+					"balance": 0.15725806
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 15001,
+				"transcendenceMax": 20401,
+				"baseBonus": 5400,
+				"baseMaxByProfile": {
+					"strMag": 15001,
+					"weapon": 15001,
+					"balance": 15001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 20401,
+					"weapon": 20401,
+					"balance": 20401
+				},
+				"baseBonusByProfile": {
+					"strMag": 5400,
+					"weapon": 5400,
+					"balance": 5400
+				},
+				"weightByProfile": {
+					"strMag": 0.16698292,
+					"weapon": 0.15578947,
+					"balance": 0.16330645
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 101,
+				"transcendenceMax": 125,
+				"baseBonus": 24,
+				"baseMaxByProfile": {
+					"strMag": 101,
+					"weapon": 101,
+					"balance": 101
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 125,
+					"weapon": 125,
+					"balance": 125
+				},
+				"baseBonusByProfile": {
+					"strMag": 24,
+					"weapon": 24,
+					"balance": 24
+				},
+				"weightByProfile": {
+					"strMag": 0.09487666,
+					"weapon": 0.10526316,
+					"balance": 0.10080645
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 16,
+				"transcendenceMax": 19,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 16,
+					"weapon": 16,
+					"balance": 16
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 19,
+					"weapon": 19,
+					"balance": 19
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.06072106,
+					"weapon": 0.03368421,
+					"balance": 0.0483871
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 13,
+				"transcendenceMax": 16,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 13,
+					"weapon": 13,
+					"balance": 13
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 16,
+					"weapon": 16,
+					"balance": 16
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.04933586,
+					"weapon": 0.05473684,
+					"balance": 0.05241935
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 101,
+				"transcendenceMax": 125,
+				"baseBonus": 24,
+				"baseMaxByProfile": {
+					"strMag": 101,
+					"weapon": 101,
+					"balance": 101
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 125,
+					"weapon": 125,
+					"balance": 125
+				},
+				"baseBonusByProfile": {
+					"strMag": 24,
+					"weapon": 24,
+					"balance": 24
+				},
+				"weightByProfile": {
+					"strMag": 0.04743833,
+					"weapon": 0.08905263,
+					"balance": 0.06300403
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 20001,
+				"transcendenceMax": 27501,
+				"baseBonus": 7500,
+				"baseMaxByProfile": {
+					"strMag": 20001,
+					"weapon": 20001,
+					"balance": 20001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 27501,
+					"weapon": 27501,
+					"balance": 27501
+				},
+				"baseBonusByProfile": {
+					"strMag": 7500,
+					"weapon": 7500,
+					"balance": 7500
+				},
+				"weightByProfile": {
+					"strMag": 0.0512334,
+					"weapon": 0.05684211,
+					"balance": 0.05443548
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		],
+		"belialRing": [
+			{
+				"key": "weaponAttrPercent",
+				"label": "Weapon attack / Elemental intensity %",
+				"baseMax": 14,
+				"transcendenceMax": 17,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 14,
+					"weapon": 14,
+					"balance": 14
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 17,
+					"weapon": 17,
+					"balance": 17
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.182013,
+					"weapon": 0.278689,
+					"balance": 0.237379
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력%"
+			},
+			{
+				"key": "maxDamage",
+				"label": "Maximum damage",
+				"baseMax": 101,
+				"transcendenceMax": 137,
+				"baseBonus": 36,
+				"baseMaxByProfile": {
+					"strMag": 101,
+					"weapon": 101,
+					"balance": 101
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 137,
+					"weapon": 137,
+					"balance": 137
+				},
+				"baseBonusByProfile": {
+					"strMag": 36,
+					"weapon": 36,
+					"balance": 36
+				},
+				"weightByProfile": {
+					"strMag": 0.205567,
+					"weapon": 0.196721,
+					"balance": 0.20623
+				},
+				"includeInTotal": true,
+				"originalLabel": "최대 대미지"
+			},
+			{
+				"key": "cooldownReduction",
+				"label": "Cooldown reduction",
+				"baseMax": 5.6,
+				"transcendenceMax": 7.4,
+				"baseBonus": 1.8,
+				"baseMaxByProfile": {
+					"strMag": 5.6,
+					"weapon": 5.6,
+					"balance": 5.6
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 7.4,
+					"weapon": 7.4,
+					"balance": 7.4
+				},
+				"baseBonusByProfile": {
+					"strMag": 1.8,
+					"weapon": 1.8,
+					"balance": 1.8
+				},
+				"weightByProfile": {
+					"strMag": 0.256959,
+					"weapon": 0.245902,
+					"balance": 0.257787
+				},
+				"includeInTotal": true,
+				"originalLabel": "쿨타임 감소"
+			},
+			{
+				"key": "weaponAttr",
+				"label": "Weapon attack / Elemental intensity",
+				"baseMax": 161,
+				"transcendenceMax": 221,
+				"baseBonus": 60,
+				"baseMaxByProfile": {
+					"strMag": 161,
+					"weapon": 161,
+					"balance": 161
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 221,
+					"weapon": 221,
+					"balance": 221
+				},
+				"baseBonusByProfile": {
+					"strMag": 60,
+					"weapon": 60,
+					"balance": 60
+				},
+				"weightByProfile": {
+					"strMag": 0.094647,
+					"weapon": 0.150266,
+					"balance": 0.11869
+				},
+				"includeInTotal": true,
+				"originalLabel": "무기공격력/속성력"
+			},
+			{
+				"key": "strMag",
+				"label": "Strength / Magic",
+				"baseMax": 20001,
+				"transcendenceMax": 27501,
+				"baseBonus": 7500,
+				"baseMaxByProfile": {
+					"strMag": 20001,
+					"weapon": 20001,
+					"balance": 20001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 27501,
+					"weapon": 27501,
+					"balance": 27501
+				},
+				"baseBonusByProfile": {
+					"strMag": 7500,
+					"weapon": 7500,
+					"balance": 7500
+				},
+				"weightByProfile": {
+					"strMag": 0.179872,
+					"weapon": 0.106557,
+					"balance": 0.146079
+				},
+				"includeInTotal": true,
+				"originalLabel": "근력/마법력"
+			},
+			{
+				"key": "allStat",
+				"label": "All stats",
+				"baseMax": 15001,
+				"transcendenceMax": 20401,
+				"baseBonus": 5400,
+				"baseMaxByProfile": {
+					"strMag": 15001,
+					"weapon": 15001,
+					"balance": 15001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 20401,
+					"weapon": 20401,
+					"balance": 20401
+				},
+				"baseBonusByProfile": {
+					"strMag": 5400,
+					"weapon": 5400,
+					"balance": 5400
+				},
+				"weightByProfile": {
+					"strMag": 0.175589,
+					"weapon": 0.128051,
+					"balance": 0.152524
+				},
+				"includeInTotal": true,
+				"originalLabel": "올스탯"
+			},
+			{
+				"key": "minDamage",
+				"label": "Minimum damage",
+				"baseMax": 101,
+				"transcendenceMax": 125,
+				"baseBonus": 24,
+				"baseMaxByProfile": {
+					"strMag": 101,
+					"weapon": 101,
+					"balance": 101
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 125,
+					"weapon": 125,
+					"balance": 125
+				},
+				"baseBonusByProfile": {
+					"strMag": 24,
+					"weapon": 24,
+					"balance": 24
+				},
+				"weightByProfile": {
+					"strMag": 0.133833,
+					"weapon": 0.122974,
+					"balance": 0.134264
+				},
+				"includeInTotal": true,
+				"originalLabel": "최소 대미지"
+			},
+			{
+				"key": "fixedDamagePercent",
+				"label": "Fixed damage %",
+				"baseMax": 16,
+				"transcendenceMax": 19,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 16,
+					"weapon": 16,
+					"balance": 16
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 19,
+					"weapon": 19,
+					"balance": 19
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.08137,
+					"weapon": 0.038934,
+					"balance": 0.061224
+				},
+				"includeInTotal": true,
+				"originalLabel": "고정 대미지%"
+			},
+			{
+				"key": "hpPercent",
+				"label": "HP %",
+				"baseMax": 13,
+				"transcendenceMax": 16,
+				"baseBonus": 3,
+				"baseMaxByProfile": {
+					"strMag": 13,
+					"weapon": 13,
+					"balance": 13
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 16,
+					"weapon": 16,
+					"balance": 16
+				},
+				"baseBonusByProfile": {
+					"strMag": 3,
+					"weapon": 3,
+					"balance": 3
+				},
+				"weightByProfile": {
+					"strMag": 0.068522,
+					"weapon": 0.065574,
+					"balance": 0.068743
+				},
+				"includeInTotal": true,
+				"originalLabel": "HP%"
+			},
+			{
+				"key": "backAttack",
+				"label": "Back attack damage",
+				"baseMax": 101,
+				"transcendenceMax": 125,
+				"baseBonus": 24,
+				"baseMaxByProfile": {
+					"strMag": 101,
+					"weapon": 101,
+					"balance": 101
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 125,
+					"weapon": 125,
+					"balance": 125
+				},
+				"baseBonusByProfile": {
+					"strMag": 24,
+					"weapon": 24,
+					"balance": 24
+				},
+				"weightByProfile": {
+					"strMag": 0.053533,
+					"weapon": 0.085369,
+					"balance": 0.06928
+				},
+				"includeInTotal": true,
+				"originalLabel": "백어택 대미지"
+			},
+			{
+				"key": "stamina",
+				"label": "Stamina",
+				"baseMax": 20001,
+				"transcendenceMax": 27501,
+				"baseBonus": 7500,
+				"baseMaxByProfile": {
+					"strMag": 20001,
+					"weapon": 20001,
+					"balance": 20001
+				},
+				"transcendenceMaxByProfile": {
+					"strMag": 27501,
+					"weapon": 27501,
+					"balance": 27501
+				},
+				"baseBonusByProfile": {
+					"strMag": 7500,
+					"weapon": 7500,
+					"balance": 7500
+				},
+				"weightByProfile": {
+					"strMag": 0.053533,
+					"weapon": 0.05123,
+					"balance": 0.053706
+				},
+				"includeInTotal": true,
+				"originalLabel": "체력"
+			}
+		]
+	},
+	"EQUIPMENT_SCORE_PROFILE_LABELS": {
+		"strMag": "Strength / Magic",
+		"weapon": "Weapon attack",
+		"balance": "Balanced"
+	},
+	"EQUIPMENT_SCORE_SOURCE_NOTE": "The wiki adjusts Belial transcendence bonuses and some transcendent maximums using the difference between unenhanced and transcendent values, correcting what it identifies as leftover formatting in the supplied reference table."
+}

@@ -8,13 +8,14 @@
 	import PackagePlusIcon from '@lucide/svelte/icons/package-plus';
 	import PercentIcon from '@lucide/svelte/icons/percent';
 	import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
+	import ScaleIcon from '@lucide/svelte/icons/scale';
 	import ShoppingBasketIcon from '@lucide/svelte/icons/shopping-basket';
 	import ScrollTextIcon from '@lucide/svelte/icons/scroll-text';
 
 	const portraits = ['589', '786', '1399', '1102', '1373', '101', '1202', '721', '741'];
 	const utilityCount = String(toolCount).padStart(2, '0');
 	const description =
-		`${toolCount} community-made shortcuts through LaTale builds, earnings, quests, stories, events, sales, and inventory upgrades.`;
+		`${toolCount} community-made shortcuts through LaTale builds, equipment, earnings, quests, stories, events, sales, and inventory upgrades.`;
 </script>
 
 <svelte:head>
@@ -146,6 +147,15 @@
 					<p>Find expansion bags and track your rewards.</p>
 				</div>
 				<div class="route-meta"><span>137 sources · saved checklist</span><ArrowRightIcon aria-hidden="true" /></div>
+			</a>
+
+			<a class="route route-equipment" href={resolve('/equipment-score')}>
+				<div class="route-head"><strong>08</strong><ScaleIcon aria-hidden="true" /></div>
+				<div>
+					<h3>Equipment score</h3>
+					<p>Compare your equipment with weighted options.</p>
+				</div>
+				<div class="route-meta"><span>16 equipment types · wiki weights</span><ArrowRightIcon aria-hidden="true" /></div>
 			</a>
 		</section>
 	</div>
@@ -628,8 +638,13 @@
 	}
 
 	.route-inventory {
-		grid-column: 1 / -1;
+		grid-column: span 6;
 		background: #ddf0f1;
+	}
+
+	.route-equipment {
+		grid-column: span 6;
+		background: #f3e6cf;
 	}
 
 	.event-copy {
@@ -665,9 +680,6 @@
 			grid-column: span 1;
 		}
 
-		.route-inventory {
-			grid-column: 1 / -1;
-		}
 		.event-copy {
 			max-width: 58%;
 		}
@@ -730,10 +742,6 @@
 		.route {
 			grid-column: span 1;
 			min-height: 175px;
-		}
-
-		.route-inventory {
-			grid-column: 1 / -1;
 		}
 	}
 
