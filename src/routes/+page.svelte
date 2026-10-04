@@ -5,6 +5,7 @@
 	import ArrowRightIcon from '@lucide/svelte/icons/arrow-right';
 	import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
 	import CircleDollarSignIcon from '@lucide/svelte/icons/circle-dollar-sign';
+	import HammerIcon from '@lucide/svelte/icons/hammer';
 	import PackagePlusIcon from '@lucide/svelte/icons/package-plus';
 	import PercentIcon from '@lucide/svelte/icons/percent';
 	import ScanSearchIcon from '@lucide/svelte/icons/scan-search';
@@ -15,7 +16,7 @@
 	const portraits = ['589', '786', '1399', '1102', '1373', '101', '1202', '721', '741'];
 	const utilityCount = String(toolCount).padStart(2, '0');
 	const description =
-		`${toolCount} community-made shortcuts through LaTale builds, equipment, earnings, quests, stories, events, sales, and inventory upgrades.`;
+		`${toolCount} community-made shortcuts through LaTale builds, equipment, enhancements, earnings, quests, stories, events, sales, and inventory upgrades.`;
 </script>
 
 <svelte:head>
@@ -46,7 +47,7 @@
 				<p class="kicker">Community toolkit / Global service</p>
 				<h1 id="dispatch-title">A better way<br />through <em>LaTale.</em></h1>
 				<p class="lede">
-					Damage models, Ely routes, quest walkthroughs, stories, rewards, and inventory plans—{toolCount} ways to
+					Damage models, enhancement plans, Ely routes, quests, stories, rewards, and inventory—{toolCount} ways to
 					spend less time guessing.
 				</p>
 				<div class="actions">
@@ -156,6 +157,15 @@
 					<p>Compare your equipment with weighted options.</p>
 				</div>
 				<div class="route-meta"><span>16 equipment types · wiki weights</span><ArrowRightIcon aria-hidden="true" /></div>
+			</a>
+
+			<a class="route route-enhancement" href={resolve('/enhancement-calculator')}>
+				<div class="route-head"><strong>09</strong><HammerIcon aria-hidden="true" /></div>
+				<div>
+					<h3>Enhancement calculator</h3>
+					<p>Plan enhancement materials, dungeon runs, and costs.</p>
+				</div>
+				<div class="route-meta"><span>Equipment upgrades · wiki data</span><ArrowRightIcon aria-hidden="true" /></div>
 			</a>
 		</section>
 	</div>
@@ -638,13 +648,18 @@
 	}
 
 	.route-inventory {
-		grid-column: span 6;
+		grid-column: span 4;
 		background: #ddf0f1;
 	}
 
 	.route-equipment {
-		grid-column: span 6;
+		grid-column: span 4;
 		background: #f3e6cf;
+	}
+
+	.route-enhancement {
+		grid-column: span 4;
+		background: #f5dfd3;
 	}
 
 	.event-copy {

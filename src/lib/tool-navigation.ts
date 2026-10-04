@@ -1,5 +1,6 @@
 import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
 import CircleDollarSignIcon from '@lucide/svelte/icons/circle-dollar-sign';
+import HammerIcon from '@lucide/svelte/icons/hammer';
 import HouseIcon from '@lucide/svelte/icons/house';
 import PackagePlusIcon from '@lucide/svelte/icons/package-plus';
 import PercentIcon from '@lucide/svelte/icons/percent';
@@ -134,6 +135,20 @@ export const toolNavigation = [
 		soft: '#f3e6cf',
 		deep: '#674319',
 		image: '/npc/1399.png'
+	},
+	{
+		key: 'enhancement-calculator',
+		index: '09',
+		label: 'Enhancement calculator',
+		description: 'Materials · dungeon runs · costs',
+		verb: 'Plan',
+		context: 'Equipment enhancement planning',
+		href: '/enhancement-calculator',
+		icon: HammerIcon,
+		accent: '#b65332',
+		soft: '#f5dfd3',
+		deep: '#71301c',
+		image: '/npc/1102.png'
 	}
 ] as const;
 
