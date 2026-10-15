@@ -1,0 +1,964 @@
+{
+  "schemaVersion": 1,
+  "id": "papayaplay-6494",
+  "postId": 6494,
+  "title": "[Oct 14] Events & Flash Sale",
+  "purchaseNotice": "Flash-sale purchases cannot be cancelled or refunded.",
+  "region": "NA",
+  "currency": "LTC",
+  "timezone": "America/New_York",
+  "sourceUrl": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6494",
+  "publishedAt": "2026-10-15T00:00:00-04:00",
+  "analyzedAt": "2026-10-15T14:54:18Z",
+  "reviewedAt": "2026-10-15",
+  "status": "published",
+  "posterUrls": [
+    "https://cdn.papayaplay.com/SF/1792/0244/0483/2026_10_14_LT_poster_Halloween2.jpg"
+  ],
+  "expectedOfferCount": 14,
+  "sources": [
+    {
+      "id": "official-sale-6494",
+      "kind": "official-sale",
+      "title": "[Oct 14] Events & Flash Sale",
+      "url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6494",
+      "accessedAt": "2026-10-15T14:54:18Z",
+      "note": "Canonical announcement confirmed on the official news listing. Displayed publication date: 2026.10.15; publishedAt represents that date at midnight in the sale timezone, not a verified posting instant. Original poster 2 contains all 14 flash-sale offers. Poster 1 and the event/premium-bonus sections are outside this snapshot."
+    },
+    {
+      "id": "official-poster-6494-2",
+      "kind": "official-sale",
+      "title": "[Oct 14] Events & Flash Sale — original poster 2",
+      "url": "https://cdn.papayaplay.com/SF/1792/0244/0483/2026_10_14_LT_poster_Halloween2.jpg",
+      "accessedAt": "2026-10-15T14:54:18Z",
+      "note": "Primary evidence: original 940×5227 JPEG, visually read in overlapping native-resolution crops without OCR. Flash-sale introduction around y=1730–1895; Round 1 y=1895–2600, Round 2 y=2647–3665, Round 3 y=3712–4805; policies y=4920–5150. Counts 4/5/5. All names, contents, quantities, prices, dates, STOCK badges and policies checked. Order is top-to-bottom by rows, left before right; Round 3 uses unequal-height cards. STOCK scope is not specified."
+    },
+    {
+      "id": "supplied-announcement-6494",
+      "kind": "official-sale",
+      "title": "User-supplied announcement: Flash Sale — 3 Rounds, 14 Products",
+      "url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6494",
+      "accessedAt": "2026-10-15T14:54:18Z",
+      "note": "Secondary evidence supplied by the maintainer in this chat, not independently retrieved from Discord; no message permalink supplied. The linked official post is used as URL. All 14 offer names, quantities, prices and round boundaries agree with original poster 2. R1 1792024200–1792196940; R2 1792197000–1792456140; R3 1792456200–1792626600. Singular unmultiplied components count as one. The non-sale announcement also links post 6463 and webtoons; those are outside this refresh."
+    },
+    {
+      "id": "event-exchange-values-2026-08-04",
+      "kind": "market-observation",
+      "title": "Maintainer-confirmed event exchange values",
+      "url": "/data/event-exchange/catalog.json",
+      "accessedAt": "2026-08-05T12:00:00-07:00",
+      "note": "Existing repository values reused only for exact item variants."
+    },
+    {
+      "id": "maintainer-values-2026-08-05",
+      "kind": "market-observation",
+      "title": "Maintainer-provided Ely valuations",
+      "url": "/data/flash-sale/catalog.json",
+      "accessedAt": "2026-08-06T18:24:40Z",
+      "note": "Internal maintainer estimates supplied for this sale; no external evidence URL was provided."
+    },
+    {
+      "id": "event-exchange-values-2026-08-20",
+      "kind": "market-observation",
+      "title": "Maintainer-confirmed event exchange values",
+      "url": "/data/event-exchange/catalog.json",
+      "accessedAt": "2026-09-12T18:18:00Z",
+      "note": "Previously approved Bottle of Blue Stars unit value, dated 2026-08-20, reused for the exact item variant. This is existing repository evidence, not a new market observation."
+    },
+    {
+      "id": "official-sale-6421",
+      "kind": "official-sale",
+      "title": "Eternal Royal Paradise - New Pet & Premium Items",
+      "url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6421",
+      "accessedAt": "2026-09-25T02:36:50Z",
+      "note": "Canonical sale post linked by the user-supplied Discord announcement and confirmed on the official news listing. Displayed publication date is 2026.09.17; publishedAt uses that date at midnight in the sale timezone, not a verified posting instant. The initial user URL, post 6422, is the separate Mistwood event announcement."
+    },
+    {
+      "id": "discord-sale-6421",
+      "kind": "official-sale",
+      "title": "User-supplied Discord announcement: September Flash Sale — 6 Rounds, 2 Weeks",
+      "url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6421",
+      "accessedAt": "2026-09-25T02:36:50Z",
+      "note": "Source of truth supplied verbatim by the maintainer in this task; not independently retrieved from Discord. No Discord permalink was supplied, so this URL is the sale link contained in the announcement. Discord controls round membership, source order, item names, contents, and Unix timestamp boundaries over conflicting website text. Prices, component quantities, and advertised stock come from the original posters. R1 1789605000–1789777740; R2 1789777800–1790036940; R3 1790037000–1790209740; R4 1790209800–1790382540; R5 1790382600–1790641740; R6 1790641800–1790812200. Counts: 7/7/5/5/5/5."
+    },
+    {
+      "id": "official-sale-6457",
+      "kind": "official-sale",
+      "title": "Haunted Harvest",
+      "url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6457",
+      "accessedAt": "2026-10-03T01:39:43Z",
+      "note": "Canonical post confirmed on the official news listing, displayed publication date 2026.10.01. publishedAt represents that date at midnight in the sale timezone, not a verified posting instant. The flash-sale section is on posters 2 and 3; poster 1 and the opening event section of poster 2 are outside this snapshot."
+    },
+    {
+      "id": "discord-sale-6457",
+      "kind": "official-sale",
+      "title": "User-supplied Discord announcement: Pre-Halloween Flash Sales — 6 Rounds, 36 Products",
+      "url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6457",
+      "accessedAt": "2026-10-03T01:39:43Z",
+      "note": "Supplied verbatim by the maintainer in this task; not independently retrieved from Discord. No announcement permalink was supplied, so this URL is its linked poster post. Discord is the source of truth for rounds 1–3 names, order, quantities and contents, the no-gifting rule, and Unix timestamps: R1 1790814600–1790987340; R2 1790987400–1791246540; R3 1791246600–1791419340; overall end 1792021800. It adds Halloween Power Basket ×1 to each Blue Halloween Vampire set and ×5 to Grim Reaper Fashion Set, omitted by the poster. Rounds 4–6 details come from poster 3."
+    }
+  ],
+  "valuationSnapshot": [
+    {
+      "itemId": "storage-expansion-bag",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification."
+    },
+    {
+      "itemId": "general-inventory-bag",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Needs a maintainer-confirmed Ely equivalent."
+    },
+    {
+      "itemId": "la-tale-adventure-dice",
+      "status": "priced",
+      "unitEly": 34500000,
+      "method": "market-observation",
+      "confidence": "high",
+      "asOf": "2026-08-03",
+      "sourceIds": [
+        "event-exchange-values-2026-08-04"
+      ],
+      "note": "Reused from the current event exchange catalog."
+    },
+    {
+      "itemId": "bottle-shining-stars",
+      "status": "estimated",
+      "unitEly": 400000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "bottle-blue-stars",
+      "status": "priced",
+      "unitEly": 700000,
+      "method": "market-observation",
+      "confidence": "high",
+      "asOf": "2026-08-20",
+      "sourceIds": [
+        "event-exchange-values-2026-08-20"
+      ],
+      "note": "Reused the previously approved 700,000 Ely per Bottle of Blue Stars from the event exchange catalog, dated 2026-08-20."
+    },
+    {
+      "itemId": "shining-laititia-dungeon-reset-coupon",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "New item from official post 6382; awaiting a maintainer-confirmed Ely value or explicit personal/unique classification."
+    },
+    {
+      "itemId": "instance-dungeon-guaranteed-titlebook-coupon-ii",
+      "status": "estimated",
+      "unitEly": 3450000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "bottle-orange-stars",
+      "status": "estimated",
+      "unitEly": 1000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "blessed-justitia-dungeon-use-ticket",
+      "status": "estimated",
+      "unitEly": 2200000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "platinum-hammer",
+      "status": "estimated",
+      "unitEly": 150000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable. Giga Platinum Hammer is a package containing this item, not an item alias."
+    },
+    {
+      "itemId": "goddess-card-eternity-coupon",
+      "status": "estimated",
+      "unitEly": 14000000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "paragon-power-30d",
+      "status": "estimated",
+      "unitEly": 6000000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "picnic-energy-15d",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "advanced-premium-syrup",
+      "status": "estimated",
+      "unitEly": 240000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "mechanical-wings-mount-coupon",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [
+        "official-sale-6494",
+        "official-poster-6494-2"
+      ],
+      "note": "Exact item from post 6494; Ely valuation is pending. One exact mount coupon; distinct from Mechanical Angel Wings."
+    },
+    {
+      "itemId": "shining-dimensional-rift-entry",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Needs a maintainer-confirmed Ely value."
+    },
+    {
+      "itemId": "exp-potion-100",
+      "status": "priced",
+      "unitEly": 35000000,
+      "method": "market-observation",
+      "confidence": "high",
+      "asOf": "2026-08-03",
+      "sourceIds": [
+        "event-exchange-values-2026-08-04"
+      ],
+      "note": "Reused from the current event exchange catalog."
+    },
+    {
+      "itemId": "exp-potion-20",
+      "status": "priced",
+      "unitEly": 40000000,
+      "method": "market-observation",
+      "confidence": "high",
+      "asOf": "2026-08-03",
+      "sourceIds": [
+        "event-exchange-values-2026-08-04"
+      ],
+      "note": "Reused from the current event exchange catalog."
+    },
+    {
+      "itemId": "heros-exp-nostrum",
+      "status": "estimated",
+      "unitEly": 35000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "exp-nostrum",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Needs a maintainer-confirmed Ely value."
+    },
+    {
+      "itemId": "stars-blessing-potion",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "paragon-knowledge-7d",
+      "status": "estimated",
+      "unitEly": 1500000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "eoli-energy-extract",
+      "status": "unique",
+      "unitEly": null,
+      "method": "not-applicable",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [],
+      "note": "Canonical display name corrected to Eel Energy Extract; maintainer designated this item as personal/non-comparable on 2026-08-05."
+    },
+    {
+      "itemId": "soulys-midnight-hunt",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [
+        "official-sale-6421",
+        "discord-sale-6421"
+      ],
+      "note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. One crate from Autumn Adventures Crate Bundle I; not the whole bundle."
+    },
+    {
+      "itemId": "phantasmal-tin-crate",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [
+        "official-sale-6421",
+        "discord-sale-6421"
+      ],
+      "note": "New item from September sale post 6421; awaiting a maintainer-confirmed Ely value or personal/unique classification. One crate from Autumn Adventures Crate Bundle I; not the whole bundle."
+    },
+    {
+      "itemId": "wicked-iniquity-crate",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [
+        "official-sale-6494",
+        "official-poster-6494-2"
+      ],
+      "note": "Exact item from post 6494; Ely valuation is pending. One individual crate; October Adventures Crate Bundle II contains twenty."
+    },
+    {
+      "itemId": "starry-safari-crate",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [
+        "official-sale-6494",
+        "official-poster-6494-2"
+      ],
+      "note": "Exact item from post 6494; Ely valuation is pending. One individual crate; October Adventures Crate Bundle II contains twenty."
+    },
+    {
+      "itemId": "tome-ancients-account-30d",
+      "status": "estimated",
+      "unitEly": 6000000000,
+      "method": "maintainer-estimate",
+      "confidence": "medium",
+      "asOf": "2026-08-05",
+      "sourceIds": [
+        "maintainer-values-2026-08-05"
+      ],
+      "note": "Maintainer-provided Ely valuation; full listed duration at 100% utilization where applicable."
+    },
+    {
+      "itemId": "halloween-souly-fx-titlebook",
+      "status": "pending",
+      "unitEly": null,
+      "method": "pending",
+      "confidence": null,
+      "asOf": null,
+      "sourceIds": [
+        "official-sale-6457",
+        "discord-sale-6457"
+      ],
+      "note": "New exact item variant from post 6457; Ely valuation is pending."
+    }
+  ],
+  "cycles": [
+    {
+      "id": "r1",
+      "label": "Round 1 · Wednesday–Friday",
+      "startsAt": "2026-10-14T20:30:00-04:00",
+      "endsAt": "2026-10-16T20:29:00-04:00",
+      "expectedOfferCount": 4,
+      "unresolvedSlots": [],
+      "offers": [
+        {
+          "id": "r1-storage-expansion",
+          "name": "Storage Expansion Bag (x10)",
+          "salePriceLtc": 950,
+          "purchaseLimit": {
+            "quantity": 25,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "storage-expansion-bag",
+              "quantity": 10
+            }
+          ],
+          "bestFor": "Players who need ten storage expansion bags.",
+          "skipIf": "Your storage already meets your needs.",
+          "slot": 1,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 1 (y≈1895–2600), row 1 left. The poster shows 1,260 LTC struck through and a 25% OFF badge; sale price is 950 LTC. Contents are ten individual bags."
+          },
+          "caveats": [
+            "Ely valuation is pending; this offer is excluded from value rankings.",
+            "Poster reference price: 1,260 LTC; advertised discount: 25% OFF.",
+            "Poster advertises STOCK 25; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r1-general-inventory",
+          "name": "General Inventory Bag (x6)",
+          "salePriceLtc": 900,
+          "purchaseLimit": {
+            "quantity": 25,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "general-inventory-bag",
+              "quantity": 6
+            }
+          ],
+          "bestFor": "Players who need all six general inventory bags.",
+          "skipIf": "You do not need more general inventory space.",
+          "slot": 2,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 1 (y≈1895–2600), row 1 right."
+          },
+          "caveats": [
+            "Ely valuation is pending; this offer is excluded from value rankings.",
+            "Poster advertises STOCK 25; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r1-adventure-dice",
+          "name": "La Tale Adventure Dice Package (x500)",
+          "salePriceLtc": 690,
+          "purchaseLimit": {
+            "quantity": 50,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "la-tale-adventure-dice",
+              "quantity": 500
+            }
+          ],
+          "bestFor": "Players with a use for all 500 adventure dice.",
+          "skipIf": "You cannot use the full quantity.",
+          "slot": 3,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 1 (y≈1895–2600), row 2 left. Package contains 500 individual La Tale Adventure Dice."
+          },
+          "caveats": [
+            "Comparison uses previously approved Ely values dated August 2026; current market value may differ.",
+            "Poster advertises STOCK 50; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r1-constellation",
+          "name": "Constellation Package",
+          "salePriceLtc": 1990,
+          "purchaseLimit": {
+            "quantity": 40,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "bottle-shining-stars",
+              "quantity": 10
+            },
+            {
+              "itemId": "bottle-blue-stars",
+              "quantity": 3000
+            },
+            {
+              "itemId": "shining-laititia-dungeon-reset-coupon",
+              "quantity": 4
+            }
+          ],
+          "bestFor": "Players who need Blue Stars and can use all four Shining Laititia resets.",
+          "skipIf": "You need Orange Stars or cannot use these dungeon resets.",
+          "slot": 4,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 1 (y≈1895–2600), row 2 right."
+          },
+          "caveats": [
+            "Some components are pending or personal; the Ely comparison is a lower bound.",
+            "Comparison uses previously approved Ely values dated August 2026; current market value may differ.",
+            "Poster advertises STOCK 40; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r2",
+      "label": "Round 2 · Friday–Monday",
+      "startsAt": "2026-10-16T20:30:00-04:00",
+      "endsAt": "2026-10-19T20:29:00-04:00",
+      "expectedOfferCount": 5,
+      "unresolvedSlots": [],
+      "offers": [
+        {
+          "id": "r2-instance-title-ii",
+          "name": "Instance Dungeon Guaranteed Titlebook Coupon II",
+          "salePriceLtc": 690,
+          "purchaseLimit": {
+            "quantity": 35,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "instance-dungeon-guaranteed-titlebook-coupon-ii",
+              "quantity": 1
+            }
+          ],
+          "bestFor": "Players missing a useful eligible instance-dungeon title.",
+          "skipIf": "You already own the useful eligible titles.",
+          "slot": 1,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 2 (y≈2647–3665), row 1 left."
+          },
+          "caveats": [
+            "Comparison uses previously approved Ely values dated August 2026; current market value may differ.",
+            "Poster advertises STOCK 35; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r2-constellation-expansion",
+          "name": "Constellation Expansion Package",
+          "salePriceLtc": 2290,
+          "purchaseLimit": {
+            "quantity": 30,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "bottle-orange-stars",
+              "quantity": 2000
+            },
+            {
+              "itemId": "bottle-shining-stars",
+              "quantity": 2
+            },
+            {
+              "itemId": "blessed-justitia-dungeon-use-ticket",
+              "quantity": 4
+            }
+          ],
+          "bestFor": "Players who need Orange Stars and can use all four Blessed Justitia entries.",
+          "skipIf": "You cannot use the stars or all four dungeon entries.",
+          "slot": 2,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 2 (y≈2647–3665), row 1 right."
+          },
+          "caveats": [
+            "Comparison uses previously approved Ely values dated August 2026; current market value may differ.",
+            "Poster advertises STOCK 30; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r2-platinum-hammer",
+          "name": "Giga Platinum Hammer (x100)",
+          "salePriceLtc": 2590,
+          "purchaseLimit": {
+            "quantity": 50,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "platinum-hammer",
+              "quantity": 100
+            }
+          ],
+          "bestFor": "Players planning enough enchanting to use 100 Platinum Hammers.",
+          "skipIf": "You do not need a large supply of Platinum Hammers.",
+          "slot": 3,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 2 (y≈2647–3665), row 2 left. Giga Platinum Hammer is the package title; the component is Platinum Hammer ×100."
+          },
+          "caveats": [
+            "Comparison uses previously approved Ely values dated August 2026; current market value may differ.",
+            "Poster advertises STOCK 50; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r2-goddess-card",
+          "name": "Goddess' Card of Eternity",
+          "salePriceLtc": 2500,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "goddess-card-eternity-coupon",
+              "quantity": 1
+            }
+          ],
+          "bestFor": "Players who need Goddess' Card of Eternity.",
+          "skipIf": "You already own or do not need this card.",
+          "slot": 4,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 2 (y≈2647–3665), row 2 right. Printed Goddess' Card of Eternity is an existing catalog alias."
+          },
+          "caveats": [
+            "Comparison uses previously approved Ely values dated August 2026; current market value may differ.",
+            "Poster advertises STOCK 15; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r2-power-picnic",
+          "name": "Power Picnic Pack",
+          "salePriceLtc": 1790,
+          "purchaseLimit": {
+            "quantity": 35,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "paragon-power-30d",
+              "quantity": 1
+            },
+            {
+              "itemId": "picnic-energy-15d",
+              "quantity": 2
+            },
+            {
+              "itemId": "advanced-premium-syrup",
+              "quantity": 10
+            }
+          ],
+          "bestFor": "Players who can use the 30-day Paragon, both 15-day skillbooks, and ten syrups.",
+          "skipIf": "You will not use the durations or the consumables.",
+          "slot": 5,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 2 (y≈2647–3665), row 3 left."
+          },
+          "caveats": [
+            "Some components are pending or personal; the Ely comparison is a lower bound.",
+            "Comparison uses previously approved Ely values dated August 2026; current market value may differ.",
+            "Numeric duration-based estimates assume use of the full stated duration.",
+            "Poster advertises STOCK 35; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r3",
+      "label": "Round 3 · Monday–Wednesday",
+      "startsAt": "2026-10-19T20:30:00-04:00",
+      "endsAt": "2026-10-21T19:50:00-04:00",
+      "expectedOfferCount": 5,
+      "unresolvedSlots": [],
+      "offers": [
+        {
+          "id": "r3-mechanical-wings",
+          "name": "Mechanical Wings Mount Coupon",
+          "salePriceLtc": 1590,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "mechanical-wings-mount-coupon",
+              "quantity": 1
+            }
+          ],
+          "bestFor": "Players who want the Mechanical Wings mount.",
+          "skipIf": "You already own or do not want this mount.",
+          "slot": 1,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 3 (y≈3712–4805), row 1 left. Marked NEW. Exact Mechanical Wings variant; no equivalence to Mechanical Angel Wings is assumed."
+          },
+          "caveats": [
+            "Ely valuation is pending; this offer is excluded from value rankings.",
+            "Poster advertises STOCK 15; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r3-weekly-grinder-iii",
+          "name": "Weekly Grinder's Package III",
+          "salePriceLtc": 2490,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "shining-dimensional-rift-entry",
+              "quantity": 7
+            },
+            {
+              "itemId": "exp-potion-100",
+              "quantity": 7
+            },
+            {
+              "itemId": "exp-potion-20",
+              "quantity": 7
+            },
+            {
+              "itemId": "heros-exp-nostrum",
+              "quantity": 7
+            },
+            {
+              "itemId": "exp-nostrum",
+              "quantity": 14
+            },
+            {
+              "itemId": "stars-blessing-potion",
+              "quantity": 14
+            },
+            {
+              "itemId": "paragon-knowledge-7d",
+              "quantity": 1
+            },
+            {
+              "itemId": "eoli-energy-extract",
+              "quantity": 28
+            }
+          ],
+          "bestFor": "Players planning a week of EXP grinding who can use all listed consumables.",
+          "skipIf": "You will not use the entry tickets, seven-day Paragon, or consumable quantities.",
+          "slot": 2,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 3 (y≈3712–4805), row 1 right. Shining Dimensional Rift One-Time Entry and Eel Energy Extract are recognized exact aliases. Paragon of Knowledge is the seven-day coupon, quantity one."
+          },
+          "caveats": [
+            "Some components are pending or personal; the Ely comparison is a lower bound.",
+            "Comparison uses previously approved Ely values dated August 2026; current market value may differ.",
+            "Numeric duration-based estimates assume use of the full stated duration.",
+            "Poster advertises STOCK 15; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r3-october-crates-ii",
+          "name": "October Adventures Crate Bundle II",
+          "salePriceLtc": 4400,
+          "purchaseLimit": {
+            "quantity": 20,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "soulys-midnight-hunt",
+              "quantity": 20
+            },
+            {
+              "itemId": "phantasmal-tin-crate",
+              "quantity": 20
+            },
+            {
+              "itemId": "wicked-iniquity-crate",
+              "quantity": 20
+            },
+            {
+              "itemId": "starry-safari-crate",
+              "quantity": 20
+            }
+          ],
+          "bestFor": "Players who want twenty of each of the four listed crate types.",
+          "skipIf": "You do not want all four crate types or need a fully valued Ely comparison.",
+          "slot": 3,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 3 (y≈3712–4805), row 2 left. Marked NEW and HALLOWEEN. Four distinct individual-crate units, twenty each; no additional bundle-level item."
+          },
+          "caveats": [
+            "Ely valuation is pending; this offer is excluded from value rankings.",
+            "Poster advertises STOCK 20; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r3-tome-ancients",
+          "name": "Tome of the Ancients [Account] (30 Day) Skillbook",
+          "salePriceLtc": 1095,
+          "purchaseLimit": {
+            "quantity": 20,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "tome-ancients-account-30d",
+              "quantity": 1
+            }
+          ],
+          "bestFor": "Accounts that can use the Tome effect for all 30 days.",
+          "skipIf": "You will not use the full duration.",
+          "slot": 4,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 3 (y≈3712–4805), row 2 right. Heading says (30 Day); component says (30 Days). Both explicitly say [Account] and identify the same existing account-wide 30-day variant."
+          },
+          "caveats": [
+            "Comparison uses previously approved Ely values dated August 2026; current market value may differ.",
+            "Numeric duration-based estimates assume use of the full stated duration.",
+            "Poster advertises STOCK 20; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        },
+        {
+          "id": "r3-halloween-souly",
+          "name": "Halloween Souly FX Titlebook",
+          "salePriceLtc": 990,
+          "purchaseLimit": {
+            "quantity": 15,
+            "scope": "unknown"
+          },
+          "contents": [
+            {
+              "itemId": "halloween-souly-fx-titlebook",
+              "quantity": 1
+            }
+          ],
+          "bestFor": "Players who want the Halloween Souly FX title.",
+          "skipIf": "You already own or do not want this title.",
+          "slot": 5,
+          "capture": {
+            "status": "verified",
+            "sourceIds": [
+              "official-poster-6494-2",
+              "supplied-announcement-6494"
+            ],
+            "note": "Visually verified against original poster 2, Round 3 (y≈3712–4805), row 3 left. Marked HALLOWEEN."
+          },
+          "caveats": [
+            "Ely valuation is pending; this offer is excluded from value rankings.",
+            "Poster advertises STOCK 15; purchase-limit scope is not stated. This is an advertised quantity, not a live inventory count or confirmed per-account allowance."
+          ]
+        }
+      ]
+    }
+  ]
+}

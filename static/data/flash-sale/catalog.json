@@ -80,6 +80,22 @@
 			"url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6457",
 			"accessedAt": "2026-10-03T01:39:43Z",
 			"note": "Supplied verbatim by the maintainer in this task; not independently retrieved from Discord. No announcement permalink was supplied, so this URL is its linked poster post. Discord is the source of truth for rounds 1–3 names, order, quantities and contents, the no-gifting rule, and Unix timestamps: R1 1790814600–1790987340; R2 1790987400–1791246540; R3 1791246600–1791419340; overall end 1792021800. It adds Halloween Power Basket ×1 to each Blue Halloween Vampire set and ×5 to Grim Reaper Fashion Set, omitted by the poster. Rounds 4–6 details come from poster 3."
+		},
+		{
+			"id": "official-sale-6494",
+			"kind": "official-sale",
+			"title": "[Oct 14] Events & Flash Sale",
+			"url": "https://latale.papayaplay.com/latale.do?tp=news.view&postid=6494",
+			"accessedAt": "2026-10-15T14:54:18Z",
+			"note": "Canonical announcement confirmed on the official news listing. Displayed publication date: 2026.10.15; publishedAt represents that date at midnight in the sale timezone, not a verified posting instant. Original poster 2 contains all 14 flash-sale offers. Poster 1 and the event/premium-bonus sections are outside this snapshot."
+		},
+		{
+			"id": "official-poster-6494-2",
+			"kind": "official-sale",
+			"title": "[Oct 14] Events & Flash Sale — original poster 2",
+			"url": "https://cdn.papayaplay.com/SF/1792/0244/0483/2026_10_14_LT_poster_Halloween2.jpg",
+			"accessedAt": "2026-10-15T14:54:18Z",
+			"note": "Primary evidence: original 940×5227 JPEG, visually read in overlapping native-resolution crops without OCR. Flash-sale introduction around y=1730–1895; Round 1 y=1895–2600, Round 2 y=2647–3665, Round 3 y=3712–4805; policies y=4920–5150. Counts 4/5/5. All names, contents, quantities, prices, dates, STOCK badges and policies checked. Order is top-to-bottom by rows, left before right; Round 3 uses unequal-height cards. STOCK scope is not specified."
 		}
 	],
 	"items": [
@@ -207,6 +223,9 @@
 		{ "id": "great-petite-kina-pet-coupon", "name": "Great Petite Kina Pet Coupon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [ "official-sale-6457" ], "note": "New exact item variant from post 6457; Ely valuation is pending. Exact Petite Kina variant, distinct from Great Kina Pet Coupon." } },
 		{ "id": "ghost-damage-skin-coupon", "name": "Ghost Damage Skin Coupon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [ "official-sale-6457" ], "note": "New exact item variant from post 6457; Ely valuation is pending." } },
 		{ "id": "happy-halloween-titlebook", "name": "Happy Halloween Titlebook", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [ "official-sale-6457" ], "note": "New exact item variant from post 6457; Ely valuation is pending." } },
-		{ "id": "halloween-emoticon-box", "name": "Halloween Emoticon Box", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [ "official-sale-6457" ], "note": "New exact item variant from post 6457; Ely valuation is pending." } }
+		{ "id": "halloween-emoticon-box", "name": "Halloween Emoticon Box", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [ "official-sale-6457" ], "note": "New exact item variant from post 6457; Ely valuation is pending." } },
+		{ "id": "mechanical-wings-mount-coupon", "name": "Mechanical Wings Mount Coupon", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [ "official-sale-6494", "official-poster-6494-2" ], "note": "Exact item from post 6494; Ely valuation is pending. One exact mount coupon; distinct from Mechanical Angel Wings." } },
+		{ "id": "wicked-iniquity-crate", "name": "Wicked Iniquity Crate", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [ "official-sale-6494", "official-poster-6494-2" ], "note": "Exact item from post 6494; Ely valuation is pending. One individual crate; October Adventures Crate Bundle II contains twenty." } },
+		{ "id": "starry-safari-crate", "name": "Starry Safari Crate", "aliases": [], "valuation": { "status": "pending", "unitEly": null, "method": "pending", "confidence": null, "asOf": null, "sourceIds": [ "official-sale-6494", "official-poster-6494-2" ], "note": "Exact item from post 6494; Ely valuation is pending. One individual crate; October Adventures Crate Bundle II contains twenty." } }
 	]
 }
