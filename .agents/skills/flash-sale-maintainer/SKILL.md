@@ -47,3 +47,13 @@ npm run build
 For a focused correction, run the data validator and checks relevant to the change. Keep fixture tests aligned with a new current sale while preserving historical assertions; do not weaken validation to accept unsupported data.
 
 Preview a refreshed `/flash-sale` with `agent-browser` at desktop and narrow widths when practical. Verify the selected sale, cycles and counts, values, guidance, and console errors. For a narrow correction, inspect the affected behavior. Report changed files, checks actually run, verification limits, and outstanding decisions.
+
+## Next-sale reminder
+
+After successfully applying a new current sale or correcting its final cycle end, schedule the next refresh reminder. Analysis, unapplied drafts, historical-only edits, and unrelated corrections do not change it.
+
+- Read `index.currentSaleId` and its `sales/<sale-id>.json`; confirm the final cycle's `endsAt` agrees with the index. Add three elapsed hours to that offset-bearing timestamp, then convert to the user's timezone for scheduling. This is the user's estimate for maintenance completion, not confirmation that maintenance has ended.
+- Use the Codex `automation_update` tool to create or update one heartbeat named `La Tale flash-sale refresh reminder`. Find an existing automation by name/prompt first; preserve its target chat and unrelated settings. Re-arm a reminder paused after delivery for a new current sale, but honor any explicit user pause or cancellation. Keep machine-specific automation IDs out of checked-in files.
+- Include the repository path, current sale ID, exact due instant, and this skill in the prompt. Ask once whether to run `$flash-sale-maintainer` for the next sale. Scheduling authorizes the reminder only; follow the normal refresh authorization when the user responds.
+- At wake-up, re-read the current sale. If it changed or its end time changed, recompute and reschedule before deciding whether a reminder is due. Stay quiet before the due instant and after a reminder has already been delivered for that sale. Pause the automation after delivering the reminder. If only recurring schedules are supported, use the due weekday and local time with these date and duplicate guards.
+- If already overdue and not previously reminded, ask once in the current chat instead of scheduling a past time. Report the actual scheduled date/time and timezone, or any scheduling failure. Keep reminder state in the automation, outside the static public dataset.
