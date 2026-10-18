@@ -467,6 +467,10 @@
 	position: relative;
 }
 
+.app-sidebar-content[data-scrollable-below] {
+	mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent);
+}
+
 .app-sidebar-nav {
 	display: flex;
 	min-height: 0;

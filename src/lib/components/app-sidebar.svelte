@@ -10,7 +10,28 @@
 	const sidebar = Sidebar.useSidebar();
 	let activeTool = $derived(getActiveTool(page.url.pathname));
 	let suppressToolTransitions = $state(false);
+	let hasMoreBelow = $state(false);
 	let toolNavigationSequence = 0;
+
+	function trackScrollOverflow(element: HTMLElement) {
+		function updateScrollHint() {
+			hasMoreBelow = element.scrollHeight - element.clientHeight - element.scrollTop > 1;
+		}
+
+		const resizeObserver = new ResizeObserver(updateScrollHint);
+		resizeObserver.observe(element);
+		// The flexed nav can keep its height while its groups grow or shrink.
+		for (const group of element.querySelectorAll('[data-sidebar="group"]')) {
+			resizeObserver.observe(group);
+		}
+		element.addEventListener('scroll', updateScrollHint, { passive: true });
+		updateScrollHint();
+
+		return () => {
+			resizeObserver.disconnect();
+			element.removeEventListener('scroll', updateScrollHint);
+		};
+	}
 
 	onNavigate(({ from, to }) => {
 		if (
@@ -69,7 +90,11 @@
 		</div>
 	</Sidebar.Header>
 
-	<Sidebar.Content class="app-sidebar-content">
+	<Sidebar.Content
+		class="app-sidebar-content"
+		data-scrollable-below={hasMoreBelow || undefined}
+		{@attach trackScrollOverflow}
+	>
 		<nav
 			class="app-sidebar-nav"
 			aria-label="Tool navigation"
