@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+	<head><meta charset="utf-8"><title>Runestone detector regression checks</title></head>
+	<body>
+		<h1>Runestone detector regression checks</h1>
+		<p>Serve the repository with a local static server, then open this file. Synthetic tests use the rune artwork. Optional screenshot tests read ignored local files only.</p>
+		<pre id="results">Ready. Call runRunestoneDetectionChecks() in the browser.</pre>
+		<script type="module">
+			const loadImage = async (url) => {
+				const image = new Image();
+				image.src = url;
+				await image.decode();
+				return image;
+			};
+			const canvas = (width, height) => {
+				const result = document.createElement('canvas');
+				result.width = width; result.height = height;
+				const context = result.getContext('2d', { willReadFrequently: true });
+				context.fillStyle = '#16414c';
+				context.fillRect(0, 0, width, height);
+				return result;
+			};
+
+			window.runRunestoneDetectionChecks = async ({ screenUrl, flameUrl, dualScreenUrl } = {}) => {
+				const { createRunestoneDetector } = await import(`../src/lib/runestone-detection.js?check=${Date.now()}`);
+				const detector = await createRunestoneDetector({ assetBase: '../static/runestone/runes' });
+				const images = await Promise.all(Array.from({ length: 30 }, (_, index) => loadImage(`../static/runestone/runes/${index + 1}.png`)));
+				const results = [];
+				const check = (name, source, expected) => {
+					const start = performance.now();
+					const result = detector.detect(source);
+					results.push({ name, passed: JSON.stringify(result?.ids ?? null) === JSON.stringify(expected),
+						expected, actual: result?.ids ?? null, confidence: result?.confidence ?? null, milliseconds: performance.now() - start });
+					return result;
+				};
+				// Measured face centers from the supplied game screenshot, translated
+				// to a fresh canvas. No screenshot or game-window pixels are committed.
+				const centers = [[741.5,145.5],[649,197],[836.5,196.5],[630,284.5],[856.5,284.5],[686.5,359.5],[799,359.5],[743,260]];
+				const synthetic = (ids, scale = 1) => {
+					const result = canvas(500 * scale, 350 * scale);
+					const context = result.getContext('2d');
+					for (let slot = 0; slot < 8; slot += 1) {
+						const [x, y] = centers[slot];
+						context.drawImage(images[ids[slot] - 1], (x - 520 - 24) * scale, (y - 70 - 24) * scale, 48 * scale, 48 * scale);
+					}
+					return result;
+				};
+				for (let first = 1; first <= 30; first += 1) {
+					const ids = Array.from({ length: 8 }, (_, slot) => (first - 1 + slot) % 30 + 1);
+					check(`Synthetic rotation ${first}: all 30 glyphs across every slot`, synthetic(ids), ids);
+				}
+				const expected = [11, 14, 20, 17, 29, 3, 15, 28];
+				check('Synthetic panel at 60% size', synthetic(expected, 0.6), expected);
+				check('Synthetic panel at 180% size', synthetic(expected, 1.8), expected);
+				check('Blank frame', canvas(1920, 1080), null);
+				check('Repeated glyphs are rejected', synthetic([11, 14, 20, 17, 29, 3, 15, 11]), null);
+				const grid = canvas(500, 350), gridContext = grid.getContext('2d');
+				images.forEach((image, index) => gridContext.drawImage(image, 25 + (index % 6) * 65, 15 + Math.floor(index / 6) * 65));
+				check('Rune list without the active ring', grid, null);
+
+				const newRoll = [19, 25, 22, 4, 14, 8, 18, 15];
+				const drawPair = ({ hidden = [], obscuredGlyph = false, jitter = false, duplicates = false, noisyLeft = false, leftYOffset = 0, leftScale = 1, scale = 1, x = 0, y = 0 } = {}) => {
+					const result = canvas(1500, 900), context = result.getContext('2d');
+					for (let side = 0; side < 2; side += 1) for (let slot = 0; slot < 8; slot += 1) {
+						if (side === 0 && hidden.includes(slot)) continue;
+						const [cx, cy] = centers[slot];
+						const offset = side === 0 && jitter ? (slot % 2 ? 2 : -2) : 0;
+						const id = side === 0 ? (duplicates && slot === 7 ? newRoll[0] : newRoll[slot]) : expected[slot];
+						const runeScale = side === 0 ? scale * leftScale : scale;
+						context.drawImage(images[id - 1], x + (cx - 520 - 24 + side * 410 + offset) * runeScale,
+							y + (cy - 70 - 24 + (side === 0 ? leftYOffset : 0)) * runeScale, 48 * runeScale, 48 * runeScale);
+					}
+					if (noisyLeft) {
+						const pixels = context.getImageData(0, 0, 400, 350);
+						let seed = 98;
+						for (let offset = 0; offset < pixels.data.length; offset += 4) for (let channel = 0; channel < 3; channel += 1) {
+							seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+							pixels.data[offset + channel] += Math.round((seed / 2 ** 32 - 0.5) * 56);
+						}
+						context.putImageData(pixels, 0, 0);
+					}
+					if (obscuredGlyph) {
+						context.fillStyle = '#62341d';
+						context.fillRect(x + (743 - 520 - 10) * scale * leftScale,
+							y + (260 - 70 - 12 + leftYOffset) * scale * leftScale, 22 * scale * leftScale, 25 * scale * leftScale);
+					}
+					return result;
+				};
+				check('Comparison: left new roll instead of right saved build', drawPair(), newRoll);
+				check('Comparison: right has cleaner layout', drawPair({ jitter: true }), newRoll);
+				const noisyPair = drawPair({ noisyLeft: true });
+				const noisyResult = check('Comparison: right has clearer glyphs', noisyPair, newRoll);
+				const savedCrop = canvas(500, 350);
+				savedCrop.getContext('2d').drawImage(noisyPair, -410, 0);
+				const savedResult = detector.detect(savedCrop);
+				results[results.length - 1].passed &&= Boolean(noisyResult && savedResult && noisyResult.confidence < savedResult.confidence);
+				check('Comparison: moved and scaled to 70%', drawPair({ scale: 0.7, x: 400, y: 230 }), newRoll);
+				check('Comparison: left unreadable glyph cannot fall back right', drawPair({ obscuredGlyph: true }), null);
+				check('Comparison: left duplicate IDs cannot fall back right', drawPair({ duplicates: true }), null);
+				for (const hidden of [[7], [0], [1], [4], [0, 1], [3, 6], [0, 1, 2]]) {
+					check(`Comparison: hidden left slots ${hidden.join(',')} cannot fall back right`, drawPair({ hidden }), null);
+				}
+				const singleRight = canvas(1500, 900);
+				singleRight.getContext('2d').drawImage(synthetic(expected), 800, 180);
+				check('Single panel at the right of the screen', singleRight, expected);
+				check('Unrelated unreadable ring below the row does not veto a single panel', drawPair({ obscuredGlyph: true, leftYOffset: 200 }), expected);
+				check('Unrelated unreadable ring at a different scale does not veto a single panel', drawPair({ obscuredGlyph: true, leftScale: 0.6 }), expected);
+
+				if (screenUrl) {
+					const screen = await loadImage(screenUrl);
+					const draw = (scale = 1, x = 0, y = 0, width = screen.width, height = screen.height) => {
+						const result = canvas(width, height);
+						result.getContext('2d').drawImage(screen, x, y, screen.width * scale, screen.height * scale);
+						return result;
+					};
+					check('Provided screenshot: original', screen, expected);
+					check('Provided screenshot: moved into a 1920×1080 frame at 70%', draw(0.7, 530, 150, 1920, 1080), expected);
+					check('Provided screenshot: moved and reduced to 50%', draw(0.5, 140, 180, 1280, 900), expected);
+					check('Provided screenshot: enlarged to 150%', draw(1.5, 50, 80, 1600, 1400), expected);
+					check('Provided screenshot: moved into a 4K frame', draw(1, 2100, 700, 3840, 2160), expected);
+					const noisy = draw(), noiseContext = noisy.getContext('2d');
+					const pixels = noiseContext.getImageData(0, 0, noisy.width, noisy.height);
+					let seed = 16;
+					for (let pixel = 0; pixel < pixels.data.length; pixel += 4) for (let channel = 0; channel < 3; channel += 1) {
+						seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+						pixels.data[pixel + channel] += Math.round((seed / 2 ** 32 - 0.5) * 32);
+					}
+					noiseContext.putImageData(pixels, 0, 0);
+					check('Provided screenshot: deterministic RGB noise ±16', noisy, expected);
+					for (const [name, x, y, width, height] of [
+						['Hidden center', 720, 240, 50, 50], ['Half-hidden center glyph', 727, 244, 30, 15],
+						['Missing outer rune', 715, 120, 55, 55]
+					]) {
+						const hidden = draw(), context = hidden.getContext('2d');
+						context.fillStyle = '#62341d'; context.fillRect(x, y, width, height);
+						check(`Provided screenshot: ${name}`, hidden, null);
+					}
+					if (flameUrl) {
+						const flame = await loadImage(flameUrl), alternate = draw();
+						alternate.getContext('2d').drawImage(flame, 700, 190);
+						check('Provided screenshot: alternate supplied flame frame', alternate, expected);
+						check('Isolated flame crop has no complete ring', flame, null);
+					}
+				}
+				if (dualScreenUrl) {
+					const screen = await loadImage(dualScreenUrl);
+					const draw = (scale = 1, x = 0, y = 0, width = screen.width, height = screen.height) => {
+						const result = canvas(width, height);
+						result.getContext('2d').drawImage(screen, x, y, screen.width * scale, screen.height * scale);
+						return result;
+					};
+					check('Provided comparison screenshot: new left roll', screen, newRoll);
+					check('Provided comparison screenshot: moved and scaled', draw(0.65, 530, 300, 1920, 1080), newRoll);
+					for (const [name, boxes] of [
+						['hidden center', [[720, 232, 50, 55]]], ['hidden top', [[715, 117, 55, 55]]],
+						['hidden outer rune', [[610, 260, 50, 50]]], ['two hidden outer runes', [[715, 117, 55, 55], [620, 166, 55, 55]]],
+						['tooltip hiding three upper runes', [[715, 117, 55, 55], [620, 166, 55, 55], [815, 166, 55, 55]]]
+					]) {
+						const hidden = draw(), context = hidden.getContext('2d');
+						context.fillStyle = '#16414c';
+						for (const box of boxes) context.fillRect(...box);
+						check(`Provided comparison screenshot: ${name} cannot select saved build`, hidden, null);
+					}
+				}
+				const summary = { passed: results.filter((result) => result.passed).length, total: results.length, results };
+				document.querySelector('#results').textContent = JSON.stringify(summary, null, 2);
+				return summary;
+			};
+		</script>
+	</body>
+</html>

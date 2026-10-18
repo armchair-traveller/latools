@@ -1,5 +1,6 @@
 import BookOpenTextIcon from '@lucide/svelte/icons/book-open-text';
 import CircleDollarSignIcon from '@lucide/svelte/icons/circle-dollar-sign';
+import GemIcon from '@lucide/svelte/icons/gem';
 import HammerIcon from '@lucide/svelte/icons/hammer';
 import HouseIcon from '@lucide/svelte/icons/house';
 import PackagePlusIcon from '@lucide/svelte/icons/package-plus';
@@ -149,6 +150,20 @@ export const toolNavigation = [
 		soft: '#f5dfd3',
 		deep: '#71301c',
 		image: '/npc/1102.png'
+	},
+	{
+		key: 'runestone',
+		index: '10',
+		label: 'Runestone',
+		description: 'Runes · slots · tier scores',
+		verb: 'Arrange',
+		context: 'Rune selection & scoring',
+		href: '/runestone',
+		icon: GemIcon,
+		accent: '#6f5b99',
+		soft: '#eae3f4',
+		deep: '#493566',
+		image: '/npc/1373.png'
 	}
 ] as const;
 

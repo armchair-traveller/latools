@@ -8,6 +8,7 @@ A growing collection of English-language LaTale fan utilities, including a scena
 - Specification Analyzer at `/spec-analyzer`: character stats, current-model damage ranges, upgrade and HP comparisons, stat distribution, a searchable skill catalog, and locally saved builds with JSON import/export
 - Equipment score at `/equipment-score`: compare weighted options across 16 equipment types using [RamuWiki's equipment score model](https://latale.wiki/tools/equipment-score)
 - Enhancement calculator at `/enhancement-calculator`: plan equipment enhancement materials, expected dungeon runs, completion time, and Ely costs using [RamuWiki's enhancement calculator](https://latale.wiki/tools/enhancement-calculator)
+- Runestone at `/runestone`: arrange eight of 30 runes in game order, read an assigned build from screen sharing or a screenshot, compare tier scores, and auto-select the highest-scoring setup using [RamuWiki's runeword calculator](https://latale.wiki/runewords) with English rune and effect terminology from `lt-runestone-calculator`
 - Inventory expansion checklist at `/inventory-expansion`: 137 translated reward sources, English/Korean search, slot totals, and progress saved in the browser
 - Scenario walkthrough at `/scenario`
 - Separate dialogue reader at `/scenario-script`, with fresh English translations, the Korean original, character portraits, dialogue choices, and a customizable character name
@@ -46,6 +47,12 @@ See [`docs/event-exchange-maintenance.md`](docs/event-exchange-maintenance.md) a
 The equipment calculator's source snapshot, preserved formula details, and verification steps are documented in [`docs/equipment-score-reference.md`](docs/equipment-score-reference.md).
 
 The enhancement planner's source data, dungeon-yield rules, and wiki parity checks are documented in [`docs/enhancement-calculator-reference.md`](docs/enhancement-calculator-reference.md).
+
+The Runestone snapshot in `src/lib/data/runestone.json` records the wiki source URLs and checksums alongside the English terminology source. Its scoring sums the selected runes, adds the eighth rune's score again only when all eight slots are filled, rounds to one decimal place, and caps the result at 500. Tier thresholds remain 200 / 270 / 330 / 400 / 500, and Insight retains the wiki's 75-point score under review. Run `node --test tests/runestone*.test.mjs` to check the catalog and calculation parity.
+
+Runestone screen reading is a browser-local input for that same calculator. Share the game window with the complete rune ring visible, or upload, drop, or paste a screenshot. The reader locates the ring as the panel moves and places the center rune in slot eight. When rolling shows adjacent New and Current Runestone Effects panels, it reads the new roll on the left. Only complete, confident readings update the selection; live capture requires matching consecutive readings. Unreadable frames preserve the last selection, and manual edits stop sharing. Screen sharing requires a supported desktop browser and HTTPS (or localhost). Screenshots and video frames are processed locally and are not uploaded. The recognition code is independently implemented; only the game rune image assets come from the reference project.
+
+For detector regression checks, serve the repository with `python3 -m http.server 8000`, open `/tests/runestone-detection.browser.html`, and run `await runRunestoneDetectionChecks()` in the browser console. This checks every glyph, comparison-panel selection, and rejection of incomplete or invalid rings using the bundled rune artwork. Optional `screenUrl`, `flameUrl`, and `dualScreenUrl` arguments can point to screenshots in ignored `.cache/` for movement, scaling, noise, flame, and side-by-side checks without committing private images.
 
 ## Project-scoped agent skills
 

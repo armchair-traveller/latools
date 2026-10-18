@@ -1,0 +1,637 @@
+{
+  "source": "https://latale.wiki/runewords",
+  "retrievedAt": "2026-10-17",
+  "calculationSourceUrl": "https://latale.wiki/_next/static/chunks/3ba5unw9tdinn.js",
+  "calculationSourceSha256": "a55b787cc4ac08345e1c79d7dc12b81a9e20681d535d758480b93597d9d87c08",
+  "dataSha256": "023543d24b734a29bdde67c56ee229772828d3d4c25beb428251bae14568e6f4",
+  "sourceData": {
+    "runes": [
+      {
+        "effect": "근력 및 마법력 1500 증가",
+        "id": "301",
+        "level": 200,
+        "name": "혈통",
+        "score": 6,
+        "type": "basic"
+      },
+      {
+        "effect": "체력 1500 증가",
+        "id": "302",
+        "level": 200,
+        "name": "강철",
+        "score": 2.5,
+        "type": "basic"
+      },
+      {
+        "effect": "행운 1500 증가",
+        "id": "303",
+        "level": 200,
+        "name": "행운",
+        "score": 0,
+        "type": "basic"
+      },
+      {
+        "effect": "퀘스트 보상 20% 증가, 옵션 발생 확률 500% 증가",
+        "id": "304",
+        "level": 200,
+        "name": "서약",
+        "score": 0,
+        "type": "basic"
+      },
+      {
+        "effect": "최소/최대공격력 및 속성력 70 증가",
+        "id": "305",
+        "level": 202,
+        "name": "분노",
+        "score": 14,
+        "type": "basic"
+      },
+      {
+        "effect": "이동 속도 50% 증가",
+        "id": "306",
+        "level": 202,
+        "name": "축복",
+        "score": 0,
+        "type": "basic"
+      },
+      {
+        "effect": "물리/마법 최소 대미지 50% 증가",
+        "id": "307",
+        "level": 202,
+        "name": "헌신",
+        "score": 15,
+        "type": "basic"
+      },
+      {
+        "effect": "아이템 발생 확률 20% 증가",
+        "id": "308",
+        "level": 205,
+        "name": "풍요",
+        "score": 0,
+        "type": "basic"
+      },
+      {
+        "effect": "물리/마법 최대 대미지 50% 증가",
+        "id": "309",
+        "level": 205,
+        "name": "파괴",
+        "score": 50,
+        "type": "basic"
+      },
+      {
+        "effect": "조합 성공확률 5% 증가",
+        "id": "310",
+        "level": 205,
+        "name": "지혜",
+        "score": 0,
+        "type": "basic"
+      },
+      {
+        "effect": "물리/마법 크리티컬 대미지 50% 증가",
+        "id": "311",
+        "level": 208,
+        "name": "파멸",
+        "score": 50,
+        "type": "basic"
+      },
+      {
+        "effect": "명중률 20% 증가",
+        "id": "312",
+        "level": 211,
+        "name": "신뢰",
+        "score": 0,
+        "type": "basic"
+      },
+      {
+        "effect": "물리/마법 고정대미지 1500 증가",
+        "id": "313",
+        "level": 214,
+        "name": "열정",
+        "score": 3,
+        "type": "basic"
+      },
+      {
+        "effect": "경험치 획득량 10% 증가",
+        "id": "314",
+        "level": 217,
+        "name": "인내",
+        "score": 0,
+        "type": "basic"
+      },
+      {
+        "effect": "최소/최대공격력 및 속성력 5% 증가",
+        "id": "315",
+        "level": 220,
+        "name": "격노",
+        "score": 20,
+        "type": "basic"
+      },
+      {
+        "effect": "물리/마법 고정대미지 8% 증가",
+        "id": "316",
+        "level": 223,
+        "name": "열광",
+        "score": 20,
+        "type": "basic"
+      },
+      {
+        "effect": "최대 HP 5% 증가",
+        "id": "317",
+        "level": 226,
+        "name": "생명",
+        "score": 10,
+        "type": "basic"
+      },
+      {
+        "effect": "올스탯 1500 증가",
+        "id": "318",
+        "level": 229,
+        "name": "평화",
+        "score": 8.5,
+        "type": "basic"
+      },
+      {
+        "effect": "올스탯 5% 증가",
+        "id": "319",
+        "level": 232,
+        "name": "조화",
+        "score": 22.5,
+        "type": "basic"
+      },
+      {
+        "effect": "물리/마법 관통력 10% 증가, 타격 시 0.1% 확률로 스킬 쿨타임 1초 감소",
+        "id": "320",
+        "level": 235,
+        "name": "통찰",
+        "score": 75,
+        "type": "basic",
+        "scoreReviewNote": "내부 자료에는 관통력 10%와 타격 시 쿨타임 감소를 점수로 환산하는 식이 없다. 75점은 재산출할 수 없어 기존값 보존 상태로 유지한다."
+      },
+      {
+        "effect": "올스탯 1500 증가, 올스탯 5% 증가",
+        "id": "321",
+        "level": 100,
+        "name": "평화&조화",
+        "score": 31,
+        "type": "combination"
+      },
+      {
+        "effect": "고정대미지 1500 증가, 최소/최대공격력 및 속성력 70 증가",
+        "id": "322",
+        "level": 200,
+        "name": "열정&분노",
+        "score": 17,
+        "type": "combination"
+      },
+      {
+        "effect": "체력 1500 증가, 최대 HP 5% 증가",
+        "id": "323",
+        "level": 300,
+        "name": "강철&생명",
+        "score": 12.5,
+        "type": "combination"
+      },
+      {
+        "effect": "경험치 획득량 10% 증가, 퀘스트 보상30% 증가",
+        "id": "324",
+        "level": 400,
+        "name": "인내&서약",
+        "score": 0,
+        "type": "combination"
+      },
+      {
+        "effect": "고정대미지 8% 증가, 최소/최대공격력 및 속성력 5% 증가",
+        "id": "325",
+        "level": 500,
+        "name": "열광&격노",
+        "score": 40,
+        "type": "combination"
+      },
+      {
+        "effect": "최소 대미지 50% 증가, 최대 대미지 50% 증가",
+        "id": "326",
+        "level": 600,
+        "name": "헌신&파괴",
+        "score": 65,
+        "type": "combination"
+      },
+      {
+        "effect": "이동 속도 50% 증가, 아이템 발생 확률 20% 증가",
+        "id": "327",
+        "level": 700,
+        "name": "축복&풍요",
+        "score": 0,
+        "type": "combination"
+      },
+      {
+        "effect": "일반 몬스터 추가 대미지 6000, 일반 몬스터 지배력 3%",
+        "id": "328",
+        "level": 800,
+        "name": "야성&지배",
+        "score": 45,
+        "type": "combination"
+      },
+      {
+        "effect": "보스 몬스터 추가 대미지 10000, 보스 몬스터 지배력 5%",
+        "id": "329",
+        "level": 900,
+        "name": "악몽&죽음",
+        "score": 45,
+        "type": "combination"
+      },
+      {
+        "effect": "크리티컬 대미지 50% 증가, 크리티컬 확률 1% 증가",
+        "id": "330",
+        "level": 1000,
+        "name": "파멸&폭주",
+        "score": 55,
+        "type": "combination"
+      }
+    ],
+    "maxScore": 500,
+    "maxSlots": 8,
+    "tiers": [
+      {
+        "minScore": 500,
+        "name": "신"
+      },
+      {
+        "minScore": 400,
+        "name": "1티어"
+      },
+      {
+        "minScore": 330,
+        "name": "2티어"
+      },
+      {
+        "minScore": 270,
+        "name": "3티어"
+      },
+      {
+        "minScore": 200,
+        "name": "4티어"
+      },
+      {
+        "minScore": 0,
+        "name": "5티어"
+      }
+    ]
+  },
+  "sourceExcerpts": {
+    "round": "function n(e){return Math.round(10*e)/10}",
+    "calculate": "f=i.map(e=>h.get(e)).filter(e=>!!e),g=f.length===e.MAX_SLOTS?f[f.length-1]:null,j=n(f.reduce((e,t)=>e+t.score,0)),N=g?g.score:0,v=Math.min(n(j+N),e.MAX_SCORE),y=[...d=e.TIERS].sort((e,t)=>t.minScore-e.minScore).find(e=>v>=e.minScore)??d[d.length-1],w=[...e.TIERS].sort((e,t)=>e.minScore-t.minScore).find(e=>e.minScore>v)??null",
+    "autoBest": "let[t,...s]=[...e.ALL_RUNES].sort((e,t)=>t.score-e.score).slice(0,e.MAX_SLOTS);c([...s.map(e=>e.id),t.id])",
+    "toggle": "c(s=>s.includes(t.id)?s.filter(e=>e!==t.id):s.length>=e.MAX_SLOTS?s:[...s,t.id])",
+    "moveToBoost": "c(s=>s.includes(t)&&s.length===e.MAX_SLOTS?[...s.filter(e=>e!==t),t]:s)"
+  },
+  "terms": [
+    {
+      "id": 1,
+      "name": "Blood",
+      "effects": [
+        "Strength/Magic +1500"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Steel",
+      "effects": [
+        "Stamina +1500"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Fortune",
+      "effects": [
+        "Luck +1500"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Oath",
+      "effects": [
+        "Quest Reward +20%",
+        "Option Rate +500"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Rage",
+      "effects": [
+        "Attack/Elemental Intensity +70"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Blessing",
+      "effects": [
+        "Movement Speed +50"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Devotion",
+      "effects": [
+        "Minimum Damage +50"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Wealth",
+      "effects": [
+        "Item Drop Rate +20"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Destruction",
+      "effects": [
+        "Maximum Damage +50"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Wisdom",
+      "effects": [
+        "Craft Rate +5"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Ruin",
+      "effects": [
+        "Critical Damage +50"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Trust",
+      "effects": [
+        "Accuracy +20"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Passion",
+      "effects": [
+        "Static Damage +1500"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Perseverance",
+      "effects": [
+        "EXP Gain Rate +10.0"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Wrath",
+      "effects": [
+        "Attack/Elemental Intensity +5%"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Mania",
+      "effects": [
+        "Static Damage +8%"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Life",
+      "effects": [
+        "Maximum HP +5%"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Peace",
+      "effects": [
+        "Basic Stats +1500"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Harmony",
+      "effects": [
+        "Basic Stats +5%"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Insight",
+      "effects": [
+        "Defense Penetration +10",
+        "Cooldown Reduction by 1s at 0.1% chance per strike"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Peace and Harmony",
+      "effects": [
+        "Basic Stats +1500",
+        "Basic Stats +5%"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Passion and Rage",
+      "effects": [
+        "Static Damage +1500",
+        "Attack/Elemental Intensity +70"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Steel and Life",
+      "effects": [
+        "Stamina +1500",
+        "Maximum HP +5%"
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Perseverance and Oath",
+      "effects": [
+        "EXP Gain Rate +10.0",
+        "Quest Reward +30%"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Mania and Wrath",
+      "effects": [
+        "Static Damage +8%",
+        "Attack/Elemental Intensity +5%"
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Devotion and Destruction",
+      "effects": [
+        "Damage +50"
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Blessing and Wealth",
+      "effects": [
+        "Movement Speed +50",
+        "Item Drop Rate +20"
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Nature and Dominance",
+      "effects": [
+        "Normal Added Damage +6000",
+        "Normal Damage Amplification +3%"
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Fear and Death",
+      "effects": [
+        "Boss Added Damage +10000",
+        "Boss Damage Amplification +5%"
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Ruin and Corruption",
+      "effects": [
+        "Critical Damage +50",
+        "Critical Rate +1"
+      ]
+    }
+  ],
+  "observedCases": [
+    {
+      "name": "Auto best",
+      "selectedIds": [
+        26,
+        30,
+        9,
+        11,
+        28,
+        29,
+        25,
+        20
+      ],
+      "baseScore": 425,
+      "eighthSlotBonus": 75,
+      "totalScore": 500,
+      "tier": "신",
+      "nextTier": null,
+      "pointsToNextTier": 0
+    },
+    {
+      "name": "Move Destruction from slot 3 to slot 8",
+      "selectedIds": [
+        26,
+        30,
+        11,
+        28,
+        29,
+        25,
+        20,
+        9
+      ],
+      "baseScore": 425,
+      "eighthSlotBonus": 50,
+      "totalScore": 475,
+      "tier": "1티어",
+      "nextTier": "신",
+      "pointsToNextTier": 25
+    },
+    {
+      "name": "Remove Ruin from the full selection",
+      "selectedIds": [
+        26,
+        30,
+        28,
+        29,
+        25,
+        20,
+        9
+      ],
+      "baseScore": 375,
+      "eighthSlotBonus": 0,
+      "totalScore": 375,
+      "tier": "2티어",
+      "nextTier": "1티어",
+      "pointsToNextTier": 25
+    },
+    {
+      "name": "Exact Tier 4 threshold",
+      "selectedIds": [
+        20,
+        26,
+        25,
+        15
+      ],
+      "baseScore": 200,
+      "eighthSlotBonus": 0,
+      "totalScore": 200,
+      "tier": "4티어",
+      "nextTier": "3티어",
+      "pointsToNextTier": 70
+    },
+    {
+      "name": "Exact Tier 3 threshold",
+      "selectedIds": [
+        20,
+        26,
+        25,
+        15,
+        9,
+        16
+      ],
+      "baseScore": 270,
+      "eighthSlotBonus": 0,
+      "totalScore": 270,
+      "tier": "3티어",
+      "nextTier": "2티어",
+      "pointsToNextTier": 60
+    },
+    {
+      "name": "Exact Tier 2 threshold",
+      "selectedIds": [
+        20,
+        26,
+        30,
+        9,
+        28,
+        25
+      ],
+      "baseScore": 330,
+      "eighthSlotBonus": 0,
+      "totalScore": 330,
+      "tier": "2티어",
+      "nextTier": "1티어",
+      "pointsToNextTier": 70
+    },
+    {
+      "name": "Exact Tier 1 threshold with eighth-slot bonus",
+      "selectedIds": [
+        20,
+        26,
+        30,
+        9,
+        28,
+        11,
+        15,
+        16
+      ],
+      "baseScore": 380,
+      "eighthSlotBonus": 20,
+      "totalScore": 400,
+      "tier": "1티어",
+      "nextTier": "신",
+      "pointsToNextTier": 100
+    }
+  ],
+  "observationMethod": "Observed rendered scores, tiers, and slot order through agent-browser on the source page after its Auto best, To slot 8, and removal controls."
+}

@@ -1,0 +1,494 @@
+{
+  "source": {
+    "url": "https://latale.wiki/runewords",
+    "retrievedAt": "2026-10-17",
+    "dataSourceUrl": "https://latale.wiki/runewords",
+    "dataSourceSha256": "023543d24b734a29bdde67c56ee229772828d3d4c25beb428251bae14568e6f4",
+    "calculationSourceUrl": "https://latale.wiki/_next/static/chunks/3ba5unw9tdinn.js",
+    "calculationSourceSha256": "a55b787cc4ac08345e1c79d7dc12b81a9e20681d535d758480b93597d9d87c08",
+    "terminologySource": "lt-runestone-calculator/src/utils/runes.js",
+    "terminologySourceSha256": "33e685499b7c82b51cfeb25b97a0687788df214076dd3797a3d06a897b98ba25",
+    "note": "Scores, effect values, unlock levels, tier thresholds, and calculation rules are preserved from the wiki. Rune and effect names use lt-runestone-calculator terminology."
+  },
+  "maxSlots": 8,
+  "maxScore": 500,
+  "tiers": [
+    {
+      "name": "God",
+      "originalName": "신",
+      "minScore": 500
+    },
+    {
+      "name": "Tier 1",
+      "originalName": "1티어",
+      "minScore": 400
+    },
+    {
+      "name": "Tier 2",
+      "originalName": "2티어",
+      "minScore": 330
+    },
+    {
+      "name": "Tier 3",
+      "originalName": "3티어",
+      "minScore": 270
+    },
+    {
+      "name": "Tier 4",
+      "originalName": "4티어",
+      "minScore": 200
+    },
+    {
+      "name": "Tier 5",
+      "originalName": "5티어",
+      "minScore": 0
+    }
+  ],
+  "runes": [
+    {
+      "id": 1,
+      "name": "Blood",
+      "originalName": "혈통",
+      "effects": [
+        "Strength/Magic +1500"
+      ],
+      "originalEffects": [
+        "근력 및 마법력 1500 증가"
+      ],
+      "score": 6,
+      "level": "Lv. 200",
+      "type": "basic"
+    },
+    {
+      "id": 2,
+      "name": "Steel",
+      "originalName": "강철",
+      "effects": [
+        "Stamina +1500"
+      ],
+      "originalEffects": [
+        "체력 1500 증가"
+      ],
+      "score": 2.5,
+      "level": "Lv. 200",
+      "type": "basic"
+    },
+    {
+      "id": 3,
+      "name": "Fortune",
+      "originalName": "행운",
+      "effects": [
+        "Luck +1500"
+      ],
+      "originalEffects": [
+        "행운 1500 증가"
+      ],
+      "score": 0,
+      "level": "Lv. 200",
+      "type": "basic"
+    },
+    {
+      "id": 4,
+      "name": "Oath",
+      "originalName": "서약",
+      "effects": [
+        "Quest Reward +20%",
+        "Option Rate +500%"
+      ],
+      "originalEffects": [
+        "퀘스트 보상 20% 증가",
+        "옵션 발생 확률 500% 증가"
+      ],
+      "score": 0,
+      "level": "Lv. 200",
+      "type": "basic"
+    },
+    {
+      "id": 5,
+      "name": "Rage",
+      "originalName": "분노",
+      "effects": [
+        "Attack/Elemental Intensity +70"
+      ],
+      "originalEffects": [
+        "최소/최대공격력 및 속성력 70 증가"
+      ],
+      "score": 14,
+      "level": "Lv. 202",
+      "type": "basic"
+    },
+    {
+      "id": 6,
+      "name": "Blessing",
+      "originalName": "축복",
+      "effects": [
+        "Movement Speed +50%"
+      ],
+      "originalEffects": [
+        "이동 속도 50% 증가"
+      ],
+      "score": 0,
+      "level": "Lv. 202",
+      "type": "basic"
+    },
+    {
+      "id": 7,
+      "name": "Devotion",
+      "originalName": "헌신",
+      "effects": [
+        "Minimum Damage +50%"
+      ],
+      "originalEffects": [
+        "물리/마법 최소 대미지 50% 증가"
+      ],
+      "score": 15,
+      "level": "Lv. 202",
+      "type": "basic"
+    },
+    {
+      "id": 8,
+      "name": "Wealth",
+      "originalName": "풍요",
+      "effects": [
+        "Item Drop Rate +20%"
+      ],
+      "originalEffects": [
+        "아이템 발생 확률 20% 증가"
+      ],
+      "score": 0,
+      "level": "Lv. 205",
+      "type": "basic"
+    },
+    {
+      "id": 9,
+      "name": "Destruction",
+      "originalName": "파괴",
+      "effects": [
+        "Maximum Damage +50%"
+      ],
+      "originalEffects": [
+        "물리/마법 최대 대미지 50% 증가"
+      ],
+      "score": 50,
+      "level": "Lv. 205",
+      "type": "basic"
+    },
+    {
+      "id": 10,
+      "name": "Wisdom",
+      "originalName": "지혜",
+      "effects": [
+        "Craft Rate +5%"
+      ],
+      "originalEffects": [
+        "조합 성공확률 5% 증가"
+      ],
+      "score": 0,
+      "level": "Lv. 205",
+      "type": "basic"
+    },
+    {
+      "id": 11,
+      "name": "Ruin",
+      "originalName": "파멸",
+      "effects": [
+        "Critical Damage +50%"
+      ],
+      "originalEffects": [
+        "물리/마법 크리티컬 대미지 50% 증가"
+      ],
+      "score": 50,
+      "level": "Lv. 208",
+      "type": "basic"
+    },
+    {
+      "id": 12,
+      "name": "Trust",
+      "originalName": "신뢰",
+      "effects": [
+        "Accuracy +20%"
+      ],
+      "originalEffects": [
+        "명중률 20% 증가"
+      ],
+      "score": 0,
+      "level": "Lv. 211",
+      "type": "basic"
+    },
+    {
+      "id": 13,
+      "name": "Passion",
+      "originalName": "열정",
+      "effects": [
+        "Static Damage +1500"
+      ],
+      "originalEffects": [
+        "물리/마법 고정대미지 1500 증가"
+      ],
+      "score": 3,
+      "level": "Lv. 214",
+      "type": "basic"
+    },
+    {
+      "id": 14,
+      "name": "Perseverance",
+      "originalName": "인내",
+      "effects": [
+        "EXP Gain Rate +10%"
+      ],
+      "originalEffects": [
+        "경험치 획득량 10% 증가"
+      ],
+      "score": 0,
+      "level": "Lv. 217",
+      "type": "basic"
+    },
+    {
+      "id": 15,
+      "name": "Wrath",
+      "originalName": "격노",
+      "effects": [
+        "Attack/Elemental Intensity +5%"
+      ],
+      "originalEffects": [
+        "최소/최대공격력 및 속성력 5% 증가"
+      ],
+      "score": 20,
+      "level": "Lv. 220",
+      "type": "basic"
+    },
+    {
+      "id": 16,
+      "name": "Mania",
+      "originalName": "열광",
+      "effects": [
+        "Static Damage +8%"
+      ],
+      "originalEffects": [
+        "물리/마법 고정대미지 8% 증가"
+      ],
+      "score": 20,
+      "level": "Lv. 223",
+      "type": "basic"
+    },
+    {
+      "id": 17,
+      "name": "Life",
+      "originalName": "생명",
+      "effects": [
+        "Maximum HP +5%"
+      ],
+      "originalEffects": [
+        "최대 HP 5% 증가"
+      ],
+      "score": 10,
+      "level": "Lv. 226",
+      "type": "basic"
+    },
+    {
+      "id": 18,
+      "name": "Peace",
+      "originalName": "평화",
+      "effects": [
+        "Basic Stats +1500"
+      ],
+      "originalEffects": [
+        "올스탯 1500 증가"
+      ],
+      "score": 8.5,
+      "level": "Lv. 229",
+      "type": "basic"
+    },
+    {
+      "id": 19,
+      "name": "Harmony",
+      "originalName": "조화",
+      "effects": [
+        "Basic Stats +5%"
+      ],
+      "originalEffects": [
+        "올스탯 5% 증가"
+      ],
+      "score": 22.5,
+      "level": "Lv. 232",
+      "type": "basic"
+    },
+    {
+      "id": 20,
+      "name": "Insight",
+      "originalName": "통찰",
+      "effects": [
+        "Defense Penetration +10%",
+        "Cooldown Reduction by 1s at 0.1% chance per strike"
+      ],
+      "originalEffects": [
+        "물리/마법 관통력 10% 증가",
+        "타격 시 0.1% 확률로 스킬 쿨타임 1초 감소"
+      ],
+      "score": 75,
+      "level": "Lv. 235",
+      "type": "basic",
+      "reviewNote": "The source is reviewing this score. Its internal data has no formula for scoring Defense Penetration +10% and the cooldown reduction effect, so the existing 75 points are retained."
+    },
+    {
+      "id": 21,
+      "name": "Peace and Harmony",
+      "originalName": "평화&조화",
+      "effects": [
+        "Basic Stats +1500",
+        "Basic Stats +5%"
+      ],
+      "originalEffects": [
+        "올스탯 1500 증가",
+        "올스탯 5% 증가"
+      ],
+      "score": 31,
+      "level": "ULv. 100",
+      "type": "advanced"
+    },
+    {
+      "id": 22,
+      "name": "Passion and Rage",
+      "originalName": "열정&분노",
+      "effects": [
+        "Static Damage +1500",
+        "Attack/Elemental Intensity +70"
+      ],
+      "originalEffects": [
+        "고정대미지 1500 증가",
+        "최소/최대공격력 및 속성력 70 증가"
+      ],
+      "score": 17,
+      "level": "ULv. 200",
+      "type": "advanced"
+    },
+    {
+      "id": 23,
+      "name": "Steel and Life",
+      "originalName": "강철&생명",
+      "effects": [
+        "Stamina +1500",
+        "Maximum HP +5%"
+      ],
+      "originalEffects": [
+        "체력 1500 증가",
+        "최대 HP 5% 증가"
+      ],
+      "score": 12.5,
+      "level": "ULv. 300",
+      "type": "advanced"
+    },
+    {
+      "id": 24,
+      "name": "Perseverance and Oath",
+      "originalName": "인내&서약",
+      "effects": [
+        "EXP Gain Rate +10%",
+        "Quest Reward +30%"
+      ],
+      "originalEffects": [
+        "경험치 획득량 10% 증가",
+        "퀘스트 보상30% 증가"
+      ],
+      "score": 0,
+      "level": "ULv. 400",
+      "type": "advanced"
+    },
+    {
+      "id": 25,
+      "name": "Mania and Wrath",
+      "originalName": "열광&격노",
+      "effects": [
+        "Static Damage +8%",
+        "Attack/Elemental Intensity +5%"
+      ],
+      "originalEffects": [
+        "고정대미지 8% 증가",
+        "최소/최대공격력 및 속성력 5% 증가"
+      ],
+      "score": 40,
+      "level": "ULv. 500",
+      "type": "advanced"
+    },
+    {
+      "id": 26,
+      "name": "Devotion and Destruction",
+      "originalName": "헌신&파괴",
+      "effects": [
+        "Minimum Damage +50%",
+        "Maximum Damage +50%"
+      ],
+      "originalEffects": [
+        "최소 대미지 50% 증가",
+        "최대 대미지 50% 증가"
+      ],
+      "score": 65,
+      "level": "ULv. 600",
+      "type": "advanced"
+    },
+    {
+      "id": 27,
+      "name": "Blessing and Wealth",
+      "originalName": "축복&풍요",
+      "effects": [
+        "Movement Speed +50%",
+        "Item Drop Rate +20%"
+      ],
+      "originalEffects": [
+        "이동 속도 50% 증가",
+        "아이템 발생 확률 20% 증가"
+      ],
+      "score": 0,
+      "level": "ULv. 700",
+      "type": "advanced"
+    },
+    {
+      "id": 28,
+      "name": "Nature and Dominance",
+      "originalName": "야성&지배",
+      "effects": [
+        "Normal Added Damage +6000",
+        "Normal Damage Amplification +3%"
+      ],
+      "originalEffects": [
+        "일반 몬스터 추가 대미지 6000",
+        "일반 몬스터 지배력 3%"
+      ],
+      "score": 45,
+      "level": "ULv. 800",
+      "type": "advanced"
+    },
+    {
+      "id": 29,
+      "name": "Fear and Death",
+      "originalName": "악몽&죽음",
+      "effects": [
+        "Boss Added Damage +10000",
+        "Boss Damage Amplification +5%"
+      ],
+      "originalEffects": [
+        "보스 몬스터 추가 대미지 10000",
+        "보스 몬스터 지배력 5%"
+      ],
+      "score": 45,
+      "level": "ULv. 900",
+      "type": "advanced"
+    },
+    {
+      "id": 30,
+      "name": "Ruin and Corruption",
+      "originalName": "파멸&폭주",
+      "effects": [
+        "Critical Damage +50%",
+        "Critical Rate +1%"
+      ],
+      "originalEffects": [
+        "크리티컬 대미지 50% 증가",
+        "크리티컬 확률 1% 증가"
+      ],
+      "score": 55,
+      "level": "ULv. 1000",
+      "type": "advanced"
+    }
+  ]
+}
