@@ -858,15 +858,15 @@ test('historical Pre-Halloween fixture preserves all 36 offers and Discord corre
 });
 
 
-test('current October 14 fixture preserves the 14 verified offers and exact component units', async () => {
+test('historical October 14 fixture preserves the 14 verified offers and exact component units', async () => {
 	const [index, currentCatalog, sale, previousSale] = await Promise.all([
 		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6494.json', import.meta.url), 'utf8').then(JSON.parse),
 		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6457.json', import.meta.url), 'utf8').then(JSON.parse)
 	]);
-	assert.equal(index.currentSaleId, 'papayaplay-6494');
-	assert.equal(sale.id, index.currentSaleId);
+	assert.equal(sale.id, 'papayaplay-6494');
+	assert.ok(index.sales.some((entry) => entry.id === sale.id));
 	assert.equal(sale.postId, 6494);
 	assert.equal(sale.expectedOfferCount, 14);
 	assert.deepEqual(index.sales.find((entry) => entry.id === sale.id), {
@@ -986,5 +986,173 @@ test('current October 14 fixture preserves the 14 verified offers and exact comp
 		assert.equal(evaluated.valuationState, 'partial');
 		assert.equal(evaluated.knownBundleEly, knownBundleEly);
 		assert.equal(evaluated.rank, null);
+	}
+});
+
+test('current October 21 fixture preserves all 33 offers, exact variants, and the EDT to EST transition', async () => {
+	const [index, currentCatalog, sale, previousSale, preHalloweenSale] = await Promise.all([
+		readFile(new URL('../static/data/flash-sale/index.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/catalog.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6505.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6494.json', import.meta.url), 'utf8').then(JSON.parse),
+		readFile(new URL('../static/data/flash-sale/sales/papayaplay-6457.json', import.meta.url), 'utf8').then(JSON.parse)
+	]);
+	assert.equal(index.currentSaleId, 'papayaplay-6505');
+	assert.equal(sale.id, index.currentSaleId);
+	assert.equal(sale.postId, 6505);
+	assert.equal(sale.sourceUrl, 'https://latale.papayaplay.com/latale.do?tp=news.view&postid=6505');
+	assert.equal(sale.timezone, 'America/New_York');
+	assert.equal(sale.status, 'published');
+	assert.equal(sale.expectedOfferCount, 33);
+	assert.deepEqual(index.sales.find((entry) => entry.id === sale.id), {
+		id: sale.id, title: sale.title,
+		startsAt: '2026-10-21T20:30:00-04:00',
+		endsAt: '2026-11-04T19:50:00-05:00',
+		reviewedAt: sale.reviewedAt
+	});
+	assert.ok(index.sales.some((entry) => entry.id === previousSale.id));
+	assert.deepEqual(sale.cycles.map((cycle) => [cycle.expectedOfferCount, cycle.offers.length]),
+		[[4, 4], [9, 9], [3, 3], [6, 6], [5, 5], [6, 6]]);
+	assert.deepEqual(sale.cycles.map((cycle) => [cycle.startsAt, cycle.endsAt]), [
+		['2026-10-21T20:30:00-04:00', '2026-10-23T20:29:00-04:00'],
+		['2026-10-23T20:30:00-04:00', '2026-10-26T20:29:00-04:00'],
+		['2026-10-26T20:30:00-04:00', '2026-10-28T20:29:00-04:00'],
+		['2026-10-28T20:30:00-04:00', '2026-10-30T20:29:00-04:00'],
+		['2026-10-30T20:30:00-04:00', '2026-11-02T20:29:00-05:00'],
+		['2026-11-02T20:30:00-05:00', '2026-11-04T19:50:00-05:00']
+	]);
+	for (let cycleIndex = 0; cycleIndex < sale.cycles.length - 1; cycleIndex += 1) {
+		const cycle = sale.cycles[cycleIndex];
+		const next = sale.cycles[cycleIndex + 1];
+		assert.equal(Date.parse(next.startsAt) - Date.parse(cycle.endsAt), 60_000);
+		assert.deepEqual(getFlashSaleTimeline(sale, cycle.endsAt), {
+			status: 'gap', activeCycleId: null, nextCycleId: next.id
+		});
+		assert.equal(getFlashSaleTimeline(sale, next.startsAt).activeCycleId, next.id);
+	}
+	const dstCycle = sale.cycles[4];
+	assert.equal(Date.parse(dstCycle.endsAt) - Date.parse(dstCycle.startsAt), 73 * 60 * 60 * 1000 - 60_000);
+	for (const instant of ['2026-11-01T01:30:00-04:00', '2026-11-01T01:30:00-05:00']) {
+		assert.equal(getFlashSaleTimeline(sale, instant).activeCycleId, dstCycle.id);
+	}
+	assert.equal(getFlashSaleTimeline(sale, '2026-11-04T19:50:00-05:00').status, 'ended');
+	assert.deepEqual(sale.cycles.map((cycle) => cycle.offers.map((entry) => entry.salePriceLtc)), [
+		[1590, 1590, 4400, 1590],
+		[950, 900, 690, 1990, 690, 2290, 2590, 2500, 1790],
+		[1290, 690, 2700],
+		[3590, 1095, 1500, 2490, 5000, 1095],
+		[1200, 2700, 4000, 790, 2290],
+		[690, 690, 4400, 990, 1990, 2500]
+	]);
+	assert.deepEqual(sale.cycles.map((cycle) => cycle.offers.map((entry) => entry.purchaseLimit.quantity)), [
+		[15, 15, 20, 15],
+		[25, 25, 50, 30, 35, 30, 50, 15, 35],
+		[15, 25, 50],
+		[20, 35, 30, 15, 15, 20],
+		[15, 50, 25, 10, 50],
+		[10, 10, 20, 20, 30, 15]
+	]);
+	const posterSources = new Set(sale.sources.filter((entry) => sale.posterUrls.includes(entry.url)).map((entry) => entry.id));
+	assert.equal(posterSources.size, 2);
+	for (const cycle of sale.cycles) {
+		assert.deepEqual(cycle.unresolvedSlots, []);
+		assert.deepEqual(cycle.offers.map((entry) => entry.slot),
+			Array.from({ length: cycle.expectedOfferCount }, (_, slot) => slot + 1));
+		for (const entry of cycle.offers) {
+			assert.equal(entry.capture.status, 'verified');
+			assert.ok(entry.capture.sourceIds.some((id) => posterSources.has(id)), entry.name);
+			assert.equal(entry.purchaseLimit.scope, 'unknown');
+			assert.doesNotMatch([entry.bestFor, entry.skipIf, ...entry.caveats].join(' '), /gift|refund|cancel/i);
+		}
+	}
+	assert.doesNotMatch(sale.purchaseNotice ?? '', /gift|refund|cancel/i);
+
+	const offers = new Map(sale.cycles.flatMap((cycle) => cycle.offers).map((entry) => [entry.id, entry]));
+	const expectedContents = {
+		'r1-halloween-vampire-i': [
+			['halloween-vampire-gloves', 1], ['halloween-vampire-suit', 1], ['halloween-vampire-boots', 1]
+		],
+		'r1-halloween-vampire-ii': [
+			['halloween-vampire-rose-veil', 1], ['halloween-vampire-bonnet', 1],
+			['halloween-vampire-dress', 1], ['halloween-vampire-heels', 1]
+		],
+		'r1-october-crates-i': [
+			['legends-of-etoile', 20], ['soulys-midnight-hunt', 20],
+			['premium-divine-era', 20], ['phantasmal-tin-crate', 20]
+		],
+		'r2-storage-expansion': [['storage-expansion-bag', 10]],
+		'r2-general-inventory': [['general-inventory-bag', 6]],
+		'r2-adventure-dice': [['la-tale-adventure-dice', 500]],
+		'r2-platinum-hammer': [['platinum-hammer', 100]],
+		'r3-summonable-scrolls': [
+			['summon-skill-enhancement-scroll', 250], ['advanced-summon-skill-enhancement-scroll', 80]
+		],
+		'r5-wished-pet-iii': [['wished-pet-coupon-iii', 1], ['pet-damage-puzzle', 5], ['pet-reassign-puzzle', 5]],
+		'r6-god-crafting-title': [['guaranteed-god-of-crafting-titlebook', 1]],
+		'r6-masters-hand-title': [['guaranteed-masters-hand-titlebook', 1]],
+		'r6-post-halloween-crates-i': [
+			['cosmic-love-crate', 20], ['premium-celestial-genesis-crate', 20],
+			['goblin-kings-infernal-crate', 20], ['premium-summertide-crate', 20]
+		]
+	};
+	for (const [offerId, contents] of Object.entries(expectedContents)) {
+		assert.deepEqual(offers.get(offerId).contents.map(({ itemId, quantity }) => [itemId, quantity]), contents, offerId);
+	}
+	const wishedPet = offers.get('r5-wished-pet-iii');
+	assert.deepEqual(wishedPet.purchaseLimit, { quantity: 25, scope: 'unknown' });
+	assert.ok(wishedPet.caveats.some((note) => /per-account/i.test(note) && /does not specify|unspecified|not specified/i.test(note)));
+
+	const snapshot = new Map(sale.valuationSnapshot.map((entry) => [entry.itemId, entry]));
+	assert.equal(snapshot.size, 64);
+	const newPendingIds = [
+		'halloween-vampire-gloves', 'halloween-vampire-suit', 'halloween-vampire-boots',
+		'halloween-vampire-rose-veil', 'halloween-vampire-bonnet', 'halloween-vampire-dress',
+		'halloween-vampire-heels', 'grim-stallion-mount-coupon', 'dotnuri-weapon-skin-coupon',
+		'wished-pet-coupon-iii', 'lunar-damage-skin-coupon', 'cosmic-love-crate',
+		'premium-celestial-genesis-crate', 'goblin-kings-infernal-crate'
+	];
+	for (const itemId of newPendingIds) {
+		const item = currentCatalog.items.find((entry) => entry.id === itemId);
+		assert.ok(item, `Missing exact new variant ${itemId}`);
+		for (const value of [item.valuation, snapshot.get(itemId)]) {
+			assert.equal(value.status, 'pending', itemId);
+			assert.equal(value.method, 'pending', itemId);
+			assert.equal(value.unitEly, null, itemId);
+			assert.equal(value.asOf, null, itemId);
+			assert.equal(value.confidence, null, itemId);
+		}
+	}
+	for (const itemId of [
+		'halloween-vampire-gloves-ii', 'halloween-vampire-suit-ii', 'halloween-vampire-boots-ii',
+		'halloween-power-basket', 'advanced-summonable-upgrade-spell',
+		'advanced-summonable-upgrade-spellbook', 'storage-expansion-bag-x5'
+	]) assert.ok(!snapshot.has(itemId), `Unexpected substitute variant ${itemId}`);
+	for (const historicalSale of [previousSale, preHalloweenSale]) {
+		for (const previousValue of historicalSale.valuationSnapshot) {
+			if (snapshot.has(previousValue.itemId) && previousValue.unitEly !== null) {
+				assert.deepEqual(snapshot.get(previousValue.itemId), previousValue,
+					`Changed reused numeric valuation evidence for ${previousValue.itemId}`);
+			}
+		}
+	}
+	for (const value of sale.valuationSnapshot) {
+		assert.ok(value.sourceIds.every((id) => sale.sources.some((entry) => entry.id === id)));
+	}
+	assert.deepEqual(getFlashSaleCompleteness(sale, currentCatalog), {
+		captured: 33, unresolved: 0, total: 33, fullyValued: 11, partiallyValued: 7, unranked: 15
+	});
+	const changedCatalog = structuredClone(currentCatalog);
+	changedCatalog.items.find((entry) => entry.id === 'la-tale-adventure-dice').valuation.unitEly = 1;
+	const dice = rankFlashSaleCycle(sale, changedCatalog, 'r2')[0];
+	assert.equal(dice.id, 'r2-adventure-dice');
+	assert.equal(dice.bundleEly, 17_250_000_000);
+	assert.equal(dice.elyPerLtc, 25_000_000);
+	for (const cycleId of ['r2', 'r6']) {
+		const constellation = evaluateFlashSaleCycle(sale, currentCatalog, cycleId).find(
+			(entry) => entry.id === `${cycleId}-constellation`
+		);
+		assert.equal(constellation.valuationState, 'partial');
+		assert.equal(constellation.knownBundleEly, 6_100_000_000);
+		assert.equal(constellation.rank, null);
 	}
 });

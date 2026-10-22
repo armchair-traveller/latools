@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"currentSaleId": "papayaplay-6494",
+	"currentSaleId": "papayaplay-6505",
 	"sales": [
 		{
 			"id": "papayaplay-6332",
@@ -50,6 +50,13 @@
 			"startsAt": "2026-10-14T20:30:00-04:00",
 			"endsAt": "2026-10-21T19:50:00-04:00",
 			"reviewedAt": "2026-10-15"
+		},
+		{
+			"id": "papayaplay-6505",
+			"title": "Spellbinding Fashion Royal - Halloween Shop Update",
+			"startsAt": "2026-10-21T20:30:00-04:00",
+			"endsAt": "2026-11-04T19:50:00-05:00",
+			"reviewedAt": "2026-10-22"
 		}
 	]
 }
